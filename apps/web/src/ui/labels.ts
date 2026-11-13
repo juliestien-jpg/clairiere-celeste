@@ -59,9 +59,9 @@ export function secondaryLabel(view: View, name: string): string | null {
 
 /** Titre de l'onglet (D5, phase « page ouverte ») : signale le besoin dès qu'il apparaît. */
 export function pageTitle(name: string | null, view: View | null): string {
-  if (!name || !view) return "Tamagoshi";
-  if (view.primary === "happy" || view.primary === "asleep") return `${name} · Tamagoshi`;
-  return `● ${primaryLabel(view.primary, name)} · Tamagoshi`;
+  if (!name || !view) return "Clairière céleste";
+  if (view.primary === "happy" || view.primary === "asleep") return `${name} · Clairière céleste`;
+  return `● ${primaryLabel(view.primary, name)} · Clairière céleste`;
 }
 
 export function refusalText(reason: string, name: string): string {
@@ -160,4 +160,17 @@ export function describeJournalEvent(e: GameEvent): string {
     default:
       return e.type;
   }
+}
+
+/** Texte d'une notification système (D5) : doux, sans reproche, toujours issu d'un besoin réel. */
+export function notificationContent(need: Need, name: string): { title: string; body: string } {
+  const body: Record<Need, string> = {
+    satiety: `${name} a un petit creux. Un repas lui ferait plaisir.`,
+    hygiene: `${name} aimerait une petite toilette.`,
+    happiness: `${name} aimerait jouer un peu avec toi.`,
+    energy: `${name} a besoin de repos.`,
+    sick: `${name} ne se sent pas très bien. Un soin lui ferait du bien.`,
+    weak: `${name} est très fragile. Une petite visite lui ferait du bien.`,
+  };
+  return { title: "Clairière céleste", body: body[need] };
 }

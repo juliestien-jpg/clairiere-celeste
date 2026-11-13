@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(0 -7.44)">
+<defs>
+  <radialGradient id="halo-faint-g" cx="120" cy="138" r="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9C0" stop-opacity="0.4"/><stop offset="0.6" stop-color="#FFE9C0" stop-opacity="0.14"/><stop offset="1" stop-color="#FFE9C0" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="80" fill="url(#halo-faint-g)"/>
+</g>
+</svg>

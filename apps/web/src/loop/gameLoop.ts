@@ -1,7 +1,7 @@
 // Boucle de jeu : détient l'état, appelle `reduce` (jamais de règle ici) avec l'heure de l'horloge
 // injectée, tient le journal des événements et déclenche la sauvegarde. Sans dépendance à React.
 import { deriveView, reduce } from "@tamagoshi/rules";
-import type { Action, Balance, GameEvent, Kind, SaveState, Time, View } from "@tamagoshi/rules";
+import type { Action, Balance, GameEvent, Kind, SaveState, Settings, Time, View } from "@tamagoshi/rules";
 import { createSave } from "@tamagoshi/rules";
 import type { SaveStore } from "../storage/saveStore";
 import type { ControllableClock } from "./clock";
@@ -31,6 +31,8 @@ export interface Snapshot {
   notice: Notice | null;
   loadError: string | null;
   saveError: string | null;
+  /** Augmente à chaque action du joueur, import, rechargement ou changement de réglage : les prévisions (D5) sont à refaire. */
+  revision: number;
 }
 
 export interface Timers {
@@ -91,6 +93,7 @@ export class GameLoop {
   private ready = false;
   private journal: JournalEntry[] = [];
   private seq = 0;
+  private revision = 0;
   private notice: Notice | null = null;
   private loadError: string | null = null;
   private saveError: string | null = null;
@@ -146,6 +149,7 @@ export class GameLoop {
       notice: this.notice,
       loadError: this.loadError,
       saveError: this.saveError,
+      revision: this.revision,
     };
   }
 
@@ -215,6 +219,7 @@ export class GameLoop {
     // `silentRefusal` : le refus reste dans le journal mais n'est pas annoncé (caresse refusée pour temps de recharge).
     const shown = events.filter((e) => !isQuiet(e) && !(options.silentRefusal && e.type === "actionRefused"));
     if (shown.length > 0) this.notice = { seq: ++this.seq, events: shown };
+    if (action.type !== "tick") this.revision++;
     this.emit();
     if (action.type !== "tick") void this.persist(true);
     return events;
@@ -228,6 +233,7 @@ export class GameLoop {
     if ([...name].length > MAX_NAME_LENGTH) return { ok: false, reason: "tooLong" };
     const { id, seed } = this.newIdentity();
     this.state = createSave({ id, name, seed }, this.time(), this.balance);
+    this.revision++;
     this.journal = [];
     this.notice = null;
     this.emit();
@@ -268,6 +274,7 @@ export class GameLoop {
   /** Efface la sauvegarde : retour à l'écran de création. */
   async reset(): Promise<void> {
     this.state = null;
+    this.revision++;
     this.journal = [];
     this.notice = null;
     this.loadError = null;
@@ -279,16 +286,38 @@ export class GameLoop {
     return this.state ? this.store.exportFile(this.state) : null;
   }
 
-  /** Remplace l'état par celui d'un fichier. Lève `MigrationError` si le fichier est illisible. */
-  async importFile(file: Blob): Promise<void> {
-    const imported = await this.store.importFile(file);
+  /** Lit et valide un fichier de sauvegarde sans rien changer. Lève `MigrationError` si illisible. */
+  parseImport(file: Blob): Promise<SaveState> {
+    return this.store.importFile(file);
+  }
+
+  /** Remplace l'état par une sauvegarde déjà lue (après confirmation du joueur). */
+  async applyImport(imported: SaveState): Promise<void> {
     this.state = imported;
     this.loadError = null;
     this.journal = [];
     this.notice = null;
+    this.revision++;
     this.emit();
     await this.persist(true);
     this.dispatch({ type: "tick" });
+  }
+
+  /** Remplace l'état par celui d'un fichier. Lève `MigrationError` si le fichier est illisible. */
+  async importFile(file: Blob): Promise<void> {
+    await this.applyImport(await this.parseImport(file));
+  }
+
+  /**
+   * Modifie les réglages (`settings` de la sauvegarde). `packages/rules` n'a pas d'action pour cela : le
+   * réglage est écrit ici, sans passer par `reduce`, et suit la sauvegarde (export, import, autres onglets).
+   */
+  updateSettings(patch: Partial<Settings>): void {
+    if (!this.state) return;
+    this.state = { ...this.state, settings: { ...this.state.settings, ...patch } };
+    this.revision++;
+    this.emit();
+    void this.persist(true);
   }
 
   /** Écrit l'état maintenant (page cachée ou fermée). */
@@ -318,6 +347,7 @@ export class GameLoop {
     } catch (e) {
       this.loadError = e instanceof Error ? e.message : "sauvegarde illisible";
     }
+    this.revision++;
     if (this.state) this.dispatch({ type: "tick" });
     else this.emit();
   }

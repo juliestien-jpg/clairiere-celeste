@@ -2,6 +2,9 @@
 import { defaultBalance } from "@tamagoshi/rules";
 import { VirtualClock } from "./loop/clock";
 import { GameLoop } from "./loop/gameLoop";
+import { createLocalHistoryStore } from "./notify/history";
+import { Notifier } from "./notify/notifier";
+import { permissionState, showSystemNotification } from "./notify/system";
 import { createDefaultStore } from "./storage/indexedDbStore";
 
 const { store, persistent } = createDefaultStore();
@@ -45,3 +48,12 @@ if (debugClock) {
     if (last !== undefined && last > now) game.jump(last - now);
   });
 }
+
+// Notifications « page ouverte » (D5) : démarrées par l'application, après le chargement de la sauvegarde.
+export const notifier = new Notifier({
+  game,
+  store: createLocalHistoryStore(),
+  permission: permissionState,
+  isHidden: () => typeof document !== "undefined" && document.visibilityState === "hidden",
+  show: (n) => void showSystemNotification(n),
+});

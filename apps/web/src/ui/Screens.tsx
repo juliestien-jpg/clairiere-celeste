@@ -5,7 +5,11 @@ import { Creature, RESTING_VIEW } from "../creature/Creature";
 import { MAX_NAME_LENGTH } from "../loop/gameLoop";
 import type { CreateResult, Notice } from "../loop/gameLoop";
 import { ActionBar } from "./ActionBar";
+import { FirstHints } from "./FirstHints";
 import { PlayArea } from "./PlayArea";
+import { ScreenHeader } from "./ScreenHeader";
+import type { Nav } from "./ScreenHeader";
+import { starPosition } from "./albumFormat";
 import type { ActionHandler } from "./perform";
 import { Vials } from "./Vials";
 import { KIND_LABEL, describeEvent, primaryLabel, secondaryLabel } from "./labels";
@@ -18,7 +22,7 @@ const CREATE_ERRORS: Record<Exclude<CreateResult, { ok: true }>["reason"], strin
   exists: "Un compagnon vit déjà ici.",
 };
 
-export function CreateScreen({ onCreate }: { onCreate: (name: string) => CreateResult }) {
+export function CreateScreen({ onCreate, nav }: { onCreate: (name: string) => CreateResult; nav?: Nav | undefined }) {
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -30,7 +34,7 @@ export function CreateScreen({ onCreate }: { onCreate: (name: string) => CreateR
 
   return (
     <main className="screen screen-create">
-      <h1>Un œuf brille dans la clairière</h1>
+      <ScreenHeader title="Un œuf brille dans la clairière" nav={nav} />
       <Creature name="L'œuf" stage="egg" view={RESTING_VIEW} stateLabel="Un œuf opalescent attend, tout chaud" />
       <form className="panel" onSubmit={submit} noValidate>
         <label htmlFor="pet-name">Comment s'appellera ton compagnon ?</label>
@@ -83,12 +87,14 @@ export function MainScreen(props: {
   view: View;
   notice: Notice | null;
   onAction: ActionHandler;
+  nav?: Nav | undefined;
 }) {
-  const { state, view, notice, onAction } = props;
+  const { state, view, notice, onAction, nav } = props;
   const name = state.pet.name;
   return (
     <main className="screen screen-main">
-      <h1 className="pet-name">{name}</h1>
+      <ScreenHeader title={name} nav={nav} className="pet-name" />
+      {state.pet.stage !== "egg" && <FirstHints />}
       <Vials state={state} levels={view.gaugeLevels} />
       <PlayArea name={name} kind={view.kind} asleep={state.pet.status.asleep} onAction={onAction}>
         <Creature
@@ -107,14 +113,6 @@ export function MainScreen(props: {
 
 // --- Après l'Envol -------------------------------------------------------------------------------
 
-function starPosition(id: string, i: number): { left: string; top: string } {
-  let h = 2166136261 ^ i;
-  for (let k = 0; k < id.length; k++) h = Math.imul(h ^ id.charCodeAt(k), 16777619);
-  const a = (h >>> 0) % 1000;
-  const b = Math.imul(h ^ 0x9e3779b9, 2246822519) >>> 0;
-  return { left: `${8 + (a / 1000) * 84}%`, top: `${6 + ((b % 1000) / 1000) * 58}%` };
-}
-
 /** Choix de l'espèce du prochain œuf, réservé au débogage : « random » laisse les règles tirer (D6). */
 type KindChoice = "random" | Kind;
 const KIND_CHOICES: readonly { value: KindChoice; label: string }[] = [
@@ -132,8 +130,9 @@ export function FlownScreen(props: {
   playFlight?: boolean;
   /** Débogage : affiche le choix de l'espèce du prochain œuf. */
   debug?: boolean;
+  nav?: Nav | undefined;
 }) {
-  const { state, onRebirth, notice, playFlight = false, debug = false } = props;
+  const { state, onRebirth, notice, playFlight = false, debug = false, nav } = props;
   const name = state.pet.name;
   const [newName, setNewName] = useState(name);
   const [choice, setChoice] = useState<KindChoice>("random");
@@ -151,7 +150,7 @@ export function FlownScreen(props: {
 
   return (
     <main className="screen screen-flown">
-      <h1>{name} est devenu une étoile</h1>
+      <ScreenHeader title={`${name} est devenu une étoile`} nav={nav} />
       <Creature
         name={name}
         stage={state.pet.stage}

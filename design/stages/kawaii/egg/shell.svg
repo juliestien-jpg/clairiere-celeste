@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <linearGradient id="egg-base" x1="62" y1="70" x2="170" y2="204" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/><stop offset="1" stop-color="#E6D6F3"/>
+  </linearGradient>
+  <radialGradient id="egg-pink" cx="94" cy="104" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4A6C6" stop-opacity=".62"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="egg-blue" cx="92" cy="180" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity=".7"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="egg-mint" cx="152" cy="150" r="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8FE3CF" stop-opacity=".6"/><stop offset="1" stop-color="#8FE3CF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="egg-gold" cx="146" cy="98" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".6"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<path d="M120 60 C156 60 180 106 180 148 C180 186 154 206 120 206 C86 206 60 186 60 148 C60 106 84 60 120 60 Z" fill="url(#egg-base)"/>
+<path d="M120 60 C156 60 180 106 180 148 C180 186 154 206 120 206 C86 206 60 186 60 148 C60 106 84 60 120 60 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+</svg>

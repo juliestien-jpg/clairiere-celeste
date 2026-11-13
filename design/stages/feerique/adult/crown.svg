@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <linearGradient id="fcr-fill" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FFF6D8"/><stop offset=".6" stop-color="#FFD27A"/><stop offset="1" stop-color="#F4A6C6"/></linearGradient>
+  <radialGradient id="fcr-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="39" r="34" fill="url(#fcr-glow)"/>
+<path d="M0 0 C-8 -7 -8 -20 0 -29 C8 -20 8 -7 0 0 Z" transform="translate(120 53) rotate(-58) scale(0.62)" fill="url(#fcr-fill)" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M0 0 C-8 -7 -8 -20 0 -29 C8 -20 8 -7 0 0 Z" transform="translate(120 53) rotate(58) scale(0.62)" fill="url(#fcr-fill)" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M0 0 C-8 -7 -8 -20 0 -29 C8 -20 8 -7 0 0 Z" transform="translate(120 53) rotate(-29) scale(0.8)" fill="url(#fcr-fill)" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M0 0 C-8 -7 -8 -20 0 -29 C8 -20 8 -7 0 0 Z" transform="translate(120 53) rotate(29) scale(0.8)" fill="url(#fcr-fill)" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M0 0 C-8 -7 -8 -20 0 -29 C8 -20 8 -7 0 0 Z" transform="translate(120 53) rotate(0) scale(0.95)" fill="url(#fcr-fill)" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="120" cy="54" r="5.4" fill="#FFFFFF" stroke="#C98A2B" stroke-width="2.8"/>
+
+</svg>

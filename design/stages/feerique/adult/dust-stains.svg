@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(-7.200000000000003 -36) scale(1.06 1.18)">
+<defs><radialGradient id="fd-blob" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#5E5878" stop-opacity=".78"/><stop offset=".6" stop-color="#5E5878" stop-opacity=".6"/><stop offset="1" stop-color="#5E5878" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="86" cy="178" rx="15" ry="10" transform="rotate(-24 86 178)" fill="url(#fd-blob)"/>
+<ellipse cx="152" cy="184" rx="17" ry="11" transform="rotate(14 152 184)" fill="url(#fd-blob)"/>
+<ellipse cx="160" cy="124" rx="10" ry="7" transform="rotate(-40 160 124)" fill="url(#fd-blob)"/>
+<ellipse cx="102" cy="100" rx="9" ry="6" transform="rotate(30 102 100)" fill="url(#fd-blob)"/>
+<ellipse cx="124" cy="194" rx="8" ry="5" fill="url(#fd-blob)"/>
+<circle cx="104" cy="182" r="2.6" fill="#5E5878" fill-opacity=".7"/><circle cx="140" cy="176" r="2.2" fill="#5E5878" fill-opacity=".7"/>
+<circle cx="66" cy="146" r="2.4" fill="#5E5878" fill-opacity=".65"/><circle cx="176" cy="150" r="2.2" fill="#5E5878" fill-opacity=".65"/>
+</g>
+</svg>

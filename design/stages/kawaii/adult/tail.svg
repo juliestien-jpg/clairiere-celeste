@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(6 0)">
+<defs>
+  <linearGradient id="tail-fill" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFD27A"/><stop offset=".6" stop-color="#FFC98F"/><stop offset="1" stop-color="#F4A6C6"/></linearGradient>
+  <linearGradient id="tail-in" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/></linearGradient>
+  <radialGradient id="tail-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".75"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="204" cy="172" r="36" fill="url(#tail-glow)"/>
+<path d="M178 196 C196 203 216 193 222 174 C225 163 220 156 228 142 C212 148 202 154 194 164 C186 174 176 184 178 196 Z" fill="url(#tail-fill)" stroke="#E8A049" stroke-width="3" stroke-linejoin="round"/>
+<path d="M186 194 C198 196 209 189 213 177 C215 170 212 166 217 158 C207 163 201 168 196 175 C190 181 185 187 186 194 Z" fill="url(#tail-in)"/>
+<path d="M192 192 C200 192 205 187 207 180 C203 183 199 186 196 189 Z" fill="#FFFFFF" fill-opacity=".9"/>
+</g>
+</svg>

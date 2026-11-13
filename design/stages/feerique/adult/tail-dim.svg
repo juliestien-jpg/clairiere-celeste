@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <linearGradient id="ftl-fill" x1="152" y1="184" x2="212" y2="104" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F3EEFA"/><stop offset=".5" stop-color="#DCD4EA"/><stop offset="1" stop-color="#CFC6E0" stop-opacity=".8"/></linearGradient>
+  <radialGradient id="ftl-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<path d="M150 170 C180 174 205 160 213 132 C215 124 215 117 213 109 C226 134 221 168 200 188 C180 204 160 202 150 196 Z" fill="url(#ftl-fill)" stroke="#8F84AE" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="201" cy="132" r="3" fill="#F3EEFA" fill-opacity=".9"/>
+<circle cx="202" cy="150" r="2.8" fill="#F3EEFA" fill-opacity=".9"/>
+<circle cx="192" cy="168" r="2.6" fill="#F3EEFA" fill-opacity=".9"/>
+<path d="M212 92.5 Q214.07 101.93 223.5 104 Q214.07 106.07 212 115.5 Q209.93 106.07 200.5 104 Q209.93 101.93 212 92.5 Z" fill="#F3EEFA" stroke="#8F84AE" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M190 114 Q191.08 118.92 196 120 Q191.08 121.08 190 126 Q188.92 121.08 184 120 Q188.92 118.92 190 114 Z" fill="#E3DAF0" stroke="#8F84AE" stroke-width="2.8" stroke-linejoin="round"/>
+
+</svg>

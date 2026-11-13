@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(240 0) scale(-1 1)">
+<defs>
+  <linearGradient id="ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 90.7 C84 71.1 72.8 37.3 76.5 17 C75.6 14.1 77.1 11 80 10 C82.9 9 86 10.6 87 13.5 C102.2 27.5 113.4 61.3 114.1 85.3 Z" fill="url(#ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 74 C88.4 62.9 82.3 44.7 83.9 33.5 C83.2 31.5 84.3 29.4 86.2 28.7 C88.2 28.1 90.3 29.1 91 31.1 C98.9 39.1 105 57.4 105.5 70.8 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="13.3" r="19" fill="url(#ear-glow)"/>
+<circle cx="81.1" cy="13.3" r="9" fill="url(#ear-bud)" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="2.6"/>
+<circle cx="78.3" cy="10.5" r="2.6" fill="#FFFFFF" fill-opacity=".95"/>
+</g>
+</svg>

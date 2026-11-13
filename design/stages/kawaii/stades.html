@@ -1,0 +1,1420 @@
+<!doctype html>
+<html lang="fr" data-sky="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stades de la créature kawaii — Clairière céleste</title>
+<!--
+  FICHIER GÉNÉRÉ : ne pas modifier à la main.
+  Source : design/stages/kawaii/ (poses.json, egg/, child/, teen/, adult/), le bébé de assets/creature/kawaii/baby/,
+  spec/motion/poses/kawaii.json, assets/emblems/, spec/theme.json. Autonome (file://), rien d'externe.
+-->
+<style>
+html[data-sky="dawn"]{--sky:linear-gradient(180deg,#8E7CC3 0%, #F4A6C6 55%, #FFB89A 100%);--stars:0.15;--text:#1B1838;--muted:#2E2A5C;--panel:rgba(251,230,238,0.9);--panel-solid:#FBE6EE;--edge:rgba(46,42,92,.28);--moss1:#B8DCC8;--moss2:#8FBFA6;--mist:#FFF6E9;--accent:#2E2A5C;--chip-on:#2E2A5C;--chip-on-text:#FFF6E9;}
+html[data-sky="day"]{--sky:linear-gradient(180deg,#F3EEFF 0%, #DCE8FF 100%);--stars:0;--text:#2E2A5C;--muted:#2E2A5C;--panel:rgba(255,255,255,0.9);--panel-solid:#FFFFFF;--edge:rgba(46,42,92,.28);--moss1:#C2E8D2;--moss2:#8FCFB0;--mist:#FFFFFF;--accent:#2E2A5C;--chip-on:#2E2A5C;--chip-on-text:#FFF6E9;}
+html[data-sky="dusk"]{--sky:linear-gradient(180deg,#2E2A5C 0%, #8E7CC3 60%, #F4A6C6 100%);--stars:0.5;--text:#FFF6E9;--muted:#FFF6E9;--panel:rgba(58,52,112,0.9);--panel-solid:#3A3470;--edge:rgba(255,255,255,.35);--moss1:#5E9C8C;--moss2:#3F7A72;--mist:#F4A6C6;--accent:#FFD27A;--chip-on:#FFF6E9;--chip-on-text:#1B1838;}
+html[data-sky="night"]{--sky:linear-gradient(180deg,#1B1838 0%, #2E2A5C 100%);--stars:1;--text:#FFF6E9;--muted:#A9C8FF;--panel:rgba(46,42,92,0.9);--panel-solid:#2E2A5C;--edge:rgba(255,255,255,.35);--moss1:#4C8C86;--moss2:#2F6A68;--mist:#8E7CC3;--accent:#FFD27A;--chip-on:#FFF6E9;--chip-on-text:#1B1838;}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#1B1838;color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.sky{position:fixed;inset:0;z-index:-2;background:var(--sky)}
+.sky::after{content:"";position:absolute;inset:0;opacity:var(--stars);
+background:
+radial-gradient(2px 2px at 12% 8%,#FFF6E9 98%,transparent),radial-gradient(2px 2px at 78% 5%,#FFF6E9 98%,transparent),
+radial-gradient(2.5px 2.5px at 40% 14%,#FFD27A 98%,transparent),radial-gradient(2px 2px at 90% 22%,#FFF6E9 98%,transparent),
+radial-gradient(2px 2px at 6% 33%,#A9C8FF 98%,transparent),radial-gradient(2.5px 2.5px at 64% 30%,#FFF6E9 98%,transparent),
+radial-gradient(2px 2px at 26% 46%,#FFF6E9 98%,transparent),radial-gradient(2px 2px at 94% 52%,#FFD27A 98%,transparent),
+radial-gradient(2px 2px at 52% 62%,#FFF6E9 98%,transparent),radial-gradient(2px 2px at 10% 72%,#A9C8FF 98%,transparent),
+radial-gradient(2.5px 2.5px at 80% 80%,#FFF6E9 98%,transparent),radial-gradient(2px 2px at 36% 90%,#FFF6E9 98%,transparent)}
+main{max-width:980px;margin:0 auto;padding:12px 16px 32px;display:flex;flex-direction:column;gap:16px}
+header,section,footer{background:var(--panel);border:1px solid var(--edge);border-radius:20px;padding:16px}
+header,section{backdrop-filter:none}
+h1{font-size:1.45rem;line-height:1.25;margin:0 0 4px}
+h2{font-size:1.2rem;margin:0 0 4px}
+h3{font-size:1rem;margin:0}
+p{margin:0}
+.lede,.intro{color:var(--muted)}
+.intro{margin-bottom:12px}
+footer p{color:var(--muted);font-size:.875rem}
+.controls{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.group{display:flex;flex-direction:column;gap:6px}
+.lbl{font-weight:600;font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips.g2{display:grid;grid-template-columns:repeat(2,1fr)}
+.chips.g3{display:grid;grid-template-columns:repeat(3,1fr)}
+.chips.center{justify-content:center;margin:10px 0}
+.chip{appearance:none;font:inherit;font-weight:600;min-height:44px;padding:6px 10px;justify-content:center;border-radius:999px;border:2px solid var(--text);background:transparent;color:var(--text);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-text);border-color:var(--chip-on)}
+.chip[aria-pressed="true"]::before{content:"\2713";font-weight:700}
+.controls .chips{display:grid;grid-template-columns:repeat(2,1fr)}
+.controls .chip{justify-content:center}
+.switch{display:inline-flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;font-weight:600;position:relative}
+.switch input{position:absolute;opacity:0;width:44px;height:44px;margin:0;left:0;cursor:pointer}
+.switch .box{width:28px;height:28px;border:2px solid var(--text);border-radius:8px;display:inline-grid;place-items:center;flex:none}
+.switch input:checked+.box{background:var(--chip-on);border-color:var(--chip-on)}
+.switch input:checked+.box::after{content:"\2713";color:var(--chip-on-text);font-weight:700;line-height:1}
+.chip:focus-visible,.cell:focus-visible,.switch input:focus-visible+.box{outline:3px solid var(--accent);outline-offset:2px}
+.scene{position:relative;border-radius:24px;padding:12px 0 4px}
+.scene::before{content:"";position:absolute;inset:0;background:radial-gradient(closest-side,var(--mist),transparent);opacity:.3;pointer-events:none}
+.cr-box{position:relative;width:240px;max-width:100%;aspect-ratio:1;margin:0 auto}
+.cr-box.game{width:220px}
+.cr{position:relative;width:100%;aspect-ratio:1}
+.stack{position:absolute;inset:0;width:100%}
+.cr-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ground{position:absolute;left:8%;right:8%;bottom:6%;height:15%;border-radius:50%;background:radial-gradient(closest-side,var(--moss1),var(--moss2) 72%,transparent 100%);opacity:.95}
+.em{position:absolute;right:-2%;top:-4%;width:26%;overflow:visible;pointer-events:none}
+.cue{min-height:3em;text-align:center;max-width:36em;margin:0 auto;color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.card{margin:0;display:flex;flex-direction:column;gap:6px}
+.card figcaption{display:flex;flex-direction:column;font-size:.9rem;color:var(--muted);line-height:1.35}
+.card figcaption strong{color:var(--text);font-size:1rem}
+.side-cr{position:relative;width:100%;aspect-ratio:1}
+.grid{display:flex;flex-direction:column;gap:10px}
+.grid-head{display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:2;background:var(--panel-solid);border-radius:12px;padding:6px 0;border:1px solid var(--edge)}
+.grid-head .sp{display:none}
+.cells{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1}
+.grid-head .cells span{text-align:center;font-weight:700;font-size:.8rem}
+.row{display:flex;flex-direction:column;gap:6px;padding-top:6px;border-top:1px solid var(--edge)}
+.row-head{display:flex;gap:10px;align-items:center}
+.row-head p{font-size:.85rem;color:var(--muted);line-height:1.3}
+.row-em{width:40px;height:40px;flex:none}
+.row-em.none{display:inline-block}
+.cell{appearance:none;font:inherit;padding:2px;margin:0;border:1px solid var(--edge);border-radius:14px;background:rgba(255,255,255,.08);cursor:pointer;display:block;color:inherit}
+.cell[aria-pressed="true"]{border:2px solid var(--accent)}
+.cell-cr{display:block;position:relative;width:100%;aspect-ratio:1}
+@media (min-width:720px){
+  main{padding:20px 24px 40px;gap:20px}
+  header,section,footer{padding:24px}
+  h1{font-size:1.8rem}
+  .controls{flex-direction:row;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+  .controls .chips{grid-template-columns:repeat(4,auto)}
+  .cards{grid-template-columns:repeat(4,1fr);gap:16px}
+  .chips.g2,.chips.g3{display:flex}
+  .row{flex-direction:row;align-items:center;gap:16px}
+  .row-head{width:300px;flex:none}
+  .grid-head .sp{display:block;width:316px;flex:none}
+  .cells{gap:12px}
+  .cr-box{width:280px}.cr-box.game{width:260px}
+  .em{width:24%}
+}
+html.rm *{scroll-behavior:auto!important}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<g id="f0"><defs>
+  <radialGradient id="f0-shadow-fill" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#1B1838" stop-opacity=".42"/><stop offset=".6" stop-color="#1B1838" stop-opacity=".18"/><stop offset="1" stop-color="#1B1838" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="120" cy="206" rx="70" ry="11.5" fill="url(#f0-shadow-fill)"/></g>
+<g id="f1"><defs>
+  <radialGradient id="f1-egg-glow-g" cx="120" cy="138" r="104" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset=".45" stop-color="#FFD27A" stop-opacity=".45"/><stop offset=".78" stop-color="#F4A6C6" stop-opacity=".14"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="104" fill="url(#f1-egg-glow-g)"/></g>
+<g id="f2"><defs>
+  <linearGradient id="f2-egg-base" x1="62" y1="70" x2="170" y2="204" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/><stop offset="1" stop-color="#E6D6F3"/>
+  </linearGradient>
+  <radialGradient id="f2-egg-pink" cx="94" cy="104" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4A6C6" stop-opacity=".62"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f2-egg-blue" cx="92" cy="180" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity=".7"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f2-egg-mint" cx="152" cy="150" r="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8FE3CF" stop-opacity=".6"/><stop offset="1" stop-color="#8FE3CF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f2-egg-gold" cx="146" cy="98" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".6"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<path d="M120 60 C156 60 180 106 180 148 C180 186 154 206 120 206 C86 206 60 186 60 148 C60 106 84 60 120 60 Z" fill="url(#f2-egg-base)"/>
+<path d="M120 60 C156 60 180 106 180 148 C180 186 154 206 120 206 C86 206 60 186 60 148 C60 106 84 60 120 60 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/></g>
+<g id="f3"><defs>
+  <linearGradient id="f3-egg-base" x1="62" y1="70" x2="170" y2="204" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/><stop offset="1" stop-color="#E6D6F3"/>
+  </linearGradient>
+  <radialGradient id="f3-egg-pink" cx="94" cy="104" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4A6C6" stop-opacity=".62"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f3-egg-blue" cx="92" cy="180" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity=".7"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f3-egg-mint" cx="152" cy="150" r="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8FE3CF" stop-opacity=".6"/><stop offset="1" stop-color="#8FE3CF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f3-egg-gold" cx="146" cy="98" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".6"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+  <clipPath id="f3-egg-clip-a"><path d="M120 60 C156 60 180 106 180 148 C180 186 154 206 120 206 C86 206 60 186 60 148 C60 106 84 60 120 60 Z"/></clipPath>
+</defs>
+<g clip-path="url(#f3-egg-clip-a)">
+<circle cx="94" cy="104" r="62" fill="url(#f3-egg-pink)"/>
+<circle cx="92" cy="180" r="62" fill="url(#f3-egg-blue)"/>
+</g></g>
+<g id="f4"><defs>
+  <linearGradient id="f4-egg-base" x1="62" y1="70" x2="170" y2="204" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/><stop offset="1" stop-color="#E6D6F3"/>
+  </linearGradient>
+  <radialGradient id="f4-egg-pink" cx="94" cy="104" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4A6C6" stop-opacity=".62"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f4-egg-blue" cx="92" cy="180" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity=".7"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f4-egg-mint" cx="152" cy="150" r="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8FE3CF" stop-opacity=".6"/><stop offset="1" stop-color="#8FE3CF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f4-egg-gold" cx="146" cy="98" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".6"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+  <clipPath id="f4-egg-clip-b"><path d="M120 60 C156 60 180 106 180 148 C180 186 154 206 120 206 C86 206 60 186 60 148 C60 106 84 60 120 60 Z"/></clipPath>
+</defs>
+<g clip-path="url(#f4-egg-clip-b)">
+<circle cx="152" cy="150" r="60" fill="url(#f4-egg-mint)"/>
+<circle cx="146" cy="98" r="44" fill="url(#f4-egg-gold)"/>
+</g></g>
+<g id="f5"><defs>
+  <radialGradient id="f5-egg-gloss-g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="96" cy="98" rx="24" ry="13" transform="rotate(-38 96 98)" fill="url(#f5-egg-gloss-g)"/>
+<circle cx="76" cy="124" r="3.4" fill="#FFFFFF" fill-opacity=".75"/></g>
+<g id="f6"><path d="M100 106 Q101.6 114.4 110 116 Q101.6 117.6 100 126 Q98.4 117.6 90 116 Q98.4 114.4 100 106 Z" fill="#FFD27A" stroke="#FFD27A" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M146 164 Q147.3 170.7 154 172 Q147.3 173.3 146 180 Q144.7 173.3 138 172 Q144.7 170.7 146 164 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M138 90 Q139 95 144 96 Q139 97 138 102 Q137 97 132 96 Q137 95 138 90 Z" fill="#FFD27A" stroke="#FFD27A" stroke-width="2.4" stroke-linejoin="round"/></g>
+<g id="f7"><defs>
+  <radialGradient id="f7-egg-light-g" cx="120" cy="150" r="74" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".45" stop-color="#FFF1C9" stop-opacity=".7"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+  <clipPath id="f7-egg-clip-l"><path d="M120 60 C156 60 180 106 180 148 C180 186 154 206 120 206 C86 206 60 186 60 148 C60 106 84 60 120 60 Z"/></clipPath>
+</defs>
+<g clip-path="url(#f7-egg-clip-l)"><circle cx="120" cy="150" r="74" fill="url(#f7-egg-light-g)"/></g></g>
+<g id="f8"><path d="M136 66 Q128 80 134 90 Q124 100 128 112 Q120 120 124 132" fill="none" stroke="#FFD27A" stroke-opacity=".45" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M136 66 Q128 80 134 90 Q124 100 128 112 Q120 120 124 132" fill="none" stroke="#E8A049" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M136 66 Q128 80 134 90 Q124 100 128 112 Q120 120 124 132" fill="none" stroke="#FFF1C9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="f9"><path d="M124 132 Q110 134 106 146 Q92 148 88 160" fill="none" stroke="#FFD27A" stroke-opacity=".45" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M124 132 Q110 134 106 146 Q92 148 88 160" fill="none" stroke="#E8A049" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M124 132 Q110 134 106 146 Q92 148 88 160" fill="none" stroke="#FFF1C9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M134 90 Q148 94 152 106 Q164 110 166 124" fill="none" stroke="#FFD27A" stroke-opacity=".45" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M134 90 Q148 94 152 106 Q164 110 166 124" fill="none" stroke="#E8A049" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M134 90 Q148 94 152 106 Q164 110 166 124" fill="none" stroke="#FFF1C9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="f10"><path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148" fill="none" stroke="#FFD27A" stroke-opacity=".45" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148" fill="none" stroke="#E8A049" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148" fill="none" stroke="#FFF1C9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="f11"><defs>
+  <linearGradient id="f11-egg-base" x1="62" y1="70" x2="170" y2="204" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/><stop offset="1" stop-color="#E6D6F3"/>
+  </linearGradient>
+  <radialGradient id="f11-egg-pink" cx="94" cy="104" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4A6C6" stop-opacity=".62"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f11-egg-blue" cx="92" cy="180" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity=".7"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f11-egg-mint" cx="152" cy="150" r="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8FE3CF" stop-opacity=".6"/><stop offset="1" stop-color="#8FE3CF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f11-egg-gold" cx="146" cy="98" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".6"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+  <clipPath id="f11-egg-clip-bt"><path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148 C180 186 154 206 120 206 C86 206 61 186 62 148 Z"/></clipPath>
+</defs>
+<path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148 C180 186 154 206 120 206 C86 206 61 186 62 148 Z" fill="url(#f11-egg-base)"/>
+<g clip-path="url(#f11-egg-clip-bt)">
+<circle cx="94" cy="104" r="62" fill="url(#f11-egg-pink)"/>
+<circle cx="92" cy="180" r="62" fill="url(#f11-egg-blue)"/>
+<circle cx="152" cy="150" r="60" fill="url(#f11-egg-mint)"/>
+<circle cx="146" cy="98" r="44" fill="url(#f11-egg-gold)"/>
+</g>
+<path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148 C180 186 154 206 120 206 C86 206 61 186 62 148 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148" fill="none" stroke="#E8A049" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="f12"><defs>
+  <linearGradient id="f12-egg-base" x1="62" y1="70" x2="170" y2="204" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/><stop offset="1" stop-color="#E6D6F3"/>
+  </linearGradient>
+  <radialGradient id="f12-egg-pink" cx="94" cy="104" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4A6C6" stop-opacity=".62"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f12-egg-blue" cx="92" cy="180" r="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity=".7"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f12-egg-mint" cx="152" cy="150" r="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8FE3CF" stop-opacity=".6"/><stop offset="1" stop-color="#8FE3CF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="f12-egg-gold" cx="146" cy="98" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".6"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+  <clipPath id="f12-egg-clip-t"><path d="M62 148 C61 106 84 60 120 60 C156 60 179 106 178 148 Q163.5 160 149 148 Q134.5 136 120 148 Q105.5 160 91 148 Q76.5 136 62 148 Z"/></clipPath>
+</defs>
+<path d="M62 148 C61 106 84 60 120 60 C156 60 179 106 178 148 Q163.5 160 149 148 Q134.5 136 120 148 Q105.5 160 91 148 Q76.5 136 62 148 Z" fill="url(#f12-egg-base)"/>
+<g clip-path="url(#f12-egg-clip-t)">
+<circle cx="94" cy="104" r="62" fill="url(#f12-egg-pink)"/>
+<circle cx="92" cy="180" r="62" fill="url(#f12-egg-blue)"/>
+<circle cx="152" cy="150" r="60" fill="url(#f12-egg-mint)"/>
+<circle cx="146" cy="98" r="44" fill="url(#f12-egg-gold)"/>
+</g>
+<ellipse cx="96" cy="98" rx="24" ry="13" transform="rotate(-38 96 98)" fill="#FFFFFF" fill-opacity=".6"/>
+<path d="M62 148 C61 106 84 60 120 60 C156 60 179 106 178 148 Q163.5 160 149 148 Q134.5 136 120 148 Q105.5 160 91 148 Q76.5 136 62 148 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M62 148 Q76.5 136 91 148 Q105.5 160 120 148 Q134.5 136 149 148 Q163.5 160 178 148" fill="none" stroke="#E8A049" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="f13"><defs>
+  <radialGradient id="f13-egg-burst-g" cx="120" cy="140" r="112" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".35" stop-color="#FFF1C9" stop-opacity=".75"/><stop offset=".7" stop-color="#FFD27A" stop-opacity=".25"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="140" r="112" fill="url(#f13-egg-burst-g)"/>
+<path d="M120 98 Q124.8 123.2 150 128 Q124.8 132.8 120 158 Q115.2 132.8 90 128 Q115.2 123.2 120 98 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round"/></g>
+<g id="f14"><defs>
+  <radialGradient id="f14-shadow-fill" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#1B1838" stop-opacity=".42"/><stop offset=".6" stop-color="#1B1838" stop-opacity=".18"/><stop offset="1" stop-color="#1B1838" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="120" cy="206" rx="68" ry="11" fill="url(#f14-shadow-fill)"/></g>
+<g id="f15"><defs>
+  <radialGradient id="f15-halo-gold" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.9"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.55"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.2"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f15-halo-gold)"/></g>
+<g id="f16"><defs>
+  <radialGradient id="f16-halo-hungry-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.7"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.4"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.15"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f16-halo-hungry-g)"/>
+<defs><radialGradient id="f16-halo-hungry-dent" cx="120" cy="172" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E7CC3" stop-opacity=".75"/><stop offset=".6" stop-color="#8E7CC3" stop-opacity=".4"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/></radialGradient></defs>
+<circle cx="120" cy="172" r="44" fill="url(#f16-halo-hungry-dent)"/></g>
+<g id="f17"><defs>
+  <radialGradient id="f17-halo-dim-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C9AE90" stop-opacity="0.55"/><stop offset="0.5" stop-color="#C9AE90" stop-opacity="0.3"/><stop offset="0.8" stop-color="#B9A9C9" stop-opacity="0.1"/><stop offset="1" stop-color="#B9A9C9" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f17-halo-dim-g)"/></g>
+<g id="f18"><defs>
+  <radialGradient id="f18-halo-cold-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#BFD6DE" stop-opacity="0.55"/><stop offset="0.5" stop-color="#B7CBD9" stop-opacity="0.32"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.1"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f18-halo-cold-g)"/></g>
+<g id="f19"><defs>
+  <radialGradient id="f19-halo-moon-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity="0.7"/><stop offset="0.5" stop-color="#A9C8FF" stop-opacity="0.38"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.12"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f19-halo-moon-g)"/></g>
+<g id="f20"><defs>
+  <radialGradient id="f20-halo-speckled-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.8"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.45"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.16"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f20-halo-speckled-g)"/>
+<circle cx="70" cy="96" r="4" fill="#6E6788" fill-opacity=".5"/><circle cx="168" cy="88" r="3.2" fill="#6E6788" fill-opacity=".5"/><circle cx="186" cy="150" r="4.4" fill="#6E6788" fill-opacity=".5"/><circle cx="60" cy="168" r="3.4" fill="#6E6788" fill-opacity=".5"/><circle cx="112" cy="214" r="3.6" fill="#6E6788" fill-opacity=".5"/><circle cx="156" cy="202" r="3" fill="#6E6788" fill-opacity=".5"/><circle cx="96" cy="60" r="2.8" fill="#6E6788" fill-opacity=".5"/><circle cx="150" cy="64" r="3.4" fill="#6E6788" fill-opacity=".5"/></g>
+<g id="f21"><defs>
+  <radialGradient id="f21-halo-faint-g" cx="120" cy="138" r="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9C0" stop-opacity="0.4"/><stop offset="0.6" stop-color="#FFE9C0" stop-opacity="0.14"/><stop offset="1" stop-color="#FFE9C0" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="80" fill="url(#f21-halo-faint-g)"/></g>
+<g id="f22"><defs>
+  <linearGradient id="f22-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f22-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f22-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M104 96 C88 90 70 74 68 54 C67 44 77 40 84 48 C96 62 108 78 112 92 Z" fill="url(#f22-ear-fill)" stroke="#9C8AD0" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M82 58 C90 68 97 80 101 90 C94 86 84 76 80 64 Z" fill="#F4A6C6" fill-opacity=".45"/>
+<circle cx="75" cy="49" r="17" fill="url(#f22-ear-glow)"/>
+<circle cx="75" cy="49" r="8" fill="url(#f22-ear-bud)" stroke="#FFFFFF" stroke-opacity=".85" stroke-width="1.5"/>
+<circle cx="72.5" cy="46.5" r="2.2" fill="#FFFFFF" fill-opacity=".95"/></g>
+<g id="f23"><defs>
+  <linearGradient id="f23-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f23-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f23-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M104 96 C88 90 70 74 68 54 C67 44 77 40 84 48 C96 62 108 78 112 92 Z" fill="url(#f23-ear-fill)" stroke="#9C8AD0" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M82 58 C90 68 97 80 101 90 C94 86 84 76 80 64 Z" fill="#F4A6C6" fill-opacity=".45"/>
+<circle cx="75" cy="49" r="8" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.5"/>
+<circle cx="72.5" cy="46.5" r="2" fill="#FFFFFF" fill-opacity=".6"/></g>
+<g id="f24"><g transform="translate(240 0) scale(-1 1)">
+
+<defs>
+  <linearGradient id="f24-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f24-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f24-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M104 96 C88 90 70 74 68 54 C67 44 77 40 84 48 C96 62 108 78 112 92 Z" fill="url(#f24-ear-fill)" stroke="#9C8AD0" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M82 58 C90 68 97 80 101 90 C94 86 84 76 80 64 Z" fill="#F4A6C6" fill-opacity=".45"/>
+<circle cx="75" cy="49" r="17" fill="url(#f24-ear-glow)"/>
+<circle cx="75" cy="49" r="8" fill="url(#f24-ear-bud)" stroke="#FFFFFF" stroke-opacity=".85" stroke-width="1.5"/>
+<circle cx="72.5" cy="46.5" r="2.2" fill="#FFFFFF" fill-opacity=".95"/>
+</g></g>
+<g id="f25"><g transform="translate(240 0) scale(-1 1)">
+
+<defs>
+  <linearGradient id="f25-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f25-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f25-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M104 96 C88 90 70 74 68 54 C67 44 77 40 84 48 C96 62 108 78 112 92 Z" fill="url(#f25-ear-fill)" stroke="#9C8AD0" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M82 58 C90 68 97 80 101 90 C94 86 84 76 80 64 Z" fill="#F4A6C6" fill-opacity=".45"/>
+<circle cx="75" cy="49" r="8" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.5"/>
+<circle cx="72.5" cy="46.5" r="2" fill="#FFFFFF" fill-opacity=".6"/>
+</g></g>
+<g id="f26"><defs>
+  <radialGradient id="f26-body-fill" cx="120" cy="148" r="88" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/>
+    <stop offset=".86" stop-color="#F8E4EE"/><stop offset="1" stop-color="#E6D6F3"/>
+  </radialGradient>
+  <radialGradient id="f26-body-shade" cx="120" cy="214" r="78" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".38"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f26-body-gloss" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".85"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f26-body-belly" cx="120" cy="168" r="40" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<path d="M120 70 C158 70 190 98 190 140 C190 178 160 204 120 204 C80 204 50 178 50 140 C50 98 82 70 120 70 Z" fill="url(#f26-body-fill)"/>
+<path d="M120 70 C158 70 190 98 190 140 C190 178 160 204 120 204 C80 204 50 178 50 140 C50 98 82 70 120 70 Z" fill="url(#f26-body-shade)"/>
+<ellipse cx="120" cy="170" rx="40" ry="30" fill="url(#f26-body-belly)"/>
+<ellipse cx="96" cy="98" rx="30" ry="15" transform="rotate(-30 96 98)" fill="url(#f26-body-gloss)"/>
+<circle cx="76" cy="116" r="3" fill="#FFFFFF" fill-opacity=".7"/>
+<path d="M120 70 C158 70 190 98 190 140 C190 178 160 204 120 204 C80 204 50 178 50 140 C50 98 82 70 120 70 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/></g>
+<g id="f27"><defs>
+  <radialGradient id="f27-dust-blob" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#5E5878" stop-opacity=".78"/><stop offset=".6" stop-color="#5E5878" stop-opacity=".6"/><stop offset="1" stop-color="#5E5878" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="78" cy="176" rx="17" ry="11" transform="rotate(-24 78 176)" fill="url(#f27-dust-blob)"/>
+<ellipse cx="156" cy="186" rx="20" ry="12" transform="rotate(14 156 186)" fill="url(#f27-dust-blob)"/>
+<ellipse cx="174" cy="112" rx="11" ry="7.5" transform="rotate(-40 174 112)" fill="url(#f27-dust-blob)"/>
+<ellipse cx="86" cy="96" rx="10" ry="6.5" transform="rotate(30 86 96)" fill="url(#f27-dust-blob)"/>
+<ellipse cx="122" cy="192" rx="9" ry="5.5" fill="url(#f27-dust-blob)"/>
+<circle cx="102" cy="180" r="2.6" fill="#5E5878" fill-opacity=".7"/>
+<circle cx="140" cy="172" r="2.2" fill="#5E5878" fill-opacity=".7"/>
+<circle cx="64" cy="146" r="2.4" fill="#5E5878" fill-opacity=".65"/>
+<circle cx="186" cy="150" r="2.2" fill="#5E5878" fill-opacity=".65"/></g>
+<g id="f28"><defs>
+  <radialGradient id="f28-cheeks-fill" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFB89A" stop-opacity="0.95"/><stop offset=".6" stop-color="#FFB89A" stop-opacity="0.6649999999999999"/><stop offset="1" stop-color="#FFB89A" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="76" cy="150" rx="15" ry="9.5" fill="url(#f28-cheeks-fill)"/>
+<ellipse cx="164" cy="150" rx="15" ry="9.5" fill="url(#f28-cheeks-fill)"/></g>
+<g id="f29"><defs>
+  <radialGradient id="f29-cheeks-sick-fill" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#A7B89A" stop-opacity="0.95"/><stop offset=".6" stop-color="#A7B89A" stop-opacity="0.6649999999999999"/><stop offset="1" stop-color="#A7B89A" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="76" cy="150" rx="15" ry="9.5" fill="url(#f29-cheeks-sick-fill)"/>
+<ellipse cx="164" cy="150" rx="15" ry="9.5" fill="url(#f29-cheeks-sick-fill)"/></g>
+<g id="f30"><g transform="translate(96 132)">
+<defs>
+  <linearGradient id="f30-eye-fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2E2A5C"/><stop offset="1" stop-color="#1B1838"/>
+  </linearGradient>
+  <radialGradient id="f30-eye-iris" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".85"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="0" cy="0" rx="11.5" ry="14.5" fill="url(#f30-eye-fill)"/>
+<ellipse cx="0" cy="7" rx="8" ry="6" fill="url(#f30-eye-iris)"/>
+<circle cx="-3.6" cy="-5.2" r="4.4" fill="#FFFFFF"/>
+<circle cx="3.8" cy="5" r="2.1" fill="#FFFFFF" fill-opacity=".92"/>
+<circle cx="5.6" cy="-7" r="1.1" fill="#FFFFFF" fill-opacity=".8"/>
+</g></g>
+<g id="f31"><g transform="translate(96 132)">
+<path d="M-11 3.5 Q0 -12 11 3.5" fill="none" stroke="#2E2A5C" stroke-width="4.6" stroke-linecap="round"/>
+<circle cx="-5" cy="-1.5" r="1.2" fill="#FFFFFF" fill-opacity=".7"/>
+</g></g>
+<g id="f32"><g transform="translate(96 132)">
+<defs>
+  <linearGradient id="f32-eye-fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2E2A5C"/><stop offset="1" stop-color="#1B1838"/>
+  </linearGradient>
+  <radialGradient id="f32-eye-iris" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".85"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<defs><clipPath id="f32-eye-lid"><path d="M-15 0.5 L15 -4.5 L15 22 L-15 22 Z"/></clipPath></defs>
+<g clip-path="url(#f32-eye-lid)">
+  <ellipse cx="0" cy="0" rx="11.5" ry="14.5" fill="url(#f32-eye-fill)"/>
+  <ellipse cx="0" cy="8" rx="8" ry="5.5" fill="url(#f32-eye-iris)"/>
+  <circle cx="-3" cy="3.4" r="3.6" fill="#FFFFFF"/>
+  <circle cx="4" cy="8.6" r="1.7" fill="#FFFFFF" fill-opacity=".9"/>
+</g>
+<path d="M-12.5 0.7 L12.5 -4.4" fill="none" stroke="#2E2A5C" stroke-width="3.2" stroke-linecap="round"/>
+</g></g>
+<g id="f33"><g transform="translate(96 132)">
+<path d="M-10.5 -1.5 Q0 9.5 10.5 -1.5" fill="none" stroke="#2E2A5C" stroke-width="4.6" stroke-linecap="round"/>
+</g></g>
+<g id="f34"><g transform="translate(144 132) scale(-1 1)">
+<defs>
+  <linearGradient id="f34-eye-fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2E2A5C"/><stop offset="1" stop-color="#1B1838"/>
+  </linearGradient>
+  <radialGradient id="f34-eye-iris" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".85"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="0" cy="0" rx="11.5" ry="14.5" fill="url(#f34-eye-fill)"/>
+<ellipse cx="0" cy="7" rx="8" ry="6" fill="url(#f34-eye-iris)"/>
+<circle cx="-3.6" cy="-5.2" r="4.4" fill="#FFFFFF"/>
+<circle cx="3.8" cy="5" r="2.1" fill="#FFFFFF" fill-opacity=".92"/>
+<circle cx="5.6" cy="-7" r="1.1" fill="#FFFFFF" fill-opacity=".8"/>
+</g></g>
+<g id="f35"><g transform="translate(144 132) scale(-1 1)">
+<path d="M-11 3.5 Q0 -12 11 3.5" fill="none" stroke="#2E2A5C" stroke-width="4.6" stroke-linecap="round"/>
+<circle cx="-5" cy="-1.5" r="1.2" fill="#FFFFFF" fill-opacity=".7"/>
+</g></g>
+<g id="f36"><g transform="translate(144 132) scale(-1 1)">
+<defs>
+  <linearGradient id="f36-eye-fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2E2A5C"/><stop offset="1" stop-color="#1B1838"/>
+  </linearGradient>
+  <radialGradient id="f36-eye-iris" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".85"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<defs><clipPath id="f36-eye-lid"><path d="M-15 0.5 L15 -4.5 L15 22 L-15 22 Z"/></clipPath></defs>
+<g clip-path="url(#f36-eye-lid)">
+  <ellipse cx="0" cy="0" rx="11.5" ry="14.5" fill="url(#f36-eye-fill)"/>
+  <ellipse cx="0" cy="8" rx="8" ry="5.5" fill="url(#f36-eye-iris)"/>
+  <circle cx="-3" cy="3.4" r="3.6" fill="#FFFFFF"/>
+  <circle cx="4" cy="8.6" r="1.7" fill="#FFFFFF" fill-opacity=".9"/>
+</g>
+<path d="M-12.5 0.7 L12.5 -4.4" fill="none" stroke="#2E2A5C" stroke-width="3.2" stroke-linecap="round"/>
+</g></g>
+<g id="f37"><g transform="translate(144 132) scale(-1 1)">
+<path d="M-10.5 -1.5 Q0 9.5 10.5 -1.5" fill="none" stroke="#2E2A5C" stroke-width="4.6" stroke-linecap="round"/>
+</g></g>
+<g id="f38"><path d="M108 149 Q120 169 132 149 Q120 153.5 108 149 Z" fill="#2E2A5C" stroke="#2E2A5C" stroke-width="2.4" stroke-linejoin="round"/>
+<ellipse cx="120" cy="155.2" rx="5.2" ry="2.6" fill="#F4A6C6"/></g>
+<g id="f39"><ellipse cx="120" cy="155" rx="6.2" ry="7.6" fill="#2E2A5C"/>
+<ellipse cx="120" cy="158.6" rx="3.6" ry="2.6" fill="#F4A6C6"/></g>
+<g id="f40"><ellipse cx="120" cy="157" rx="9" ry="11" fill="#2E2A5C"/>
+<ellipse cx="120" cy="162.5" rx="5.4" ry="3.6" fill="#F4A6C6"/></g>
+<g id="f41"><path d="M107 155 Q111 150 115 155 T123 155 T131 155" fill="none" stroke="#2E2A5C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="f42"><path d="M113.5 150 Q120 156.5 126.5 150" fill="none" stroke="#2E2A5C" stroke-width="3.4" stroke-linecap="round"/></g>
+<g id="f43"><path d="M113 155 Q120 157.5 127 155" fill="none" stroke="#2E2A5C" stroke-width="3.4" stroke-linecap="round"/></g>
+<g id="f44"><defs>
+  <radialGradient id="f44-hand-fill" cx=".4" cy=".35" r=".8">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset="1" stop-color="#F8E2EC"/>
+  </radialGradient>
+</defs>
+<path d="M170 160 Q156 180 130 173" fill="none" stroke="#9C8AD0" stroke-opacity=".85" stroke-width="19" stroke-linecap="round"/>
+<path d="M170 160 Q156 180 130 173" fill="none" stroke="url(#f44-hand-fill)" stroke-width="14.5" stroke-linecap="round"/>
+<circle cx="128" cy="173" r="10" fill="url(#f44-hand-fill)"/>
+<circle cx="124.5" cy="170" r="2" fill="#FFFFFF" fill-opacity=".8"/></g>
+<g id="f45"><ellipse cx="218.0" cy="138.0" rx="5.5" ry="4.4" transform="rotate(0 218.0 138.0)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/>
+<ellipse cx="197.2" cy="198.3" rx="3.4" ry="2.7" transform="rotate(38 197.2 198.3)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/>
+<ellipse cx="131.9" cy="235.3" rx="4.6" ry="3.7" transform="rotate(83 131.9 235.3)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/>
+<ellipse cx="61.0" cy="216.3" rx="3" ry="2.4" transform="rotate(127 61.0 216.3)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/>
+<ellipse cx="23.2" cy="153.3" rx="5" ry="4.0" transform="rotate(171 23.2 153.3)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/>
+<ellipse cx="38.8" cy="83.2" rx="3.6" ry="2.9" transform="rotate(214 38.8 83.2)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/>
+<ellipse cx="106.4" cy="41.0" rx="4.8" ry="3.8" transform="rotate(262 106.4 41.0)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/>
+<ellipse cx="176.2" cy="57.7" rx="3.2" ry="2.6" transform="rotate(305 176.2 57.7)" fill="#8A839C" fill-opacity=".85" stroke="#5E5878" stroke-opacity=".6" stroke-width="1"/></g>
+<g id="f46"><defs>
+  <radialGradient id="f46-star-glow" cx="120" cy="138" r="70" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset=".5" stop-color="#FFD27A" stop-opacity=".35"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f46-star-core" cx="120" cy="138" r="38" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<circle cx="120" cy="138" r="70" fill="url(#f46-star-glow)"/>
+<path d="M120 118 Q126 132 140 138 Q126 144 120 158 Q114 144 100 138 Q114 132 120 118 Z" transform="rotate(45 120 138)" fill="#FFF6E9" stroke="#FFF6E9" stroke-width="3" stroke-linejoin="round" fill-opacity=".9"/>
+<path d="M120 100 Q127 131 158 138 Q127 145 120 176 Q113 145 82 138 Q113 131 120 100 Z" fill="url(#f46-star-core)" stroke="#FFD27A" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="120" cy="138" r="5" fill="#FFFFFF"/></g>
+<g id="f47"><defs>
+  <radialGradient id="f47-shadow-fill" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#1B1838" stop-opacity=".42"/><stop offset=".6" stop-color="#1B1838" stop-opacity=".18"/><stop offset="1" stop-color="#1B1838" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="120" cy="206" rx="73" ry="11.5" fill="url(#f47-shadow-fill)"/></g>
+<g id="f48"><g transform="translate(120 138) scale(1.12) translate(-120 -138)">
+<defs>
+  <radialGradient id="f48-halo-gold" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.9"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.55"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.2"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f48-halo-gold)"/>
+</g></g>
+<g id="f49"><g transform="translate(120 138) scale(1.12) translate(-120 -138)">
+<defs>
+  <radialGradient id="f49-halo-hungry-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.7"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.4"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.15"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f49-halo-hungry-g)"/>
+<defs><radialGradient id="f49-halo-hungry-dent" cx="120" cy="172" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E7CC3" stop-opacity=".75"/><stop offset=".6" stop-color="#8E7CC3" stop-opacity=".4"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/></radialGradient></defs>
+<circle cx="120" cy="172" r="44" fill="url(#f49-halo-hungry-dent)"/>
+</g></g>
+<g id="f50"><g transform="translate(120 138) scale(1.12) translate(-120 -138)">
+<defs>
+  <radialGradient id="f50-halo-dim-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C9AE90" stop-opacity="0.55"/><stop offset="0.5" stop-color="#C9AE90" stop-opacity="0.3"/><stop offset="0.8" stop-color="#B9A9C9" stop-opacity="0.1"/><stop offset="1" stop-color="#B9A9C9" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f50-halo-dim-g)"/>
+</g></g>
+<g id="f51"><g transform="translate(120 138) scale(1.12) translate(-120 -138)">
+<defs>
+  <radialGradient id="f51-halo-cold-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#BFD6DE" stop-opacity="0.55"/><stop offset="0.5" stop-color="#B7CBD9" stop-opacity="0.32"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.1"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f51-halo-cold-g)"/>
+</g></g>
+<g id="f52"><g transform="translate(120 138) scale(1.12) translate(-120 -138)">
+<defs>
+  <radialGradient id="f52-halo-moon-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity="0.7"/><stop offset="0.5" stop-color="#A9C8FF" stop-opacity="0.38"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.12"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f52-halo-moon-g)"/>
+</g></g>
+<g id="f53"><g transform="translate(120 138) scale(1.12) translate(-120 -138)">
+<defs>
+  <radialGradient id="f53-halo-speckled-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.8"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.45"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.16"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f53-halo-speckled-g)"/>
+<circle cx="70" cy="96" r="4" fill="#6E6788" fill-opacity=".5"/><circle cx="168" cy="88" r="3.2" fill="#6E6788" fill-opacity=".5"/><circle cx="186" cy="150" r="4.4" fill="#6E6788" fill-opacity=".5"/><circle cx="60" cy="168" r="3.4" fill="#6E6788" fill-opacity=".5"/><circle cx="112" cy="214" r="3.6" fill="#6E6788" fill-opacity=".5"/><circle cx="156" cy="202" r="3" fill="#6E6788" fill-opacity=".5"/><circle cx="96" cy="60" r="2.8" fill="#6E6788" fill-opacity=".5"/><circle cx="150" cy="64" r="3.4" fill="#6E6788" fill-opacity=".5"/>
+</g></g>
+<g id="f54"><g transform="translate(120 138) scale(1.12) translate(-120 -138)">
+<defs>
+  <radialGradient id="f54-halo-faint-g" cx="120" cy="138" r="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9C0" stop-opacity="0.4"/><stop offset="0.6" stop-color="#FFE9C0" stop-opacity="0.14"/><stop offset="1" stop-color="#FFE9C0" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="80" fill="url(#f54-halo-faint-g)"/>
+</g></g>
+<g id="f55"><defs>
+  <linearGradient id="f55-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f55-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f55-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 94.6 C84 74.4 72.7 39.6 76.5 18.9 C75.5 16 77.1 12.9 80 12 C82.9 11.1 86 12.6 86.9 15.5 C102.2 30 113.5 64.8 114.1 89.4 Z" fill="url(#f55-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96 77.5 C88.4 66.2 82.3 47.3 83.8 35.9 C83.2 34 84.3 31.8 86.2 31.2 C88.2 30.6 90.3 31.6 91 33.6 C98.9 41.9 105 60.8 105.6 74.5 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="15.3" r="19" fill="url(#f55-ear-glow)"/>
+<circle cx="81.1" cy="15.3" r="9" fill="url(#f55-ear-bud)" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="2.6"/>
+<circle cx="78.3" cy="12.5" r="2.6" fill="#FFFFFF" fill-opacity=".95"/></g>
+<g id="f56"><defs>
+  <linearGradient id="f56-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f56-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f56-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 94.6 C84 74.4 72.7 39.6 76.5 18.9 C75.5 16 77.1 12.9 80 12 C82.9 11.1 86 12.6 86.9 15.5 C102.2 30 113.5 64.8 114.1 89.4 Z" fill="url(#f56-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96 77.5 C88.4 66.2 82.3 47.3 83.8 35.9 C83.2 34 84.3 31.8 86.2 31.2 C88.2 30.6 90.3 31.6 91 33.6 C98.9 41.9 105 60.8 105.6 74.5 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="15.3" r="9" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.6"/>
+<circle cx="78.3" cy="12.5" r="2.6" fill="#FFFFFF" fill-opacity=".65"/></g>
+<g id="f57"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+  <linearGradient id="f57-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f57-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f57-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 94.6 C84 74.4 72.7 39.6 76.5 18.9 C75.5 16 77.1 12.9 80 12 C82.9 11.1 86 12.6 86.9 15.5 C102.2 30 113.5 64.8 114.1 89.4 Z" fill="url(#f57-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96 77.5 C88.4 66.2 82.3 47.3 83.8 35.9 C83.2 34 84.3 31.8 86.2 31.2 C88.2 30.6 90.3 31.6 91 33.6 C98.9 41.9 105 60.8 105.6 74.5 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="15.3" r="19" fill="url(#f57-ear-glow)"/>
+<circle cx="81.1" cy="15.3" r="9" fill="url(#f57-ear-bud)" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="2.6"/>
+<circle cx="78.3" cy="12.5" r="2.6" fill="#FFFFFF" fill-opacity=".95"/>
+</g></g>
+<g id="f58"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+  <linearGradient id="f58-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f58-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f58-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 94.6 C84 74.4 72.7 39.6 76.5 18.9 C75.5 16 77.1 12.9 80 12 C82.9 11.1 86 12.6 86.9 15.5 C102.2 30 113.5 64.8 114.1 89.4 Z" fill="url(#f58-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96 77.5 C88.4 66.2 82.3 47.3 83.8 35.9 C83.2 34 84.3 31.8 86.2 31.2 C88.2 30.6 90.3 31.6 91 33.6 C98.9 41.9 105 60.8 105.6 74.5 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="15.3" r="9" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.6"/>
+<circle cx="78.3" cy="12.5" r="2.6" fill="#FFFFFF" fill-opacity=".65"/>
+</g></g>
+<g id="f59"><defs>
+  <radialGradient id="f59-body-fill" cx="120" cy="143" r="93" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/>
+    <stop offset=".86" stop-color="#F8E4EE"/><stop offset="1" stop-color="#E6D6F3"/>
+  </radialGradient>
+  <radialGradient id="f59-body-shade" cx="120" cy="214" r="82.5" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".38"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f59-body-gloss" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".85"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f59-body-belly" cx="120" cy="168" r="42.3" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<path d="M120 60 C160.2 60 194 92 194 140 C194 178 162.3 204 120 204 C77.7 204 46 178 46 140 C46 92 79.8 60 120 60 Z" fill="url(#f59-body-fill)"/>
+<path d="M120 60 C160.2 60 194 92 194 140 C194 178 162.3 204 120 204 C77.7 204 46 178 46 140 C46 92 79.8 60 120 60 Z" fill="url(#f59-body-shade)"/>
+<ellipse cx="120" cy="170" rx="42.3" ry="31.7" fill="url(#f59-body-belly)"/>
+<ellipse cx="94.6" cy="88" rx="31.7" ry="15.9" transform="rotate(-30 94.6 88)" fill="url(#f59-body-gloss)"/>
+<circle cx="73.4" cy="106" r="3.2" fill="#FFFFFF" fill-opacity=".7"/>
+<path d="M120 60 C160.2 60 194 92 194 140 C194 178 162.3 204 120 204 C77.7 204 46 178 46 140 C46 92 79.8 60 120 60 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/></g>
+<g id="f60"><defs>
+  <radialGradient id="f60-shadow-fill" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#1B1838" stop-opacity=".42"/><stop offset=".6" stop-color="#1B1838" stop-opacity=".18"/><stop offset="1" stop-color="#1B1838" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="120" cy="206" rx="77" ry="11.5" fill="url(#f60-shadow-fill)"/></g>
+<g id="f61"><g transform="translate(120 138) scale(1.2) translate(-120 -138)">
+<defs>
+  <radialGradient id="f61-halo-gold" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.9"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.55"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.2"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f61-halo-gold)"/>
+</g></g>
+<g id="f62"><g transform="translate(120 138) scale(1.2) translate(-120 -138)">
+<defs>
+  <radialGradient id="f62-halo-hungry-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.7"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.4"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.15"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f62-halo-hungry-g)"/>
+<defs><radialGradient id="f62-halo-hungry-dent" cx="120" cy="172" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E7CC3" stop-opacity=".75"/><stop offset=".6" stop-color="#8E7CC3" stop-opacity=".4"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/></radialGradient></defs>
+<circle cx="120" cy="172" r="44" fill="url(#f62-halo-hungry-dent)"/>
+</g></g>
+<g id="f63"><g transform="translate(120 138) scale(1.2) translate(-120 -138)">
+<defs>
+  <radialGradient id="f63-halo-dim-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C9AE90" stop-opacity="0.55"/><stop offset="0.5" stop-color="#C9AE90" stop-opacity="0.3"/><stop offset="0.8" stop-color="#B9A9C9" stop-opacity="0.1"/><stop offset="1" stop-color="#B9A9C9" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f63-halo-dim-g)"/>
+</g></g>
+<g id="f64"><g transform="translate(120 138) scale(1.2) translate(-120 -138)">
+<defs>
+  <radialGradient id="f64-halo-cold-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#BFD6DE" stop-opacity="0.55"/><stop offset="0.5" stop-color="#B7CBD9" stop-opacity="0.32"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.1"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f64-halo-cold-g)"/>
+</g></g>
+<g id="f65"><g transform="translate(120 138) scale(1.2) translate(-120 -138)">
+<defs>
+  <radialGradient id="f65-halo-moon-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity="0.7"/><stop offset="0.5" stop-color="#A9C8FF" stop-opacity="0.38"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.12"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f65-halo-moon-g)"/>
+</g></g>
+<g id="f66"><g transform="translate(120 138) scale(1.2) translate(-120 -138)">
+<defs>
+  <radialGradient id="f66-halo-speckled-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.8"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.45"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.16"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f66-halo-speckled-g)"/>
+<circle cx="70" cy="96" r="4" fill="#6E6788" fill-opacity=".5"/><circle cx="168" cy="88" r="3.2" fill="#6E6788" fill-opacity=".5"/><circle cx="186" cy="150" r="4.4" fill="#6E6788" fill-opacity=".5"/><circle cx="60" cy="168" r="3.4" fill="#6E6788" fill-opacity=".5"/><circle cx="112" cy="214" r="3.6" fill="#6E6788" fill-opacity=".5"/><circle cx="156" cy="202" r="3" fill="#6E6788" fill-opacity=".5"/><circle cx="96" cy="60" r="2.8" fill="#6E6788" fill-opacity=".5"/><circle cx="150" cy="64" r="3.4" fill="#6E6788" fill-opacity=".5"/>
+</g></g>
+<g id="f67"><g transform="translate(120 138) scale(1.2) translate(-120 -138)">
+<defs>
+  <radialGradient id="f67-halo-faint-g" cx="120" cy="138" r="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9C0" stop-opacity="0.4"/><stop offset="0.6" stop-color="#FFE9C0" stop-opacity="0.14"/><stop offset="1" stop-color="#FFE9C0" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="80" fill="url(#f67-halo-faint-g)"/>
+</g></g>
+<g id="f68"><defs>
+  <linearGradient id="f68-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f68-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f68-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 90.7 C84 71.1 72.8 37.3 76.5 17 C75.6 14.1 77.1 11 80 10 C82.9 9 86 10.6 87 13.5 C102.2 27.5 113.4 61.3 114.1 85.3 Z" fill="url(#f68-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 74 C88.4 62.9 82.3 44.7 83.9 33.5 C83.2 31.5 84.3 29.4 86.2 28.7 C88.2 28.1 90.3 29.1 91 31.1 C98.9 39.1 105 57.4 105.5 70.8 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="13.3" r="19" fill="url(#f68-ear-glow)"/>
+<circle cx="81.1" cy="13.3" r="9" fill="url(#f68-ear-bud)" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="2.6"/>
+<circle cx="78.3" cy="10.5" r="2.6" fill="#FFFFFF" fill-opacity=".95"/></g>
+<g id="f69"><defs>
+  <linearGradient id="f69-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f69-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f69-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 90.7 C84 71.1 72.8 37.3 76.5 17 C75.6 14.1 77.1 11 80 10 C82.9 9 86 10.6 87 13.5 C102.2 27.5 113.4 61.3 114.1 85.3 Z" fill="url(#f69-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 74 C88.4 62.9 82.3 44.7 83.9 33.5 C83.2 31.5 84.3 29.4 86.2 28.7 C88.2 28.1 90.3 29.1 91 31.1 C98.9 39.1 105 57.4 105.5 70.8 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="13.3" r="9" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.6"/>
+<circle cx="78.3" cy="10.5" r="2.6" fill="#FFFFFF" fill-opacity=".65"/></g>
+<g id="f70"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+  <linearGradient id="f70-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f70-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f70-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 90.7 C84 71.1 72.8 37.3 76.5 17 C75.6 14.1 77.1 11 80 10 C82.9 9 86 10.6 87 13.5 C102.2 27.5 113.4 61.3 114.1 85.3 Z" fill="url(#f70-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 74 C88.4 62.9 82.3 44.7 83.9 33.5 C83.2 31.5 84.3 29.4 86.2 28.7 C88.2 28.1 90.3 29.1 91 31.1 C98.9 39.1 105 57.4 105.5 70.8 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="13.3" r="19" fill="url(#f70-ear-glow)"/>
+<circle cx="81.1" cy="13.3" r="9" fill="url(#f70-ear-bud)" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="2.6"/>
+<circle cx="78.3" cy="10.5" r="2.6" fill="#FFFFFF" fill-opacity=".95"/>
+</g></g>
+<g id="f71"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+  <linearGradient id="f71-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f71-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f71-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M97.9 90.7 C84 71.1 72.8 37.3 76.5 17 C75.6 14.1 77.1 11 80 10 C82.9 9 86 10.6 87 13.5 C102.2 27.5 113.4 61.3 114.1 85.3 Z" fill="url(#f71-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 74 C88.4 62.9 82.3 44.7 83.9 33.5 C83.2 31.5 84.3 29.4 86.2 28.7 C88.2 28.1 90.3 29.1 91 31.1 C98.9 39.1 105 57.4 105.5 70.8 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="13.3" r="9" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.6"/>
+<circle cx="78.3" cy="10.5" r="2.6" fill="#FFFFFF" fill-opacity=".65"/>
+</g></g>
+<g id="f72"><defs>
+  <radialGradient id="f72-body-fill" cx="120" cy="140" r="98.1" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/>
+    <stop offset=".86" stop-color="#F8E4EE"/><stop offset="1" stop-color="#E6D6F3"/>
+  </radialGradient>
+  <radialGradient id="f72-body-shade" cx="120" cy="214" r="86.9" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".38"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f72-body-gloss" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".85"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f72-body-belly" cx="120" cy="168" r="44.6" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<path d="M120 54 C162.4 54 198 88 198 139 C198 177.6 164.5 204 120 204 C75.5 204 42 177.6 42 139 C42 88 77.6 54 120 54 Z" fill="url(#f72-body-fill)"/>
+<path d="M120 54 C162.4 54 198 88 198 139 C198 177.6 164.5 204 120 204 C75.5 204 42 177.6 42 139 C42 88 77.6 54 120 54 Z" fill="url(#f72-body-shade)"/>
+<ellipse cx="120" cy="170" rx="44.6" ry="33.4" fill="url(#f72-body-belly)"/>
+<ellipse cx="93.2" cy="82" rx="33.4" ry="16.7" transform="rotate(-30 93.2 82)" fill="url(#f72-body-gloss)"/>
+<circle cx="70.9" cy="100" r="3.2" fill="#FFFFFF" fill-opacity=".7"/>
+<path d="M120 54 C162.4 54 198 88 198 139 C198 177.6 164.5 204 120 204 C75.5 204 42 177.6 42 139 C42 88 77.6 54 120 54 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/></g>
+<g id="f73"><g transform="translate(2 0)">
+<defs>
+  <linearGradient id="f73-tail-fill" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFD27A"/><stop offset=".6" stop-color="#FFC98F"/><stop offset="1" stop-color="#F4A6C6"/></linearGradient>
+  <linearGradient id="f73-tail-in" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/></linearGradient>
+  <radialGradient id="f73-tail-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".75"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="204" cy="172" r="36" fill="url(#f73-tail-glow)"/>
+<path d="M178 196 C196 203 216 193 222 174 C225 163 220 156 228 142 C212 148 202 154 194 164 C186 174 176 184 178 196 Z" fill="url(#f73-tail-fill)" stroke="#E8A049" stroke-width="3" stroke-linejoin="round"/>
+<path d="M186 194 C198 196 209 189 213 177 C215 170 212 166 217 158 C207 163 201 168 196 175 C190 181 185 187 186 194 Z" fill="url(#f73-tail-in)"/>
+<path d="M192 192 C200 192 205 187 207 180 C203 183 199 186 196 189 Z" fill="#FFFFFF" fill-opacity=".9"/>
+</g></g>
+<g id="f74"><g transform="translate(2 0)">
+<defs>
+  <linearGradient id="f74-tail-fill" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#E6D8C4"/><stop offset="1" stop-color="#CFC5D8"/></linearGradient>
+  <radialGradient id="f74-tail-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#C9AE90" stop-opacity=".4"/><stop offset="1" stop-color="#C9AE90" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="204" cy="172" r="30" fill="url(#f74-tail-glow)"/>
+<path d="M178 196 C196 203 216 193 222 174 C225 163 220 156 228 142 C212 148 202 154 194 164 C186 174 176 184 178 196 Z" fill="url(#f74-tail-fill)" stroke="#A89BB8" stroke-width="3" stroke-linejoin="round"/>
+<path d="M186 194 C198 196 209 189 213 177 C215 170 212 166 217 158 C207 163 201 168 196 175 C190 181 185 187 186 194 Z" fill="#F3ECE2" fill-opacity=".8"/>
+</g></g>
+<g id="f75"><defs>
+  <radialGradient id="f75-shadow-fill" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#1B1838" stop-opacity=".42"/><stop offset=".6" stop-color="#1B1838" stop-opacity=".18"/><stop offset="1" stop-color="#1B1838" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="120" cy="206" rx="82" ry="11.5" fill="url(#f75-shadow-fill)"/></g>
+<g id="f76"><g transform="translate(120 138) scale(1.32) translate(-120 -138)">
+<defs>
+  <radialGradient id="f76-halo-gold" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.9"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.55"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.2"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f76-halo-gold)"/>
+</g></g>
+<g id="f77"><g transform="translate(120 138) scale(1.32) translate(-120 -138)">
+<defs>
+  <radialGradient id="f77-halo-hungry-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.7"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.4"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.15"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f77-halo-hungry-g)"/>
+<defs><radialGradient id="f77-halo-hungry-dent" cx="120" cy="172" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E7CC3" stop-opacity=".75"/><stop offset=".6" stop-color="#8E7CC3" stop-opacity=".4"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/></radialGradient></defs>
+<circle cx="120" cy="172" r="44" fill="url(#f77-halo-hungry-dent)"/>
+</g></g>
+<g id="f78"><g transform="translate(120 138) scale(1.32) translate(-120 -138)">
+<defs>
+  <radialGradient id="f78-halo-dim-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C9AE90" stop-opacity="0.55"/><stop offset="0.5" stop-color="#C9AE90" stop-opacity="0.3"/><stop offset="0.8" stop-color="#B9A9C9" stop-opacity="0.1"/><stop offset="1" stop-color="#B9A9C9" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f78-halo-dim-g)"/>
+</g></g>
+<g id="f79"><g transform="translate(120 138) scale(1.32) translate(-120 -138)">
+<defs>
+  <radialGradient id="f79-halo-cold-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#BFD6DE" stop-opacity="0.55"/><stop offset="0.5" stop-color="#B7CBD9" stop-opacity="0.32"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.1"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f79-halo-cold-g)"/>
+</g></g>
+<g id="f80"><g transform="translate(120 138) scale(1.32) translate(-120 -138)">
+<defs>
+  <radialGradient id="f80-halo-moon-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9C8FF" stop-opacity="0.7"/><stop offset="0.5" stop-color="#A9C8FF" stop-opacity="0.38"/><stop offset="0.8" stop-color="#A9C8FF" stop-opacity="0.12"/><stop offset="1" stop-color="#A9C8FF" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f80-halo-moon-g)"/>
+</g></g>
+<g id="f81"><g transform="translate(120 138) scale(1.32) translate(-120 -138)">
+<defs>
+  <radialGradient id="f81-halo-speckled-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.8"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.45"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.16"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#f81-halo-speckled-g)"/>
+<circle cx="70" cy="96" r="4" fill="#6E6788" fill-opacity=".5"/><circle cx="168" cy="88" r="3.2" fill="#6E6788" fill-opacity=".5"/><circle cx="186" cy="150" r="4.4" fill="#6E6788" fill-opacity=".5"/><circle cx="60" cy="168" r="3.4" fill="#6E6788" fill-opacity=".5"/><circle cx="112" cy="214" r="3.6" fill="#6E6788" fill-opacity=".5"/><circle cx="156" cy="202" r="3" fill="#6E6788" fill-opacity=".5"/><circle cx="96" cy="60" r="2.8" fill="#6E6788" fill-opacity=".5"/><circle cx="150" cy="64" r="3.4" fill="#6E6788" fill-opacity=".5"/>
+</g></g>
+<g id="f82"><g transform="translate(120 138) scale(1.32) translate(-120 -138)">
+<defs>
+  <radialGradient id="f82-halo-faint-g" cx="120" cy="138" r="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9C0" stop-opacity="0.4"/><stop offset="0.6" stop-color="#FFE9C0" stop-opacity="0.14"/><stop offset="1" stop-color="#FFE9C0" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="80" fill="url(#f82-halo-faint-g)"/>
+</g></g>
+<g id="f83"><defs>
+  <linearGradient id="f83-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f83-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f83-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M98 86.8 C84.1 67.7 72.8 34.9 76.6 15 C75.6 12.1 77.1 9 80 8 C82.9 7 86 8.5 87 11.4 C102.2 24.9 113.4 57.7 114 81.2 Z" fill="url(#f83-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 70.4 C88.4 59.7 82.4 42 83.9 31 C83.2 29 84.3 26.9 86.2 26.2 C88.2 25.6 90.3 26.6 91 28.6 C98.9 36.3 105 54.1 105.5 67.2 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="11.3" r="19" fill="url(#f83-ear-glow)"/>
+<circle cx="81.1" cy="11.3" r="9" fill="url(#f83-ear-bud)" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="2.6"/>
+<circle cx="78.3" cy="8.5" r="2.6" fill="#FFFFFF" fill-opacity=".95"/></g>
+<g id="f84"><defs>
+  <linearGradient id="f84-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f84-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f84-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M98 86.8 C84.1 67.7 72.8 34.9 76.6 15 C75.6 12.1 77.1 9 80 8 C82.9 7 86 8.5 87 11.4 C102.2 24.9 113.4 57.7 114 81.2 Z" fill="url(#f84-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 70.4 C88.4 59.7 82.4 42 83.9 31 C83.2 29 84.3 26.9 86.2 26.2 C88.2 25.6 90.3 26.6 91 28.6 C98.9 36.3 105 54.1 105.5 67.2 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="11.3" r="9" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.6"/>
+<circle cx="78.3" cy="8.5" r="2.6" fill="#FFFFFF" fill-opacity=".65"/></g>
+<g id="f85"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+  <linearGradient id="f85-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f85-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f85-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M98 86.8 C84.1 67.7 72.8 34.9 76.6 15 C75.6 12.1 77.1 9 80 8 C82.9 7 86 8.5 87 11.4 C102.2 24.9 113.4 57.7 114 81.2 Z" fill="url(#f85-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 70.4 C88.4 59.7 82.4 42 83.9 31 C83.2 29 84.3 26.9 86.2 26.2 C88.2 25.6 90.3 26.6 91 28.6 C98.9 36.3 105 54.1 105.5 67.2 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="11.3" r="19" fill="url(#f85-ear-glow)"/>
+<circle cx="81.1" cy="11.3" r="9" fill="url(#f85-ear-bud)" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="2.6"/>
+<circle cx="78.3" cy="8.5" r="2.6" fill="#FFFFFF" fill-opacity=".95"/>
+</g></g>
+<g id="f86"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+  <linearGradient id="f86-ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="f86-ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f86-ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M98 86.8 C84.1 67.7 72.8 34.9 76.6 15 C75.6 12.1 77.1 9 80 8 C82.9 7 86 8.5 87 11.4 C102.2 24.9 113.4 57.7 114 81.2 Z" fill="url(#f86-ear-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M96.1 70.4 C88.4 59.7 82.4 42 83.9 31 C83.2 29 84.3 26.9 86.2 26.2 C88.2 25.6 90.3 26.6 91 28.6 C98.9 36.3 105 54.1 105.5 67.2 Z" fill="#F4A6C6" fill-opacity=".5"/>
+<circle cx="81.1" cy="11.3" r="9" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.6"/>
+<circle cx="78.3" cy="8.5" r="2.6" fill="#FFFFFF" fill-opacity=".65"/>
+</g></g>
+<g id="f87"><defs>
+  <radialGradient id="f87-body-fill" cx="120" cy="137" r="103.1" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFBF4"/><stop offset=".55" stop-color="#FFF6E9"/>
+    <stop offset=".86" stop-color="#F8E4EE"/><stop offset="1" stop-color="#E6D6F3"/>
+  </radialGradient>
+  <radialGradient id="f87-body-shade" cx="120" cy="214" r="91.4" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".38"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f87-body-gloss" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".85"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="f87-body-belly" cx="120" cy="168" r="46.9" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<path d="M120 48 C164.5 48 202 84 202 138 C202 177.2 166.8 204 120 204 C73.2 204 38 177.2 38 138 C38 84 75.5 48 120 48 Z" fill="url(#f87-body-fill)"/>
+<path d="M120 48 C164.5 48 202 84 202 138 C202 177.2 166.8 204 120 204 C73.2 204 38 177.2 38 138 C38 84 75.5 48 120 48 Z" fill="url(#f87-body-shade)"/>
+<ellipse cx="120" cy="170" rx="46.9" ry="35.1" fill="url(#f87-body-belly)"/>
+<ellipse cx="91.9" cy="76" rx="35.1" ry="17.6" transform="rotate(-30 91.9 76)" fill="url(#f87-body-gloss)"/>
+<circle cx="68.3" cy="94" r="3.2" fill="#FFFFFF" fill-opacity=".7"/>
+<path d="M120 48 C164.5 48 202 84 202 138 C202 177.2 166.8 204 120 204 C73.2 204 38 177.2 38 138 C38 84 75.5 48 120 48 Z" fill="none" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/></g>
+<g id="f88"><g transform="translate(6 0)">
+<defs>
+  <linearGradient id="f88-tail-fill" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFD27A"/><stop offset=".6" stop-color="#FFC98F"/><stop offset="1" stop-color="#F4A6C6"/></linearGradient>
+  <linearGradient id="f88-tail-in" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/></linearGradient>
+  <radialGradient id="f88-tail-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".75"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="204" cy="172" r="36" fill="url(#f88-tail-glow)"/>
+<path d="M178 196 C196 203 216 193 222 174 C225 163 220 156 228 142 C212 148 202 154 194 164 C186 174 176 184 178 196 Z" fill="url(#f88-tail-fill)" stroke="#E8A049" stroke-width="3" stroke-linejoin="round"/>
+<path d="M186 194 C198 196 209 189 213 177 C215 170 212 166 217 158 C207 163 201 168 196 175 C190 181 185 187 186 194 Z" fill="url(#f88-tail-in)"/>
+<path d="M192 192 C200 192 205 187 207 180 C203 183 199 186 196 189 Z" fill="#FFFFFF" fill-opacity=".9"/>
+</g></g>
+<g id="f89"><g transform="translate(6 0)">
+<defs>
+  <linearGradient id="f89-tail-fill" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#E6D8C4"/><stop offset="1" stop-color="#CFC5D8"/></linearGradient>
+  <radialGradient id="f89-tail-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#C9AE90" stop-opacity=".4"/><stop offset="1" stop-color="#C9AE90" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="204" cy="172" r="30" fill="url(#f89-tail-glow)"/>
+<path d="M178 196 C196 203 216 193 222 174 C225 163 220 156 228 142 C212 148 202 154 194 164 C186 174 176 184 178 196 Z" fill="url(#f89-tail-fill)" stroke="#A89BB8" stroke-width="3" stroke-linejoin="round"/>
+<path d="M186 194 C198 196 209 189 213 177 C215 170 212 166 217 158 C207 163 201 168 196 175 C190 181 185 187 186 194 Z" fill="#F3ECE2" fill-opacity=".8"/>
+</g></g>
+<g id="f90"><defs>
+<linearGradient id="f90-wing-fill" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FFF6E9" stop-opacity=".8"/><stop offset=".5" stop-color="#A9C8FF" stop-opacity=".68"/><stop offset="1" stop-color="#F4A6C6" stop-opacity=".7"/></linearGradient>
+</defs>
+<path d="M98.9 131.8 C72.1 143.4 38.4 139.6 20.1 124.6 C13.8 123.9 9.3 118.3 10 112 C10.7 105.7 16.3 101.2 22.6 101.9 C43.8 91.3 77.5 95 101.1 112.2 Z" fill="url(#f90-wing-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M93.9 132.3 C58.6 131.6 23.5 110.7 10.8 84.9 C4.2 81 2.1 72.5 6 66 C9.9 59.5 18.4 57.3 24.9 61.2 C53.6 60.1 88.7 81 106.1 111.7 Z" fill="url(#f90-wing-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M89.8 130.9 C50.9 116.5 18.2 79.2 12.6 46 C6.9 39.5 7.5 29.7 14 24 C20.5 18.3 30.3 19 36 25.4 C68.2 35.3 100.9 72.6 110.2 113.1 Z" fill="url(#f90-wing-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M62.2 117.8 L28 114" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M60.5 98.5 L24.8 77.2" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M63.9 80.8 L31.2 43.6" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/></g>
+<g id="f91"><defs>
+<linearGradient id="f91-wing-fill" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#EDE6F5" stop-opacity=".75"/><stop offset="1" stop-color="#CFC8E3" stop-opacity=".55"/></linearGradient>
+</defs>
+<path d="M98.9 131.8 C72.1 143.4 38.4 139.6 20.1 124.6 C13.8 123.9 9.3 118.3 10 112 C10.7 105.7 16.3 101.2 22.6 101.9 C43.8 91.3 77.5 95 101.1 112.2 Z" fill="url(#f91-wing-fill)" stroke="#A59BC4" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M93.9 132.3 C58.6 131.6 23.5 110.7 10.8 84.9 C4.2 81 2.1 72.5 6 66 C9.9 59.5 18.4 57.3 24.9 61.2 C53.6 60.1 88.7 81 106.1 111.7 Z" fill="url(#f91-wing-fill)" stroke="#A59BC4" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M89.8 130.9 C50.9 116.5 18.2 79.2 12.6 46 C6.9 39.5 7.5 29.7 14 24 C20.5 18.3 30.3 19 36 25.4 C68.2 35.3 100.9 72.6 110.2 113.1 Z" fill="url(#f91-wing-fill)" stroke="#A59BC4" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M62.2 117.8 L28 114" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M60.5 98.5 L24.8 77.2" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M63.9 80.8 L31.2 43.6" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/></g>
+<g id="f92"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+<linearGradient id="f92-wing-fill" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FFF6E9" stop-opacity=".8"/><stop offset=".5" stop-color="#A9C8FF" stop-opacity=".68"/><stop offset="1" stop-color="#F4A6C6" stop-opacity=".7"/></linearGradient>
+</defs>
+<path d="M98.9 131.8 C72.1 143.4 38.4 139.6 20.1 124.6 C13.8 123.9 9.3 118.3 10 112 C10.7 105.7 16.3 101.2 22.6 101.9 C43.8 91.3 77.5 95 101.1 112.2 Z" fill="url(#f92-wing-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M93.9 132.3 C58.6 131.6 23.5 110.7 10.8 84.9 C4.2 81 2.1 72.5 6 66 C9.9 59.5 18.4 57.3 24.9 61.2 C53.6 60.1 88.7 81 106.1 111.7 Z" fill="url(#f92-wing-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M89.8 130.9 C50.9 116.5 18.2 79.2 12.6 46 C6.9 39.5 7.5 29.7 14 24 C20.5 18.3 30.3 19 36 25.4 C68.2 35.3 100.9 72.6 110.2 113.1 Z" fill="url(#f92-wing-fill)" stroke="#9C8AD0" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M62.2 117.8 L28 114" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M60.5 98.5 L24.8 77.2" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M63.9 80.8 L31.2 43.6" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+</g></g>
+<g id="f93"><g transform="translate(240 0) scale(-1 1)">
+<defs>
+<linearGradient id="f93-wing-fill" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#EDE6F5" stop-opacity=".75"/><stop offset="1" stop-color="#CFC8E3" stop-opacity=".55"/></linearGradient>
+</defs>
+<path d="M98.9 131.8 C72.1 143.4 38.4 139.6 20.1 124.6 C13.8 123.9 9.3 118.3 10 112 C10.7 105.7 16.3 101.2 22.6 101.9 C43.8 91.3 77.5 95 101.1 112.2 Z" fill="url(#f93-wing-fill)" stroke="#A59BC4" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M93.9 132.3 C58.6 131.6 23.5 110.7 10.8 84.9 C4.2 81 2.1 72.5 6 66 C9.9 59.5 18.4 57.3 24.9 61.2 C53.6 60.1 88.7 81 106.1 111.7 Z" fill="url(#f93-wing-fill)" stroke="#A59BC4" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M89.8 130.9 C50.9 116.5 18.2 79.2 12.6 46 C6.9 39.5 7.5 29.7 14 24 C20.5 18.3 30.3 19 36 25.4 C68.2 35.3 100.9 72.6 110.2 113.1 Z" fill="url(#f93-wing-fill)" stroke="#A59BC4" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
+<path d="M62.2 117.8 L28 114" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M60.5 98.5 L24.8 77.2" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+<path d="M63.9 80.8 L31.2 43.6" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>
+</g></g>
+<g id="f94"><defs>
+  <radialGradient id="f94-bubble-fill" cx=".4" cy=".3" r=".85">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".97"/><stop offset=".7" stop-color="#FFF6E9" stop-opacity=".95"/><stop offset="1" stop-color="#E9DDFA" stop-opacity=".95"/>
+  </radialGradient>
+</defs>
+<circle cx="32" cy="30" r="28" fill="url(#f94-bubble-fill)" stroke="#8E7CC3" stroke-width="2.2"/>
+<circle cx="32" cy="60.5" r="3" fill="url(#f94-bubble-fill)" stroke="#8E7CC3" stroke-width="1.6"/>
+<path d="M14 22 Q17 14 25 11" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-opacity=".9"/></g>
+<g id="f95"><defs>
+  <radialGradient id="f95-starfruit-fill" cx=".35" cy=".3" r=".9">
+    <stop offset="0" stop-color="#FFD9A0"/><stop offset="1" stop-color="#FFB547"/>
+  </radialGradient>
+</defs>
+<path d="M32 22 Q33 16 37 13" fill="none" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.6"/>
+<path d="M34 18 Q41 11 47 16 Q41 22 34 18 Z" fill="#8FE3CF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.8"/>
+<circle cx="32" cy="36" r="15" fill="url(#f95-starfruit-fill)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2"/>
+<path d="M32 28 Q34.4 33.6 40 36 Q34.4 38.4 32 44 Q29.6 38.4 24 36 Q29.6 33.6 32 28 Z" fill="#FFF6E9" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.4"/>
+<path d="M48 19.6 Q49.3 22.7 52.4 24 Q49.3 25.3 48 28.4 Q46.7 25.3 43.6 24 Q46.7 22.7 48 19.6 Z" fill="#FFD27A" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.2"/></g>
+<g id="f96"><defs>
+  <linearGradient id="f96-candle-fill" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#F4D9C6"/><stop offset=".45" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F4D9C6"/>
+  </linearGradient>
+  <radialGradient id="f96-candle-flame" cx=".5" cy=".7" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFB547"/>
+  </radialGradient>
+</defs>
+<ellipse cx="32" cy="54.5" rx="14" ry="3.2" fill="#8E7CC3" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.8"/>
+<path d="M24 36 C24 32 27 31 29 32.5 C31 34 34 30.5 36 31.5 C39.5 32 40 34 40 37 L40 51 C40 53.5 38 54.5 36 54.5 L28 54.5 C26 54.5 24 53.5 24 51 Z" fill="url(#f96-candle-fill)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2"/>
+<path d="M40 36 Q43.5 37.5 42.6 42 Q41.6 45 40 43" fill="#FFF6E9" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.8"/>
+<path d="M32 31.5 L32 27" fill="none" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2"/>
+<path d="M32 14 C37.5 19.5 37.5 25 32 27 C26.5 25 26.5 19.5 32 14 Z" fill="url(#f96-candle-flame)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.8"/></g>
+<g id="f97"><defs>
+  <linearGradient id="f97-raincloud-fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#D6CCEE"/><stop offset="1" stop-color="#A998D4"/>
+  </linearGradient>
+</defs>
+<path d="M19 38 C12 38 11 29 18 28 C18 20 28 17 32 23 C36 17 46 20 46 28 C53 29 52 38 45 38 Z" fill="url(#f97-raincloud-fill)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2"/>
+<path d="M23 42.3 C26.4 46.5 26.6 50.1 23 50.7 C19.4 50.1 19.6 46.5 23 42.3 Z" fill="#A9C8FF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"/><path d="M32 46.8 C35.4 51 35.6 54.6 32 55.2 C28.4 54.6 28.6 51 32 46.8 Z" fill="#A9C8FF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"/><path d="M41 42.3 C44.4 46.5 44.6 50.1 41 50.7 C37.4 50.1 37.6 46.5 41 42.3 Z" fill="#A9C8FF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"/></g>
+<g id="f98"><defs>
+  <linearGradient id="f98-moons-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#D5E4FF"/><stop offset="1" stop-color="#A9C8FF"/>
+  </linearGradient>
+</defs>
+<path d="M38 15 C24 14 14 25 18 37 C21 46 32 50 41 45 C33 44 27 36 30 28 C32 22 35 18 38 15 Z" fill="url(#f98-moons-fill)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2"/>
+<g transform="translate(36 8) scale(.52)"><path d="M38 15 C24 14 14 25 18 37 C21 46 32 50 41 45 C33 44 27 36 30 28 C32 22 35 18 38 15 Z" transform="translate(-16 -8)" fill="url(#f98-moons-fill)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="3.4"/></g>
+<path d="M46 38.6 Q47.6 42.4 51.4 44 Q47.6 45.6 46 49.4 Q44.4 45.6 40.6 44 Q44.4 42.4 46 38.6 Z" fill="#FFD27A" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.4"/></g>
+<g id="f99"><defs>
+  <radialGradient id="f99-fading-star-fill" cx=".5" cy=".5" r=".6">
+    <stop offset="0" stop-color="#FFE9B8"/><stop offset="1" stop-color="#E3DAF0"/>
+  </radialGradient>
+</defs>
+<circle cx="32" cy="31" r="22" fill="none" stroke="#8E7CC3" stroke-width="1.8" stroke-dasharray="2 5" stroke-linecap="round"/>
+<path d="M32 14 Q36.4 26.6 49 31 Q36.4 35.4 32 48 Q27.6 35.4 15 31 Q27.6 26.6 32 14 Z" fill="url(#f99-fading-star-fill)" stroke="#2E2A5C" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="4 3" fill-opacity=".85"/>
+<circle cx="32" cy="31" r="2.4" fill="#FFFFFF"/>
+<circle cx="50" cy="18" r="1.6" fill="#8E7CC3" fill-opacity=".7"/>
+<circle cx="14" cy="44" r="1.3" fill="#8E7CC3" fill-opacity=".5"/></g>
+</defs></svg>
+<div class="sky" aria-hidden="true"></div>
+<main>
+<header>
+  <h1>Les stades de la créature kawaii</h1>
+  <p class="lede">Œuf commun, puis bébé, enfant, adolescent, adulte : chaque stade ajoute un seul élément.</p>
+  <div class="controls">
+    <div class="group" role="group" aria-label="Ciel"><span class="lbl">Ciel</span><div class="chips"><button type="button" class="chip" data-sky-btn="dawn" aria-pressed="false">Aube</button><button type="button" class="chip" data-sky-btn="day" aria-pressed="false">Jour</button><button type="button" class="chip" data-sky-btn="dusk" aria-pressed="false">Crépuscule</button><button type="button" class="chip" data-sky-btn="night" aria-pressed="false">Nuit</button></div></div>
+    <label class="switch"><input type="checkbox" id="rm"><span class="box" aria-hidden="true"></span><span>Mouvement réduit</span></label>
+  </div>
+</header>
+
+<section aria-labelledby="h-egg">
+  <h2 id="h-egg">L’œuf et l’éclosion</h2>
+  <p class="intro">Le même œuf pour les deux espèces : l’espèce se découvre à l’éclosion (ici, kawaii).</p>
+  <div class="scene">
+    <div class="cr-box">
+      <div id="egg-baby" class="stack" data-emblem="no"></div>
+      <div id="egg-host" class="stack" data-emblem="no"></div>
+    </div>
+  </div>
+  <div class="chips center" role="group" aria-label="Étape de l’œuf">
+    <button type="button" class="chip" data-egg="idle" aria-pressed="true">Œuf qui pulse</button>
+    <button type="button" class="chip" data-egg="soon" aria-pressed="false">Fissures dorées</button>
+    <button type="button" class="chip strong" data-egg="hatch" aria-pressed="false">Éclosion</button>
+  </div>
+  <p id="egg-status" class="cue" role="status" aria-live="polite"></p>
+</section>
+
+<section aria-labelledby="h-side">
+  <h2 id="h-side">Côte à côte</h2>
+  <p class="intro">Même cadre, même échelle : le corps grandit un peu, la silhouette reste la même.</p>
+  <div class="cards">
+<figure class="card"><div class="side-cr" data-side="baby"></div><figcaption><strong>Bébé</strong><span>Boule ronde, petites oreilles à bourgeon.</span></figcaption></figure>
+<figure class="card"><div class="side-cr" data-side="child"></div><figcaption><strong>Enfant</strong><span>Oreilles longues : elles poussent, avec leur bourgeon lumineux au bout.</span></figcaption></figure>
+<figure class="card"><div class="side-cr" data-side="teen"></div><figcaption><strong>Adolescent</strong><span>Queue en petite flamme de lumière (ajoutée au stade enfant).</span></figcaption></figure>
+<figure class="card"><div class="side-cr" data-side="adult"></div><figcaption><strong>Adulte</strong><span>Ailes de lumière translucides (ajoutées au stade adolescent).</span></figcaption></figure>
+  </div>
+</section>
+
+<section aria-labelledby="h-game">
+  <h2 id="h-game">À taille de jeu</h2>
+  <p class="intro">La créature mesure ici entre 150 et 180 px de haut, comme sur un téléphone de 360 à 390 px.</p>
+  <div class="chips center g2" role="group" aria-label="Stade"><button type="button" class="chip" data-game-stage="baby" aria-pressed="false">Bébé</button><button type="button" class="chip" data-game-stage="child" aria-pressed="false">Enfant</button><button type="button" class="chip" data-game-stage="teen" aria-pressed="false">Adolescent</button><button type="button" class="chip" data-game-stage="adult" aria-pressed="false">Adulte</button></div>
+  <div class="scene big">
+    <div class="cr-box game"><div id="game-host" class="stack"></div></div>
+  </div>
+  <div class="chips center g3" role="group" aria-label="État"><button type="button" class="chip" data-game-state="happy" aria-pressed="false">Content</button><button type="button" class="chip" data-game-state="hungry" aria-pressed="false">Faim</button><button type="button" class="chip" data-game-state="tired" aria-pressed="false">Fatigué</button><button type="button" class="chip" data-game-state="sick" aria-pressed="false">Malade</button><button type="button" class="chip" data-game-state="asleep" aria-pressed="false">Endormi</button><button type="button" class="chip" data-game-state="dirty" aria-pressed="false">Sale</button><button type="button" class="chip" data-game-state="weak" aria-pressed="false">Affaiblie</button><button type="button" class="chip" data-game-state="flown" aria-pressed="false">Envol</button></div>
+  <p id="game-cue" class="cue" role="status" aria-live="polite"></p>
+</section>
+
+<section aria-labelledby="h-grid">
+  <h2 id="h-grid">Stades × états</h2>
+  <p class="intro">Les huit états à chaque stade (poses tenues). Touche une case pour l’animer ou la figer.</p>
+  <div class="grid">
+    <div class="grid-head" aria-hidden="true"><span class="sp"></span><div class="cells"><span>Bébé</span><span>Enfant</span><span>Adolescent</span><span>Adulte</span></div></div>
+<div class="row"><div class="row-head"><span class="row-em none" aria-hidden="true"></span><div><h3>Content</h3><p>Yeux en arcs souriants, petit rebond, halo doré plein</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/happy" aria-pressed="false" aria-label="Bébé, Content : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/happy" aria-pressed="false" aria-label="Enfant, Content : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/happy" aria-pressed="false" aria-label="Adolescent, Content : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/happy" aria-pressed="false" aria-label="Adulte, Content : animer ou figer"><span class="cell-cr"></span></button></div></div>
+<div class="row"><div class="row-head"><svg class="row-em" viewBox="0 0 64 64" aria-hidden="true"><use href="#f94"/><use href="#f95"/></svg><div><h3>Faim</h3><p>Bouche en « o », regard vers le bol, main sur le ventre, halo creusé au ventre</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/hungry" aria-pressed="false" aria-label="Bébé, Faim : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/hungry" aria-pressed="false" aria-label="Enfant, Faim : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/hungry" aria-pressed="false" aria-label="Adolescent, Faim : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/hungry" aria-pressed="false" aria-label="Adulte, Faim : animer ou figer"><span class="cell-cr"></span></button></div></div>
+<div class="row"><div class="row-head"><svg class="row-em" viewBox="0 0 64 64" aria-hidden="true"><use href="#f94"/><use href="#f96"/></svg><div><h3>Fatigué</h3><p>Paupières mi-closes, oreilles tombantes, bâillement lent, bourgeons éteints</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/tired" aria-pressed="false" aria-label="Bébé, Fatigué : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/tired" aria-pressed="false" aria-label="Enfant, Fatigué : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/tired" aria-pressed="false" aria-label="Adolescent, Fatigué : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/tired" aria-pressed="false" aria-label="Adulte, Fatigué : animer ou figer"><span class="cell-cr"></span></button></div></div>
+<div class="row"><div class="row-head"><svg class="row-em" viewBox="0 0 64 64" aria-hidden="true"><use href="#f94"/><use href="#f97"/></svg><div><h3>Malade</h3><p>Corps affaissé, léger frisson, bouche ondulée, joues vert tisane, halo pâle et froid</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/sick" aria-pressed="false" aria-label="Bébé, Malade : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/sick" aria-pressed="false" aria-label="Enfant, Malade : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/sick" aria-pressed="false" aria-label="Adolescent, Malade : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/sick" aria-pressed="false" aria-label="Adulte, Malade : animer ou figer"><span class="cell-cr"></span></button></div></div>
+<div class="row"><div class="row-head"><svg class="row-em" viewBox="0 0 64 64" aria-hidden="true"><use href="#f94"/><use href="#f98"/></svg><div><h3>Endormi</h3><p>Roulé en boule, yeux fermés en traits courbes, respiration lente, veilleuse bleu lune</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/asleep" aria-pressed="false" aria-label="Bébé, Endormi : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/asleep" aria-pressed="false" aria-label="Enfant, Endormi : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/asleep" aria-pressed="false" aria-label="Adolescent, Endormi : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/asleep" aria-pressed="false" aria-label="Adulte, Endormi : animer ou figer"><span class="cell-cr"></span></button></div></div>
+<div class="row"><div class="row-head"><span class="row-em none" aria-hidden="true"></span><div><h3>Sale</h3><p>Taches de poussière d'ombre sur le corps, poussières grises en orbite lente, halo moucheté</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/dirty" aria-pressed="false" aria-label="Bébé, Sale : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/dirty" aria-pressed="false" aria-label="Enfant, Sale : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/dirty" aria-pressed="false" aria-label="Adolescent, Sale : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/dirty" aria-pressed="false" aria-label="Adulte, Sale : animer ou figer"><span class="cell-cr"></span></button></div></div>
+<div class="row"><div class="row-head"><svg class="row-em" viewBox="0 0 64 64" aria-hidden="true"><use href="#f94"/><use href="#f99"/></svg><div><h3>Affaiblie</h3><p>Corps translucide, mouvements très lents, yeux mi-clos tournés vers le joueur, halo presque éteint</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/weak" aria-pressed="false" aria-label="Bébé, Affaiblie : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/weak" aria-pressed="false" aria-label="Enfant, Affaiblie : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/weak" aria-pressed="false" aria-label="Adolescent, Affaiblie : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/weak" aria-pressed="false" aria-label="Adulte, Affaiblie : animer ou figer"><span class="cell-cr"></span></button></div></div>
+<div class="row"><div class="row-head"><span class="row-em none" aria-hidden="true"></span><div><h3>Envol</h3><p>La créature se défait en lumière dorée, monte et devient une étoile du ciel</p></div></div><div class="cells"><button type="button" class="cell" data-cell="baby/flown" aria-pressed="false" aria-label="Bébé, Envol : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="child/flown" aria-pressed="false" aria-label="Enfant, Envol : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="teen/flown" aria-pressed="false" aria-label="Adolescent, Envol : animer ou figer"><span class="cell-cr"></span></button><button type="button" class="cell" data-cell="adult/flown" aria-pressed="false" aria-label="Adulte, Envol : animer ou figer"><span class="cell-cr"></span></button></div></div>
+  </div>
+</section>
+<footer><p>Généré à partir des fichiers de design/stages/kawaii/. Animations : transform et opacity seulement.</p></footer>
+</main>
+<script>
+const DATA = {"easings":{"linear":[0,0,1,1],"breath":[0.37,0,0.63,1],"soft-in-out":[0.45,0.05,0.35,1],"ease-out-soft":[0.22,0.8,0.3,1],"ease-in-soft":[0.5,0,0.8,0.4],"spring-soft":[0.34,1.35,0.5,1]},"targets":{"creature":{"kind":"group","origin":[120,204],"note":"Groupe racine : reçoit la boucle de repos (respiration)."},"pose":{"kind":"group","origin":[120,204],"note":"Groupe imbriqué dans creature : pose et mouvement d'ensemble propres à l'état."},"emblem":{"kind":"group","origin":[32,31],"note":"Bulle et emblème, repère 64x64."}},"emblems":{"starfruit":{"bubble":"emblems/bubble.svg","file":"emblems/starfruit.svg","label":"Fruit étoilé"},"candle":{"bubble":"emblems/bubble.svg","file":"emblems/candle.svg","label":"Chandelle à demi consumée"},"raincloud":{"bubble":"emblems/bubble.svg","file":"emblems/raincloud.svg","label":"Petit nuage de pluie"},"moons":{"bubble":"emblems/bubble.svg","file":"emblems/moons.svg","label":"Petites lunes"},"fading-star":{"bubble":"emblems/bubble.svg","file":"emblems/fading-star.svg","label":"Étoile qui pâlit"}},"rest":{"id":"breathe","duration":3600,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.992,1.026]},{"offset":1,"scale":[1,1]}]}},"files":{"creature/egg/shadow.svg":"f0","creature/egg/glow.svg":"f1","creature/egg/shell.svg":"f2","creature/egg/sheen-a.svg":"f3","creature/egg/sheen-b.svg":"f4","creature/egg/gloss.svg":"f5","creature/egg/sparkle.svg":"f6","creature/egg/light.svg":"f7","creature/egg/cracks-1.svg":"f8","creature/egg/cracks-2.svg":"f9","creature/egg/cracks-3.svg":"f10","creature/egg/shell-bottom.svg":"f11","creature/egg/shell-top.svg":"f12","creature/egg/burst.svg":"f13","creature/kawaii/baby/shadow.svg":"f14","creature/kawaii/baby/halo.svg":"f15","creature/kawaii/baby/halo-hungry.svg":"f16","creature/kawaii/baby/halo-dim.svg":"f17","creature/kawaii/baby/halo-cold.svg":"f18","creature/kawaii/baby/halo-moon.svg":"f19","creature/kawaii/baby/halo-speckled.svg":"f20","creature/kawaii/baby/halo-faint.svg":"f21","creature/kawaii/baby/ear-left.svg":"f22","creature/kawaii/baby/ear-left-dim.svg":"f23","creature/kawaii/baby/ear-right.svg":"f24","creature/kawaii/baby/ear-right-dim.svg":"f25","creature/kawaii/baby/body.svg":"f26","emblems/dust-stains.svg":"f27","creature/kawaii/baby/cheeks.svg":"f28","creature/kawaii/baby/cheeks-sick.svg":"f29","creature/kawaii/baby/eye-left-open.svg":"f30","creature/kawaii/baby/eye-left-arc.svg":"f31","creature/kawaii/baby/eye-left-half.svg":"f32","creature/kawaii/baby/eye-left-closed.svg":"f33","creature/kawaii/baby/eye-right-open.svg":"f34","creature/kawaii/baby/eye-right-arc.svg":"f35","creature/kawaii/baby/eye-right-half.svg":"f36","creature/kawaii/baby/eye-right-closed.svg":"f37","creature/kawaii/baby/mouth-smile.svg":"f38","creature/kawaii/baby/mouth-o.svg":"f39","creature/kawaii/baby/mouth-yawn.svg":"f40","creature/kawaii/baby/mouth-wavy.svg":"f41","creature/kawaii/baby/mouth-sleep.svg":"f42","creature/kawaii/baby/mouth-flat.svg":"f43","creature/kawaii/baby/hand.svg":"f44","emblems/dust-specks.svg":"f45","creature/kawaii/baby/star.svg":"f46","creature/kawaii/child/shadow.svg":"f47","creature/kawaii/child/halo.svg":"f48","creature/kawaii/child/halo-hungry.svg":"f49","creature/kawaii/child/halo-dim.svg":"f50","creature/kawaii/child/halo-cold.svg":"f51","creature/kawaii/child/halo-moon.svg":"f52","creature/kawaii/child/halo-speckled.svg":"f53","creature/kawaii/child/halo-faint.svg":"f54","creature/kawaii/child/ear-left.svg":"f55","creature/kawaii/child/ear-left-dim.svg":"f56","creature/kawaii/child/ear-right.svg":"f57","creature/kawaii/child/ear-right-dim.svg":"f58","creature/kawaii/child/body.svg":"f59","creature/kawaii/teen/shadow.svg":"f60","creature/kawaii/teen/halo.svg":"f61","creature/kawaii/teen/halo-hungry.svg":"f62","creature/kawaii/teen/halo-dim.svg":"f63","creature/kawaii/teen/halo-cold.svg":"f64","creature/kawaii/teen/halo-moon.svg":"f65","creature/kawaii/teen/halo-speckled.svg":"f66","creature/kawaii/teen/halo-faint.svg":"f67","creature/kawaii/teen/ear-left.svg":"f68","creature/kawaii/teen/ear-left-dim.svg":"f69","creature/kawaii/teen/ear-right.svg":"f70","creature/kawaii/teen/ear-right-dim.svg":"f71","creature/kawaii/teen/body.svg":"f72","creature/kawaii/teen/tail.svg":"f73","creature/kawaii/teen/tail-dim.svg":"f74","creature/kawaii/adult/shadow.svg":"f75","creature/kawaii/adult/halo.svg":"f76","creature/kawaii/adult/halo-hungry.svg":"f77","creature/kawaii/adult/halo-dim.svg":"f78","creature/kawaii/adult/halo-cold.svg":"f79","creature/kawaii/adult/halo-moon.svg":"f80","creature/kawaii/adult/halo-speckled.svg":"f81","creature/kawaii/adult/halo-faint.svg":"f82","creature/kawaii/adult/ear-left.svg":"f83","creature/kawaii/adult/ear-left-dim.svg":"f84","creature/kawaii/adult/ear-right.svg":"f85","creature/kawaii/adult/ear-right-dim.svg":"f86","creature/kawaii/adult/body.svg":"f87","creature/kawaii/adult/tail.svg":"f88","creature/kawaii/adult/tail-dim.svg":"f89","creature/kawaii/adult/wing-left.svg":"f90","creature/kawaii/adult/wing-left-dim.svg":"f91","creature/kawaii/adult/wing-right.svg":"f92","creature/kawaii/adult/wing-right-dim.svg":"f93","emblems/bubble.svg":"f94","emblems/starfruit.svg":"f95","emblems/candle.svg":"f96","emblems/raincloud.svg":"f97","emblems/moons.svg":"f98","emblems/fading-star.svg":"f99"},"stages":{"egg":{"label":"Œuf","added":"Œuf opalescent qui pulse ; fissures dorées avant l’éclosion. Commun aux deux espèces.","partsDir":"design/stages/kawaii/egg/ (à ranger en assets/creature/egg/, partagé avec le féérique)","common":true,"parts":{"shadow":{"origin":[120,206],"variants":{"default":"creature/egg/shadow.svg"}},"glow":{"origin":[120,138],"variants":{"default":"creature/egg/glow.svg"}},"shell":{"origin":[120,206],"variants":{"default":"creature/egg/shell.svg"}},"sheen-a":{"origin":[120,148],"variants":{"default":"creature/egg/sheen-a.svg"}},"sheen-b":{"origin":[120,148],"variants":{"default":"creature/egg/sheen-b.svg"}},"gloss":{"origin":[120,148],"variants":{"default":"creature/egg/gloss.svg"}},"sparkle":{"origin":[120,140],"variants":{"default":"creature/egg/sparkle.svg"}},"light":{"origin":[120,150],"variants":{"default":"creature/egg/light.svg"}},"cracks-1":{"origin":[120,148],"variants":{"default":"creature/egg/cracks-1.svg"}},"cracks-2":{"origin":[120,148],"variants":{"default":"creature/egg/cracks-2.svg"}},"cracks-3":{"origin":[120,148],"variants":{"default":"creature/egg/cracks-3.svg"}},"shell-bottom":{"origin":[120,206],"variants":{"default":"creature/egg/shell-bottom.svg"}},"shell-top":{"origin":[120,148],"variants":{"default":"creature/egg/shell-top.svg"}},"burst":{"origin":[120,140],"variants":{"default":"creature/egg/burst.svg"}}},"layers":["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle","light","cracks-1","cracks-2","cracks-3","shell-bottom","shell-top","burst"],"states":{"idle":{"label":"Œuf qui pulse","cue":"Œuf nacré aux reflets rose, menthe et bleu lune ; lueur dorée qui bat lentement, deux étincelles qui scintillent","emblem":null,"visible":["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle"],"variants":{"shadow":"default","glow":"default","shell":"default","sheen-a":"default","sheen-b":"default","gloss":"default","sparkle":"default","light":"default","cracks-1":"default","cracks-2":"default","cracks-3":"default","shell-bottom":"default","shell-top":"default","burst":"default"},"static":{},"loops":[{"id":"glow-pulse","duration":3600,"iterations":"infinite","easing":"breath","targets":{"glow":[{"offset":0,"scale":[1,1],"opacity":0.7},{"offset":0.5,"scale":[1.07,1.07],"opacity":1},{"offset":1,"scale":[1,1],"opacity":0.7}]}},{"id":"sheen-shift","duration":5200,"iterations":"infinite","easing":"breath","targets":{"sheen-a":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":0.35},{"offset":1,"opacity":1}],"sheen-b":[{"offset":0,"opacity":0.35},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.35}]}},{"id":"twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"sparkle":[{"offset":0,"scale":[0.94,0.94],"opacity":0.45},{"offset":0.5,"scale":[1.06,1.06],"opacity":1},{"offset":1,"scale":[0.94,0.94],"opacity":0.45}]}}],"particles":[{"preset":"ambient","continuous":true}]},"soon":{"label":"Fissures dorées","cue":"Des fissures dorées courent sur la coquille, la lumière filtre de l’intérieur, l’œuf se balance doucement : il va éclore","emblem":null,"visible":["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle","light","cracks-1","cracks-2"],"variants":{"shadow":"default","glow":"default","shell":"default","sheen-a":"default","sheen-b":"default","gloss":"default","sparkle":"default","light":"default","cracks-1":"default","cracks-2":"default","cracks-3":"default","shell-bottom":"default","shell-top":"default","burst":"default"},"static":{"light":{"opacity":0.35}},"loops":[{"id":"wobble","duration":4800,"iterations":"infinite","easing":"soft-in-out","targets":{"pose":[{"offset":0,"rotate":0},{"offset":0.12,"rotate":-3},{"offset":0.24,"rotate":3},{"offset":0.36,"rotate":-2},{"offset":0.46,"rotate":0},{"offset":1,"rotate":0}]}},{"id":"glow-pulse","duration":2800,"iterations":"infinite","easing":"breath","targets":{"glow":[{"offset":0,"scale":[1.04,1.04],"opacity":0.8},{"offset":0.5,"scale":[1.15,1.15],"opacity":1},{"offset":1,"scale":[1.04,1.04],"opacity":0.8}],"light":[{"offset":0,"opacity":0.25},{"offset":0.5,"opacity":0.6},{"offset":1,"opacity":0.25}]}},{"id":"twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"sparkle":[{"offset":0,"scale":[0.94,0.94],"opacity":0.45},{"offset":0.5,"scale":[1.06,1.06],"opacity":1},{"offset":1,"scale":[0.94,0.94],"opacity":0.45}]}}],"particles":[{"preset":"ambient","continuous":true}]},"hatch":{"label":"Éclosion","cue":"La coquille se fend en deux le long d’une ligne dorée, une lumière douce jaillit, le haut s’envole : la créature apparaît","emblem":null,"visible":["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle","light","cracks-1","cracks-2","cracks-3","shell-bottom","shell-top","burst"],"variants":{"shadow":"default","glow":"default","shell":"default","sheen-a":"default","sheen-b":"default","gloss":"default","sparkle":"default","light":"default","cracks-1":"default","cracks-2":"default","cracks-3":"default","shell-bottom":"default","shell-top":"default","burst":"default"},"static":{"light":{"opacity":0.35},"cracks-3":{"opacity":0},"shell-top":{"opacity":0},"shell-bottom":{"opacity":0},"burst":{"opacity":0}},"rest":null,"loops":[],"sequence":{"id":"hatch","duration":3000,"iterations":1,"fill":"forwards","easing":"soft-in-out","reducedAt":1,"targets":{"pose":[{"offset":0,"rotate":0,"scale":[1,1]},{"offset":0.1,"rotate":-4},{"offset":0.2,"rotate":4},{"offset":0.3,"rotate":-5},{"offset":0.4,"rotate":5},{"offset":0.48,"rotate":0,"scale":[1,1]},{"offset":0.52,"rotate":0,"scale":[1.05,0.95],"easing":"ease-out-soft"},{"offset":0.58,"rotate":0,"scale":[0.98,1.04]},{"offset":0.68,"rotate":0,"scale":[1,1]},{"offset":1,"rotate":0,"scale":[1,1]}],"glow":[{"offset":0,"scale":[1.04,1.04],"opacity":0.8},{"offset":0.5,"scale":[1.2,1.2],"opacity":1},{"offset":0.62,"scale":[1.45,1.45],"opacity":1},{"offset":1,"scale":[1.7,1.7],"opacity":0}],"light":[{"offset":0,"opacity":0.35},{"offset":0.3,"opacity":0.6},{"offset":0.5,"opacity":0.95},{"offset":0.56,"opacity":0.95},{"offset":0.74,"opacity":0},{"offset":1,"opacity":0}],"cracks-1":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.54,"opacity":0},{"offset":1,"opacity":0}],"cracks-2":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.54,"opacity":0},{"offset":1,"opacity":0}],"cracks-3":[{"offset":0,"opacity":0},{"offset":0.3,"opacity":0},{"offset":0.46,"opacity":1},{"offset":0.53,"opacity":1},{"offset":0.57,"opacity":0},{"offset":1,"opacity":0}],"shell":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"sheen-a":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"sheen-b":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"gloss":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"sparkle":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"shell-top":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":0},{"offset":0.5,"translate":[0,0],"rotate":0,"opacity":0},{"offset":0.52,"translate":[0,0],"rotate":0,"opacity":1,"easing":"ease-out-soft"},{"offset":0.64,"translate":[-6,-40],"rotate":-16,"opacity":1,"easing":"soft-in-out"},{"offset":0.82,"translate":[-14,-80],"rotate":-30,"opacity":0.8},{"offset":1,"translate":[-20,-112],"rotate":-40,"opacity":0}],"shell-bottom":[{"offset":0,"translate":[0,0],"scale":[1,1],"opacity":0},{"offset":0.5,"translate":[0,0],"scale":[1,1],"opacity":0},{"offset":0.52,"translate":[0,0],"scale":[1,1],"opacity":1,"easing":"ease-out-soft"},{"offset":0.6,"translate":[0,2],"scale":[1.06,0.94],"opacity":1},{"offset":0.74,"translate":[0,3],"scale":[1.03,0.97],"opacity":1},{"offset":0.95,"translate":[0,6],"scale":[1.03,0.97],"opacity":0},{"offset":1,"translate":[0,6],"scale":[1.03,0.97],"opacity":0}],"burst":[{"offset":0,"scale":[0.5,0.5],"opacity":0},{"offset":0.5,"scale":[0.6,0.6],"opacity":0,"easing":"ease-out-soft"},{"offset":0.62,"scale":[1,1],"opacity":0.85},{"offset":0.82,"scale":[1.25,1.25],"opacity":0.45},{"offset":1,"scale":[1.5,1.5],"opacity":0}],"shadow":[{"offset":0,"opacity":1},{"offset":0.8,"opacity":1},{"offset":1,"opacity":0}]}},"handoff":{"at":0.6,"reveal":"baby","note":"À cet offset l’interprète affiche la créature de l’espèce tirée (stade bébé, état courant) et joue la réaction hatch-<espèce> ; l’œuf finit invisible."},"particles":[{"preset":"hatch-{kind}","at":0.6,"note":"{kind} = espèce tirée (kawaii ou feerique) ; préréglages de spec/motion/particles.json"}]}}},"baby":{"label":"Bébé","parts":{"shadow":{"origin":[120,206],"variants":{"default":"creature/kawaii/baby/shadow.svg"}},"halo":{"origin":[120,138],"variants":{"default":"creature/kawaii/baby/halo.svg","hungry":"creature/kawaii/baby/halo-hungry.svg","dim":"creature/kawaii/baby/halo-dim.svg","cold":"creature/kawaii/baby/halo-cold.svg","moon":"creature/kawaii/baby/halo-moon.svg","speckled":"creature/kawaii/baby/halo-speckled.svg","faint":"creature/kawaii/baby/halo-faint.svg"}},"ear-left":{"origin":[96,88],"variants":{"lit":"creature/kawaii/baby/ear-left.svg","dim":"creature/kawaii/baby/ear-left-dim.svg"}},"ear-right":{"origin":[144,88],"variants":{"lit":"creature/kawaii/baby/ear-right.svg","dim":"creature/kawaii/baby/ear-right-dim.svg"}},"body":{"origin":[120,202],"variants":{"default":"creature/kawaii/baby/body.svg"}},"dust-stains":{"origin":[120,140],"variants":{"default":"emblems/dust-stains.svg"}},"cheeks":{"origin":[120,150],"variants":{"default":"creature/kawaii/baby/cheeks.svg","sick":"creature/kawaii/baby/cheeks-sick.svg"}},"eye-left":{"origin":[96,132],"variants":{"open":"creature/kawaii/baby/eye-left-open.svg","arc":"creature/kawaii/baby/eye-left-arc.svg","half":"creature/kawaii/baby/eye-left-half.svg","closed":"creature/kawaii/baby/eye-left-closed.svg"}},"eye-right":{"origin":[144,132],"variants":{"open":"creature/kawaii/baby/eye-right-open.svg","arc":"creature/kawaii/baby/eye-right-arc.svg","half":"creature/kawaii/baby/eye-right-half.svg","closed":"creature/kawaii/baby/eye-right-closed.svg"}},"mouth":{"origin":[120,152],"variants":{"smile":"creature/kawaii/baby/mouth-smile.svg","o":"creature/kawaii/baby/mouth-o.svg","yawn":"creature/kawaii/baby/mouth-yawn.svg","wavy":"creature/kawaii/baby/mouth-wavy.svg","sleep":"creature/kawaii/baby/mouth-sleep.svg","flat":"creature/kawaii/baby/mouth-flat.svg"}},"hand":{"origin":[170,160],"variants":{"default":"creature/kawaii/baby/hand.svg"}},"dust-specks":{"origin":[120,138],"variants":{"default":"emblems/dust-specks.svg"}},"star":{"origin":[120,138],"variants":{"default":"creature/kawaii/baby/star.svg"}}},"layers":["shadow","halo","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","hand","dust-specks","star"],"states":{"happy":{"label":"Content","cue":"Yeux en arcs souriants, petit rebond, halo doré plein","emblem":null,"visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"arc","eye-right":"arc","mouth":"smile"},"static":{},"loops":[{"id":"bounce","duration":2800,"iterations":"infinite","easing":"ease-out-soft","targets":{"pose":[{"offset":0,"translate":[0,0],"scale":[1,1],"easing":"ease-out-soft"},{"offset":0.14,"translate":[0,0],"scale":[1.04,0.95],"easing":"ease-out-soft"},{"offset":0.42,"translate":[0,-10],"scale":[0.98,1.04],"easing":"ease-in-soft"},{"offset":0.66,"translate":[0,0],"scale":[1.03,0.96],"easing":"spring-soft"},{"offset":0.8,"translate":[0,0],"scale":[1,1]},{"offset":1,"translate":[0,0],"scale":[1,1]}],"shadow":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.42,"scale":[0.86,0.86],"opacity":0.65},{"offset":0.66,"scale":[1,1],"opacity":1},{"offset":1,"scale":[1,1],"opacity":1}],"ear-left":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":-7},{"offset":0.66,"rotate":3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":7},{"offset":0.66,"rotate":-3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}]}},{"id":"halo-pulse","duration":3600,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"scale":[1,1],"opacity":0.9},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[1,1],"opacity":0.9}]}}],"particles":[{"preset":"ambient","continuous":true}]},"hungry":{"label":"Faim","cue":"Bouche en « o », regard vers le bol, main sur le ventre, halo creusé au ventre","emblem":"starfruit","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","hand"],"variants":{"halo":"hungry","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"o","hand":"default"},"static":{"eye-left":{"translate":[-3,3]},"eye-right":{"translate":[-3,3]}},"loops":[{"id":"sway","duration":3400,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":1.8},{"offset":0.5,"rotate":-1.8},{"offset":1,"rotate":1.8}]}},{"id":"belly-pat","duration":2400,"iterations":"infinite","easing":"soft-in-out","targets":{"hand":[{"offset":0,"translate":[0,0],"rotate":-4},{"offset":0.5,"translate":[-2,3],"rotate":4},{"offset":1,"translate":[0,0],"rotate":-4}],"mouth":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[1.14,0.9]},{"offset":1,"scale":[1,1]}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"tired":{"label":"Fatigué","cue":"Paupières mi-closes, oreilles tombantes, bâillement lent, bourgeons éteints","emblem":"candle","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"dim","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"yawn"},"static":{"pose":{"translate":[0,3],"scale":[1.03,0.96]},"ear-left":{"rotate":-46},"ear-right":{"rotate":46},"mouth":{"scale":[0.25,0.25]}},"loops":[{"id":"yawn","duration":5600,"iterations":"infinite","easing":"soft-in-out","targets":{"mouth":[{"offset":0,"scale":[0.25,0.25]},{"offset":0.35,"scale":[0.25,0.25]},{"offset":0.55,"scale":[1,1]},{"offset":0.76,"scale":[0.95,0.95]},{"offset":1,"scale":[0.25,0.25]}],"eye-left":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"eye-right":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"pose":[{"offset":0,"rotate":0},{"offset":0.55,"rotate":3},{"offset":0.8,"rotate":1.5},{"offset":1,"rotate":0}],"ear-left":[{"offset":0,"rotate":-46},{"offset":0.55,"rotate":-53},{"offset":1,"rotate":-46}],"ear-right":[{"offset":0,"rotate":46},{"offset":0.55,"rotate":53},{"offset":1,"rotate":46}]}},{"id":"emblem-bob","duration":3600,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"sick":{"label":"Malade","cue":"Corps affaissé, léger frisson, bouche ondulée, joues vert tisane, halo pâle et froid","emblem":"raincloud","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"cold","ear-left":"lit","ear-right":"lit","cheeks":"sick","eye-left":"open","eye-right":"open","mouth":"wavy"},"static":{"pose":{"translate":[0,4],"scale":[1.05,0.93]},"ear-left":{"rotate":-18},"ear-right":{"rotate":18},"eye-left":{"translate":[0,2],"scale":[1,0.9]},"eye-right":{"translate":[0,2],"scale":[1,0.9]}},"loops":[{"id":"shiver","duration":3200,"iterations":"infinite","easing":"soft-in-out","targets":{"pose":[{"offset":0,"translate":[0,4]},{"offset":0.08,"translate":[-1.4,4]},{"offset":0.16,"translate":[1.4,4]},{"offset":0.24,"translate":[-1.2,4]},{"offset":0.32,"translate":[1.2,4]},{"offset":0.4,"translate":[0,4]},{"offset":1,"translate":[0,4]}]}},{"id":"halo-ebb","duration":4000,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.75},{"offset":0.5,"opacity":0.95},{"offset":1,"opacity":0.75}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"asleep":{"label":"Endormi","cue":"Roulé en boule, yeux fermés en traits courbes, respiration lente, veilleuse bleu lune","emblem":"moons","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"moon","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep"},"static":{"pose":{"translate":[0,8],"scale":[1.07,0.86]},"ear-left":{"rotate":-70},"ear-right":{"rotate":70}},"rest":{"id":"sleep-breathe","duration":5200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.99,1.03]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"halo-lull","duration":5200,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.7},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.7}]}},{"id":"moons-rise","duration":4800,"iterations":"infinite","easing":"soft-in-out","targets":{"emblem":[{"offset":0,"translate":[0,8],"opacity":0},{"offset":0.3,"translate":[0,3],"opacity":1},{"offset":0.8,"translate":[0,-4],"opacity":1},{"offset":1,"translate":[0,-8],"opacity":0}]}}],"particles":[{"preset":"sleep","continuous":true}]},"dirty":{"label":"Sale","cue":"Taches de poussière d'ombre sur le corps, poussières grises en orbite lente, halo moucheté","emblem":null,"visible":["shadow","halo","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","dust-specks"],"variants":{"halo":"speckled","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"flat"},"static":{},"loops":[{"id":"dust-orbit","duration":16000,"iterations":"infinite","easing":"linear","targets":{"dust-specks":[{"offset":0,"rotate":0},{"offset":1,"rotate":360}]}},{"id":"itch","duration":3800,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":-2},{"offset":0.5,"rotate":2},{"offset":1,"rotate":-2}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.5,"rotate":5},{"offset":1,"rotate":0}]}}],"particles":[]},"weak":{"label":"Affaiblie","cue":"Corps translucide, mouvements très lents, yeux mi-clos tournés vers le joueur, halo presque éteint","emblem":"fading-star","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"faint","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"flat"},"static":{"pose":{"translate":[0,6],"scale":[1.04,0.94],"opacity":0.6},"ear-left":{"rotate":-34},"ear-right":{"rotate":34},"eye-left":{"translate":[0,2]},"eye-right":{"translate":[0,2]}},"rest":{"id":"weak-breathe","duration":7200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.996,1.012]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"fade-pulse","duration":7000,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52},{"offset":0.5,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.68},{"offset":1,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52}],"halo":[{"offset":0,"opacity":0.5},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.5}]}},{"id":"star-fade","duration":6000,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"scale":[0.96,0.96],"opacity":0.55},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[0.96,0.96],"opacity":0.55}]}}],"particles":[]},"flown":{"label":"Envol","cue":"La créature se défait en lumière dorée, monte et devient une étoile du ciel","emblem":null,"visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","star"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep","star":"default"},"static":{"star":{"opacity":0,"scale":[0.2,0.2]}},"rest":null,"loops":[],"sequence":{"id":"envol","duration":9000,"iterations":1,"fill":"forwards","easing":"soft-in-out","reducedAt":1,"targets":{"pose":[{"offset":0,"translate":[0,0],"easing":"soft-in-out"},{"offset":0.1,"translate":[0,-3],"easing":"ease-out-soft"},{"offset":0.55,"translate":[0,-26]},{"offset":1,"translate":[0,-40]}],"halo":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.2,"scale":[1.2,1.2],"opacity":1},{"offset":0.5,"scale":[1.35,1.35],"opacity":0.7},{"offset":0.88,"scale":[1.5,1.5],"opacity":0},{"offset":1,"scale":[1.5,1.5],"opacity":0}],"eye-left":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"eye-right":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"mouth":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"cheeks":[{"offset":0,"opacity":1},{"offset":0.1,"opacity":1},{"offset":0.38,"opacity":0},{"offset":1,"opacity":0}],"ear-left":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[-3,-14],"rotate":-10,"opacity":0},{"offset":1,"translate":[-3,-14],"rotate":-10,"opacity":0}],"ear-right":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[3,-14],"rotate":10,"opacity":0},{"offset":1,"translate":[3,-14],"rotate":10,"opacity":0}],"body":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.14,"scale":[1,1],"opacity":1},{"offset":0.5,"scale":[1.12,1.12],"opacity":0},{"offset":1,"scale":[1.12,1.12],"opacity":0}],"shadow":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":0.5},{"offset":0.9,"opacity":0},{"offset":1,"opacity":0}],"star":[{"offset":0,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"linear"},{"offset":0.22,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"ease-out-soft"},{"offset":0.4,"translate":[0,-6],"scale":[0.5,0.5],"opacity":1,"easing":"soft-in-out"},{"offset":0.62,"translate":[0,-50],"scale":[0.62,0.62],"opacity":1,"easing":"ease-out-soft"},{"offset":1,"translate":[0,-112],"scale":[0.7,0.7],"opacity":1}]}},"after":{"loops":[{"id":"star-twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"star":[{"offset":0,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9},{"offset":0.5,"translate":[0,-112],"scale":[0.74,0.74],"opacity":1},{"offset":1,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9}]}}]},"particles":[{"preset":"flight","at":0.08}]}}},"child":{"label":"Enfant","added":"Oreilles longues : elles poussent, avec leur bourgeon lumineux au bout.","partsDir":"design/stages/kawaii/child/ (à ranger en assets/creature/kawaii/child/)","parts":{"shadow":{"origin":[120,206],"variants":{"default":"creature/kawaii/child/shadow.svg"}},"halo":{"origin":[120,138],"variants":{"default":"creature/kawaii/child/halo.svg","hungry":"creature/kawaii/child/halo-hungry.svg","dim":"creature/kawaii/child/halo-dim.svg","cold":"creature/kawaii/child/halo-cold.svg","moon":"creature/kawaii/child/halo-moon.svg","speckled":"creature/kawaii/child/halo-speckled.svg","faint":"creature/kawaii/child/halo-faint.svg"}},"ear-left":{"origin":[106,92],"variants":{"lit":"creature/kawaii/child/ear-left.svg","dim":"creature/kawaii/child/ear-left-dim.svg"}},"ear-right":{"origin":[134,92],"variants":{"lit":"creature/kawaii/child/ear-right.svg","dim":"creature/kawaii/child/ear-right-dim.svg"}},"body":{"origin":[120,202],"variants":{"default":"creature/kawaii/child/body.svg"}},"dust-stains":{"origin":[120,140],"variants":{"default":"emblems/dust-stains.svg"}},"cheeks":{"origin":[120,150],"variants":{"default":"creature/kawaii/baby/cheeks.svg","sick":"creature/kawaii/baby/cheeks-sick.svg"}},"eye-left":{"origin":[96,132],"variants":{"open":"creature/kawaii/baby/eye-left-open.svg","arc":"creature/kawaii/baby/eye-left-arc.svg","half":"creature/kawaii/baby/eye-left-half.svg","closed":"creature/kawaii/baby/eye-left-closed.svg"}},"eye-right":{"origin":[144,132],"variants":{"open":"creature/kawaii/baby/eye-right-open.svg","arc":"creature/kawaii/baby/eye-right-arc.svg","half":"creature/kawaii/baby/eye-right-half.svg","closed":"creature/kawaii/baby/eye-right-closed.svg"}},"mouth":{"origin":[120,152],"variants":{"smile":"creature/kawaii/baby/mouth-smile.svg","o":"creature/kawaii/baby/mouth-o.svg","yawn":"creature/kawaii/baby/mouth-yawn.svg","wavy":"creature/kawaii/baby/mouth-wavy.svg","sleep":"creature/kawaii/baby/mouth-sleep.svg","flat":"creature/kawaii/baby/mouth-flat.svg"}},"hand":{"origin":[170,160],"variants":{"default":"creature/kawaii/baby/hand.svg"}},"dust-specks":{"origin":[120,138],"variants":{"default":"emblems/dust-specks.svg"}},"star":{"origin":[120,138],"variants":{"default":"creature/kawaii/baby/star.svg"}}},"layers":["shadow","halo","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","hand","dust-specks","star"],"states":{"happy":{"label":"Content","cue":"Yeux en arcs souriants, petit rebond, halo doré plein","emblem":null,"visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"arc","eye-right":"arc","mouth":"smile"},"static":{},"loops":[{"id":"bounce","duration":2800,"iterations":"infinite","easing":"ease-out-soft","targets":{"pose":[{"offset":0,"translate":[0,0],"scale":[1,1],"easing":"ease-out-soft"},{"offset":0.14,"translate":[0,0],"scale":[1.04,0.95],"easing":"ease-out-soft"},{"offset":0.42,"translate":[0,-10],"scale":[0.98,1.04],"easing":"ease-in-soft"},{"offset":0.66,"translate":[0,0],"scale":[1.03,0.96],"easing":"spring-soft"},{"offset":0.8,"translate":[0,0],"scale":[1,1]},{"offset":1,"translate":[0,0],"scale":[1,1]}],"shadow":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.42,"scale":[0.86,0.86],"opacity":0.65},{"offset":0.66,"scale":[1,1],"opacity":1},{"offset":1,"scale":[1,1],"opacity":1}],"ear-left":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":-7},{"offset":0.66,"rotate":3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":7},{"offset":0.66,"rotate":-3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}]}},{"id":"halo-pulse","duration":3600,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"scale":[1,1],"opacity":0.9},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[1,1],"opacity":0.9}]}}],"particles":[{"preset":"ambient","continuous":true}]},"hungry":{"label":"Faim","cue":"Bouche en « o », regard vers le bol, main sur le ventre, halo creusé au ventre","emblem":"starfruit","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","hand"],"variants":{"halo":"hungry","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"o","hand":"default"},"static":{"eye-left":{"translate":[-3,3]},"eye-right":{"translate":[-3,3]}},"loops":[{"id":"sway","duration":3400,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":1.8},{"offset":0.5,"rotate":-1.8},{"offset":1,"rotate":1.8}]}},{"id":"belly-pat","duration":2400,"iterations":"infinite","easing":"soft-in-out","targets":{"hand":[{"offset":0,"translate":[0,0],"rotate":-4},{"offset":0.5,"translate":[-2,3],"rotate":4},{"offset":1,"translate":[0,0],"rotate":-4}],"mouth":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[1.14,0.9]},{"offset":1,"scale":[1,1]}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"tired":{"label":"Fatigué","cue":"Paupières mi-closes, oreilles tombantes, bâillement lent, bourgeons éteints","emblem":"candle","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"dim","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"yawn"},"static":{"pose":{"translate":[0,3],"scale":[1.03,0.96]},"ear-left":{"rotate":-62},"ear-right":{"rotate":62},"mouth":{"scale":[0.25,0.25]}},"loops":[{"id":"yawn","duration":5600,"iterations":"infinite","easing":"soft-in-out","targets":{"mouth":[{"offset":0,"scale":[0.25,0.25]},{"offset":0.35,"scale":[0.25,0.25]},{"offset":0.55,"scale":[1,1]},{"offset":0.76,"scale":[0.95,0.95]},{"offset":1,"scale":[0.25,0.25]}],"eye-left":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"eye-right":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"pose":[{"offset":0,"rotate":0},{"offset":0.55,"rotate":3},{"offset":0.8,"rotate":1.5},{"offset":1,"rotate":0}],"ear-left":[{"offset":0,"rotate":-62},{"offset":0.55,"rotate":-69},{"offset":1,"rotate":-62}],"ear-right":[{"offset":0,"rotate":62},{"offset":0.55,"rotate":69},{"offset":1,"rotate":62}]}},{"id":"emblem-bob","duration":3600,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"sick":{"label":"Malade","cue":"Corps affaissé, léger frisson, bouche ondulée, joues vert tisane, halo pâle et froid","emblem":"raincloud","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"cold","ear-left":"lit","ear-right":"lit","cheeks":"sick","eye-left":"open","eye-right":"open","mouth":"wavy"},"static":{"pose":{"translate":[0,4],"scale":[1.05,0.93]},"ear-left":{"rotate":-34},"ear-right":{"rotate":34},"eye-left":{"translate":[0,2],"scale":[1,0.9]},"eye-right":{"translate":[0,2],"scale":[1,0.9]}},"loops":[{"id":"shiver","duration":3200,"iterations":"infinite","easing":"soft-in-out","targets":{"pose":[{"offset":0,"translate":[0,4]},{"offset":0.08,"translate":[-1.4,4]},{"offset":0.16,"translate":[1.4,4]},{"offset":0.24,"translate":[-1.2,4]},{"offset":0.32,"translate":[1.2,4]},{"offset":0.4,"translate":[0,4]},{"offset":1,"translate":[0,4]}]}},{"id":"halo-ebb","duration":4000,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.75},{"offset":0.5,"opacity":0.95},{"offset":1,"opacity":0.75}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"asleep":{"label":"Endormi","cue":"Roulé en boule, yeux fermés en traits courbes, respiration lente, veilleuse bleu lune","emblem":"moons","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"moon","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep"},"static":{"pose":{"translate":[0,8],"scale":[1.07,0.86]},"ear-left":{"rotate":-86},"ear-right":{"rotate":86}},"rest":{"id":"sleep-breathe","duration":5200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.99,1.03]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"halo-lull","duration":5200,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.7},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.7}]}},{"id":"moons-rise","duration":4800,"iterations":"infinite","easing":"soft-in-out","targets":{"emblem":[{"offset":0,"translate":[0,8],"opacity":0},{"offset":0.3,"translate":[0,3],"opacity":1},{"offset":0.8,"translate":[0,-4],"opacity":1},{"offset":1,"translate":[0,-8],"opacity":0}]}}],"particles":[{"preset":"sleep","continuous":true}]},"dirty":{"label":"Sale","cue":"Taches de poussière d'ombre sur le corps, poussières grises en orbite lente, halo moucheté","emblem":null,"visible":["shadow","halo","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","dust-specks"],"variants":{"halo":"speckled","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"flat"},"static":{},"loops":[{"id":"dust-orbit","duration":16000,"iterations":"infinite","easing":"linear","targets":{"dust-specks":[{"offset":0,"rotate":0},{"offset":1,"rotate":360}]}},{"id":"itch","duration":3800,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":-2},{"offset":0.5,"rotate":2},{"offset":1,"rotate":-2}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.5,"rotate":5},{"offset":1,"rotate":0}]}}],"particles":[]},"weak":{"label":"Affaiblie","cue":"Corps translucide, mouvements très lents, yeux mi-clos tournés vers le joueur, halo presque éteint","emblem":"fading-star","visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"faint","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"flat"},"static":{"pose":{"translate":[0,6],"scale":[1.04,0.94],"opacity":0.6},"ear-left":{"rotate":-50},"ear-right":{"rotate":50},"eye-left":{"translate":[0,2]},"eye-right":{"translate":[0,2]}},"rest":{"id":"weak-breathe","duration":7200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.996,1.012]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"fade-pulse","duration":7000,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52},{"offset":0.5,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.68},{"offset":1,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52}],"halo":[{"offset":0,"opacity":0.5},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.5}]}},{"id":"star-fade","duration":6000,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"scale":[0.96,0.96],"opacity":0.55},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[0.96,0.96],"opacity":0.55}]}}],"particles":[]},"flown":{"label":"Envol","cue":"La créature se défait en lumière dorée, monte et devient une étoile du ciel","emblem":null,"visible":["shadow","halo","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","star"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep","star":"default"},"static":{"star":{"opacity":0,"scale":[0.2,0.2]}},"rest":null,"loops":[],"sequence":{"id":"envol","duration":9000,"iterations":1,"fill":"forwards","easing":"soft-in-out","reducedAt":1,"targets":{"pose":[{"offset":0,"translate":[0,0],"easing":"soft-in-out"},{"offset":0.1,"translate":[0,-3],"easing":"ease-out-soft"},{"offset":0.55,"translate":[0,-26]},{"offset":1,"translate":[0,-40]}],"halo":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.2,"scale":[1.2,1.2],"opacity":1},{"offset":0.5,"scale":[1.35,1.35],"opacity":0.7},{"offset":0.88,"scale":[1.5,1.5],"opacity":0},{"offset":1,"scale":[1.5,1.5],"opacity":0}],"eye-left":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"eye-right":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"mouth":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"cheeks":[{"offset":0,"opacity":1},{"offset":0.1,"opacity":1},{"offset":0.38,"opacity":0},{"offset":1,"opacity":0}],"ear-left":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[-3,-14],"rotate":-10,"opacity":0},{"offset":1,"translate":[-3,-14],"rotate":-10,"opacity":0}],"ear-right":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[3,-14],"rotate":10,"opacity":0},{"offset":1,"translate":[3,-14],"rotate":10,"opacity":0}],"body":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.14,"scale":[1,1],"opacity":1},{"offset":0.5,"scale":[1.12,1.12],"opacity":0},{"offset":1,"scale":[1.12,1.12],"opacity":0}],"shadow":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":0.5},{"offset":0.9,"opacity":0},{"offset":1,"opacity":0}],"star":[{"offset":0,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"linear"},{"offset":0.22,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"ease-out-soft"},{"offset":0.4,"translate":[0,-6],"scale":[0.5,0.5],"opacity":1,"easing":"soft-in-out"},{"offset":0.62,"translate":[0,-50],"scale":[0.62,0.62],"opacity":1,"easing":"ease-out-soft"},{"offset":1,"translate":[0,-112],"scale":[0.7,0.7],"opacity":1}]}},"after":{"loops":[{"id":"star-twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"star":[{"offset":0,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9},{"offset":0.5,"translate":[0,-112],"scale":[0.74,0.74],"opacity":1},{"offset":1,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9}]}}]},"particles":[{"preset":"flight","at":0.08}]}}},"teen":{"label":"Adolescent","added":"Queue en petite flamme de lumière (ajoutée au stade enfant).","partsDir":"design/stages/kawaii/teen/ (à ranger en assets/creature/kawaii/teen/)","parts":{"shadow":{"origin":[120,206],"variants":{"default":"creature/kawaii/teen/shadow.svg"}},"halo":{"origin":[120,138],"variants":{"default":"creature/kawaii/teen/halo.svg","hungry":"creature/kawaii/teen/halo-hungry.svg","dim":"creature/kawaii/teen/halo-dim.svg","cold":"creature/kawaii/teen/halo-cold.svg","moon":"creature/kawaii/teen/halo-moon.svg","speckled":"creature/kawaii/teen/halo-speckled.svg","faint":"creature/kawaii/teen/halo-faint.svg"}},"ear-left":{"origin":[106,88],"variants":{"lit":"creature/kawaii/teen/ear-left.svg","dim":"creature/kawaii/teen/ear-left-dim.svg"}},"ear-right":{"origin":[134,88],"variants":{"lit":"creature/kawaii/teen/ear-right.svg","dim":"creature/kawaii/teen/ear-right-dim.svg"}},"body":{"origin":[120,202],"variants":{"default":"creature/kawaii/teen/body.svg"}},"dust-stains":{"origin":[120,140],"variants":{"default":"emblems/dust-stains.svg"}},"cheeks":{"origin":[120,150],"variants":{"default":"creature/kawaii/baby/cheeks.svg","sick":"creature/kawaii/baby/cheeks-sick.svg"}},"eye-left":{"origin":[96,132],"variants":{"open":"creature/kawaii/baby/eye-left-open.svg","arc":"creature/kawaii/baby/eye-left-arc.svg","half":"creature/kawaii/baby/eye-left-half.svg","closed":"creature/kawaii/baby/eye-left-closed.svg"}},"eye-right":{"origin":[144,132],"variants":{"open":"creature/kawaii/baby/eye-right-open.svg","arc":"creature/kawaii/baby/eye-right-arc.svg","half":"creature/kawaii/baby/eye-right-half.svg","closed":"creature/kawaii/baby/eye-right-closed.svg"}},"mouth":{"origin":[120,152],"variants":{"smile":"creature/kawaii/baby/mouth-smile.svg","o":"creature/kawaii/baby/mouth-o.svg","yawn":"creature/kawaii/baby/mouth-yawn.svg","wavy":"creature/kawaii/baby/mouth-wavy.svg","sleep":"creature/kawaii/baby/mouth-sleep.svg","flat":"creature/kawaii/baby/mouth-flat.svg"}},"hand":{"origin":[170,160],"variants":{"default":"creature/kawaii/baby/hand.svg"}},"dust-specks":{"origin":[120,138],"variants":{"default":"emblems/dust-specks.svg"}},"star":{"origin":[120,138],"variants":{"default":"creature/kawaii/baby/star.svg"}},"tail":{"origin":[186,190],"variants":{"lit":"creature/kawaii/teen/tail.svg","dim":"creature/kawaii/teen/tail-dim.svg"}}},"layers":["shadow","halo","tail","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","hand","dust-specks","star"],"states":{"happy":{"label":"Content","cue":"Yeux en arcs souriants, petit rebond, halo doré plein","emblem":null,"visible":["shadow","halo","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"arc","eye-right":"arc","mouth":"smile","tail":"lit"},"static":{},"loops":[{"id":"bounce","duration":2800,"iterations":"infinite","easing":"ease-out-soft","targets":{"pose":[{"offset":0,"translate":[0,0],"scale":[1,1],"easing":"ease-out-soft"},{"offset":0.14,"translate":[0,0],"scale":[1.04,0.95],"easing":"ease-out-soft"},{"offset":0.42,"translate":[0,-10],"scale":[0.98,1.04],"easing":"ease-in-soft"},{"offset":0.66,"translate":[0,0],"scale":[1.03,0.96],"easing":"spring-soft"},{"offset":0.8,"translate":[0,0],"scale":[1,1]},{"offset":1,"translate":[0,0],"scale":[1,1]}],"shadow":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.42,"scale":[0.86,0.86],"opacity":0.65},{"offset":0.66,"scale":[1,1],"opacity":1},{"offset":1,"scale":[1,1],"opacity":1}],"ear-left":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":-7},{"offset":0.66,"rotate":3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":7},{"offset":0.66,"rotate":-3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}]}},{"id":"halo-pulse","duration":3600,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"scale":[1,1],"opacity":0.9},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[1,1],"opacity":0.9}]}},{"id":"tail-wag","duration":2800,"iterations":"infinite","easing":"ease-out-soft","targets":{"tail":[{"offset":0,"rotate":0,"scale":[1,1]},{"offset":0.14,"rotate":6,"scale":[1.03,0.96]},{"offset":0.42,"rotate":-10,"scale":[0.97,1.08],"easing":"ease-in-soft"},{"offset":0.66,"rotate":5,"scale":[1.02,0.97],"easing":"spring-soft"},{"offset":0.8,"rotate":0,"scale":[1,1]},{"offset":1,"rotate":0,"scale":[1,1]}]}}],"particles":[{"preset":"ambient","continuous":true}]},"hungry":{"label":"Faim","cue":"Bouche en « o », regard vers le bol, main sur le ventre, halo creusé au ventre","emblem":"starfruit","visible":["shadow","halo","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","hand"],"variants":{"halo":"hungry","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"o","hand":"default","tail":"lit"},"static":{"eye-left":{"translate":[-3,3]},"eye-right":{"translate":[-3,3]}},"loops":[{"id":"sway","duration":3400,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":1.8},{"offset":0.5,"rotate":-1.8},{"offset":1,"rotate":1.8}]}},{"id":"belly-pat","duration":2400,"iterations":"infinite","easing":"soft-in-out","targets":{"hand":[{"offset":0,"translate":[0,0],"rotate":-4},{"offset":0.5,"translate":[-2,3],"rotate":4},{"offset":1,"translate":[0,0],"rotate":-4}],"mouth":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[1.14,0.9]},{"offset":1,"scale":[1,1]}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}},{"id":"tail-sway","duration":3400,"iterations":"infinite","easing":"breath","targets":{"tail":[{"offset":0,"rotate":4},{"offset":0.5,"rotate":-4},{"offset":1,"rotate":4}]}}],"particles":[]},"tired":{"label":"Fatigué","cue":"Paupières mi-closes, oreilles tombantes, bâillement lent, bourgeons éteints","emblem":"candle","visible":["shadow","halo","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"dim","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"yawn","tail":"dim"},"static":{"pose":{"translate":[0,3],"scale":[1.03,0.96]},"ear-left":{"rotate":-62},"ear-right":{"rotate":62},"mouth":{"scale":[0.25,0.25]},"tail":{"rotate":40,"scale":[0.85,0.85]}},"loops":[{"id":"yawn","duration":5600,"iterations":"infinite","easing":"soft-in-out","targets":{"mouth":[{"offset":0,"scale":[0.25,0.25]},{"offset":0.35,"scale":[0.25,0.25]},{"offset":0.55,"scale":[1,1]},{"offset":0.76,"scale":[0.95,0.95]},{"offset":1,"scale":[0.25,0.25]}],"eye-left":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"eye-right":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"pose":[{"offset":0,"rotate":0},{"offset":0.55,"rotate":3},{"offset":0.8,"rotate":1.5},{"offset":1,"rotate":0}],"ear-left":[{"offset":0,"rotate":-62},{"offset":0.55,"rotate":-69},{"offset":1,"rotate":-62}],"ear-right":[{"offset":0,"rotate":62},{"offset":0.55,"rotate":69},{"offset":1,"rotate":62}]}},{"id":"emblem-bob","duration":3600,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"sick":{"label":"Malade","cue":"Corps affaissé, léger frisson, bouche ondulée, joues vert tisane, halo pâle et froid","emblem":"raincloud","visible":["shadow","halo","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"cold","ear-left":"lit","ear-right":"lit","cheeks":"sick","eye-left":"open","eye-right":"open","mouth":"wavy","tail":"dim"},"static":{"pose":{"translate":[0,4],"scale":[1.05,0.93]},"ear-left":{"rotate":-34},"ear-right":{"rotate":34},"eye-left":{"translate":[0,2],"scale":[1,0.9]},"eye-right":{"translate":[0,2],"scale":[1,0.9]},"tail":{"rotate":36,"scale":[0.8,0.8]}},"loops":[{"id":"shiver","duration":3200,"iterations":"infinite","easing":"soft-in-out","targets":{"pose":[{"offset":0,"translate":[0,4]},{"offset":0.08,"translate":[-1.4,4]},{"offset":0.16,"translate":[1.4,4]},{"offset":0.24,"translate":[-1.2,4]},{"offset":0.32,"translate":[1.2,4]},{"offset":0.4,"translate":[0,4]},{"offset":1,"translate":[0,4]}]}},{"id":"halo-ebb","duration":4000,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.75},{"offset":0.5,"opacity":0.95},{"offset":1,"opacity":0.75}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"asleep":{"label":"Endormi","cue":"Roulé en boule, yeux fermés en traits courbes, respiration lente, veilleuse bleu lune","emblem":"moons","visible":["shadow","halo","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"moon","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep","tail":"lit"},"static":{"pose":{"translate":[0,8],"scale":[1.07,0.86]},"ear-left":{"rotate":-86},"ear-right":{"rotate":86},"tail":{"rotate":54,"scale":[0.7,0.7]}},"rest":{"id":"sleep-breathe","duration":5200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.99,1.03]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"halo-lull","duration":5200,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.7},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.7}]}},{"id":"moons-rise","duration":4800,"iterations":"infinite","easing":"soft-in-out","targets":{"emblem":[{"offset":0,"translate":[0,8],"opacity":0},{"offset":0.3,"translate":[0,3],"opacity":1},{"offset":0.8,"translate":[0,-4],"opacity":1},{"offset":1,"translate":[0,-8],"opacity":0}]}},{"id":"tail-lull","duration":5200,"iterations":"infinite","easing":"breath","targets":{"tail":[{"offset":0,"opacity":0.7},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.7}]}}],"particles":[{"preset":"sleep","continuous":true}]},"dirty":{"label":"Sale","cue":"Taches de poussière d'ombre sur le corps, poussières grises en orbite lente, halo moucheté","emblem":null,"visible":["shadow","halo","tail","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","dust-specks"],"variants":{"halo":"speckled","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"flat","tail":"lit"},"static":{},"loops":[{"id":"dust-orbit","duration":16000,"iterations":"infinite","easing":"linear","targets":{"dust-specks":[{"offset":0,"rotate":0},{"offset":1,"rotate":360}]}},{"id":"itch","duration":3800,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":-2},{"offset":0.5,"rotate":2},{"offset":1,"rotate":-2}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.5,"rotate":5},{"offset":1,"rotate":0}]}},{"id":"tail-itch","duration":3800,"iterations":"infinite","easing":"breath","targets":{"tail":[{"offset":0,"rotate":-6},{"offset":0.5,"rotate":7},{"offset":1,"rotate":-6}]}}],"particles":[]},"weak":{"label":"Affaiblie","cue":"Corps translucide, mouvements très lents, yeux mi-clos tournés vers le joueur, halo presque éteint","emblem":"fading-star","visible":["shadow","halo","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"faint","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"flat","tail":"dim"},"static":{"pose":{"translate":[0,6],"scale":[1.04,0.94],"opacity":0.6},"ear-left":{"rotate":-50},"ear-right":{"rotate":50},"eye-left":{"translate":[0,2]},"eye-right":{"translate":[0,2]},"tail":{"rotate":46,"scale":[0.7,0.7]}},"rest":{"id":"weak-breathe","duration":7200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.996,1.012]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"fade-pulse","duration":7000,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52},{"offset":0.5,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.68},{"offset":1,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52}],"halo":[{"offset":0,"opacity":0.5},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.5}]}},{"id":"star-fade","duration":6000,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"scale":[0.96,0.96],"opacity":0.55},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[0.96,0.96],"opacity":0.55}]}}],"particles":[]},"flown":{"label":"Envol","cue":"La créature se défait en lumière dorée, monte et devient une étoile du ciel","emblem":null,"visible":["shadow","halo","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","star"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep","star":"default","tail":"lit"},"static":{"star":{"opacity":0,"scale":[0.2,0.2]}},"rest":null,"loops":[],"sequence":{"id":"envol","duration":9000,"iterations":1,"fill":"forwards","easing":"soft-in-out","reducedAt":1,"targets":{"pose":[{"offset":0,"translate":[0,0],"easing":"soft-in-out"},{"offset":0.1,"translate":[0,-3],"easing":"ease-out-soft"},{"offset":0.55,"translate":[0,-26]},{"offset":1,"translate":[0,-40]}],"halo":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.2,"scale":[1.2,1.2],"opacity":1},{"offset":0.5,"scale":[1.35,1.35],"opacity":0.7},{"offset":0.88,"scale":[1.5,1.5],"opacity":0},{"offset":1,"scale":[1.5,1.5],"opacity":0}],"eye-left":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"eye-right":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"mouth":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"cheeks":[{"offset":0,"opacity":1},{"offset":0.1,"opacity":1},{"offset":0.38,"opacity":0},{"offset":1,"opacity":0}],"ear-left":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[-3,-14],"rotate":-10,"opacity":0},{"offset":1,"translate":[-3,-14],"rotate":-10,"opacity":0}],"ear-right":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[3,-14],"rotate":10,"opacity":0},{"offset":1,"translate":[3,-14],"rotate":10,"opacity":0}],"body":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.14,"scale":[1,1],"opacity":1},{"offset":0.5,"scale":[1.12,1.12],"opacity":0},{"offset":1,"scale":[1.12,1.12],"opacity":0}],"shadow":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":0.5},{"offset":0.9,"opacity":0},{"offset":1,"opacity":0}],"star":[{"offset":0,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"linear"},{"offset":0.22,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"ease-out-soft"},{"offset":0.4,"translate":[0,-6],"scale":[0.5,0.5],"opacity":1,"easing":"soft-in-out"},{"offset":0.62,"translate":[0,-50],"scale":[0.62,0.62],"opacity":1,"easing":"ease-out-soft"},{"offset":1,"translate":[0,-112],"scale":[0.7,0.7],"opacity":1}],"tail":[{"offset":0,"translate":[0,0],"opacity":1},{"offset":0.1,"translate":[0,0],"opacity":1},{"offset":0.45,"opacity":0,"translate":[4,-12]},{"offset":1,"opacity":0,"translate":[4,-12]}]}},"after":{"loops":[{"id":"star-twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"star":[{"offset":0,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9},{"offset":0.5,"translate":[0,-112],"scale":[0.74,0.74],"opacity":1},{"offset":1,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9}]}}]},"particles":[{"preset":"flight","at":0.08}]}}},"adult":{"label":"Adulte","added":"Ailes de lumière translucides (ajoutées au stade adolescent).","partsDir":"design/stages/kawaii/adult/ (à ranger en assets/creature/kawaii/adult/)","parts":{"shadow":{"origin":[120,206],"variants":{"default":"creature/kawaii/adult/shadow.svg"}},"halo":{"origin":[120,138],"variants":{"default":"creature/kawaii/adult/halo.svg","hungry":"creature/kawaii/adult/halo-hungry.svg","dim":"creature/kawaii/adult/halo-dim.svg","cold":"creature/kawaii/adult/halo-cold.svg","moon":"creature/kawaii/adult/halo-moon.svg","speckled":"creature/kawaii/adult/halo-speckled.svg","faint":"creature/kawaii/adult/halo-faint.svg"}},"ear-left":{"origin":[106,84],"variants":{"lit":"creature/kawaii/adult/ear-left.svg","dim":"creature/kawaii/adult/ear-left-dim.svg"}},"ear-right":{"origin":[134,84],"variants":{"lit":"creature/kawaii/adult/ear-right.svg","dim":"creature/kawaii/adult/ear-right-dim.svg"}},"body":{"origin":[120,202],"variants":{"default":"creature/kawaii/adult/body.svg"}},"dust-stains":{"origin":[120,140],"variants":{"default":"emblems/dust-stains.svg"}},"cheeks":{"origin":[120,150],"variants":{"default":"creature/kawaii/baby/cheeks.svg","sick":"creature/kawaii/baby/cheeks-sick.svg"}},"eye-left":{"origin":[96,132],"variants":{"open":"creature/kawaii/baby/eye-left-open.svg","arc":"creature/kawaii/baby/eye-left-arc.svg","half":"creature/kawaii/baby/eye-left-half.svg","closed":"creature/kawaii/baby/eye-left-closed.svg"}},"eye-right":{"origin":[144,132],"variants":{"open":"creature/kawaii/baby/eye-right-open.svg","arc":"creature/kawaii/baby/eye-right-arc.svg","half":"creature/kawaii/baby/eye-right-half.svg","closed":"creature/kawaii/baby/eye-right-closed.svg"}},"mouth":{"origin":[120,152],"variants":{"smile":"creature/kawaii/baby/mouth-smile.svg","o":"creature/kawaii/baby/mouth-o.svg","yawn":"creature/kawaii/baby/mouth-yawn.svg","wavy":"creature/kawaii/baby/mouth-wavy.svg","sleep":"creature/kawaii/baby/mouth-sleep.svg","flat":"creature/kawaii/baby/mouth-flat.svg"}},"hand":{"origin":[170,160],"variants":{"default":"creature/kawaii/baby/hand.svg"}},"dust-specks":{"origin":[120,138],"variants":{"default":"emblems/dust-specks.svg"}},"star":{"origin":[120,138],"variants":{"default":"creature/kawaii/baby/star.svg"}},"tail":{"origin":[190,190],"variants":{"lit":"creature/kawaii/adult/tail.svg","dim":"creature/kawaii/adult/tail-dim.svg"}},"wing-left":{"origin":[100,120],"variants":{"lit":"creature/kawaii/adult/wing-left.svg","dim":"creature/kawaii/adult/wing-left-dim.svg"}},"wing-right":{"origin":[140,120],"variants":{"lit":"creature/kawaii/adult/wing-right.svg","dim":"creature/kawaii/adult/wing-right-dim.svg"}}},"layers":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","hand","dust-specks","star"],"states":{"happy":{"label":"Content","cue":"Yeux en arcs souriants, petit rebond, halo doré plein","emblem":null,"visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"arc","eye-right":"arc","mouth":"smile","tail":"lit","wing-left":"lit","wing-right":"lit"},"static":{},"loops":[{"id":"bounce","duration":2800,"iterations":"infinite","easing":"ease-out-soft","targets":{"pose":[{"offset":0,"translate":[0,0],"scale":[1,1],"easing":"ease-out-soft"},{"offset":0.14,"translate":[0,0],"scale":[1.04,0.95],"easing":"ease-out-soft"},{"offset":0.42,"translate":[0,-10],"scale":[0.98,1.04],"easing":"ease-in-soft"},{"offset":0.66,"translate":[0,0],"scale":[1.03,0.96],"easing":"spring-soft"},{"offset":0.8,"translate":[0,0],"scale":[1,1]},{"offset":1,"translate":[0,0],"scale":[1,1]}],"shadow":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.42,"scale":[0.86,0.86],"opacity":0.65},{"offset":0.66,"scale":[1,1],"opacity":1},{"offset":1,"scale":[1,1],"opacity":1}],"ear-left":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":-7},{"offset":0.66,"rotate":3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.42,"rotate":7},{"offset":0.66,"rotate":-3},{"offset":0.82,"rotate":0},{"offset":1,"rotate":0}]}},{"id":"halo-pulse","duration":3600,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"scale":[1,1],"opacity":0.9},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[1,1],"opacity":0.9}]}},{"id":"tail-wag","duration":2800,"iterations":"infinite","easing":"ease-out-soft","targets":{"tail":[{"offset":0,"rotate":0,"scale":[1,1]},{"offset":0.14,"rotate":6,"scale":[1.03,0.96]},{"offset":0.42,"rotate":-10,"scale":[0.97,1.08],"easing":"ease-in-soft"},{"offset":0.66,"rotate":5,"scale":[1.02,0.97],"easing":"spring-soft"},{"offset":0.8,"rotate":0,"scale":[1,1]},{"offset":1,"rotate":0,"scale":[1,1]}]}},{"id":"wing-flap","duration":2800,"iterations":"infinite","easing":"ease-out-soft","targets":{"wing-left":[{"offset":0,"rotate":0},{"offset":0.14,"rotate":3},{"offset":0.42,"rotate":10,"easing":"ease-in-soft"},{"offset":0.66,"rotate":-4,"easing":"spring-soft"},{"offset":0.8,"rotate":0},{"offset":1,"rotate":0}],"wing-right":[{"offset":0,"rotate":0},{"offset":0.14,"rotate":-3},{"offset":0.42,"rotate":-10,"easing":"ease-in-soft"},{"offset":0.66,"rotate":4,"easing":"spring-soft"},{"offset":0.8,"rotate":0},{"offset":1,"rotate":0}]}}],"particles":[{"preset":"ambient","continuous":true}]},"hungry":{"label":"Faim","cue":"Bouche en « o », regard vers le bol, main sur le ventre, halo creusé au ventre","emblem":"starfruit","visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","hand"],"variants":{"halo":"hungry","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"o","hand":"default","tail":"lit","wing-left":"lit","wing-right":"lit"},"static":{"eye-left":{"translate":[-3,3]},"eye-right":{"translate":[-3,3]}},"loops":[{"id":"sway","duration":3400,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":1.8},{"offset":0.5,"rotate":-1.8},{"offset":1,"rotate":1.8}]}},{"id":"belly-pat","duration":2400,"iterations":"infinite","easing":"soft-in-out","targets":{"hand":[{"offset":0,"translate":[0,0],"rotate":-4},{"offset":0.5,"translate":[-2,3],"rotate":4},{"offset":1,"translate":[0,0],"rotate":-4}],"mouth":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[1.14,0.9]},{"offset":1,"scale":[1,1]}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}},{"id":"tail-sway","duration":3400,"iterations":"infinite","easing":"breath","targets":{"tail":[{"offset":0,"rotate":4},{"offset":0.5,"rotate":-4},{"offset":1,"rotate":4}]}},{"id":"wing-sway","duration":3400,"iterations":"infinite","easing":"breath","targets":{"wing-left":[{"offset":0,"rotate":3},{"offset":0.5,"rotate":-3},{"offset":1,"rotate":3}],"wing-right":[{"offset":0,"rotate":-3},{"offset":0.5,"rotate":3},{"offset":1,"rotate":-3}]}}],"particles":[]},"tired":{"label":"Fatigué","cue":"Paupières mi-closes, oreilles tombantes, bâillement lent, bourgeons éteints","emblem":"candle","visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"dim","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"yawn","tail":"dim","wing-left":"dim","wing-right":"dim"},"static":{"pose":{"translate":[0,3],"scale":[1.03,0.96]},"ear-left":{"rotate":-62},"ear-right":{"rotate":62},"mouth":{"scale":[0.25,0.25]},"tail":{"rotate":40,"scale":[0.85,0.85]},"wing-left":{"rotate":-34,"scale":[0.95,0.95]},"wing-right":{"rotate":34,"scale":[0.95,0.95]}},"loops":[{"id":"yawn","duration":5600,"iterations":"infinite","easing":"soft-in-out","targets":{"mouth":[{"offset":0,"scale":[0.25,0.25]},{"offset":0.35,"scale":[0.25,0.25]},{"offset":0.55,"scale":[1,1]},{"offset":0.76,"scale":[0.95,0.95]},{"offset":1,"scale":[0.25,0.25]}],"eye-left":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"eye-right":[{"offset":0,"scale":[1,1]},{"offset":0.35,"scale":[1,1]},{"offset":0.55,"scale":[1,0.55]},{"offset":0.76,"scale":[1,0.6]},{"offset":1,"scale":[1,1]}],"pose":[{"offset":0,"rotate":0},{"offset":0.55,"rotate":3},{"offset":0.8,"rotate":1.5},{"offset":1,"rotate":0}],"ear-left":[{"offset":0,"rotate":-62},{"offset":0.55,"rotate":-69},{"offset":1,"rotate":-62}],"ear-right":[{"offset":0,"rotate":62},{"offset":0.55,"rotate":69},{"offset":1,"rotate":62}]}},{"id":"emblem-bob","duration":3600,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"sick":{"label":"Malade","cue":"Corps affaissé, léger frisson, bouche ondulée, joues vert tisane, halo pâle et froid","emblem":"raincloud","visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"cold","ear-left":"lit","ear-right":"lit","cheeks":"sick","eye-left":"open","eye-right":"open","mouth":"wavy","tail":"dim","wing-left":"dim","wing-right":"dim"},"static":{"pose":{"translate":[0,4],"scale":[1.05,0.93]},"ear-left":{"rotate":-34},"ear-right":{"rotate":34},"eye-left":{"translate":[0,2],"scale":[1,0.9]},"eye-right":{"translate":[0,2],"scale":[1,0.9]},"tail":{"rotate":36,"scale":[0.8,0.8]},"wing-left":{"rotate":-28,"scale":[0.95,0.95]},"wing-right":{"rotate":28,"scale":[0.95,0.95]}},"loops":[{"id":"shiver","duration":3200,"iterations":"infinite","easing":"soft-in-out","targets":{"pose":[{"offset":0,"translate":[0,4]},{"offset":0.08,"translate":[-1.4,4]},{"offset":0.16,"translate":[1.4,4]},{"offset":0.24,"translate":[-1.2,4]},{"offset":0.32,"translate":[1.2,4]},{"offset":0.4,"translate":[0,4]},{"offset":1,"translate":[0,4]}]}},{"id":"halo-ebb","duration":4000,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.75},{"offset":0.5,"opacity":0.95},{"offset":1,"opacity":0.75}]}},{"id":"emblem-bob","duration":3200,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"translate":[0,0]},{"offset":0.5,"translate":[0,-3]},{"offset":1,"translate":[0,0]}]}}],"particles":[]},"asleep":{"label":"Endormi","cue":"Roulé en boule, yeux fermés en traits courbes, respiration lente, veilleuse bleu lune","emblem":"moons","visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"moon","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep","tail":"lit","wing-left":"lit","wing-right":"lit"},"static":{"pose":{"translate":[0,8],"scale":[1.07,0.86]},"ear-left":{"rotate":-86},"ear-right":{"rotate":86},"tail":{"rotate":54,"scale":[0.7,0.7]},"wing-left":{"rotate":-64,"scale":[0.85,0.85]},"wing-right":{"rotate":64,"scale":[0.85,0.85]}},"rest":{"id":"sleep-breathe","duration":5200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.99,1.03]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"halo-lull","duration":5200,"iterations":"infinite","easing":"breath","targets":{"halo":[{"offset":0,"opacity":0.7},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.7}]}},{"id":"moons-rise","duration":4800,"iterations":"infinite","easing":"soft-in-out","targets":{"emblem":[{"offset":0,"translate":[0,8],"opacity":0},{"offset":0.3,"translate":[0,3],"opacity":1},{"offset":0.8,"translate":[0,-4],"opacity":1},{"offset":1,"translate":[0,-8],"opacity":0}]}},{"id":"tail-lull","duration":5200,"iterations":"infinite","easing":"breath","targets":{"tail":[{"offset":0,"opacity":0.7},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.7}]}}],"particles":[{"preset":"sleep","continuous":true}]},"dirty":{"label":"Sale","cue":"Taches de poussière d'ombre sur le corps, poussières grises en orbite lente, halo moucheté","emblem":null,"visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","dust-stains","cheeks","eye-left","eye-right","mouth","dust-specks"],"variants":{"halo":"speckled","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"open","eye-right":"open","mouth":"flat","tail":"lit","wing-left":"lit","wing-right":"lit"},"static":{},"loops":[{"id":"dust-orbit","duration":16000,"iterations":"infinite","easing":"linear","targets":{"dust-specks":[{"offset":0,"rotate":0},{"offset":1,"rotate":360}]}},{"id":"itch","duration":3800,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"rotate":-2},{"offset":0.5,"rotate":2},{"offset":1,"rotate":-2}],"ear-right":[{"offset":0,"rotate":0},{"offset":0.5,"rotate":5},{"offset":1,"rotate":0}]}},{"id":"tail-itch","duration":3800,"iterations":"infinite","easing":"breath","targets":{"tail":[{"offset":0,"rotate":-6},{"offset":0.5,"rotate":7},{"offset":1,"rotate":-6}]}},{"id":"wing-itch","duration":3800,"iterations":"infinite","easing":"breath","targets":{"wing-left":[{"offset":0,"rotate":0},{"offset":0.5,"rotate":4},{"offset":1,"rotate":0}],"wing-right":[{"offset":0,"rotate":0},{"offset":0.5,"rotate":-4},{"offset":1,"rotate":0}]}}],"particles":[]},"weak":{"label":"Affaiblie","cue":"Corps translucide, mouvements très lents, yeux mi-clos tournés vers le joueur, halo presque éteint","emblem":"fading-star","visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth"],"variants":{"halo":"faint","ear-left":"dim","ear-right":"dim","cheeks":"default","eye-left":"half","eye-right":"half","mouth":"flat","tail":"dim","wing-left":"dim","wing-right":"dim"},"static":{"pose":{"translate":[0,6],"scale":[1.04,0.94],"opacity":0.6},"ear-left":{"rotate":-50},"ear-right":{"rotate":50},"eye-left":{"translate":[0,2]},"eye-right":{"translate":[0,2]},"tail":{"rotate":46,"scale":[0.7,0.7]},"wing-left":{"rotate":-46,"scale":[0.9,0.9]},"wing-right":{"rotate":46,"scale":[0.9,0.9]}},"rest":{"id":"weak-breathe","duration":7200,"iterations":"infinite","easing":"breath","targets":{"creature":[{"offset":0,"scale":[1,1]},{"offset":0.5,"scale":[0.996,1.012]},{"offset":1,"scale":[1,1]}]}},"loops":[{"id":"fade-pulse","duration":7000,"iterations":"infinite","easing":"breath","targets":{"pose":[{"offset":0,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52},{"offset":0.5,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.68},{"offset":1,"translate":[0,6],"scale":[1.04,0.94],"opacity":0.52}],"halo":[{"offset":0,"opacity":0.5},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.5}]}},{"id":"star-fade","duration":6000,"iterations":"infinite","easing":"breath","targets":{"emblem":[{"offset":0,"scale":[0.96,0.96],"opacity":0.55},{"offset":0.5,"scale":[1.04,1.04],"opacity":1},{"offset":1,"scale":[0.96,0.96],"opacity":0.55}]}}],"particles":[]},"flown":{"label":"Envol","cue":"La créature se défait en lumière dorée, monte et devient une étoile du ciel","emblem":null,"visible":["shadow","halo","wing-left","wing-right","tail","ear-left","ear-right","body","cheeks","eye-left","eye-right","mouth","star"],"variants":{"halo":"default","ear-left":"lit","ear-right":"lit","cheeks":"default","eye-left":"closed","eye-right":"closed","mouth":"sleep","star":"default","tail":"lit","wing-left":"lit","wing-right":"lit"},"static":{"star":{"opacity":0,"scale":[0.2,0.2]}},"rest":null,"loops":[],"sequence":{"id":"envol","duration":9000,"iterations":1,"fill":"forwards","easing":"soft-in-out","reducedAt":1,"targets":{"pose":[{"offset":0,"translate":[0,0],"easing":"soft-in-out"},{"offset":0.1,"translate":[0,-3],"easing":"ease-out-soft"},{"offset":0.55,"translate":[0,-26]},{"offset":1,"translate":[0,-40]}],"halo":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.2,"scale":[1.2,1.2],"opacity":1},{"offset":0.5,"scale":[1.35,1.35],"opacity":0.7},{"offset":0.88,"scale":[1.5,1.5],"opacity":0},{"offset":1,"scale":[1.5,1.5],"opacity":0}],"eye-left":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"eye-right":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"mouth":[{"offset":0,"opacity":1},{"offset":0.08,"opacity":1},{"offset":0.3,"opacity":0},{"offset":1,"opacity":0}],"cheeks":[{"offset":0,"opacity":1},{"offset":0.1,"opacity":1},{"offset":0.38,"opacity":0},{"offset":1,"opacity":0}],"ear-left":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[-3,-14],"rotate":-10,"opacity":0},{"offset":1,"translate":[-3,-14],"rotate":-10,"opacity":0}],"ear-right":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.1,"translate":[0,0],"rotate":0,"opacity":1},{"offset":0.45,"translate":[3,-14],"rotate":10,"opacity":0},{"offset":1,"translate":[3,-14],"rotate":10,"opacity":0}],"body":[{"offset":0,"scale":[1,1],"opacity":1},{"offset":0.14,"scale":[1,1],"opacity":1},{"offset":0.5,"scale":[1.12,1.12],"opacity":0},{"offset":1,"scale":[1.12,1.12],"opacity":0}],"shadow":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":0.5},{"offset":0.9,"opacity":0},{"offset":1,"opacity":0}],"star":[{"offset":0,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"linear"},{"offset":0.22,"translate":[0,0],"scale":[0.2,0.2],"opacity":0,"easing":"ease-out-soft"},{"offset":0.4,"translate":[0,-6],"scale":[0.5,0.5],"opacity":1,"easing":"soft-in-out"},{"offset":0.62,"translate":[0,-50],"scale":[0.62,0.62],"opacity":1,"easing":"ease-out-soft"},{"offset":1,"translate":[0,-112],"scale":[0.7,0.7],"opacity":1}],"tail":[{"offset":0,"translate":[0,0],"opacity":1},{"offset":0.1,"translate":[0,0],"opacity":1},{"offset":0.45,"opacity":0,"translate":[4,-12]},{"offset":1,"opacity":0,"translate":[4,-12]}],"wing-left":[{"offset":0,"translate":[0,0],"opacity":1},{"offset":0.1,"translate":[0,0],"opacity":1},{"offset":0.45,"opacity":0,"translate":[-6,-16]},{"offset":1,"opacity":0,"translate":[-6,-16]}],"wing-right":[{"offset":0,"translate":[0,0],"opacity":1},{"offset":0.1,"translate":[0,0],"opacity":1},{"offset":0.45,"opacity":0,"translate":[6,-16]},{"offset":1,"opacity":0,"translate":[6,-16]}]}},"after":{"loops":[{"id":"star-twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"star":[{"offset":0,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9},{"offset":0.5,"translate":[0,-112],"scale":[0.74,0.74],"opacity":1},{"offset":1,"translate":[0,-112],"scale":[0.68,0.68],"opacity":0.9}]}}]},"particles":[{"preset":"flight","at":0.08}]}}}}};
+</script>
+<script>
+// Interprète minimal des poses (README spec/motion) : transform et opacity seulement.
+(function () {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var RM = mq.matches;
+  var registry = [];
+  var doc = document.documentElement;
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function cubic(name) {
+    var e = DATA.easings[name];
+    if (!e || name === 'linear') return 'linear';
+    return 'cubic-bezier(' + e.join(',') + ')';
+  }
+  function scaleOf(s) { return s === undefined ? [1, 1] : (Array.isArray(s) ? s : [s, s]); }
+  function tf(s) {
+    var t = s.translate || [0, 0], sc = scaleOf(s.scale);
+    return 'translate(' + t[0] + 'px,' + t[1] + 'px) rotate(' + (s.rotate || 0) + 'deg) scale(' + sc[0] + ',' + sc[1] + ')';
+  }
+  function merge(k, st) {
+    st = st || {};
+    return {
+      translate: k.translate !== undefined ? k.translate : st.translate,
+      rotate: k.rotate !== undefined ? k.rotate : st.rotate,
+      scale: k.scale !== undefined ? k.scale : st.scale,
+      opacity: k.opacity !== undefined ? k.opacity : (st.opacity !== undefined ? st.opacity : 1)
+    };
+  }
+  function setOrigin(el, o) {
+    el.style.transformBox = 'view-box';
+    el.style.transformOrigin = o[0] + 'px ' + o[1] + 'px';
+  }
+  function mk(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  // ------------------------------------------------------------ créature
+  function createCreature(host, stageKey) {
+    var stage = DATA.stages[stageKey];
+    host.textContent = '';
+    host.classList.add('cr');
+    var ground = document.createElement('div');
+    ground.className = 'ground';
+    host.appendChild(ground);
+    var svg = mk('svg', { viewBox: '0 0 240 240', 'class': 'cr-svg', role: 'img' }, host);
+    var creature = mk('g', {}, svg), pose = mk('g', {}, creature);
+    setOrigin(creature, DATA.targets.creature.origin);
+    setOrigin(pose, DATA.targets.pose.origin);
+    var inst = { host: host, stageKey: stageKey, stage: stage, svg: svg, creature: creature, pose: pose, parts: {}, anims: [], timers: [], state: null, particles: null };
+    stage.layers.forEach(function (name) {
+      var g = mk('g', { 'data-part': name }, pose);
+      setOrigin(g, stage.parts[name].origin);
+      g.appendChild(mk('use', {}));
+      g.style.display = 'none';
+      inst.parts[name] = g;
+    });
+    inst.emblemHost = null;
+    if (host.dataset.emblem !== 'no') {
+      var esvg = mk('svg', { viewBox: '0 0 64 64', 'class': 'em', 'aria-hidden': 'true' });
+      esvg.style.display = 'none';
+      var eg = mk('g', {}, esvg);
+      setOrigin(eg, DATA.targets.emblem.origin);
+      eg.appendChild(mk('use', { 'class': 'bubble' }));
+      eg.appendChild(mk('use', { 'class': 'icon' }));
+      host.appendChild(esvg);
+      inst.emblemHost = esvg; inst.emblemG = eg;
+    }
+    registry.push(inst);
+    return inst;
+  }
+
+  function elOf(inst, target) {
+    if (target === 'creature') return inst.creature;
+    if (target === 'pose') return inst.pose;
+    if (target === 'emblem') return inst.emblemG;
+    return inst.parts[target];
+  }
+  function stopAll(inst) {
+    inst.anims.forEach(function (a) { try { a.cancel(); } catch (e) {} });
+    inst.anims = [];
+    inst.timers.forEach(clearTimeout);
+    inst.timers = [];
+  }
+  function applyStyle(el, v) { el.style.transform = tf(v); el.style.opacity = v.opacity; }
+
+  function applyFrame(inst, seq, at, statics) {
+    Object.keys(seq.targets).forEach(function (t) {
+      var el = elOf(inst, t); if (!el) return;
+      var frames = seq.targets[t], pick = frames[0];
+      frames.forEach(function (k) { if (k.offset <= at + 1e-6) pick = k; });
+      applyStyle(el, merge(pick, statics[t]));
+    });
+  }
+  function animate(inst, st, lp, statics) {
+    var targets = lp.targets;
+    Object.keys(targets).forEach(function (t) {
+      var el = elOf(inst, t); if (!el) return;
+      var kfs = targets[t].map(function (k) {
+        var v = merge(k, statics[t]);
+        return { offset: k.offset, transform: tf(v), opacity: v.opacity, easing: cubic(k.easing || lp.easing) };
+      });
+      var a = el.animate(kfs, { duration: lp.duration, iterations: lp.iterations === 'infinite' ? Infinity : lp.iterations, fill: lp.fill || 'none', delay: lp.delay || 0, easing: 'linear' });
+      inst.anims.push(a);
+    });
+  }
+
+  function setState(inst, key, opts) {
+    opts = opts || {};
+    var play = opts.play !== false && !RM;
+    stopAll(inst);
+    inst.state = key;
+    var stage = inst.stage, s = stage.states[key], statics = s.static || {};
+    var vis = {};
+    s.visible.forEach(function (p) { vis[p] = true; });
+    stage.layers.forEach(function (name) {
+      var g = inst.parts[name];
+      if (!vis[name]) { g.style.display = 'none'; return; }
+      g.style.display = '';
+      var variant = s.variants[name] || 'default';
+      var file = stage.parts[name].variants[variant];
+      g.firstChild.setAttribute('href', '#' + DATA.files[file]);
+    });
+    stage.layers.forEach(function (name) { applyStyle(inst.parts[name], merge(statics[name] || {}, null)); });
+    applyStyle(inst.creature, merge({}, statics.creature));
+    applyStyle(inst.pose, merge({}, statics.pose));
+    if (inst.emblemHost) {
+      if (s.emblem) {
+        var em = DATA.emblems[s.emblem];
+        inst.emblemHost.style.display = '';
+        inst.emblemG.querySelector('.bubble').setAttribute('href', '#' + DATA.files[em.bubble]);
+        inst.emblemG.querySelector('.icon').setAttribute('href', '#' + DATA.files[em.file]);
+        applyStyle(inst.emblemG, merge({}, statics.emblem));
+      } else inst.emblemHost.style.display = 'none';
+    }
+    inst.svg.setAttribute('aria-label', stage.label + ' — ' + s.label + ' : ' + s.cue);
+    // image figée de la séquence (Envol, éclosion) en mouvement réduit ou sans lecture
+    if (s.sequence && !play) { applyFrame(inst, s.sequence, s.sequence.reducedAt === undefined ? 1 : s.sequence.reducedAt, statics); return; }
+    if (!play) return;
+    var rest = s.rest === undefined ? DATA.rest : s.rest;
+    if (rest) animate(inst, s, rest, statics);
+    (s.loops || []).forEach(function (lp) { animate(inst, s, lp, statics); });
+    if (s.sequence) {
+      var seq = s.sequence, pending = 0;
+      var n0 = inst.anims.length;
+      animate(inst, s, seq, statics);
+      var mine = inst.anims.slice(n0);
+      var first = mine[0];
+      if (s.after && first) {
+        first.onfinish = function () { (s.after.loops || []).forEach(function (lp) { animate(inst, s, lp, statics); }); };
+      }
+    }
+  }
+
+  function refreshAll() { registry.forEach(function (i) { if (i.state) setState(i, i.state, { play: i.playing !== false }); }); }
+
+  // ------------------------------------------------------------ étincelles d'éclosion (démonstration, la vraie bouffée vient de particles.json)
+  function burst(inst, n) {
+    if (RM) return;
+    var cx = 120, cy = 140;
+    for (var i = 0; i < n; i++) {
+      var s = 5 + Math.random() * 5, col = i % 3 === 0 ? '#F4A6C6' : (i % 3 === 1 ? '#FFD27A' : '#FFFFFF');
+      var d = 'M0 ' + -s + ' Q' + s * 0.16 + ' ' + -s * 0.16 + ' ' + s + ' 0 Q' + s * 0.16 + ' ' + s * 0.16 + ' 0 ' + s + ' Q' + -s * 0.16 + ' ' + s * 0.16 + ' ' + -s + ' 0 Q' + -s * 0.16 + ' ' + -s * 0.16 + ' 0 ' + -s + ' Z';
+      var p = mk('path', { d: d, fill: col, stroke: col, 'stroke-width': 1.6, 'stroke-linejoin': 'round' }, inst.svg);
+      p.style.transformBox = 'view-box'; p.style.transformOrigin = '0 0';
+      var ang = (Math.PI * 2 * i) / n + Math.random() * 0.4, dist = 60 + Math.random() * 60;
+      var x = cx + Math.cos(ang) * dist, y = cy + Math.sin(ang) * dist - 24 - Math.random() * 20;
+      var a = p.animate([
+        { transform: 'translate(' + cx + 'px,' + cy + 'px) scale(0.3)', opacity: 0, easing: 'cubic-bezier(.22,.8,.3,1)' },
+        { transform: 'translate(' + (cx + (x - cx) * 0.6) + 'px,' + (cy + (y - cy) * 0.6) + 'px) scale(1)', opacity: 1, offset: 0.35 },
+        { transform: 'translate(' + x + 'px,' + y + 'px) scale(0.6)', opacity: 0 }
+      ], { duration: 1100 + Math.random() * 600, fill: 'forwards', delay: Math.random() * 120 });
+      a.onfinish = (function (el) { return function () { el.remove(); }; })(p);
+    }
+  }
+
+  // ------------------------------------------------------------ interface
+  var SKY_ORDER = ['dawn', 'day', 'dusk', 'night'];
+  function setSky(k) {
+    doc.setAttribute('data-sky', k);
+    $$('[data-sky-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.skyBtn === k)); });
+  }
+  function defaultSky() {
+    var h = new Date().getHours();
+    return h >= 5 && h < 8 ? 'dawn' : h >= 8 && h < 18 ? 'day' : h >= 18 && h < 21 ? 'dusk' : 'night';
+  }
+
+  var STATE_ORDER = ['happy', 'hungry', 'tired', 'sick', 'asleep', 'dirty', 'weak', 'flown'];
+  var STAGE_ORDER = ['baby', 'child', 'teen', 'adult'];
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // ciel
+    $$('[data-sky-btn]').forEach(function (b) { b.addEventListener('click', function () { setSky(b.dataset.skyBtn); }); });
+    setSky(defaultSky());
+
+    // mouvement réduit
+    var rmBox = $('#rm');
+    rmBox.checked = RM;
+    function setRM(v) { RM = v; doc.classList.toggle('rm', v); rmBox.checked = v; refreshAll(); updateEggUI(); }
+    rmBox.addEventListener('change', function () { setRM(rmBox.checked); });
+    mq.addEventListener && mq.addEventListener('change', function () { setRM(mq.matches); });
+    doc.classList.toggle('rm', RM);
+
+    // ---- œuf
+    var eggHost = $('#egg-host'), babyHost = $('#egg-baby');
+    var eggInst = createCreature(eggHost, 'egg');
+    eggHost.dataset.emblem = 'no';
+    var babyInst = createCreature(babyHost, 'baby');
+    babyInst.playing = true;
+    var eggStatus = $('#egg-status'), eggTimer = null, eggMode = 'idle';
+    function showBaby(v) { babyHost.style.opacity = v ? '1' : '0'; babyHost.style.visibility = v ? 'visible' : 'hidden'; }
+    function eggSet(mode) {
+      eggMode = mode;
+      clearTimeout(eggTimer);
+      $$('[data-egg]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.egg === mode)); });
+      eggHost.style.visibility = 'visible';
+      eggInst.creature.style.opacity = '1';
+      if (mode === 'idle' || mode === 'soon') {
+        showBaby(false);
+        setState(eggInst, mode);
+        eggStatus.textContent = DATA.stages.egg.states[mode].label + ' : ' + DATA.stages.egg.states[mode].cue + '.';
+      } else {
+        var seq = DATA.stages.egg.states.hatch.sequence, hand = DATA.stages.egg.states.hatch.handoff;
+        eggStatus.textContent = 'Éclosion…';
+        setState(eggInst, 'hatch');
+        setState(babyInst, 'happy');
+        if (RM) {
+          // mouvement réduit : l'œuf s'efface (image figée), la créature apparaît en fondu de 250 ms
+          showBaby(false);
+          babyHost.style.transition = 'opacity 250ms linear';
+          requestAnimationFrame(function () { showBaby(true); });
+          eggStatus.textContent = 'La créature est née.';
+          return;
+        }
+        showBaby(false);
+        eggTimer = setTimeout(function () {
+          showBaby(true);
+          babyHost.style.transition = 'none';
+          var pop = babyInst.pose.animate([
+            { transform: 'translate(0px,0px) rotate(0deg) scale(0.5,0.5)', opacity: 0 },
+            { transform: 'translate(0px,-6px) rotate(0deg) scale(1.07,1.07)', opacity: 1, offset: 0.55 },
+            { transform: 'translate(0px,0px) rotate(0deg) scale(1,1)', opacity: 1 }
+          ], { duration: 900, easing: 'cubic-bezier(.34,1.35,.5,1)' });
+          babyInst.anims.push(pop);
+          burst(eggInst, 18);
+          eggStatus.textContent = 'La créature est née.';
+        }, seq.duration * hand.at);
+      }
+    }
+    function updateEggUI() { eggSet(eggMode === 'hatch' ? 'hatch' : eggMode); }
+    $$('[data-egg]').forEach(function (b) { b.addEventListener('click', function () { eggSet(b.dataset.egg); }); });
+    eggSet('idle');
+
+    // ---- côte à côte
+    $$('[data-side]').forEach(function (h) {
+      var inst = createCreature(h, h.dataset.side);
+      setState(inst, 'happy');
+    });
+
+    // ---- taille de jeu
+    var gameHost = $('#game-host'), gameInst = null, curStage = 'child', curState = 'happy';
+    var gameCue = $('#game-cue');
+    function gameShow() {
+      if (!gameInst || gameInst.stageKey !== curStage) {
+        if (gameInst) registry.splice(registry.indexOf(gameInst), 1);
+        gameInst = createCreature(gameHost, curStage);
+      }
+      setState(gameInst, curState);
+      var s = DATA.stages[curStage].states[curState];
+      gameCue.textContent = DATA.stages[curStage].label + ' — ' + s.label + ' : ' + s.cue + '.';
+      $$('[data-game-stage]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.gameStage === curStage)); });
+      $$('[data-game-state]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.gameState === curState)); });
+    }
+    $$('[data-game-stage]').forEach(function (b) { b.addEventListener('click', function () { curStage = b.dataset.gameStage; gameShow(); }); });
+    $$('[data-game-state]').forEach(function (b) { b.addEventListener('click', function () { curState = b.dataset.gameState; gameShow(); }); });
+    gameShow();
+
+    // ---- grille stades x états (poses tenues ; un appui anime la case)
+    $$('[data-cell]').forEach(function (btn) {
+      var parts = btn.dataset.cell.split('/'), host = $('.cell-cr', btn);
+      host.dataset.emblem = 'no';
+      var inst = createCreature(host, parts[0]);
+      inst.playing = false;
+      setState(inst, parts[1], { play: false });
+      inst.svg.setAttribute('aria-hidden', 'true');
+      inst.svg.removeAttribute('role');
+      btn.addEventListener('click', function () {
+        inst.playing = !inst.playing;
+        btn.setAttribute('aria-pressed', String(inst.playing));
+        setState(inst, parts[1], { play: inst.playing });
+      });
+    });
+  });
+})();
+
+</script>
+</body>
+</html>

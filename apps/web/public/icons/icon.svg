@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1" width="512" height="512">
+  <title>Clairière céleste</title>
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.4" r="0.75"><stop offset="0" stop-color="#2E2A5C"/><stop offset="1" stop-color="#1B1838"/></radialGradient>
+    <radialGradient id="halo"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.55"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1" height="1" rx="0.22" fill="url(#bg)"/>
+  <circle cx="0.5" cy="0.58" r="0.36" fill="url(#halo)"/>
+  <ellipse cx="0.41" cy="0.41" rx="0.045" ry="0.085" fill="#FFF6E9"/>
+  <ellipse cx="0.59" cy="0.41" rx="0.045" ry="0.085" fill="#FFF6E9"/>
+  <ellipse cx="0.5" cy="0.6" rx="0.22" ry="0.2" fill="#FFF6E9"/>
+  <ellipse cx="0.405" cy="0.325" rx="0.034" ry="0.034" fill="#FFD27A"/>
+  <ellipse cx="0.595" cy="0.325" rx="0.034" ry="0.034" fill="#FFD27A"/>
+  <ellipse cx="0.425" cy="0.585" rx="0.03" ry="0.034" fill="#1B1838"/>
+  <ellipse cx="0.575" cy="0.585" rx="0.03" ry="0.034" fill="#1B1838"/>
+  <ellipse cx="0.435" cy="0.572" rx="0.01" ry="0.01" fill="#FFF6E9"/>
+  <ellipse cx="0.585" cy="0.572" rx="0.01" ry="0.01" fill="#FFF6E9"/>
+  <ellipse cx="0.35" cy="0.655" rx="0.035" ry="0.025" fill="#FFB89A" opacity="0.85"/>
+  <ellipse cx="0.65" cy="0.655" rx="0.035" ry="0.025" fill="#FFB89A" opacity="0.85"/>
+  <path d="M0.74 0.14 Q0.74 0.25 0.85 0.25 Q0.74 0.25 0.74 0.36 Q0.74 0.25 0.63 0.25 Q0.74 0.25 0.74 0.14Z" fill="#FFD27A"/>
+  <path d="M0.25 0.25 Q0.25 0.3 0.3 0.3 Q0.25 0.3 0.25 0.35 Q0.25 0.3 0.2 0.3 Q0.25 0.3 0.25 0.25Z" fill="#FFF6E9"/>
+</svg>

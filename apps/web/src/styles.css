@@ -7,6 +7,11 @@
   --focus: var(--firefly-gold);
   --radius: 20px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Champs de saisie : sombres sur les ciels sombres, clairs sur les ciels clairs (contraste >= 4,5:1). */
+  --field-bg: color-mix(in srgb, var(--ink-night) 70%, transparent);
+  --field-text: var(--moonmilk-cream);
+  --field-border: var(--mist-lavender);
+  --field-placeholder: var(--moon-blue);
   color-scheme: dark;
 }
 /* Ciels clairs (aube, jour) : textes sombres, accents et alertes assez contrastés sur fond clair. */
@@ -14,6 +19,10 @@
   --accent: var(--velvet-indigo);
   --need-text: var(--ink-night);
   --focus: var(--velvet-indigo);
+  --field-bg: rgba(255, 255, 255, 0.92);
+  --field-text: var(--ink-night);
+  --field-border: var(--velvet-indigo);
+  --field-placeholder: #5e5878;
   color-scheme: light;
 }
 
@@ -76,11 +85,12 @@ input[type="text"] {
   font: inherit;
   min-height: 48px;
   padding: 0.5rem 1rem;
-  color: var(--text);
-  background: color-mix(in srgb, var(--ink-night) 70%, transparent);
-  border: 1px solid var(--mist-lavender);
+  color: var(--field-text);
+  background: var(--field-bg);
+  border: 2px solid var(--field-border);
   border-radius: 999px;
 }
+input[type="text"]::placeholder { color: var(--field-placeholder); opacity: 1; }
 input[aria-invalid="true"] { border-color: var(--soft-amber); border-width: 2px; }
 
 button {
@@ -389,6 +399,192 @@ button.primary:hover { box-shadow: 0 0 18px rgba(255, 210, 122, 0.6); transform:
 .debug th { text-align: left; padding-right: 1rem; font-weight: 600; }
 .debug td { padding-right: 1rem; font-variant-numeric: tabular-nums; }
 .journal { margin: 0; padding-left: 1.5rem; max-height: 14rem; overflow: auto; font-family: ui-monospace, Consolas, monospace; font-size: 0.8125rem; }
+
+/* --- En-tête d'écran, réglages, album, aide, mise à jour (panneaux calmes : verre dépoli, sans particules) --- */
+.topbar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 0.25rem;
+}
+.topbar h1 { margin: 0; overflow-wrap: anywhere; }
+.topbar h1:focus { outline: none; }
+.topbar h1:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
+.topbar-spacer { width: 48px; height: 48px; }
+.iconbtn {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: 50%;
+  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+}
+.iconbtn:hover { transform: translateY(-1px); box-shadow: 0 0 14px rgba(169, 200, 255, 0.5); }
+
+/* Écrans calmes : pas de particules par-dessus. */
+:root[data-screen="album"] .particles,
+:root[data-screen="settings"] .particles { display: none; }
+
+.screen-panel { width: 100%; }
+.screen-panel h2 { color: var(--text); font-size: 1.0625rem; font-weight: 700; margin: 0; }
+.screen-panel h3 { margin: 0; font-size: 1rem; }
+.panel-text { margin: 0; color: var(--text); }
+.setting { border-radius: var(--radius); margin: 0; min-width: 0; }
+fieldset.setting { padding: 1rem; }
+fieldset.setting legend { padding: 0 0.5rem; font-weight: 700; color: var(--text); }
+.screen-panel .message { text-align: left; background: none; border: 0; padding: 0; }
+
+.choice { display: flex; align-items: flex-start; gap: 0.75rem; min-height: 48px; padding: 0.25rem 0; font-weight: 400; }
+.choice input { width: 24px; height: 24px; margin: 0.65rem 0 0; flex: none; accent-color: var(--accent); }
+.choice-label { display: block; font-weight: 700; }
+.choice-help { display: block; font-size: 0.875rem; color: var(--text-soft); }
+
+.switch {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.35rem 0.5rem 0.35rem 1rem;
+  text-align: left;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 60%, transparent);
+  border: 2px solid var(--field-border);
+  border-radius: 999px;
+}
+.switch-label { font-weight: 700; }
+.switch-state { font-size: 0.875rem; color: var(--text-soft); font-weight: 600; }
+.switch-track {
+  position: relative;
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--velvet-indigo);
+  border: 2px solid var(--mist-lavender);
+  transition: background 240ms var(--ease);
+}
+.switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--moonmilk-cream);
+  transition: transform 240ms var(--ease);
+}
+.switch[aria-checked="true"] .switch-track { background: #6a5fb0; border-color: var(--firefly-gold); }
+.switch[aria-checked="true"] .switch-thumb { transform: translateX(22px); background: var(--firefly-gold); }
+
+.row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+button.secondary, .file-button.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 60%, transparent);
+  border: 2px solid var(--field-border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+button.secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+button.quiet {
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+  color: var(--text);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.file-button { position: relative; }
+.file-button input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.file-button:focus-within { outline: 3px solid var(--focus); outline-offset: 3px; }
+button.primary:focus-visible, button.secondary:focus-visible, .iconbtn:focus-visible { outline-offset: 3px; }
+
+.confirm {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 2px solid var(--soft-amber);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--panel) 85%, transparent);
+}
+.confirm p { margin: 0; }
+
+/* Album : ciel d'étoiles (toujours sombre, comme le ciel de l'Envol) ; chaque étoile est un bouton de 48 px. */
+.album-sky {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #120f2a, var(--velvet-indigo));
+  border: 1px solid var(--panel-edge);
+  overflow: hidden;
+}
+.album-star {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+.album-star .star { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.album-star[aria-pressed="true"] { border-color: var(--firefly-gold); }
+.album-star:focus-visible { outline: 3px solid var(--firefly-gold); outline-offset: 2px; }
+.card-title { font-size: 1.25rem !important; }
+.card { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 1rem; margin: 0; }
+.card dt { font-weight: 700; }
+.card dd { margin: 0; }
+
+/* Bulles d'aide du premier lancement. */
+.helpbubble {
+  position: relative;
+  width: 100%;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  color: var(--text);
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+}
+.helpbubble p { margin: 0; font-weight: 600; }
+.helpbubble-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; }
+.helpbubble button.primary { padding: 0.25rem 1.25rem; }
+
+.updatebar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+@media (max-width: 30rem) {
+  .topbar { grid-template-columns: 48px minmax(0, 1fr) 48px; }
+  .switch { grid-template-columns: 1fr auto; }
+  .switch-state { grid-column: 1; grid-row: 2; }
+  .switch-track { grid-column: 2; grid-row: 1 / span 2; }
+  .helpbubble { padding: 0.35rem 0.75rem; }
+}
 
 /* --- Mouvement réduit : plus de respiration, de scintillement ni de dérive ; fondus seulement --- */
 :root[data-motion="reduce"] *,

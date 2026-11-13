@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <radialGradient id="egg-burst-g" cx="120" cy="140" r="112" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".35" stop-color="#FFF1C9" stop-opacity=".75"/><stop offset=".7" stop-color="#FFD27A" stop-opacity=".25"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="140" r="112" fill="url(#egg-burst-g)"/>
+<path d="M120 98 Q124.8 123.2 150 128 Q124.8 132.8 120 158 Q115.2 132.8 90 128 Q115.2 123.2 120 98 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round"/>
+</svg>

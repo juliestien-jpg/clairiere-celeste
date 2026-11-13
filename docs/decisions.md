@@ -240,7 +240,7 @@ L'Envol (D3) a sa propre séquence : la créature se défait en particules doré
 
 #### Technique de rendu retenue
 - **Créature** : parties SVG au profil restreint pour rester compatibles avec Flutter : `path`, `circle`, `ellipse`, `g` avec `transform`, `linearGradient`, `radialGradient`, `opacity`, `clipPath`. **Interdits** : CSS dans le SVG, filtres (`feGaussianBlur`…), masques complexes, texte. Les lueurs sont peintes en dégradés radiaux.
-- **Animations** : décrites dans `spec/motion/poses.json` (pose par état : transformations par partie, boucles, courbes d'accélération nommées) ; interprétées côté web par l'API Web Animations, côté Flutter par `AnimationController`. Seules `transform` et `opacity` sont animées.
+- **Animations** : décrites dans `spec/motion/poses/<espèce>.json` (un fichier par espèce depuis D6 ; pose par état : transformations par partie, boucles, courbes d'accélération nommées) ; interprétées côté web par l'API Web Animations, côté Flutter par `AnimationController`. Seules `transform` et `opacity` sont animées.
 - **Particules** : un seul `<canvas>` 2D en surimpression côté web (mis en pause quand l'onglet est caché), `CustomPainter` côté Flutter ; préréglages partagés dans `spec/motion/particles.json` (nombre, couleurs, durée de vie, vitesse).
 - **Décor** : dégradés CSS côté web, `LinearGradient` côté Flutter ; quatre jeux de couleurs (aube, jour, crépuscule, nuit).
 
@@ -465,7 +465,8 @@ tamagoshi/
 │  ├─ save.schema.json
 │  ├─ scenarios/                 # vecteurs de conformité (état + actions horodatées → attendu)
 │  └─ motion/
-│     ├─ poses.json              # poses et boucles par état et par stade (D4)
+│     ├─ poses/                  # kawaii.json, feerique.json : poses et boucles par état et par stade (D4, D6)
+│     ├─ reactions.json          # réactions animées aux soins et aux gestes
 │     └─ particles.json          # préréglages de particules (D4)
 ├─ assets/
 │  └─ creature/                  # parties SVG par stade : baby/body.svg, baby/eye-left.svg…

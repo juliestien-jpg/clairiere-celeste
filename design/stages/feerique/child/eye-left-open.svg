@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(0 -3.48)">
+<g transform="translate(96 142)">
+<defs>
+  <linearGradient id="fe-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E2A5C"/><stop offset="1" stop-color="#1B1838"/></linearGradient>
+  <radialGradient id="fe-iris" cx="0" cy="2" r="8.5" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#C7F5E8"/><stop offset=".6" stop-color="#8FE3CF" stop-opacity=".9"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<path d="M-13 -1.5 C-8 -11 7 -11 13 2 C 8 9 -7 9.5 -13 -1.5 Z" fill="url(#fe-fill)"/>
+<circle cx="0" cy="1.5" r="8" fill="url(#fe-iris)"/>
+<path d="M0 -5 Q1.2400000000000002 -0.04000000000000026 6.2 1.2 Q1.2400000000000002 2.4400000000000004 0 7.4 Q-1.2400000000000002 2.4400000000000004 -6.2 1.2 Q-1.2400000000000002 -0.04000000000000026 0 -5 Z" fill="#FFFFFF"/>
+<circle cx="-6" cy="-4.2" r="1.8" fill="#FFFFFF" fill-opacity=".9"/>
+<path d="M-14 -1.8 C-9 -12.5 8 -12.5 14.2 2.4" fill="none" stroke="#2E2A5C" stroke-width="3" stroke-linecap="round"/>
+<path d="M-14 -1.8 L-17.6 -5" fill="none" stroke="#2E2A5C" stroke-width="2.8" stroke-linecap="round"/></g>
+</g>
+</svg>

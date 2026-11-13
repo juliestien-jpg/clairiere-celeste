@@ -9,8 +9,8 @@ describe("labels", () => {
     const hungry: View = { kind: "kawaii", primary: "hungry", secondary: [], gaugeLevels: { ...levels } };
     const happy: View = { kind: "kawaii", primary: "happy", secondary: [], gaugeLevels: { ...levels } };
     expect(pageTitle("Lumi", hungry)).toContain("Lumi a faim");
-    expect(pageTitle("Lumi", happy)).toBe("Lumi · Tamagoshi");
-    expect(pageTitle(null, null)).toBe("Tamagoshi");
+    expect(pageTitle("Lumi", happy)).toBe("Lumi · Clairière céleste");
+    expect(pageTitle(null, null)).toBe("Clairière céleste");
   });
 
   it("chaque raison de refus a un texte doux, avec repli", () => {

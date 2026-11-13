@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <radialGradient id="egg-glow-g" cx="120" cy="138" r="104" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset=".45" stop-color="#FFD27A" stop-opacity=".45"/><stop offset=".78" stop-color="#F4A6C6" stop-opacity=".14"/><stop offset="1" stop-color="#F4A6C6" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="104" fill="url(#egg-glow-g)"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <linearGradient id="ftl-fill" x1="150" y1="186" x2="216" y2="122" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFF6D8"/><stop offset=".5" stop-color="#FFD9A8"/><stop offset="1" stop-color="#F4A6C6" stop-opacity=".85"/></linearGradient>
+  <radialGradient id="ftl-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="216" cy="122" r="23.1" fill="url(#ftl-glow)"/>
+<path d="M148 172 C178 174 202 162 213 138 C215 133 216 129 216 125 C226 146 220 174 198 190 C178 204 158 202 148 196 Z" fill="url(#ftl-fill)" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="204" cy="150" r="2.8" fill="#FFFFFF" fill-opacity=".9"/>
+<circle cx="196" cy="168" r="2.6" fill="#FFFFFF" fill-opacity=".9"/>
+<path d="M216 111 Q217.98 120.02 227 122 Q217.98 123.98 216 133 Q214.02 123.98 205 122 Q214.02 120.02 216 111 Z" fill="#FFF6D8" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+
+</svg>
