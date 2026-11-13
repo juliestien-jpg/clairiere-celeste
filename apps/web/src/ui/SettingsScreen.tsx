@@ -168,7 +168,8 @@ export function SettingsScreen(props: {
               describedBy="sound-help"
             />
             <p id="sound-help" className="panel-text">
-              Les sons arriveront bientôt : ton choix est déjà gardé.
+              De petits sons doux de carillon accompagnent les soins et les événements. Ils ne dépendent pas du réglage de
+              mouvement.
             </p>
           </section>
 

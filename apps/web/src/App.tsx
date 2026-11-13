@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { MotionContext } from "./motion/MotionContext";
 import { ParticleLayer } from "./particles/ParticleLayer";
-import { setSoundEnabled } from "./audio";
+import { installAudioLifecycle, play, setSoundEnabled } from "./audio";
 import { onUpdateReady, registerServiceWorker } from "./pwa/register";
 import type { UpdateHandle } from "./pwa/register";
 import { game, notifier, storagePersistent } from "./runtime";
@@ -78,7 +78,10 @@ export function App() {
     return () => document.removeEventListener("keydown", onKey);
   }, [screen, closeScreen]);
 
-  useEffect(() => setSoundEnabled(state?.settings.sound ?? true), [state?.settings.sound]);
+  // Sons : réglage de la sauvegarde ; déblocage au premier geste ; suspendus quand la page est cachée.
+  const soundOn = state?.settings.sound ?? false;
+  useEffect(() => setSoundEnabled(soundOn), [soundOn]);
+  useEffect(() => installAudioLifecycle(), []);
 
   useEffect(() => {
     let cancelled = false;
@@ -119,6 +122,21 @@ export function App() {
   const nav: Nav = {
     onSettings: () => openScreen("settings"),
     ...(state ? { onAlbum: () => openScreen("album") } : {}),
+    ...(state
+      ? {
+          sound: {
+            on: soundOn,
+            onToggle: () => {
+              game.updateSettings({ sound: !soundOn });
+              // Petite note de confirmation en activant (le réglage s'applique avant le rendu suivant).
+              if (!soundOn) {
+                setSoundEnabled(true);
+                play("chime");
+              }
+            },
+          },
+        }
+      : {}),
   };
 
   let body;

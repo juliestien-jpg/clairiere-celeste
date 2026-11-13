@@ -412,6 +412,9 @@ button.primary:hover { box-shadow: 0 0 18px rgba(255, 210, 122, 0.6); transform:
 .topbar h1:focus { outline: none; }
 .topbar h1:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
 .topbar-spacer { width: 48px; height: 48px; }
+.topbar-end { display: flex; justify-content: flex-end; gap: 0.25rem; }
+.topbar-sound { grid-template-columns: 104px minmax(0, 1fr) 104px; }
+.topbar-sound > :first-child { justify-self: start; }
 .iconbtn {
   display: grid;
   place-items: center;
@@ -580,6 +583,7 @@ button.primary:focus-visible, button.secondary:focus-visible, .iconbtn:focus-vis
 
 @media (max-width: 30rem) {
   .topbar { grid-template-columns: 48px minmax(0, 1fr) 48px; }
+  .topbar-sound { grid-template-columns: 104px minmax(0, 1fr) 104px; }
   .switch { grid-template-columns: 1fr auto; }
   .switch-state { grid-column: 1; grid-row: 2; }
   .switch-track { grid-column: 2; grid-row: 1 / span 2; }

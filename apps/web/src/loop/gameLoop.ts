@@ -56,7 +56,22 @@ export interface GameLoopOptions {
   journalSize?: number;
   timers?: Timers;
   newIdentity?: () => Identity;
+  /** Appelé après chaque `dispatch` (sons). Ne doit rien changer à l'état ; une erreur y est ignorée. */
+  onDispatch?: (info: DispatchInfo) => void;
 }
+
+/** Ce que l'interface (sons…) apprend de chaque appel à `dispatch`. */
+export interface DispatchInfo {
+  action: Action;
+  /** Événements conservés (un refus de tick est déjà retiré). */
+  events: readonly GameEvent[];
+  /** Tick qui a rattrapé un long laps de temps (réouverture, saut d'horloge) : à résumer, pas à rejouer. */
+  catchUp: boolean;
+  silentRefusal: boolean;
+}
+
+/** Écart au-delà duquel un tick est un rattrapage et non l'écoulement normal du temps. */
+export const CATCH_UP_MS = 30_000;
 
 export type CreateResult = { ok: true } | { ok: false; reason: "emptyName" | "tooLong" | "exists" };
 
@@ -88,6 +103,7 @@ export class GameLoop {
   private readonly journalSize: number;
   private readonly timers: Timers;
   private readonly newIdentity: () => Identity;
+  private readonly onDispatch: ((info: DispatchInfo) => void) | undefined;
 
   private state: SaveState | null = null;
   private ready = false;
@@ -114,6 +130,7 @@ export class GameLoop {
     this.journalSize = opts.journalSize ?? 60;
     this.timers = opts.timers ?? defaultTimers;
     this.newIdentity = opts.newIdentity ?? defaultIdentity;
+    this.onDispatch = opts.onDispatch;
     this.snapshot = this.compute();
   }
 
@@ -207,6 +224,7 @@ export class GameLoop {
   dispatch(action: Action, options: { silentRefusal?: boolean } = {}): GameEvent[] {
     if (!this.state) return [];
     const time = this.time();
+    const catchUp = action.type === "tick" && time.nowMs - this.state.pet.lastUpdatedAt > CATCH_UP_MS;
     const result = reduce(this.state, action, time, this.balance);
     this.state = result.state;
     const events =
@@ -222,6 +240,11 @@ export class GameLoop {
     if (action.type !== "tick") this.revision++;
     this.emit();
     if (action.type !== "tick") void this.persist(true);
+    try {
+      this.onDispatch?.({ action, events, catchUp, silentRefusal: options.silentRefusal === true });
+    } catch {
+      // Un son raté ne doit jamais gêner le jeu.
+    }
     return events;
   }
 

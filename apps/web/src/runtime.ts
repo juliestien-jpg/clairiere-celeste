@@ -1,5 +1,7 @@
 // Assemblage de l'application : horloge, sauvegarde, boucle. Une seule instance par onglet.
 import { defaultBalance } from "@tamagoshi/rules";
+import { play } from "./audio";
+import { cuesFor } from "./audio/events";
 import { VirtualClock } from "./loop/clock";
 import { GameLoop } from "./loop/gameLoop";
 import { createLocalHistoryStore } from "./notify/history";
@@ -26,7 +28,15 @@ function readSavedOffset(): number {
 }
 
 export const clock = new VirtualClock(undefined, readSavedOffset());
-export const game = new GameLoop({ clock, balance: defaultBalance, store });
+export const game = new GameLoop({
+  clock,
+  balance: defaultBalance,
+  store,
+  // Sons : une action ou un événement des règles -> au plus un ou deux sons (jamais une cascade au rattrapage).
+  onDispatch: ({ action, events, catchUp, silentRefusal }) => {
+    for (const cue of cuesFor(action, events, { catchUp, silentRefusal })) play(cue.name, cue.delay);
+  },
+});
 export const storagePersistent = persistent;
 
 if (debugClock) {

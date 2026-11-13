@@ -6,11 +6,13 @@ export interface Nav {
   /** Absent tant qu'il n'y a pas d'animal. */
   onAlbum?: () => void;
   onSettings: () => void;
+  /** Bouton de son rapide (à côté des réglages) : `on` = les sons sont activés. */
+  sound?: { on: boolean; onToggle: () => void };
 }
 
 export function ScreenHeader({ title, nav, className }: { title: string; nav?: Nav | undefined; className?: string | undefined }) {
   return (
-    <header className="topbar">
+    <header className={nav?.sound ? "topbar topbar-sound" : "topbar"}>
       {nav?.onAlbum ? (
         <button type="button" className="iconbtn" data-nav="album" onClick={nav.onAlbum} aria-label="Album des étoiles">
           <Icon name="star" />
@@ -20,9 +22,21 @@ export function ScreenHeader({ title, nav, className }: { title: string; nav?: N
       )}
       <h1 className={className}>{title}</h1>
       {nav ? (
-        <button type="button" className="iconbtn" data-nav="settings" onClick={nav.onSettings} aria-label="Réglages">
-          <Icon name="gear" />
-        </button>
+        <span className="topbar-end">
+          {nav.sound && (
+            <button
+              type="button"
+              className="iconbtn"
+              onClick={nav.sound.onToggle}
+              aria-label={nav.sound.on ? "Couper le son" : "Activer le son"}
+            >
+              <Icon name={nav.sound.on ? "speaker" : "speakerOff"} />
+            </button>
+          )}
+          <button type="button" className="iconbtn" data-nav="settings" onClick={nav.onSettings} aria-label="Réglages">
+            <Icon name="gear" />
+          </button>
+        </span>
       ) : (
         <span className="topbar-spacer" aria-hidden="true" />
       )}
