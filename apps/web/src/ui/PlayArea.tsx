@@ -43,11 +43,11 @@ interface ItemDef {
 }
 
 const ITEMS: readonly ItemDef[] = [
-  { id: "meal", label: "Repas", file: "props/bowl.svg", target: "mouth", action: { type: "feed", food: "meal" }, aria: "Repas : glisser jusqu'à la bouche, ou activer pour nourrir" },
-  { id: "snack", label: "Goûter", file: "props/snack-fruit.svg", target: "mouth", action: { type: "feed", food: "snack" }, aria: "Goûter : glisser jusqu'à la bouche, ou activer pour donner un goûter" },
-  { id: "heal", label: "Fiole", file: "props/vial.svg", target: "body", action: { type: "heal" }, aria: "Fiole : glisser jusqu'à la créature, ou activer pour soigner" },
-  { id: "star", label: "Étoile", file: "props/toy-star.svg", target: "body", action: { type: "play" }, aria: "Étoile : lancer d'une pichenette, ou activer pour jouer" },
-  { id: "sponge", label: "Éponge", file: "props/sponge.svg", target: "body", action: null, aria: "Éponge de lumière : activer pour frotter la créature (le bouton Laver lave sans geste)" },
+  { id: "meal", label: "Repas", file: "props/bowl.svg", target: "mouth", action: { type: "feed", food: "meal" }, aria: "Repas : glisser jusqu'à la bouche, ou appuyer pour nourrir" },
+  { id: "snack", label: "Goûter", file: "props/snack-fruit.svg", target: "mouth", action: { type: "feed", food: "snack" }, aria: "Goûter : glisser jusqu'à la bouche, ou appuyer pour donner un goûter" },
+  { id: "heal", label: "Fiole", file: "props/vial.svg", target: "body", action: { type: "heal" }, aria: "Fiole : glisser jusqu'à la créature, ou appuyer pour soigner" },
+  { id: "star", label: "Étoile", file: "props/toy-star.svg", target: "body", action: { type: "play" }, aria: "Étoile : lancer d'une pichenette, ou appuyer pour jouer" },
+  { id: "sponge", label: "Éponge", file: "props/sponge.svg", target: "body", action: null, aria: "Éponge de lumière : appuyer pour frotter la créature (le bouton Laver nettoie sans geste)" },
 ];
 const ITEM = Object.fromEntries(ITEMS.map((i) => [i.id, i])) as Record<ItemId, ItemDef>;
 
@@ -530,10 +530,10 @@ export function PlayArea(props: { name: string; kind: Kind; asleep: boolean; onA
 
   const hint =
     mode === "wash"
-      ? `Frotte ${name} doucement avec l'éponge, jusqu'à ce qu'il brille de propre.`
+      ? `Frotte ${name} doucement avec l'éponge, jusqu'à ce que tout brille.`
       : asleep
-        ? `${name} dort : laisse-le se reposer.`
-        : `Touche ${name}, caresse-le, ou glisse un objet jusqu'à lui.`;
+        ? `${name} dort. Laisse-lui un peu de calme.`
+        : `Touche ${name} ou fais-lui une caresse. Tu peux aussi glisser un objet jusqu'à lui.`;
 
   return (
     <div

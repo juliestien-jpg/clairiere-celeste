@@ -118,7 +118,7 @@ export function SettingsScreen(props: {
   async function confirmImport(): Promise<void> {
     if (!pending) return;
     await game.applyImport(pending);
-    setSaveMessage(`${pending.pet.name} est arrivé dans la clairière.`);
+    setSaveMessage(`${pending.pet.name} a rejoint la clairière.`);
     setPending(null);
   }
 
@@ -177,13 +177,13 @@ export function SettingsScreen(props: {
             <h2 id="notif-title">Notifications</h2>
             <Switch
               id="notif-switch"
-              label="Me prévenir quand il a besoin de moi"
+              label="Me prévenir quand mon compagnon a besoin de moi"
               checked={notifOn}
               onChange={(v) => void toggleNotifications(v)}
               describedBy="notif-help"
             />
             <p id="notif-help" className="panel-text">
-              Elles ne marchent que tant que le jeu est ouvert (dans un onglet ou l'app installée).
+              Elles ne fonctionnent que tant que le jeu est ouvert (dans un onglet ou l'app installée).
             </p>
             {notifOn && notifBlocked && (
               <p className="message" role="status">
@@ -202,8 +202,8 @@ export function SettingsScreen(props: {
       <section className="panel setting" aria-labelledby="save-title">
         <h2 id="save-title">Sauvegarde</h2>
         <p className="panel-text">
-          Ton compagnon vit sur cet appareil, sans compte. Exporte un fichier pour le garder en lieu sûr ou le retrouver
-          ailleurs.
+          Ton compagnon vit sur cet appareil, sans compte. Exporte un fichier pour le garder en lieu sûr ou retrouver ta
+          clairière ailleurs.
         </p>
         <div className="row">
           <button type="button" className="secondary" onClick={download} disabled={!state}>
@@ -220,8 +220,8 @@ export function SettingsScreen(props: {
             <h3 id="confirm-title">Remplacer {state ? state.pet.name : "ta clairière"} ?</h3>
             <p id="confirm-text">
               {state
-                ? `Ce fichier contient ${pending.pet.name} (${STAGE_LABEL[pending.pet.stage]}, ${KIND_LABEL[pending.pet.kind]}, ${pending.album.length} étoile${pending.album.length > 1 ? "s" : ""} dans l'album). S'il est importé, ${state.pet.name} et son album seront remplacés et ne pourront pas être retrouvés, sauf si tu les as exportés.`
-                : `Ce fichier contient ${pending.pet.name} (${STAGE_LABEL[pending.pet.stage]}, ${KIND_LABEL[pending.pet.kind]}). Il arrivera dans la clairière.`}
+                ? `Ce fichier contient ${pending.pet.name} (${STAGE_LABEL[pending.pet.stage]}, ${KIND_LABEL[pending.pet.kind]}, ${pending.album.length} étoile${pending.album.length > 1 ? "s" : ""} dans l'album). S'il est importé, ${state.pet.name} et son album seront remplacés. Exporte d'abord ce que tu veux garder.`
+                : `Ce fichier contient ${pending.pet.name} (${STAGE_LABEL[pending.pet.stage]}, ${KIND_LABEL[pending.pet.kind]}). ${pending.pet.name} arrivera dans la clairière.`}
             </p>
             <div className="row">
               <button ref={cancelRef} type="button" className="primary" onClick={() => setPending(null)}>

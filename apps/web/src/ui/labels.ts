@@ -1,4 +1,5 @@
-// Textes de l'interface (français, ton doux et jamais culpabilisant, D4).
+// Textes de l'interface (français, ton doux et jamais culpabilisant, CLAUDE.md). Tournures neutres pour le genre
+// de la créature : pas de « il », « fatigué », « devenu »… quand une autre formulation existe.
 import type { Gauge, GameEvent, GaugeLevel, Kind, Need, PrimaryState, View } from "@tamagoshi/rules";
 
 export const GAUGE_LABEL: Record<Gauge, string> = {
@@ -27,15 +28,15 @@ export function primaryLabel(primary: PrimaryState, name: string): string {
     case "tired":
       return `${name} a sommeil`;
     case "sick":
-      return `${name} ne se sent pas bien`;
+      return `${name} ne se sent pas très bien`;
     case "asleep":
       return `${name} dort paisiblement`;
     case "dirty":
       return `${name} aimerait une toilette`;
     case "weak":
-      return `${name} a besoin de beaucoup de soins`;
+      return `${name} a besoin de soins`;
     case "flown":
-      return `${name} est devenu une étoile`;
+      return `${name} rejoint les étoiles`;
   }
 }
 
@@ -67,13 +68,13 @@ export function pageTitle(name: string | null, view: View | null): string {
 export function refusalText(reason: string, name: string): string {
   switch (reason) {
     case "asleep":
-      return `${name} dort paisiblement. Tu peux le réveiller si tu veux.`;
+      return `${name} dort paisiblement. Le bouton Réveiller est là quand tu voudras.`;
     case "notHungry":
       return `${name} n'a pas faim pour l'instant.`;
     case "cooldown":
       return `Pas tout de suite : ${name} a besoin d'un petit moment.`;
     case "tooTired":
-      return `${name} est trop fatigué pour jouer. Un peu de repos lui fera du bien.`;
+      return `${name} a besoin de repos avant de jouer. Un peu de calme lui fera du bien.`;
     case "alreadyClean":
       return `${name} est déjà tout propre.`;
     case "nothingToHeal":
@@ -81,13 +82,13 @@ export function refusalText(reason: string, name: string): string {
     case "notTired":
       return `${name} n'a pas sommeil pour l'instant.`;
     case "notAsleep":
-      return `${name} est déjà réveillé.`;
+      return `${name} a déjà les yeux ouverts.`;
     case "exhausted":
       return `${name} a encore besoin de dormir.`;
     case "invalidIdentity":
       return "Choisis un nom pour le nouvel œuf.";
     case "flownDuringCatchUp":
-      return `${name} vient de devenir une étoile. Il veille sur la clairière.`;
+      return `${name} vient de rejoindre les étoiles. Une étoile veille sur la clairière.`;
     case "unknownAction":
     case "invalidAction":
       return "Je n'ai pas compris ce geste. Essaie encore ?";
@@ -127,7 +128,7 @@ export function describeEvent(e: GameEvent, name: string, kind?: Kind): { text: 
         refused: false,
       };
     case "becameSick":
-      return { text: `${name} ne se sent pas bien. Un soin lui ferait du bien.`, refused: false };
+      return { text: `${name} ne se sent pas très bien. Un soin lui ferait du bien.`, refused: false };
     case "recovered":
       return { text: `${name} va mieux.`, refused: false };
     case "fellAsleep":
@@ -135,13 +136,13 @@ export function describeEvent(e: GameEvent, name: string, kind?: Kind): { text: 
     case "wokeUp":
       return { text: `${name} ouvre les yeux.`, refused: false };
     case "weakened":
-      return { text: `${name} est très fragile. Il a besoin de soins.`, refused: false };
+      return { text: `${name} a besoin de soins pour retrouver sa lumière.`, refused: false };
     case "recoveredStrength":
       return { text: `${name} reprend des forces.`, refused: false };
     case "flewAway":
-      return { text: `${name} est devenu une étoile. Il veille sur la clairière.`, refused: false };
+      return { text: `${name} rejoint les étoiles et veille sur la clairière.`, refused: false };
     case "reborn":
-      return { text: "Une nouvelle lueur est devenue un œuf.", refused: false };
+      return { text: "Une nouvelle lueur a pris la forme d'un œuf.", refused: false };
     case "needAppeared":
     case "needResolved":
       return null;
@@ -170,7 +171,7 @@ export function notificationContent(need: Need, name: string): { title: string; 
     happiness: `${name} aimerait jouer un peu avec toi.`,
     energy: `${name} a besoin de repos.`,
     sick: `${name} ne se sent pas très bien. Un soin lui ferait du bien.`,
-    weak: `${name} est très fragile. Une petite visite lui ferait du bien.`,
+    weak: `${name} a besoin de soins. Une petite visite lui ferait du bien.`,
   };
   return { title: "Clairière céleste", body: body[need] };
 }

@@ -6,10 +6,10 @@ export interface Hint {
 }
 
 export const HINTS: readonly Hint[] = [
-  { id: "feed", text: "Glisse le repas jusqu'à sa bouche pour le nourrir." },
-  { id: "wash", text: "Choisis l'éponge, puis frotte doucement pour le laver." },
-  { id: "pet", text: "Caresse-le du doigt : il adore ça." },
-  { id: "vials", text: "Les fioles du haut disent comment il se sent." },
+  { id: "feed", text: "Glisse le repas vers sa bouche." },
+  { id: "wash", text: "Choisis l'éponge et frotte doucement : une toilette de lumière." },
+  { id: "pet", text: "Une petite caresse du doigt lui fait toujours plaisir." },
+  { id: "vials", text: "Les fioles du haut racontent son bien-être." },
 ];
 
 export const HINTS_STORAGE_NAME = "tamagoshi.hints.v1";

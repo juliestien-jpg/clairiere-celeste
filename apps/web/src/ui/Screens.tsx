@@ -155,7 +155,7 @@ export function FlownScreen(props: {
 
   return (
     <main className="screen screen-flown">
-      <ScreenHeader title={`${name} est devenu une étoile`} nav={nav} />
+      <ScreenHeader title={`${name} rejoint les étoiles`} nav={nav} />
       <Creature
         name={name}
         stage={state.pet.stage}
@@ -174,7 +174,7 @@ export function FlownScreen(props: {
           />
         ))}
       </div>
-      <p className="lead">Il veille sur la clairière. Quand tu seras prêt, une lueur peut redescendre.</p>
+      <p className="lead">Une étoile veille sur la clairière. Quand tu voudras, une lueur peut redescendre.</p>
       <NoticeLine notice={notice} name={name} kind={state.pet.kind} />
       <form className="panel" onSubmit={submit}>
         <label htmlFor="rebirth-name">Nom du nouvel œuf</label>

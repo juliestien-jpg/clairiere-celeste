@@ -29,8 +29,7 @@ export function AlbumScreen({ album, onClose }: { album: readonly AlbumEntry[]; 
       {album.length === 0 ? (
         <section className="panel" aria-live="polite">
           <p className="panel-text">
-            Le ciel est encore tout calme. Quand une créature s'envolera, elle deviendra une étoile et tu pourras la
-            retrouver ici.
+            Le ciel est encore calme. Les compagnons envolés y brilleront, et tu pourras les retrouver ici.
           </p>
         </section>
       ) : (
@@ -48,7 +47,7 @@ export function AlbumScreen({ album, onClose }: { album: readonly AlbumEntry[]; 
                   className="album-star"
                   style={{ left: `${p?.left ?? 50}%`, top: `${p?.top ?? 50}%` }}
                   aria-pressed={selected === e.id}
-                  aria-label={`${e.name}, ${KIND_LABEL[e.kind]}, envolé le ${formatDay(e.flownAt)}`}
+                  aria-label={`${e.name}, ${KIND_LABEL[e.kind]}, envol le ${formatDay(e.flownAt)}`}
                   onClick={() => setSelected(selected === e.id ? null : e.id)}
                 >
                   <span className="star" data-kind={e.kind} aria-hidden="true" />
@@ -64,13 +63,13 @@ export function AlbumScreen({ album, onClose }: { album: readonly AlbumEntry[]; 
                 <dl className="card">
                   <dt>Espèce</dt>
                   <dd>{KIND_LABEL[current.kind]}</dd>
-                  <dt>Né le</dt>
+                  <dt>Naissance</dt>
                   <dd>{formatDay(current.bornAt)}</dd>
-                  <dt>Envolé le</dt>
+                  <dt>Envol</dt>
                   <dd>{formatDay(current.flownAt)}</dd>
                   <dt>Stade atteint</dt>
                   <dd>{STAGE_LABEL[current.stage]}</dd>
-                  <dt>A vécu</dt>
+                  <dt>Durée de vie</dt>
                   <dd>{formatLifespan(lifespanOf(current))}</dd>
                 </dl>
                 <button type="button" className="quiet" onClick={() => setSelected(null)}>

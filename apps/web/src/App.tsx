@@ -151,7 +151,7 @@ export function App() {
       <main className="screen">
         <h1>Sauvegarde illisible</h1>
         <p className="message" role="alert">{snap.loadError}</p>
-        <p className="lead">Tu peux importer un fichier de sauvegarde ou repartir d'un nouvel œuf (panneau de débogage).</p>
+        <p className="lead">Tu peux importer un fichier de sauvegarde, ou repartir d'un nouvel œuf.</p>
         <button type="button" className="primary" onClick={() => void game.reset()}>
           Repartir d'un nouvel œuf
         </button>
