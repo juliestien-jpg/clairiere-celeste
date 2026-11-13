@@ -1,0 +1,114 @@
+{
+  "scenarioVersion": 1,
+  "name": "actions-refusees-fatigue-sommeil",
+  "description": "Jouer avec une énergie de 15 ou moins est refusé (tooTired) ; coucher l'animal fatigué est accepté ; pendant le sommeil toute action autre que wake et tick est refusée (asleep) ; réveiller un animal dont l'énergie est de 5 ou moins est refusé (exhausted).",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "energy": 12
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "play"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "play",
+          "reason": "tooTired"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.energy": 12,
+        "pet.gauges.happiness": 80
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "sleep"
+      },
+      "expectEvents": [
+        {
+          "type": "fellAsleep"
+        }
+      ],
+      "expectState": {
+        "pet.status.asleep": true,
+        "pet.status.asleepSince": 1763020800000
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "feed",
+          "reason": "asleep"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 80
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "play"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "play",
+          "reason": "asleep"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "sleep"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "sleep",
+          "reason": "asleep"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "wake"
+      },
+      "expectEvents": [
+        {
+          "type": "wokeUp"
+        }
+      ],
+      "expectState": {
+        "pet.status.asleep": false,
+        "pet.status.asleepSince": null
+      }
+    }
+  ]
+}

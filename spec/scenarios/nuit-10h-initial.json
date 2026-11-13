@@ -1,0 +1,43 @@
+{
+  "scenarioVersion": 1,
+  "name": "nuit-10h-initial",
+  "description": "G1, départ jauges initiales : une nuit de 10 h sans aucun soin, avec la pire malchance possible (graine dont le premier tirage est proche de 0), ne rend jamais l'animal malade ni affaibli. Selon docs/equilibrage.md 6 : à T+10 h satiété 35,0 (tout juste basse, valeur non vérifiée ici car posée sur un seuil), bonheur 50, énergie 45, hygiène 55 (2 salissures), santé 100.",
+  "guarantee": "G1",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763056800000,
+      "action": {
+        "type": "tick"
+      }
+    }
+  ],
+  "forbidEventTypes": [
+    "becameSick",
+    "weakened",
+    "flewAway"
+  ],
+  "expectState": {
+    "pet.life": "alive",
+    "pet.status.weakSince": null,
+    "pet.status.sick": false,
+    "pet.status.messes": 2,
+    "pet.gauges.satiety": {
+      "min": 34.9,
+      "max": 35.1
+    },
+    "pet.gauges.happiness": 50,
+    "pet.gauges.energy": 45,
+    "pet.gauges.hygiene": 55,
+    "pet.gauges.health": 100
+  }
+}

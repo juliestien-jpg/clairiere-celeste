@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<defs>
+  <linearGradient id="raincloud-fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#D6CCEE"/><stop offset="1" stop-color="#A998D4"/>
+  </linearGradient>
+</defs>
+<path d="M19 38 C12 38 11 29 18 28 C18 20 28 17 32 23 C36 17 46 20 46 28 C53 29 52 38 45 38 Z" fill="url(#raincloud-fill)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2"/>
+<path d="M23 42.3 C26.4 46.5 26.6 50.1 23 50.7 C19.4 50.1 19.6 46.5 23 42.3 Z" fill="#A9C8FF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"/><path d="M32 46.8 C35.4 51 35.6 54.6 32 55.2 C28.4 54.6 28.6 51 32 46.8 Z" fill="#A9C8FF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"/><path d="M41 42.3 C44.4 46.5 44.6 50.1 41 50.7 C37.4 50.1 37.6 46.5 41 42.3 Z" fill="#A9C8FF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"/>
+</svg>

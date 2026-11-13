@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(96 132)">
+<defs>
+  <linearGradient id="eye-fill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2E2A5C"/><stop offset="1" stop-color="#1B1838"/>
+  </linearGradient>
+  <radialGradient id="eye-iris" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".85"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="0" cy="0" rx="11.5" ry="14.5" fill="url(#eye-fill)"/>
+<ellipse cx="0" cy="7" rx="8" ry="6" fill="url(#eye-iris)"/>
+<circle cx="-3.6" cy="-5.2" r="4.4" fill="#FFFFFF"/>
+<circle cx="3.8" cy="5" r="2.1" fill="#FFFFFF" fill-opacity=".92"/>
+<circle cx="5.6" cy="-7" r="1.1" fill="#FFFFFF" fill-opacity=".8"/>
+</g>
+</svg>

@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "name": "Clairière céleste",
+  "description": "Palette de D4 en jetons nommés et quatre ciels. Source unique pour le CSS (web) et le ThemeData (Flutter). Ratios de contraste calculés (WCAG 2.x) le 2026-11-13.",
+  "colors": {
+    "ink-night":       { "hex": "#1B1838", "name": "Nuit d'encre",       "role": "Fond principal du thème nuit, texte du thème jour" },
+    "velvet-indigo":   { "hex": "#2E2A5C", "name": "Indigo velours",     "role": "Panneaux, ciel du crépuscule, texte du thème jour, contours des emblèmes" },
+    "mist-lavender":   { "hex": "#8E7CC3", "name": "Lavande brume",      "role": "Brumes, contours décoratifs, grands textes seulement sur fond Nuit d'encre" },
+    "moon-blue":       { "hex": "#A9C8FF", "name": "Bleu lune",          "role": "Reflets, étoiles froides, sommeil" },
+    "dawn-pink":       { "hex": "#F4A6C6", "name": "Aurore rose",        "role": "Bandes d'aurore, jeu, tendresse" },
+    "firefly-gold":    { "hex": "#FFD27A", "name": "Or de luciole",      "role": "Lueurs, particules, récompenses, accents" },
+    "fairy-mint":      { "hex": "#8FE3CF", "name": "Menthe féerique",    "role": "Soin, santé, propreté" },
+    "moonmilk-cream":  { "hex": "#FFF6E9", "name": "Crème lait de lune", "role": "Corps de la créature, texte sur fond sombre" },
+    "soft-peach":      { "hex": "#FFB89A", "name": "Pêche tendre",       "role": "Joues, chaleur" },
+    "soft-amber":      { "hex": "#FFB547", "name": "Ambre doux",         "role": "Signaux « besoin » (jamais de rouge vif)" },
+    "herbal-green":    { "hex": "#A7B89A", "name": "Vert tisane",        "role": "Teinte de maladie, désaturée et douce" },
+    "pearl-sky":       { "hex": "#F3EEFF", "name": "Ciel nacré",         "role": "Fond du thème jour" }
+  },
+  "derived": {
+    "creature-edge":  { "hex": "#9C8AD0", "role": "Contour de la silhouette de la créature (se détache sur le ciel nacré)" },
+    "creature-rose-edge": { "hex": "#E6D6F3", "role": "Bord du dégradé du corps" },
+    "dust-shadow":    { "hex": "#5E5878", "role": "Poussière d'ombre : taches et poussières" }
+  },
+  "semantic": {
+    "need":        "soft-amber",
+    "care":        "fairy-mint",
+    "play":        "dawn-pink",
+    "sleep":       "moon-blue",
+    "reward":      "firefly-gold",
+    "illness":     "herbal-green",
+    "text-on-dark":  "moonmilk-cream",
+    "text-on-light": "velvet-indigo"
+  },
+  "skies": {
+    "dawn": {
+      "label": "Aube",
+      "window": { "from": "05:00", "to": "08:00" },
+      "gradient": { "angle": 180, "stops": [ { "at": 0, "color": "#8E7CC3" }, { "at": 0.55, "color": "#F4A6C6" }, { "at": 1, "color": "#FFB89A" } ] },
+      "stars": 0.15,
+      "text": "#1B1838",
+      "textMuted": "#2E2A5C",
+      "panel": "#FBE6EE",
+      "panelOpacity": 0.78,
+      "panelEdge": "#FFFFFF",
+      "moss": ["#B8DCC8", "#8FBFA6"],
+      "mist": "#FFF6E9"
+    },
+    "day": {
+      "label": "Jour",
+      "window": { "from": "08:00", "to": "18:00" },
+      "gradient": { "angle": 180, "stops": [ { "at": 0, "color": "#F3EEFF" }, { "at": 1, "color": "#DCE8FF" } ] },
+      "stars": 0,
+      "text": "#2E2A5C",
+      "textMuted": "#2E2A5C",
+      "panel": "#FFFFFF",
+      "panelOpacity": 0.72,
+      "panelEdge": "#FFFFFF",
+      "moss": ["#C2E8D2", "#8FCFB0"],
+      "mist": "#FFFFFF"
+    },
+    "dusk": {
+      "label": "Crépuscule",
+      "window": { "from": "18:00", "to": "21:00" },
+      "gradient": { "angle": 180, "stops": [ { "at": 0, "color": "#2E2A5C" }, { "at": 0.6, "color": "#8E7CC3" }, { "at": 1, "color": "#F4A6C6" } ] },
+      "stars": 0.5,
+      "text": "#FFF6E9",
+      "textMuted": "#FFF6E9",
+      "panel": "#3A3470",
+      "panelOpacity": 0.7,
+      "panelEdge": "#FFFFFF",
+      "moss": ["#5E9C8C", "#3F7A72"],
+      "mist": "#F4A6C6"
+    },
+    "night": {
+      "label": "Nuit",
+      "window": { "from": "21:00", "to": "05:00" },
+      "gradient": { "angle": 180, "stops": [ { "at": 0, "color": "#1B1838" }, { "at": 1, "color": "#2E2A5C" } ] },
+      "stars": 1,
+      "text": "#FFF6E9",
+      "textMuted": "#A9C8FF",
+      "panel": "#2E2A5C",
+      "panelOpacity": 0.7,
+      "panelEdge": "#FFFFFF",
+      "moss": ["#4C8C86", "#2F6A68"],
+      "mist": "#8E7CC3"
+    }
+  },
+  "skyCrossfadeMinutes": 30,
+  "contrast": {
+    "note": "Ratios WCAG calculés par script. Seuils : 4,5 pour le texte courant, 3 pour grands textes et éléments graphiques.",
+    "pairs": [
+      { "foreground": "moonmilk-cream", "background": "ink-night",     "ratio": 15.89, "use": "Texte nuit" },
+      { "foreground": "firefly-gold",   "background": "ink-night",     "ratio": 11.95, "use": "Accents nuit" },
+      { "foreground": "soft-amber",     "background": "ink-night",     "ratio": 9.68,  "use": "Signaux de besoin nuit" },
+      { "foreground": "moon-blue",      "background": "ink-night",     "ratio": 10.04, "use": "Texte secondaire nuit" },
+      { "foreground": "mist-lavender",  "background": "ink-night",     "ratio": 4.72,  "use": "Grands textes seulement" },
+      { "foreground": "mist-lavender",  "background": "velvet-indigo", "ratio": 3.63,  "use": "Décor seulement, jamais du texte" },
+      { "foreground": "velvet-indigo",  "background": "pearl-sky",     "ratio": 11.54, "use": "Texte jour" },
+      { "foreground": "ink-night",      "background": "dawn-pink",     "ratio": 9.01,  "use": "Texte sur bande d'aurore" },
+      { "foreground": "moonmilk-cream", "background": "velvet-indigo", "ratio": 12.24, "use": "Texte sur panneau" },
+      { "foreground": "moonmilk-cream", "background": "#3A3470",       "ratio": 10.29, "use": "Texte sur panneau crépuscule" },
+      { "foreground": "ink-night",      "background": "#FBE6EE",       "ratio": 14.3,  "use": "Texte sur panneau aube" }
+    ]
+  },
+  "shape": { "touchTargetMin": 48, "radiusPanel": 20, "radiusStone": 999, "panelBorder": 1 },
+  "motion": {
+    "ui": { "min": 200, "max": 400 },
+    "creature": { "min": 600, "max": 1200 },
+    "twinkleMinCycle": 2000,
+    "twinkleMaxPerSecond": 3
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "scenarioVersion": 1,
+  "name": "actions-effets",
+  "description": "Effets chiffrés des actions (spec/balance.json) sur un animal éprouvé, sans passage du temps : repas (+35 satiété, +5 bonheur), jeu (+25 bonheur, -5 énergie, -3 satiété), nettoyage (hygiène 100, salissures 0), soin (guérit, +20 santé), en-cas refusé pendant son attente puis accepté, repas refusé pendant son attente de 5 400 s, besoins résolus signalés.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 20,
+          "happiness": 20,
+          "energy": 60,
+          "hygiene": 30,
+          "health": 50
+        },
+        "status": {
+          "sick": true,
+          "sickSince": 1763020800000,
+          "messes": 2,
+          "messProgressSeconds": 100
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      },
+      "expectEvents": [
+        {
+          "type": "needResolved",
+          "need": "satiety"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 55,
+        "pet.gauges.happiness": 25,
+        "pet.cooldowns": {
+          "feed.meal": 1763026200000,
+          "feed.snack": 0,
+          "heal": 0,
+          "pet": 0
+        }
+      }
+    },
+    {
+      "nowMs": 1763020860000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "feed",
+          "reason": "cooldown"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763020860000,
+      "action": {
+        "type": "feed",
+        "food": "snack"
+      },
+      "expectEvents": [],
+      "expectState": {
+        "pet.cooldowns": {
+          "feed.meal": 1763026200000,
+          "feed.snack": 1763022660000,
+          "heal": 0,
+          "pet": 0
+        }
+      }
+    },
+    {
+      "nowMs": 1763020860000,
+      "action": {
+        "type": "play"
+      },
+      "expectEvents": [
+        {
+          "type": "needResolved",
+          "need": "happiness"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763020860000,
+      "action": {
+        "type": "clean"
+      },
+      "expectEvents": [
+        {
+          "type": "needResolved",
+          "need": "hygiene"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.hygiene": 100,
+        "pet.status.messes": 0
+      }
+    },
+    {
+      "nowMs": 1763020860000,
+      "action": {
+        "type": "heal"
+      },
+      "expectEvents": [
+        {
+          "type": "recovered"
+        },
+        {
+          "type": "needResolved",
+          "need": "sick"
+        }
+      ],
+      "expectState": {
+        "pet.status.sick": false,
+        "pet.status.sickSince": null,
+        "pet.cooldowns": {
+          "feed.meal": 1763026200000,
+          "feed.snack": 1763022660000,
+          "heal": 1763021760000,
+          "pet": 0
+        }
+      }
+    }
+  ]
+}

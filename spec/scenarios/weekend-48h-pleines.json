@@ -1,0 +1,103 @@
+{
+  "scenarioVersion": 1,
+  "name": "weekend-48h-pleines",
+  "description": "G2 : jauges pleines, 48 h sans aucun soin, malchance maximale : l'animal tombe malade (vers T+18,9 h), sa santé vaut 53,41 (doc : 53,4) à T+48 h, il n'est ni affaibli ni envolé. L'état affaiblie arrive vers T+53,3 h et l'Envol vers T+81,4 h (doc).",
+  "guarantee": "G2",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 100,
+          "happiness": 100,
+          "energy": 100,
+          "hygiene": 100,
+          "health": 100
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763193600000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "weakened",
+        "flewAway"
+      ],
+      "containsEvents": [
+        {
+          "type": "becameSick"
+        }
+      ],
+      "expectState": {
+        "pet.life": "alive",
+        "pet.status.sick": true,
+        "pet.status.weakSince": null,
+        "pet.gauges.health": 53.4133,
+        "pet.gauges.satiety": 0,
+        "pet.gauges.hygiene": 0
+      }
+    },
+    {
+      "nowMs": 1763212320000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "weakened",
+        "flewAway"
+      ]
+    },
+    {
+      "nowMs": 1763213040000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "weakened"
+        }
+      ],
+      "forbidEventTypes": [
+        "flewAway"
+      ]
+    },
+    {
+      "nowMs": 1763313480000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "flewAway"
+      ],
+      "expectState": {
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763314200000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.gauges.health": 0
+      }
+    }
+  ]
+}

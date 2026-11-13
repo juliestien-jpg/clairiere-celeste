@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tamagoshi.local/spec/balance.schema.json",
+  "title": "Équilibrage Tamagoshi",
+  "description": "Schéma de spec/balance.json (Annexe A3 de docs/decisions.md ; modèle de règles : docs/equilibrage.md). Les noms de clés sont des contrats.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["balanceVersion", "catchUp", "gauges", "sleep", "actions", "kinds", "stages", "sickness", "messes", "envol", "attention"],
+  "properties": {
+    "balanceVersion": { "type": "integer", "minimum": 1 },
+    "catchUp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stepSeconds", "maxSeconds"],
+      "properties": {
+        "stepSeconds": { "type": "integer", "minimum": 1, "description": "Pas fixe du rattrapage, en secondes." },
+        "maxSeconds": { "type": "integer", "minimum": 1, "description": "Plafond du rattrapage ; doit dépasser la durée minimale avant l'Envol (D3)." }
+      }
+    },
+    "gauges": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["satiety", "happiness", "energy", "hygiene", "health"],
+      "properties": {
+        "satiety": { "$ref": "#/$defs/decayGauge" },
+        "happiness": { "$ref": "#/$defs/decayGauge" },
+        "energy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["initial", "decayPerHour", "regenPerHourAsleep", "low", "critical"],
+          "properties": {
+            "initial": { "$ref": "#/$defs/gaugeValue" },
+            "decayPerHour": { "$ref": "#/$defs/rate" },
+            "regenPerHourAsleep": { "$ref": "#/$defs/rate" },
+            "low": { "$ref": "#/$defs/gaugeValue" },
+            "critical": { "$ref": "#/$defs/gaugeValue" }
+          }
+        },
+        "hygiene": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["initial", "decayPerHour", "decayPerHourAsleep", "decayPerMess", "low", "critical"],
+          "properties": {
+            "initial": { "$ref": "#/$defs/gaugeValue" },
+            "decayPerHour": { "$ref": "#/$defs/rate" },
+            "decayPerHourAsleep": { "$ref": "#/$defs/rate" },
+            "decayPerMess": { "$ref": "#/$defs/gaugeValue" },
+            "low": { "$ref": "#/$defs/gaugeValue" },
+            "critical": { "$ref": "#/$defs/gaugeValue" }
+          }
+        },
+        "health": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["initial", "decayPerHourWhenCritical", "decayPerHourWhenSick", "regenPerHourWhenWell", "low", "critical"],
+          "properties": {
+            "initial": { "$ref": "#/$defs/gaugeValue" },
+            "decayPerHourWhenCritical": { "$ref": "#/$defs/rate" },
+            "decayPerHourWhenSick": { "$ref": "#/$defs/rate" },
+            "regenPerHourWhenWell": { "$ref": "#/$defs/rate" },
+            "low": { "$ref": "#/$defs/gaugeValue" },
+            "critical": { "$ref": "#/$defs/gaugeValue" }
+          }
+        }
+      }
+    },
+    "sleep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["autoSleepAtOrBelowEnergy", "wakeAtOrAboveEnergy", "manualSleepMaxEnergy"],
+      "properties": {
+        "autoSleepAtOrBelowEnergy": { "$ref": "#/$defs/gaugeValue" },
+        "wakeAtOrAboveEnergy": { "$ref": "#/$defs/gaugeValue" },
+        "manualSleepMaxEnergy": { "$ref": "#/$defs/gaugeValue" }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["feed.meal", "feed.snack", "play", "clean", "heal", "pet"],
+      "properties": {
+        "feed.meal": { "$ref": "#/$defs/feedAction" },
+        "feed.snack": { "$ref": "#/$defs/feedAction" },
+        "play": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["happiness", "energy", "satiety", "requiresEnergyAbove"],
+          "properties": {
+            "happiness": { "type": "number" },
+            "energy": { "type": "number" },
+            "satiety": { "type": "number" },
+            "requiresEnergyAbove": { "$ref": "#/$defs/gaugeValue" }
+          }
+        },
+        "clean": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["hygiene", "clearsMesses"],
+          "properties": {
+            "hygiene": { "$ref": "#/$defs/gaugeValue" },
+            "clearsMesses": { "type": "boolean" }
+          }
+        },
+        "heal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["curesSickness", "health", "cooldownSeconds"],
+          "properties": {
+            "curesSickness": { "type": "boolean" },
+            "health": { "type": "number" },
+            "cooldownSeconds": { "type": "number", "minimum": 0 }
+          }
+        },
+        "pet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["happiness", "cooldownSeconds"],
+          "properties": {
+            "happiness": { "type": "number" },
+            "cooldownSeconds": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "kinds": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Espèces tirables à la naissance et à la renaissance (D6) : tirage par poids entiers, l'ordre du tableau est significatif. Les id sont uniques (vérifié par packages/rules, BalanceError) ; somme des poids <= 1000000.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "weight"],
+        "properties": {
+          "id": { "enum": ["kawaii", "feerique"] },
+          "weight": { "type": "integer", "minimum": 1, "maximum": 1000000 }
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Stades par âge réel croissant ; le premier a minAgeHours 0.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "minAgeHours"],
+        "properties": {
+          "id": { "enum": ["egg", "baby", "child", "teen", "adult"] },
+          "minAgeHours": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "sickness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chancePerHourWhenHygieneCritical", "chancePerHourWhenSatietyCritical"],
+      "properties": {
+        "chancePerHourWhenHygieneCritical": { "type": "number", "minimum": 0 },
+        "chancePerHourWhenSatietyCritical": { "type": "number", "minimum": 0 }
+      }
+    },
+    "messes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["everyHoursAwake", "max"],
+      "properties": {
+        "everyHoursAwake": { "type": "number", "exclusiveMinimum": 0 },
+        "max": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "envol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["weakWhenHealthAtOrBelow", "recoverWhenHealthAbove", "flyWhenHealthAtOrBelow"],
+      "properties": {
+        "weakWhenHealthAtOrBelow": { "$ref": "#/$defs/gaugeValue", "description": "Doit être égal à gauges.health.critical." },
+        "recoverWhenHealthAbove": { "$ref": "#/$defs/gaugeValue" },
+        "flyWhenHealthAtOrBelow": { "$ref": "#/$defs/gaugeValue" }
+      }
+    },
+    "attention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["notifyAt", "needs", "quietHours", "maxPerDay", "reservedForAlwaysNotify", "minGapMinutes", "alwaysNotify"],
+      "properties": {
+        "notifyAt": { "enum": ["low", "critical"] },
+        "needs": {
+          "type": "array",
+          "items": { "enum": ["satiety", "hygiene", "happiness", "energy", "sick"] }
+        },
+        "quietHours": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["from", "to"],
+          "properties": {
+            "from": { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" },
+            "to": { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" }
+          }
+        },
+        "maxPerDay": { "type": "integer", "minimum": 1 },
+        "reservedForAlwaysNotify": { "type": "integer", "minimum": 0 },
+        "minGapMinutes": { "type": "integer", "minimum": 0 },
+        "alwaysNotify": {
+          "type": "array",
+          "items": { "enum": ["weak", "sick", "satiety", "hygiene", "happiness", "energy"] }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gaugeValue": { "type": "number", "minimum": 0, "maximum": 100 },
+    "rate": { "type": "number", "minimum": 0, "description": "Variation par heure." },
+    "decayGauge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initial", "decayPerHour", "decayPerHourAsleep", "low", "critical"],
+      "properties": {
+        "initial": { "$ref": "#/$defs/gaugeValue" },
+        "decayPerHour": { "$ref": "#/$defs/rate" },
+        "decayPerHourAsleep": { "$ref": "#/$defs/rate" },
+        "low": { "$ref": "#/$defs/gaugeValue" },
+        "critical": { "$ref": "#/$defs/gaugeValue" }
+      }
+    },
+    "feedAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["satiety", "happiness", "cooldownSeconds", "refusedAboveSatiety"],
+      "properties": {
+        "satiety": { "type": "number" },
+        "happiness": { "type": "number" },
+        "cooldownSeconds": { "type": "number", "minimum": 0 },
+        "refusedAboveSatiety": { "$ref": "#/$defs/gaugeValue" }
+      }
+    }
+  }
+}

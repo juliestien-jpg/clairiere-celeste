@@ -1,0 +1,199 @@
+{
+  "scenarioVersion": 1,
+  "name": "retour-tardif-76h",
+  "description": "Le joueur revient à T+76 h, à environ 1 h de l'Envol (santé 1,5, malchance maximale), et fait réveil + soin + repas + nettoyage + jeu, puis repasse toutes les 5 h (mêmes soins si nécessaires). Santé juste après : 21,5 (doc). L'animal est rattrapable : il n'est plus affaibli (recoveredStrength) quelques visites plus tard (doc : à la 3e visite suivante, +15 h).",
+  "guarantee": "D3",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 23352,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763294400000,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.life": "alive",
+        "pet.status.weakSince": {
+          "min": 1
+        },
+        "pet.gauges.health": 1.4933
+      }
+    },
+    {
+      "nowMs": 1763294400000,
+      "action": {
+        "type": "wake"
+      }
+    },
+    {
+      "nowMs": 1763294400000,
+      "action": {
+        "type": "heal"
+      }
+    },
+    {
+      "nowMs": 1763294400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763294400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763294400000,
+      "action": {
+        "type": "play"
+      },
+      "expectState": {
+        "pet.gauges.health": 21.4933,
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763312400000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "recoveredStrength"
+      ]
+    },
+    {
+      "nowMs": 1763312400000,
+      "action": {
+        "type": "heal"
+      }
+    },
+    {
+      "nowMs": 1763312400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763312400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763312400000,
+      "action": {
+        "type": "play"
+      },
+      "expectState": {
+        "pet.gauges.health": 47.3733,
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763330400000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "recoveredStrength"
+      ]
+    },
+    {
+      "nowMs": 1763330400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763330400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763330400000,
+      "action": {
+        "type": "play"
+      },
+      "expectState": {
+        "pet.gauges.health": 57.3733,
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763348400000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "recoveredStrength"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763348400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763348400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763348400000,
+      "action": {
+        "type": "play"
+      },
+      "expectState": {
+        "pet.gauges.health": 67.3733,
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763366400000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "recoveredStrength"
+      ],
+      "expectState": {
+        "pet.gauges.health": 77.3733,
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763384400000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "recoveredStrength"
+      ],
+      "expectState": {
+        "pet.gauges.health": 87.3733,
+        "pet.life": "alive"
+      }
+    }
+  ],
+  "forbidEventTypes": [
+    "flewAway"
+  ]
+}

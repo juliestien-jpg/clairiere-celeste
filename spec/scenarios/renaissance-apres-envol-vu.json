@@ -1,0 +1,99 @@
+{
+  "scenarioVersion": 1,
+  "name": "renaissance-apres-envol-vu",
+  "description": "Renaissance sans Envol vu (A2, D3) : si l'animal s'envole pendant le rattrapage de l'appel, l'action de cet appel est refusée, rebirth comprise (flownDuringCatchUp) : le joueur doit voir l'écran de l'Envol. rebirth n'est accepté que si l'animal était déjà envolé au début de l'appel. Identité vide ou absente : invalidIdentity.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763380800000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 99
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        },
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "flownDuringCatchUp"
+        }
+      ],
+      "forbidEventTypes": [
+        "reborn"
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "album": []
+      }
+    },
+    {
+      "nowMs": 1763380860000,
+      "action": {
+        "type": "rebirth",
+        "id": "",
+        "name": "Nova",
+        "seed": 99
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "invalidIdentity"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown"
+      }
+    },
+    {
+      "nowMs": 1763380860000,
+      "action": {
+        "type": "rebirth",
+        "name": "Nova",
+        "seed": 99
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "invalidIdentity"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763380920000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 99
+      },
+      "expectEvents": [
+        {
+          "type": "reborn"
+        }
+      ],
+      "expectState": {
+        "pet.life": "alive",
+        "pet.bornAt": 1763380920000,
+        "album.0.flownAt": {
+          "min": 1763272800000,
+          "max": 1763308800000
+        }
+      }
+    }
+  ]
+}

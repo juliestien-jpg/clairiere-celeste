@@ -1,0 +1,60 @@
+{
+  "scenarioVersion": 1,
+  "name": "actions-malformees",
+  "description": "Actions mal formées (A2) : jamais d'exception, une raison de refus toujours textuelle : type inconnu (unknownAction), repas sans nourriture valide (invalidAction), renaissance d'un animal vivant (notFlown) ; sur un animal envolé, identité vide ou absente (invalidIdentity), puis renaissance valide.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763024400000,
+      "action": {
+        "type": "explode"
+      },
+      "containsEvents": [
+        {
+          "type": "actionRefused",
+          "action": "explode",
+          "reason": "unknownAction"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763024400000,
+      "action": {
+        "type": "feed",
+        "food": "pizza"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "feed",
+          "reason": "invalidAction"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763024400000,
+      "action": {
+        "type": "rebirth",
+        "id": "a",
+        "name": "Nova",
+        "seed": 1
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "notFlown"
+        }
+      ]
+    }
+  ]
+}

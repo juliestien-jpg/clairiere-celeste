@@ -1,0 +1,40 @@
+{
+  "balanceVersion": 1,
+  "catchUp": { "stepSeconds": 60, "maxSeconds": 604800 },
+  "gauges": {
+    "satiety":   { "initial": 80,  "decayPerHour": 4.5, "decayPerHourAsleep": 1.5, "low": 35, "critical": 15 },
+    "happiness": { "initial": 80,  "decayPerHour": 3,   "decayPerHourAsleep": 1,   "low": 35, "critical": 15 },
+    "energy":    { "initial": 80,  "decayPerHour": 3.5, "regenPerHourAsleep": 6.5, "low": 30, "critical": 10 },
+    "hygiene":   { "initial": 100, "decayPerHour": 1.5, "decayPerHourAsleep": 0.5, "decayPerMess": 15, "low": 40, "critical": 15 },
+    "health":    { "initial": 100, "decayPerHourWhenCritical": 1.3, "decayPerHourWhenSick": 0.3, "regenPerHourWhenWell": 2, "low": 75, "critical": 45 }
+  },
+  "sleep": { "autoSleepAtOrBelowEnergy": 5, "wakeAtOrAboveEnergy": 100, "manualSleepMaxEnergy": 85 },
+  "actions": {
+    "feed.meal":  { "satiety": 35, "happiness": 5, "cooldownSeconds": 5400, "refusedAboveSatiety": 90 },
+    "feed.snack": { "satiety": 10, "happiness": 10, "cooldownSeconds": 1800, "refusedAboveSatiety": 90 },
+    "play":       { "happiness": 25, "energy": -5, "satiety": -3, "requiresEnergyAbove": 15 },
+    "clean":      { "hygiene": 100, "clearsMesses": true },
+    "heal":       { "curesSickness": true, "health": 20, "cooldownSeconds": 900 },
+    "pet":        { "happiness": 5, "cooldownSeconds": 300 }
+  },
+  "kinds": [{ "id": "kawaii", "weight": 1 }, { "id": "feerique", "weight": 1 }],
+  "stages": [
+    { "id": "egg",   "minAgeHours": 0 },
+    { "id": "baby",  "minAgeHours": 0.05 },
+    { "id": "child", "minAgeHours": 24 },
+    { "id": "teen",  "minAgeHours": 96 },
+    { "id": "adult", "minAgeHours": 240 }
+  ],
+  "sickness": { "chancePerHourWhenHygieneCritical": 0.1, "chancePerHourWhenSatietyCritical": 0.1 },
+  "messes":   { "everyHoursAwake": 5, "max": 3 },
+  "envol":    { "weakWhenHealthAtOrBelow": 45, "recoverWhenHealthAbove": 60, "flyWhenHealthAtOrBelow": 0 },
+  "attention": {
+    "notifyAt": "low",
+    "needs": ["satiety", "hygiene", "happiness", "sick"],
+    "quietHours": { "from": "21:30", "to": "08:00" },
+    "maxPerDay": 4,
+    "reservedForAlwaysNotify": 1,
+    "minGapMinutes": 180,
+    "alwaysNotify": ["weak"]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "scenarioVersion": 1,
+  "name": "delai-affaiblie-envol-sans-maladie",
+  "description": "G3 : abandon total depuis les jauges initiales, sans jamais tomber malade (graine aux tirages tous élevés). Affaiblie vers T+56,8 h, Envol vers T+91,4 h (doc), soit 34,6 h de préavis, au moins 24 h.",
+  "guarantee": "G3",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763224560000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "weakened",
+        "flewAway"
+      ],
+      "expectState": {
+        "pet.status.weakSince": null,
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763225640000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "weakened"
+        }
+      ],
+      "forbidEventTypes": [
+        "flewAway"
+      ],
+      "expectState": {
+        "pet.status.weakSince": 1763225100000,
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763348940000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "flewAway"
+      ],
+      "expectState": {
+        "pet.life": "alive"
+      }
+    },
+    {
+      "nowMs": 1763350200000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.flownAt": {
+          "min": 1763311500000
+        },
+        "pet.status.weakSince": 1763225100000
+      }
+    }
+  ],
+  "expectState": {
+    "pet.life": "flown",
+    "pet.flownAt": 1763349720000,
+    "pet.gauges.health": 0
+  }
+}

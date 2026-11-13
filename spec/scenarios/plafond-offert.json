@@ -1,0 +1,61 @@
+{
+  "scenarioVersion": 1,
+  "name": "plafond-offert",
+  "description": "Plafond de rattrapage : avec catchUp.maxSeconds ramené à 20 h (balanceOverrides), une absence de 400 h ne rejoue que 20 h de règles (le reste est offert) mais lastUpdatedAt vaut maintenant, et l'âge (stade) suit le temps réel : quatre paliers franchis.",
+  "guarantee": "G4",
+  "balanceOverrides": {
+    "catchUp": {
+      "maxSeconds": 72000
+    }
+  },
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1764460800000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "stageChanged",
+          "from": "egg",
+          "to": "baby"
+        },
+        {
+          "type": "stageChanged",
+          "from": "baby",
+          "to": "child"
+        },
+        {
+          "type": "stageChanged",
+          "from": "child",
+          "to": "teen"
+        },
+        {
+          "type": "stageChanged",
+          "from": "teen",
+          "to": "adult"
+        }
+      ],
+      "expectState": {
+        "pet.life": "alive",
+        "pet.stage": "adult",
+        "pet.lastUpdatedAt": 1764460800000,
+        "pet.gauges.satiety": 0,
+        "pet.gauges.happiness": 20,
+        "pet.gauges.energy": 10,
+        "pet.gauges.hygiene": 25,
+        "pet.gauges.health": 92.7633
+      }
+    }
+  ]
+}

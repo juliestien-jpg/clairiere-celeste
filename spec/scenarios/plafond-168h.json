@@ -1,0 +1,49 @@
+{
+  "scenarioVersion": 1,
+  "name": "plafond-168h",
+  "description": "G4 : une absence de 400 h est plafonnée à catchUp.maxSeconds (168 h), supérieur à la durée minimale avant l'Envol (76,9 h au pire) : l'animal est trouvé envolé, flownAt vers T+76,9 h, et l'horloge de l'animal s'arrête à l'Envol (lastUpdatedAt = savedAt = flownAt). Le stade suit l'âge réel au moment de l'Envol (enfant).",
+  "guarantee": "G4",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1764460800000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "stageChanged",
+          "from": "egg",
+          "to": "baby"
+        },
+        {
+          "type": "stageChanged",
+          "from": "baby",
+          "to": "child"
+        },
+        {
+          "type": "flewAway"
+        }
+      ],
+      "forbidEventTypes": [
+        "actionRefused"
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.stage": "child",
+        "pet.flownAt": 1763297820000,
+        "pet.lastUpdatedAt": 1763297820000,
+        "savedAt": 1763297820000
+      }
+    }
+  ]
+}

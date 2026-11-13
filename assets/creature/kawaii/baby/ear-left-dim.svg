@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+
+<defs>
+  <linearGradient id="ear-fill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF6E9"/><stop offset="1" stop-color="#F6DCEA"/>
+  </linearGradient>
+  <radialGradient id="ear-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".8"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ear-bud" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M104 96 C88 90 70 74 68 54 C67 44 77 40 84 48 C96 62 108 78 112 92 Z" fill="url(#ear-fill)" stroke="#9C8AD0" stroke-opacity=".85" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M82 58 C90 68 97 80 101 90 C94 86 84 76 80 64 Z" fill="#F4A6C6" fill-opacity=".45"/>
+<circle cx="75" cy="49" r="8" fill="#D9D0E6" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.5"/>
+<circle cx="72.5" cy="46.5" r="2" fill="#FFFFFF" fill-opacity=".6"/>
+</svg>

@@ -1,0 +1,48 @@
+{
+  "scenarioVersion": 1,
+  "name": "nuit-10h-bornes",
+  "description": "G1, départ le plus défavorable de la grille de docs/equilibrage.md 6 (jauges juste au-dessus de leur seuil bas : satiété 36, bonheur 36, hygiène 41, énergie 31, santé 76, déjà malade, éveillé) : après 10 h la santé vaut 66,07 (doc : 66,1), loin du seuil d'affaiblie (45).",
+  "guarantee": "G1",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 36,
+          "happiness": 36,
+          "hygiene": 41,
+          "energy": 31,
+          "health": 76
+        },
+        "status": {
+          "sick": true,
+          "sickSince": 1763020800000
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763056800000,
+      "action": {
+        "type": "tick"
+      }
+    }
+  ],
+  "forbidEventTypes": [
+    "weakened",
+    "flewAway"
+  ],
+  "expectState": {
+    "pet.life": "alive",
+    "pet.status.weakSince": null,
+    "pet.gauges.health": 66.0667
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "scenarioVersion": 1,
+  "name": "attention-initial-abandon",
+  "description": "D5, abandon à 08:00 depuis les jauges initiales : première notification à T+10 h (18:00, satiété basse), dans la journée donc non reportée (valeur non posée sur le seuil exact : voir la note de docs/equilibrage.md 3.1, la satiété initiale 80 atteint 35 à 10 h pile ; ici le départ est à 81 pour s'en écarter).",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 81
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "utcOffsetMin": 0,
+      "expect": {
+        "at": 1763057640000,
+        "need": "satiety"
+      }
+    }
+  ]
+}

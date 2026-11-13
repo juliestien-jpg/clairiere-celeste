@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tamagoshi.local/spec/save.schema.json",
+  "title": "Sauvegarde Tamagoshi (version 2)",
+  "description": "État sauvegardé versionné (Annexe A1 de docs/decisions.md). Toutes les jauges vont de 0 (au plus bas) à 100 (parfait). Horodatages en millisecondes UTC (entiers).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "savedAt", "pet", "album", "settings"],
+  "properties": {
+    "version": { "const": 2, "description": "Version du format." },
+    "savedAt": { "$ref": "#/$defs/timestamp" },
+    "pet": { "$ref": "#/$defs/pet" },
+    "album": {
+      "type": "array",
+      "description": "Une entrée par créature envolée ; les étoiles du ciel en sont dérivées.",
+      "items": { "$ref": "#/$defs/albumEntry" }
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reducedMotion", "sound", "notifications"],
+      "properties": {
+        "reducedMotion": { "enum": ["system", "on", "off"] },
+        "sound": { "type": "boolean" },
+        "notifications": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "timestamp": { "type": "integer", "description": "Millisecondes depuis l'époque Unix, UTC." },
+    "nullableTimestamp": { "type": ["integer", "null"] },
+    "gauge": { "type": "number", "minimum": 0, "maximum": 100 },
+    "stage": { "enum": ["egg", "baby", "child", "teen", "adult"] },
+    "kind": { "enum": ["kawaii", "feerique"], "description": "Espèce de la créature (D6), purement visuelle." },
+    "albumEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "bornAt", "flownAt", "stage", "kind"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "bornAt": { "$ref": "#/$defs/timestamp" },
+        "flownAt": { "$ref": "#/$defs/timestamp" },
+        "stage": { "$ref": "#/$defs/stage" },
+        "kind": { "$ref": "#/$defs/kind" }
+      }
+    },
+    "pet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "bornAt",
+        "stage",
+        "stageSince",
+        "life",
+        "flownAt",
+        "gauges",
+        "status",
+        "cooldowns",
+        "lastUpdatedAt",
+        "rng"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "description": "Identifiant de l'animal (UUID)." },
+        "name": { "type": "string" },
+        "kind": { "$ref": "#/$defs/kind" },
+        "bornAt": { "$ref": "#/$defs/timestamp" },
+        "stage": { "$ref": "#/$defs/stage" },
+        "stageSince": { "$ref": "#/$defs/timestamp" },
+        "life": { "enum": ["alive", "flown"] },
+        "flownAt": { "$ref": "#/$defs/nullableTimestamp", "description": "Instant de l'Envol, null tant que l'animal vit." },
+        "gauges": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["satiety", "happiness", "energy", "hygiene", "health"],
+          "properties": {
+            "satiety": { "$ref": "#/$defs/gauge" },
+            "happiness": { "$ref": "#/$defs/gauge" },
+            "energy": { "$ref": "#/$defs/gauge" },
+            "hygiene": { "$ref": "#/$defs/gauge" },
+            "health": { "$ref": "#/$defs/gauge" }
+          }
+        },
+        "status": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["asleep", "asleepSince", "sick", "sickSince", "messes", "messProgressSeconds", "weakSince"],
+          "properties": {
+            "asleep": { "type": "boolean" },
+            "asleepSince": { "$ref": "#/$defs/nullableTimestamp" },
+            "sick": { "type": "boolean" },
+            "sickSince": { "$ref": "#/$defs/nullableTimestamp" },
+            "messes": { "type": "integer", "minimum": 0 },
+            "messProgressSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Secondes d'éveil accumulées vers la prochaine salissure (0 à messes.everyHoursAwake * 3600)."
+            },
+            "weakSince": { "$ref": "#/$defs/nullableTimestamp", "description": "Instant d'entrée dans l'état « affaiblie », null sinon." }
+          }
+        },
+        "cooldowns": {
+          "type": "object",
+          "description": "Instants (ms) avant lesquels l'action est refusée ; 0 = disponible. Clés : feed.meal, feed.snack, heal, pet.",
+          "additionalProperties": { "type": "number", "minimum": 0 }
+        },
+        "lastUpdatedAt": { "$ref": "#/$defs/timestamp" },
+        "rng": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "État du générateur mulberry32 (entier non signé 32 bits)."
+        }
+      }
+    }
+  }
+}

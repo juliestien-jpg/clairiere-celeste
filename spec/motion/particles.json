@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "description": "Préréglages de particules (D4). Un seul canvas 2D en surimpression (web) ou un CustomPainter (Flutter). Longueurs et vitesses en unités du viewBox 240x240 de la créature, que le moteur met à l'échelle. Les couleurs sont des jetons de spec/theme.json.",
+  "limits": {
+    "maxParticles": 40,
+    "note": "Plafond global, tous préréglages confondus. Quand il est atteint, les émissions de priorité plus basse sont retardées ou abandonnées (priority : plus grand = plus important)."
+  },
+  "pauseWhenHidden": true,
+  "reducedMotion": "Aucune particule : le moteur ignore tous les préréglages quand le mouvement réduit est actif.",
+  "avoidZones": [
+    { "id": "face", "shape": "ellipse", "center": [120, 138], "radii": [52, 30], "rule": "Une particule qui entre dans la zone s'estompe à 0 : rien ne passe devant les yeux." }
+  ],
+  "shapes": {
+    "orb": "Disque avec lueur en dégradé radial",
+    "sparkle4": "Étincelle à quatre branches aux pointes arrondies",
+    "bubble": "Anneau fin avec reflet, centre quasi transparent",
+    "leaf": "Petite feuille en goutte allongée",
+    "moon": "Petit croissant",
+    "star": "Petite étoile à quatre branches, plus ronde"
+  },
+  "fields": {
+    "mode": "continuous (émission répétée) ou burst (une seule bouffée)",
+    "count": "burst : nombre de particules émises",
+    "emitDuration": "burst : durée sur laquelle les naissances sont étalées (ms)",
+    "maxAlive": "continuous : particules vivantes en même temps",
+    "spawnEveryMs": "continuous : intervalle entre deux naissances [min, max]",
+    "emitter": "point (center), ellipse (center, radii) ou line (from, to)",
+    "life": "durée de vie [min, max] en ms",
+    "speed": "[min, max] en unités par seconde",
+    "angle": "[min, max] en degrés, 0 = vers la droite, -90 = vers le haut",
+    "gravity": "unités par seconde², positif = vers le bas",
+    "wander": "oscillation latérale : amplitude (unités) et période [min, max] ms",
+    "spin": "rotation [min, max] en degrés par seconde",
+    "scaleOverLife": "[début, fin] multiplicateur de la taille",
+    "fade": "in et out : fractions de la vie passées à apparaître et à disparaître",
+    "motion": "free (par défaut), spiral (autour de center, rayon qui décroît) ou converge (vers target)",
+    "glow": "lueur peinte en dégradé radial : radius (multiple de la taille) et opacity",
+    "priority": "ordre de priorité face au plafond global",
+    "spiral": "motion spiral : center, radiusFrom, radiusTo, turns, rise (décalage vertical total)",
+    "avoidFace": "false pour ignorer la zone face (ex. Envol, où le visage a disparu)"
+  },
+  "presets": {
+    "ambient": {
+      "label": "Lucioles d'ambiance",
+      "mode": "continuous", "maxAlive": 7, "spawnEveryMs": [1100, 2200], "priority": 1,
+      "emitter": { "shape": "ellipse", "center": [120, 120], "radii": [150, 100] },
+      "shape": "orb", "colors": ["firefly-gold", "moonmilk-cream"],
+      "size": [2.4, 4.6], "life": [8000, 13000],
+      "speed": [4, 9], "angle": [-120, -60], "gravity": 0,
+      "wander": { "amplitude": 12, "period": [3200, 5200] },
+      "fade": { "in": 0.3, "out": 0.35 }, "scaleOverLife": [0.8, 1],
+      "glow": { "radius": 3.2, "opacity": 0.55 }
+    },
+    "feed": {
+      "label": "Nourrir : étincelles dorées",
+      "mode": "burst", "count": 14, "emitDuration": 500, "priority": 3,
+      "emitter": { "shape": "ellipse", "center": [120, 172], "radii": [34, 12] },
+      "shape": "sparkle4", "colors": ["firefly-gold", "moonmilk-cream"],
+      "size": [4, 8], "life": [900, 1500],
+      "speed": [18, 42], "angle": [-140, -40], "gravity": -6,
+      "wander": { "amplitude": 4, "period": [1200, 1800] },
+      "spin": [-40, 40],
+      "fade": { "in": 0.12, "out": 0.5 }, "scaleOverLife": [0.6, 1],
+      "glow": { "radius": 2.4, "opacity": 0.5 }
+    },
+    "wash": {
+      "label": "Laver : bulles irisées",
+      "mode": "burst", "count": 16, "emitDuration": 900, "priority": 3,
+      "emitter": { "shape": "ellipse", "center": [120, 150], "radii": [60, 40] },
+      "shape": "bubble", "colors": ["moon-blue", "dawn-pink", "fairy-mint", "moonmilk-cream"],
+      "size": [5, 11], "life": [1400, 2200],
+      "speed": [14, 30], "angle": [-120, -60], "gravity": -4,
+      "wander": { "amplitude": 8, "period": [1400, 2200] },
+      "fade": { "in": 0.15, "out": 0.4 }, "scaleOverLife": [0.7, 1.1],
+      "glow": { "radius": 1.6, "opacity": 0.3 }
+    },
+    "heal": {
+      "label": "Soigner : spirale de feuilles menthe",
+      "mode": "burst", "count": 12, "emitDuration": 900, "priority": 3,
+      "emitter": { "shape": "point", "center": [120, 190] },
+      "shape": "leaf", "colors": ["fairy-mint", "moonmilk-cream"],
+      "size": [5, 9], "life": [1600, 2200],
+      "speed": [30, 44], "angle": [-100, -80], "gravity": 0,
+      "motion": "spiral", "spiral": { "center": [120, 150], "radiusFrom": 78, "radiusTo": 60, "turns": 1.1, "rise": -40 },
+      "spin": [60, 120],
+      "fade": { "in": 0.15, "out": 0.4 }, "scaleOverLife": [1, 0.7],
+      "glow": { "radius": 2, "opacity": 0.4 }
+    },
+    "play": {
+      "label": "Jouer : pluie d'étoiles roses",
+      "mode": "burst", "count": 18, "emitDuration": 1400, "priority": 3,
+      "emitter": { "shape": "line", "from": [30, 10], "to": [210, 10] },
+      "shape": "star", "colors": ["dawn-pink", "firefly-gold", "moonmilk-cream"],
+      "size": [4, 8], "life": [1500, 2200],
+      "speed": [20, 40], "angle": [75, 105], "gravity": 14,
+      "wander": { "amplitude": 6, "period": [1200, 2000] },
+      "spin": [-50, 50],
+      "fade": { "in": 0.15, "out": 0.4 }, "scaleOverLife": [0.8, 1],
+      "glow": { "radius": 2.2, "opacity": 0.45 }
+    },
+    "sleep": {
+      "label": "Coucher : petites lunes qui montent",
+      "mode": "continuous", "maxAlive": 4, "spawnEveryMs": [1600, 2600], "priority": 2,
+      "emitter": { "shape": "ellipse", "center": [120, 70], "radii": [60, 10] },
+      "shape": "moon", "colors": ["moon-blue", "moonmilk-cream"],
+      "size": [6, 10], "life": [3800, 5200],
+      "speed": [8, 14], "angle": [-100, -80], "gravity": 0,
+      "wander": { "amplitude": 8, "period": [3000, 4200] },
+      "spin": [-12, 12],
+      "fade": { "in": 0.3, "out": 0.4 }, "scaleOverLife": [0.8, 1],
+      "glow": { "radius": 2, "opacity": 0.4 }
+    },
+    "hatch-kawaii": {
+      "label": "Éclosion kawaii : étincelles dorées et roses",
+      "mode": "burst", "count": 20, "emitDuration": 700, "priority": 4,
+      "emitter": { "shape": "ellipse", "center": [120, 100], "radii": [66, 14] },
+      "shape": "sparkle4", "colors": ["firefly-gold", "dawn-pink", "moonmilk-cream"],
+      "size": [4, 8], "life": [1000, 1700],
+      "speed": [20, 46], "angle": [-170, -10], "gravity": 10,
+      "wander": { "amplitude": 6, "period": [1200, 1800] },
+      "spin": [-50, 50],
+      "fade": { "in": 0.12, "out": 0.5 }, "scaleOverLife": [0.7, 1],
+      "glow": { "radius": 2.4, "opacity": 0.5 }
+    },
+    "hatch-feerique": {
+      "label": "Éclosion féérique : lucioles qui montent, menthe et bleu lune",
+      "mode": "burst", "count": 18, "emitDuration": 900, "priority": 4,
+      "emitter": { "shape": "ellipse", "center": [120, 150], "radii": [54, 46] },
+      "shape": "orb", "colors": ["fairy-mint", "moon-blue", "firefly-gold", "moonmilk-cream"],
+      "size": [2.6, 5], "life": [1600, 2500],
+      "speed": [12, 30], "angle": [-115, -65], "gravity": -6,
+      "wander": { "amplitude": 10, "period": [1800, 2800] },
+      "fade": { "in": 0.25, "out": 0.4 }, "scaleOverLife": [0.8, 1.1],
+      "glow": { "radius": 3, "opacity": 0.6 }
+    },
+    "flight": {
+      "label": "Envol : lumière dorée qui monte et se rassemble",
+      "mode": "burst", "count": 30, "emitDuration": 2800, "priority": 5,
+      "emitter": { "shape": "ellipse", "center": [120, 140], "radii": [56, 50] },
+      "shape": "sparkle4", "colors": ["firefly-gold", "moonmilk-cream", "firefly-gold"],
+      "size": [3, 7], "life": [2400, 3600],
+      "speed": [10, 24], "angle": [-120, -60], "gravity": 0,
+      "motion": "converge", "target": [120, -14], "avoidFace": false,
+      "wander": { "amplitude": 10, "period": [1800, 2600] },
+      "spin": [-30, 30],
+      "fade": { "in": 0.15, "out": 0.35 }, "scaleOverLife": [1, 0.5],
+      "glow": { "radius": 2.6, "opacity": 0.6 }
+    }
+  }
+}

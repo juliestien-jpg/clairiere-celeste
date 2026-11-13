@@ -1,0 +1,44 @@
+{
+  "scenarioVersion": 1,
+  "name": "actions-refusees-epuise",
+  "description": "Un animal endormi dont l'énergie est de 5 ou moins ne peut pas être réveillé (exhausted).",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "energy": 3
+        },
+        "status": {
+          "asleep": true,
+          "asleepSince": 1763020800000
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "wake"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "wake",
+          "reason": "exhausted"
+        }
+      ],
+      "expectState": {
+        "pet.status.asleep": true
+      }
+    }
+  ]
+}

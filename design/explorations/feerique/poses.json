@@ -1,0 +1,791 @@
+{
+  "version": 1,
+  "stage": "baby",
+  "variant": "feerique",
+  "description": "Poses de la variante féérique de la créature (stade bébé), pour les 8 états de deriveView. Même format que spec/motion/README.md ; chemins relatifs à CE fichier. Seules transform et opacity sont animées.",
+  "viewBox": {"width": 240, "height": 240},
+  "units": {"length": "unités du viewBox 240x240", "angle": "degrés, sens horaire positif", "time": "millisecondes"},
+  "paths": {
+    "note": "Les fichiers de parties (baby/…) sont relatifs à ce fichier ; les emblèmes pointent vers ../../../assets/emblems/ (inchangés). Dans l'app, tout serait relatif à assets/ comme dans spec/motion/poses.json."
+  },
+  "transition": {"duration": 900, "easing": "soft-in-out"},
+  "reducedMotion": {
+    "loops": "ignorées : on applique seulement la pose statique (static)",
+    "sequence": "image figée à l'offset reducedAt",
+    "transition": {"duration": 250, "easing": "linear", "note": "simple fondu"}
+  },
+  "priority": ["weak", "sick", "asleep", "hungry", "dirty", "tired", "happy"],
+  "easings": {
+    "linear": [0, 0, 1, 1],
+    "breath": [0.37, 0, 0.63, 1],
+    "soft-in-out": [0.45, 0.05, 0.35, 1],
+    "ease-out-soft": [0.22, 0.8, 0.3, 1],
+    "ease-in-soft": [0.5, 0, 0.8, 0.4],
+    "spring-soft": [0.34, 1.35, 0.5, 1]
+  },
+  "targets": {
+    "creature": {"kind": "group", "origin": [120, 204], "note": "Groupe racine : reçoit la boucle de repos (respiration)."},
+    "pose": {"kind": "group", "origin": [120, 204], "note": "Groupe imbriqué dans creature : pose et mouvement d'ensemble propres à l'état."},
+    "emblem": {"kind": "group", "origin": [32, 31], "note": "Bulle et emblème, repère 64x64."}
+  },
+  "parts": {
+    "shadow": {"origin": [120, 208], "variants": {"default": "baby/shadow.svg"}},
+    "halo": {
+      "origin": [120, 138],
+      "variants": {
+        "default": "baby/halo.svg",
+        "hungry": "baby/halo-hungry.svg",
+        "dim": "baby/halo-dim.svg",
+        "cold": "baby/halo-cold.svg",
+        "moon": "baby/halo-moon.svg",
+        "speckled": "baby/halo-speckled.svg",
+        "faint": "baby/halo-faint.svg"
+      }
+    },
+    "trail": {"origin": [120, 200], "variants": {"default": "baby/trail.svg"}},
+    "wing-left": {"origin": [76, 132], "variants": {"default": "baby/wing-left.svg", "dim": "baby/wing-left-dim.svg"}},
+    "wing-right": {"origin": [164, 132], "variants": {"default": "baby/wing-right.svg", "dim": "baby/wing-right-dim.svg"}},
+    "antenna-left": {"origin": [112, 76], "variants": {"lit": "baby/antenna-left.svg", "dim": "baby/antenna-left-dim.svg"}},
+    "antenna-right": {"origin": [128, 76], "variants": {"lit": "baby/antenna-right.svg", "dim": "baby/antenna-right-dim.svg"}},
+    "body": {"origin": [120, 198], "variants": {"default": "baby/body.svg"}},
+    "core": {
+      "origin": [120, 184],
+      "variants": {
+        "default": "baby/core.svg",
+        "hungry": "baby/core-hungry.svg",
+        "dim": "baby/core-dim.svg",
+        "cold": "baby/core-cold.svg",
+        "moon": "baby/core-moon.svg",
+        "faint": "baby/core-faint.svg"
+      }
+    },
+    "dust-stains": {"origin": [120, 140], "variants": {"default": "baby/dust-stains.svg"}},
+    "cheeks": {"origin": [120, 158], "variants": {"default": "baby/cheeks.svg", "sick": "baby/cheeks-sick.svg"}},
+    "eye-left": {
+      "origin": [96, 142],
+      "variants": {
+        "open": "baby/eye-left-open.svg",
+        "arc": "baby/eye-left-arc.svg",
+        "half": "baby/eye-left-half.svg",
+        "closed": "baby/eye-left-closed.svg"
+      }
+    },
+    "eye-right": {
+      "origin": [144, 142],
+      "variants": {
+        "open": "baby/eye-right-open.svg",
+        "arc": "baby/eye-right-arc.svg",
+        "half": "baby/eye-right-half.svg",
+        "closed": "baby/eye-right-closed.svg"
+      }
+    },
+    "mouth": {
+      "origin": [120, 161],
+      "variants": {
+        "smile": "baby/mouth-smile.svg",
+        "o": "baby/mouth-o.svg",
+        "yawn": "baby/mouth-yawn.svg",
+        "wavy": "baby/mouth-wavy.svg",
+        "sleep": "baby/mouth-sleep.svg",
+        "flat": "baby/mouth-flat.svg"
+      }
+    },
+    "hand": {"origin": [172, 164], "variants": {"default": "baby/hand.svg"}},
+    "dust-specks": {"origin": [120, 138], "variants": {"default": "baby/dust-specks.svg"}},
+    "star": {"origin": [120, 138], "variants": {"default": "baby/star.svg"}}
+  },
+  "layers": [
+    "shadow",
+    "halo",
+    "trail",
+    "wing-left",
+    "wing-right",
+    "antenna-left",
+    "antenna-right",
+    "body",
+    "core",
+    "dust-stains",
+    "cheeks",
+    "eye-left",
+    "eye-right",
+    "mouth",
+    "hand",
+    "dust-specks",
+    "star"
+  ],
+  "emblems": {
+    "starfruit": {"bubble": "../../../assets/emblems/bubble.svg", "file": "../../../assets/emblems/starfruit.svg", "label": "Fruit étoilé"},
+    "candle": {"bubble": "../../../assets/emblems/bubble.svg", "file": "../../../assets/emblems/candle.svg", "label": "Chandelle à demi consumée"},
+    "raincloud": {"bubble": "../../../assets/emblems/bubble.svg", "file": "../../../assets/emblems/raincloud.svg", "label": "Petit nuage de pluie"},
+    "moons": {"bubble": "../../../assets/emblems/bubble.svg", "file": "../../../assets/emblems/moons.svg", "label": "Petites lunes"},
+    "fading-star": {"bubble": "../../../assets/emblems/bubble.svg", "file": "../../../assets/emblems/fading-star.svg", "label": "Étoile qui pâlit"}
+  },
+  "rest": {
+    "id": "breathe",
+    "duration": 3600,
+    "iterations": "infinite",
+    "easing": "breath",
+    "targets": {"creature": [{"offset": 0, "scale": [1, 1]}, {"offset": 0.5, "scale": [0.992, 1.026]}, {"offset": 1, "scale": [1, 1]}]}
+  },
+  "states": {
+    "happy": {
+      "label": "Content",
+      "cue": "Yeux en arcs souriants, flottement léger, ailes qui frémissent, antennes lumineuses, halo doré plein et étoile dorée dans la poitrine",
+      "emblem": null,
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth"
+      ],
+      "variants": {
+        "halo": "default",
+        "wing-left": "default",
+        "wing-right": "default",
+        "antenna-left": "lit",
+        "antenna-right": "lit",
+        "core": "default",
+        "cheeks": "default",
+        "eye-left": "arc",
+        "eye-right": "arc",
+        "mouth": "smile"
+      },
+      "static": {},
+      "loops": [
+        {
+          "id": "float",
+          "duration": 3000,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "pose": [
+              {"offset": 0, "translate": [0, 0], "scale": [1, 1]},
+              {"offset": 0.5, "translate": [0, -9], "scale": [0.98, 1.03]},
+              {"offset": 1, "translate": [0, 0], "scale": [1, 1]}
+            ],
+            "shadow": [{"offset": 0, "scale": [1, 1], "opacity": 1}, {"offset": 0.5, "scale": [0.84, 0.84], "opacity": 0.6}, {"offset": 1, "scale": [1, 1], "opacity": 1}]
+          }
+        },
+        {
+          "id": "wing-flutter",
+          "duration": 2400,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "wing-left": [{"offset": 0, "rotate": 0}, {"offset": 0.5, "rotate": 9}, {"offset": 1, "rotate": 0}],
+            "wing-right": [{"offset": 0, "rotate": 0}, {"offset": 0.5, "rotate": -9}, {"offset": 1, "rotate": 0}]
+          }
+        },
+        {
+          "id": "antenna-sway",
+          "duration": 3400,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "antenna-left": [{"offset": 0, "rotate": 3}, {"offset": 0.5, "rotate": -6}, {"offset": 1, "rotate": 3}],
+            "antenna-right": [{"offset": 0, "rotate": -3}, {"offset": 0.5, "rotate": 6}, {"offset": 1, "rotate": -3}]
+          }
+        },
+        {
+          "id": "core-pulse",
+          "duration": 3600,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "core": [{"offset": 0, "scale": [1, 1], "opacity": 0.9}, {"offset": 0.5, "scale": [1.12, 1.12], "opacity": 1}, {"offset": 1, "scale": [1, 1], "opacity": 0.9}],
+            "halo": [{"offset": 0, "scale": [1, 1], "opacity": 0.9}, {"offset": 0.5, "scale": [1.04, 1.04], "opacity": 1}, {"offset": 1, "scale": [1, 1], "opacity": 0.9}]
+          }
+        },
+        {
+          "id": "trail-drift",
+          "duration": 4200,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {"trail": [{"offset": 0, "rotate": -3, "opacity": 0.8}, {"offset": 0.5, "rotate": 3, "opacity": 1}, {"offset": 1, "rotate": -3, "opacity": 0.8}]}
+        }
+      ],
+      "particles": [{"preset": "ambient", "continuous": true}]
+    },
+    "hungry": {
+      "label": "Faim",
+      "cue": "Bouche en « o », regard vers le bol, main sur le ventre, étoile de poitrine réduite à un anneau vide, antennes et ailes légèrement tombantes",
+      "emblem": "starfruit",
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth",
+        "hand"
+      ],
+      "variants": {
+        "halo": "hungry",
+        "wing-left": "default",
+        "wing-right": "default",
+        "antenna-left": "lit",
+        "antenna-right": "lit",
+        "core": "hungry",
+        "cheeks": "default",
+        "eye-left": "open",
+        "eye-right": "open",
+        "mouth": "o",
+        "hand": "default"
+      },
+      "static": {
+        "eye-left": {"translate": [-3, 3]},
+        "eye-right": {"translate": [-3, 3]},
+        "antenna-left": {"rotate": -12},
+        "antenna-right": {"rotate": 12},
+        "wing-left": {"rotate": -10},
+        "wing-right": {"rotate": 10}
+      },
+      "loops": [
+        {
+          "id": "sway",
+          "duration": 3400,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {"pose": [{"offset": 0, "rotate": 1.8}, {"offset": 0.5, "rotate": -1.8}, {"offset": 1, "rotate": 1.8}]}
+        },
+        {
+          "id": "belly-pat",
+          "duration": 2400,
+          "iterations": "infinite",
+          "easing": "soft-in-out",
+          "targets": {
+            "hand": [
+              {"offset": 0, "translate": [0, 0], "rotate": -4},
+              {"offset": 0.5, "translate": [-2, 3], "rotate": 4},
+              {"offset": 1, "translate": [0, 0], "rotate": -4}
+            ],
+            "mouth": [{"offset": 0, "scale": [1, 1]}, {"offset": 0.5, "scale": [1.14, 0.9]}, {"offset": 1, "scale": [1, 1]}]
+          }
+        },
+        {
+          "id": "core-hollow",
+          "duration": 3000,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {"core": [{"offset": 0, "opacity": 0.6}, {"offset": 0.5, "opacity": 0.95}, {"offset": 1, "opacity": 0.6}]}
+        },
+        {
+          "id": "emblem-bob",
+          "duration": 3200,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {"emblem": [{"offset": 0, "translate": [0, 0]}, {"offset": 0.5, "translate": [0, -3]}, {"offset": 1, "translate": [0, 0]}]}
+        }
+      ],
+      "particles": []
+    },
+    "tired": {
+      "label": "Fatigué",
+      "cue": "Somnolent mais debout : paupières lourdes, grand bâillement bouche ouverte, corps droit qui oscille lentement, antennes qui piquent du nez (boutons allumés), ailes repliées, étoile de poitrine tamisée",
+      "emblem": "candle",
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth"
+      ],
+      "variants": {
+        "halo": "dim",
+        "wing-left": "default",
+        "wing-right": "default",
+        "antenna-left": "lit",
+        "antenna-right": "lit",
+        "core": "dim",
+        "cheeks": "default",
+        "eye-left": "half",
+        "eye-right": "half",
+        "mouth": "yawn"
+      },
+      "static": {
+        "pose": {"translate": [0, 2]},
+        "antenna-left": {"rotate": -40},
+        "antenna-right": {"rotate": 40},
+        "wing-left": {"rotate": -6, "scale": [0.5, 0.75]},
+        "wing-right": {"rotate": 6, "scale": [0.5, 0.75]},
+        "mouth": {"scale": [1.05, 1.05]}
+      },
+      "loops": [
+        {
+          "id": "doze",
+          "duration": 5200,
+          "iterations": "infinite",
+          "easing": "soft-in-out",
+          "targets": {
+            "pose": [
+              {"offset": 0, "translate": [0, 2], "rotate": -3},
+              {"offset": 0.5, "translate": [0, 5], "rotate": 3},
+              {"offset": 1, "translate": [0, 2], "rotate": -3}
+            ],
+            "antenna-left": [{"offset": 0, "rotate": -40}, {"offset": 0.5, "rotate": -52}, {"offset": 1, "rotate": -40}],
+            "antenna-right": [{"offset": 0, "rotate": 40}, {"offset": 0.5, "rotate": 52}, {"offset": 1, "rotate": 40}],
+            "mouth": [{"offset": 0, "scale": [0.95, 0.95]}, {"offset": 0.5, "scale": [1.15, 1.15]}, {"offset": 1, "scale": [0.95, 0.95]}],
+            "eye-left": [{"offset": 0, "scale": [1, 1]}, {"offset": 0.5, "scale": [1, 0.6]}, {"offset": 1, "scale": [1, 1]}],
+            "eye-right": [{"offset": 0, "scale": [1, 1]}, {"offset": 0.5, "scale": [1, 0.6]}, {"offset": 1, "scale": [1, 1]}]
+          }
+        },
+        {
+          "id": "emblem-bob",
+          "duration": 3600,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {"emblem": [{"offset": 0, "translate": [0, 0]}, {"offset": 0.5, "translate": [0, -3]}, {"offset": 1, "translate": [0, 0]}]}
+        }
+      ],
+      "particles": []
+    },
+    "sick": {
+      "label": "Malade",
+      "cue": "Corps affaissé, léger frisson, bouche ondulée, joues et constellation vert tisane, ailes pâles repliées, halo pâle et froid",
+      "emblem": "raincloud",
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth"
+      ],
+      "variants": {
+        "halo": "cold",
+        "wing-left": "dim",
+        "wing-right": "dim",
+        "antenna-left": "lit",
+        "antenna-right": "lit",
+        "core": "cold",
+        "cheeks": "sick",
+        "eye-left": "open",
+        "eye-right": "open",
+        "mouth": "wavy"
+      },
+      "static": {
+        "pose": {"translate": [0, 5], "scale": [1.05, 0.93]},
+        "antenna-left": {"rotate": -24},
+        "antenna-right": {"rotate": 24},
+        "wing-left": {"rotate": -14, "scale": [0.92, 0.92]},
+        "wing-right": {"rotate": 14, "scale": [0.92, 0.92]},
+        "eye-left": {"translate": [0, 2], "scale": [1, 0.9]},
+        "eye-right": {"translate": [0, 2], "scale": [1, 0.9]}
+      },
+      "loops": [
+        {
+          "id": "shiver",
+          "duration": 3200,
+          "iterations": "infinite",
+          "easing": "soft-in-out",
+          "targets": {
+            "pose": [
+              {"offset": 0, "translate": [0, 5]},
+              {"offset": 0.08, "translate": [-1.4, 5]},
+              {"offset": 0.16, "translate": [1.4, 5]},
+              {"offset": 0.24, "translate": [-1.2, 5]},
+              {"offset": 0.32, "translate": [1.2, 5]},
+              {"offset": 0.4, "translate": [0, 5]},
+              {"offset": 1, "translate": [0, 5]}
+            ]
+          }
+        },
+        {
+          "id": "halo-ebb",
+          "duration": 4000,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {"halo": [{"offset": 0, "opacity": 0.75}, {"offset": 0.5, "opacity": 0.95}, {"offset": 1, "opacity": 0.75}]}
+        },
+        {
+          "id": "emblem-bob",
+          "duration": 3200,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {"emblem": [{"offset": 0, "translate": [0, 0]}, {"offset": 0.5, "translate": [0, -3]}, {"offset": 1, "translate": [0, 0]}]}
+        }
+      ],
+      "particles": []
+    },
+    "asleep": {
+      "label": "Endormi",
+      "cue": "Roulé en boule, yeux fermés en traits courbes, antennes couchées, ailes repliées, respiration lente, veilleuse bleu lune",
+      "emblem": "moons",
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth"
+      ],
+      "variants": {
+        "halo": "moon",
+        "wing-left": "default",
+        "wing-right": "default",
+        "antenna-left": "lit",
+        "antenna-right": "lit",
+        "core": "moon",
+        "cheeks": "default",
+        "eye-left": "closed",
+        "eye-right": "closed",
+        "mouth": "sleep"
+      },
+      "static": {
+        "pose": {"translate": [0, 8], "scale": [1.08, 0.88]},
+        "antenna-left": {"rotate": -78},
+        "antenna-right": {"rotate": 78},
+        "wing-left": {"rotate": -50, "scale": [0.7, 0.7]},
+        "wing-right": {"rotate": 50, "scale": [0.7, 0.7]}
+      },
+      "rest": {
+        "id": "sleep-breathe",
+        "duration": 5200,
+        "iterations": "infinite",
+        "easing": "breath",
+        "targets": {"creature": [{"offset": 0, "scale": [1, 1]}, {"offset": 0.5, "scale": [0.99, 1.03]}, {"offset": 1, "scale": [1, 1]}]}
+      },
+      "loops": [
+        {
+          "id": "halo-lull",
+          "duration": 5200,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "halo": [{"offset": 0, "opacity": 0.7}, {"offset": 0.5, "opacity": 1}, {"offset": 1, "opacity": 0.7}],
+            "core": [{"offset": 0, "opacity": 0.6}, {"offset": 0.5, "opacity": 1}, {"offset": 1, "opacity": 0.6}]
+          }
+        },
+        {
+          "id": "moons-rise",
+          "duration": 4800,
+          "iterations": "infinite",
+          "easing": "soft-in-out",
+          "targets": {
+            "emblem": [
+              {"offset": 0, "translate": [0, 8], "opacity": 0},
+              {"offset": 0.3, "translate": [0, 3], "opacity": 1},
+              {"offset": 0.8, "translate": [0, -4], "opacity": 1},
+              {"offset": 1, "translate": [0, -8], "opacity": 0}
+            ]
+          }
+        }
+      ],
+      "particles": [{"preset": "sleep", "continuous": true}]
+    },
+    "dirty": {
+      "label": "Sale",
+      "cue": "Taches de poussière d'ombre sur le corps, poussières grises en orbite lente, bouche plate, ailes et halo ternis de grains",
+      "emblem": null,
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "dust-stains",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth",
+        "dust-specks"
+      ],
+      "variants": {
+        "halo": "speckled",
+        "wing-left": "dim",
+        "wing-right": "dim",
+        "antenna-left": "lit",
+        "antenna-right": "lit",
+        "core": "default",
+        "cheeks": "default",
+        "eye-left": "open",
+        "eye-right": "open",
+        "mouth": "flat"
+      },
+      "static": {"wing-left": {"rotate": -6}, "wing-right": {"rotate": 6}},
+      "loops": [
+        {
+          "id": "dust-orbit",
+          "duration": 16000,
+          "iterations": "infinite",
+          "easing": "linear",
+          "targets": {"dust-specks": [{"offset": 0, "rotate": 0}, {"offset": 1, "rotate": 360}]}
+        },
+        {
+          "id": "itch",
+          "duration": 3800,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "pose": [{"offset": 0, "rotate": -2}, {"offset": 0.5, "rotate": 2}, {"offset": 1, "rotate": -2}],
+            "antenna-right": [{"offset": 0, "rotate": 0}, {"offset": 0.5, "rotate": 6}, {"offset": 1, "rotate": 0}],
+            "wing-left": [{"offset": 0, "rotate": -6}, {"offset": 0.5, "rotate": -1}, {"offset": 1, "rotate": -6}],
+            "wing-right": [{"offset": 0, "rotate": 6}, {"offset": 0.5, "rotate": 1}, {"offset": 1, "rotate": 6}]
+          }
+        }
+      ],
+      "particles": []
+    },
+    "weak": {
+      "label": "Affaiblie",
+      "cue": "Posée sur la clairière, presque allongée et translucide, antennes inertes aux boutons éteints, ailes presque invisibles, étoile de poitrine réduite à une étincelle qui vacille, regard mi-clos tourné vers le joueur",
+      "emblem": "fading-star",
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth"
+      ],
+      "variants": {
+        "halo": "faint",
+        "wing-left": "dim",
+        "wing-right": "dim",
+        "antenna-left": "dim",
+        "antenna-right": "dim",
+        "core": "faint",
+        "cheeks": "default",
+        "eye-left": "half",
+        "eye-right": "half",
+        "mouth": "flat"
+      },
+      "static": {
+        "pose": {"translate": [0, 18], "scale": [1.2, 0.66], "opacity": 0.52},
+        "antenna-left": {"rotate": -76},
+        "antenna-right": {"rotate": 76},
+        "wing-left": {"rotate": -10, "scale": [0.8, 0.8], "opacity": 0.3},
+        "wing-right": {"rotate": 10, "scale": [0.8, 0.8], "opacity": 0.3},
+        "eye-left": {"translate": [0, 3]},
+        "eye-right": {"translate": [0, 3]},
+        "trail": {"opacity": 0.4}
+      },
+      "rest": {
+        "id": "weak-breathe",
+        "duration": 7200,
+        "iterations": "infinite",
+        "easing": "breath",
+        "targets": {"creature": [{"offset": 0, "scale": [1, 1]}, {"offset": 0.5, "scale": [0.996, 1.012]}, {"offset": 1, "scale": [1, 1]}]}
+      },
+      "loops": [
+        {
+          "id": "fade-pulse",
+          "duration": 7000,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "pose": [
+              {"offset": 0, "translate": [0, 18], "scale": [1.2, 0.66], "opacity": 0.44},
+              {"offset": 0.5, "translate": [0, 18], "scale": [1.2, 0.66], "opacity": 0.6},
+              {"offset": 1, "translate": [0, 18], "scale": [1.2, 0.66], "opacity": 0.44}
+            ],
+            "halo": [{"offset": 0, "opacity": 0.4}, {"offset": 0.5, "opacity": 0.9}, {"offset": 1, "opacity": 0.4}]
+          }
+        },
+        {
+          "id": "spark-flicker",
+          "duration": 2600,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "core": [
+              {"offset": 0, "scale": [0.9, 0.9], "opacity": 0.35},
+              {"offset": 0.5, "scale": [1.15, 1.15], "opacity": 1},
+              {"offset": 1, "scale": [0.9, 0.9], "opacity": 0.35}
+            ]
+          }
+        },
+        {
+          "id": "star-fade",
+          "duration": 6000,
+          "iterations": "infinite",
+          "easing": "breath",
+          "targets": {
+            "emblem": [
+              {"offset": 0, "scale": [0.96, 0.96], "opacity": 0.55},
+              {"offset": 0.5, "scale": [1.04, 1.04], "opacity": 1},
+              {"offset": 1, "scale": [0.96, 0.96], "opacity": 0.55}
+            ]
+          }
+        }
+      ],
+      "particles": [{"preset": "ambient", "continuous": true, "note": "quelques lucioles qui montent lentement, début d'Envol"}]
+    },
+    "flown": {
+      "label": "Envol",
+      "cue": "La créature se défait en lumière dorée, ailes et antennes se dissolvent, elle monte et devient une étoile du ciel",
+      "emblem": null,
+      "visible": [
+        "shadow",
+        "halo",
+        "trail",
+        "wing-left",
+        "wing-right",
+        "antenna-left",
+        "antenna-right",
+        "body",
+        "core",
+        "cheeks",
+        "eye-left",
+        "eye-right",
+        "mouth",
+        "star"
+      ],
+      "variants": {
+        "halo": "default",
+        "wing-left": "default",
+        "wing-right": "default",
+        "antenna-left": "lit",
+        "antenna-right": "lit",
+        "core": "default",
+        "cheeks": "default",
+        "eye-left": "closed",
+        "eye-right": "closed",
+        "mouth": "sleep",
+        "star": "default"
+      },
+      "static": {"star": {"opacity": 0, "scale": [0.2, 0.2]}},
+      "rest": null,
+      "loops": [],
+      "sequence": {
+        "id": "envol",
+        "duration": 9000,
+        "iterations": 1,
+        "fill": "forwards",
+        "easing": "soft-in-out",
+        "reducedAt": 1,
+        "targets": {
+          "pose": [
+            {"offset": 0, "translate": [0, 0], "easing": "soft-in-out"},
+            {"offset": 0.1, "translate": [0, -3], "easing": "ease-out-soft"},
+            {"offset": 0.55, "translate": [0, -26]},
+            {"offset": 1, "translate": [0, -40]}
+          ],
+          "halo": [
+            {"offset": 0, "scale": [1, 1], "opacity": 1},
+            {"offset": 0.2, "scale": [1.2, 1.2], "opacity": 1},
+            {"offset": 0.5, "scale": [1.35, 1.35], "opacity": 0.7},
+            {"offset": 0.88, "scale": [1.5, 1.5], "opacity": 0},
+            {"offset": 1, "scale": [1.5, 1.5], "opacity": 0}
+          ],
+          "eye-left": [{"offset": 0, "opacity": 1}, {"offset": 0.08, "opacity": 1}, {"offset": 0.3, "opacity": 0}, {"offset": 1, "opacity": 0}],
+          "eye-right": [{"offset": 0, "opacity": 1}, {"offset": 0.08, "opacity": 1}, {"offset": 0.3, "opacity": 0}, {"offset": 1, "opacity": 0}],
+          "mouth": [{"offset": 0, "opacity": 1}, {"offset": 0.08, "opacity": 1}, {"offset": 0.3, "opacity": 0}, {"offset": 1, "opacity": 0}],
+          "cheeks": [{"offset": 0, "opacity": 1}, {"offset": 0.1, "opacity": 1}, {"offset": 0.38, "opacity": 0}, {"offset": 1, "opacity": 0}],
+          "core": [
+            {"offset": 0, "scale": [1, 1], "opacity": 1},
+            {"offset": 0.15, "scale": [1.4, 1.4], "opacity": 1},
+            {"offset": 0.45, "scale": [2, 2], "opacity": 0},
+            {"offset": 1, "scale": [2, 2], "opacity": 0}
+          ],
+          "antenna-left": [
+            {"offset": 0, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.1, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.45, "translate": [-3, -14], "rotate": -10, "opacity": 0},
+            {"offset": 1, "translate": [-3, -14], "rotate": -10, "opacity": 0}
+          ],
+          "antenna-right": [
+            {"offset": 0, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.1, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.45, "translate": [3, -14], "rotate": 10, "opacity": 0},
+            {"offset": 1, "translate": [3, -14], "rotate": 10, "opacity": 0}
+          ],
+          "wing-left": [
+            {"offset": 0, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.1, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.4, "translate": [-4, -10], "rotate": 12, "opacity": 0},
+            {"offset": 1, "translate": [-4, -10], "rotate": 12, "opacity": 0}
+          ],
+          "wing-right": [
+            {"offset": 0, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.1, "translate": [0, 0], "rotate": 0, "opacity": 1},
+            {"offset": 0.4, "translate": [4, -10], "rotate": -12, "opacity": 0},
+            {"offset": 1, "translate": [4, -10], "rotate": -12, "opacity": 0}
+          ],
+          "trail": [{"offset": 0, "opacity": 1}, {"offset": 0.1, "opacity": 1}, {"offset": 0.4, "opacity": 0}, {"offset": 1, "opacity": 0}],
+          "body": [
+            {"offset": 0, "scale": [1, 1], "opacity": 1},
+            {"offset": 0.14, "scale": [1, 1], "opacity": 1},
+            {"offset": 0.5, "scale": [1.12, 1.12], "opacity": 0},
+            {"offset": 1, "scale": [1.12, 1.12], "opacity": 0}
+          ],
+          "shadow": [{"offset": 0, "opacity": 1}, {"offset": 0.5, "opacity": 0.5}, {"offset": 0.9, "opacity": 0}, {"offset": 1, "opacity": 0}],
+          "star": [
+            {"offset": 0, "translate": [0, 0], "scale": [0.2, 0.2], "opacity": 0, "easing": "linear"},
+            {"offset": 0.22, "translate": [0, 0], "scale": [0.2, 0.2], "opacity": 0, "easing": "ease-out-soft"},
+            {"offset": 0.4, "translate": [0, -6], "scale": [0.5, 0.5], "opacity": 1, "easing": "soft-in-out"},
+            {"offset": 0.62, "translate": [0, -50], "scale": [0.62, 0.62], "opacity": 1, "easing": "ease-out-soft"},
+            {"offset": 1, "translate": [0, -112], "scale": [0.7, 0.7], "opacity": 1}
+          ]
+        }
+      },
+      "after": {
+        "loops": [
+          {
+            "id": "star-twinkle",
+            "duration": 3200,
+            "iterations": "infinite",
+            "easing": "breath",
+            "targets": {
+              "star": [
+                {"offset": 0, "translate": [0, -112], "scale": [0.68, 0.68], "opacity": 0.9},
+                {"offset": 0.5, "translate": [0, -112], "scale": [0.74, 0.74], "opacity": 1},
+                {"offset": 1, "translate": [0, -112], "scale": [0.68, 0.68], "opacity": 0.9}
+              ]
+            }
+          }
+        ]
+      },
+      "particles": [{"preset": "flight", "at": 0.08}]
+    }
+  }
+}

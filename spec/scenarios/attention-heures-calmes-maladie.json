@@ -1,0 +1,33 @@
+{
+  "scenarioVersion": 1,
+  "name": "attention-heures-calmes-maladie",
+  "description": "D5 : même départ avec la pire malchance : la maladie (satiété critique vers T+18,4 h, 02:26 UTC) apparaît pendant les heures calmes elle aussi ; à 08:00 le lendemain la notification groupée désigne la maladie, besoin plus pressant que la satiété.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 97.8
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "utcOffsetMin": 0,
+      "expect": {
+        "at": 1763107200000,
+        "need": "sick"
+      }
+    }
+  ]
+}

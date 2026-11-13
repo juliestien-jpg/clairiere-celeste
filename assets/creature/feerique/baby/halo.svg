@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <radialGradient id="halo-gold" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.9"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.55"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.2"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#halo-gold)"/>
+</svg>

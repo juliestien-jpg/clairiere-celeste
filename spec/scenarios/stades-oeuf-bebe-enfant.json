@@ -1,0 +1,72 @@
+{
+  "scenarioVersion": 1,
+  "name": "stades-oeuf-bebe-enfant",
+  "description": "L'œuf devient bébé à 3 minutes (0,05 h) puis enfant à 24 h ; aucun événement entre les deux.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020920000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "stageChanged"
+      ],
+      "expectState": {
+        "pet.stage": "egg"
+      }
+    },
+    {
+      "nowMs": 1763021040000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "stageChanged",
+          "from": "egg",
+          "to": "baby"
+        }
+      ],
+      "expectState": {
+        "pet.stage": "baby",
+        "pet.stageSince": 1763020980000
+      }
+    },
+    {
+      "nowMs": 1763103600000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "stageChanged"
+      ]
+    },
+    {
+      "nowMs": 1763110800000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "stageChanged",
+          "from": "baby",
+          "to": "child"
+        }
+      ],
+      "expectState": {
+        "pet.stage": "child",
+        "pet.stageSince": 1763107200000
+      }
+    }
+  ]
+}

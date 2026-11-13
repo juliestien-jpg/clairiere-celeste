@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <radialGradient id="fa-glow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="fa-bud" cx=".38" cy=".32" r=".75">
+    <stop offset="0" stop-color="#FFF6D8"/><stop offset="1" stop-color="#FFD27A"/>
+  </radialGradient>
+</defs>
+<path d="M112 76 C111 54 99 38 83 36 C77 36 73 40 73 45" fill="none" stroke="#6A5AAE" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M105 64 C96 64 91 58 91 51 C99 52 105 57 105 64 Z" fill="#8FE3CF" stroke="#6A5AAE" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="73" cy="54" r="21" fill="url(#fa-glow)"/>
+<circle cx="73" cy="54" r="8.6" fill="url(#fa-bud)" stroke="#B9791A" stroke-width="2.4"/>
+<path d="M66.5 47.5 C68 43 78 43 79.5 47.5 C76.5 46.3 69.5 46.3 66.5 47.5 Z" fill="#8FE3CF" stroke="#6A5AAE" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M73 51.8 Q73.64 54.36 76.2 55 Q73.64 55.64 73 58.2 Q72.36 55.64 69.8 55 Q72.36 54.36 73 51.8 Z" fill="#FFFFFF" fill-opacity=".95"/>
+</svg>

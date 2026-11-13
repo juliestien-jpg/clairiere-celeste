@@ -1,0 +1,157 @@
+{
+  "scenarioVersion": 1,
+  "name": "migrate-v1",
+  "description": "migrate : une sauvegarde v1 valide est migrée en v2 (espèce kawaii, D6) ; une sauvegarde illisible lève une erreur typée (codes notAnObject, missingVersion, unsupportedVersion, invalid), jamais autre chose.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 7,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 7
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectState": {
+        "version": 2,
+        "pet.kind": "kawaii",
+        "pet.name": "Lumi",
+        "pet.rng": 7,
+        "pet.status.messProgressSeconds": 0,
+        "settings.reducedMotion": "system"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": 42,
+      "expectError": "notAnObject"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {},
+      "expectError": "missingVersion"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 99
+      },
+      "expectError": "unsupportedVersion"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 0
+      },
+      "expectError": "unsupportedVersion"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 120
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 7
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    }
+  ]
+}

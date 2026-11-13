@@ -1,0 +1,49 @@
+{
+  "scenarioVersion": 1,
+  "name": "attention-historique",
+  "description": "D5, historique des notifications (A2) : la satiété (97,9) devient basse vers 22:00 UTC (heures calmes), elle est annoncée pour 08:00 le lendemain. À 23:00, après un recalcul, le besoin actif mais jamais envoyé reste dû (même instant) : avec un historique vide il n'est pas perdu. Une fois envoyé (présent dans history.sent), il n'est plus dû.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 97.9
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "expect": {
+        "at": 1763107200000,
+        "need": "satiety"
+      }
+    },
+    {
+      "nowMs": 1763074800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763074800000,
+      "query": "nextAttentionAt",
+      "history": {
+        "sent": []
+      },
+      "expect": {
+        "at": 1763107200000,
+        "need": "satiety"
+      }
+    }
+  ]
+}

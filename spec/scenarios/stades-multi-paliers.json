@@ -1,0 +1,55 @@
+{
+  "scenarioVersion": 1,
+  "name": "stades-multi-paliers",
+  "description": "Les stades suivent l'âge réel (egg 0 h, baby 0,05 h, child 24 h, teen 96 h, adult 240 h) : un animal né 300 h plus tôt franchit tous les paliers d'un seul rattrapage, un événement stageChanged par palier, dans l'ordre. stageSince = bornAt + seuil du stade atteint.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "bornAt": 1761940800000,
+        "stageSince": 1761940800000
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020860000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "stageChanged",
+          "from": "egg",
+          "to": "baby"
+        },
+        {
+          "type": "stageChanged",
+          "from": "baby",
+          "to": "child"
+        },
+        {
+          "type": "stageChanged",
+          "from": "child",
+          "to": "teen"
+        },
+        {
+          "type": "stageChanged",
+          "from": "teen",
+          "to": "adult"
+        }
+      ],
+      "expectState": {
+        "pet.stage": "adult",
+        "pet.stageSince": 1762804800000
+      }
+    }
+  ]
+}

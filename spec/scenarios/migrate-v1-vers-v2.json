@@ -1,0 +1,289 @@
+{
+  "scenarioVersion": 1,
+  "name": "migrate-v1-vers-v2",
+  "description": "Migration v1 -> v2 (D6) : une sauvegarde v1 (animal envolé, deux entrées d'album, sans aucune espèce) devient v2 ; pet.kind et chaque album[].kind valent kawaii, tout le reste est conservé tel quel (rng, jauges, réglages, album dans le même ordre). Une v1 portant déjà un kind (invalide pour v1) est quand même ramenée à kawaii. Une v1 illisible reste invalide.",
+  "guarantee": "D6",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000009",
+      "name": "Init",
+      "seed": 7,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763298000000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1763298000000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "bornAt": 1763020800000,
+          "stage": "child",
+          "stageSince": 1763107200000,
+          "life": "flown",
+          "flownAt": 1763298000000,
+          "gauges": {
+            "satiety": 0,
+            "happiness": 0,
+            "energy": 50,
+            "hygiene": 10,
+            "health": 0
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": true,
+            "sickSince": 1763200000000,
+            "messes": 3,
+            "messProgressSeconds": 0,
+            "weakSince": 1763196000000
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763298000000,
+          "rng": 123456
+        },
+        "album": [
+          {
+            "id": "00000000-0000-4000-8000-000000000101",
+            "name": "Etoile",
+            "bornAt": 1762000000001,
+            "flownAt": 1762500000001,
+            "stage": "adult"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000102",
+            "name": "Astre",
+            "bornAt": 1762000000002,
+            "flownAt": 1762500000002,
+            "stage": "adult"
+          }
+        ],
+        "settings": {
+          "reducedMotion": "on",
+          "sound": false,
+          "notifications": true
+        }
+      },
+      "expectState": {
+        "version": 2,
+        "pet.kind": "kawaii",
+        "pet.name": "Lumi",
+        "pet.rng": 123456,
+        "pet.life": "flown",
+        "pet.flownAt": 1763298000000,
+        "pet.status.messes": 3,
+        "settings.reducedMotion": "on",
+        "settings.sound": false,
+        "album": [
+          {
+            "id": "00000000-0000-4000-8000-000000000101",
+            "name": "Etoile",
+            "bornAt": 1762000000001,
+            "flownAt": 1762500000001,
+            "stage": "adult",
+            "kind": "kawaii"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000102",
+            "name": "Astre",
+            "bornAt": 1762000000002,
+            "flownAt": 1762500000002,
+            "stage": "adult",
+            "kind": "kawaii"
+          }
+        ]
+      }
+    },
+    {
+      "nowMs": 1763298000000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1763298000000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "kind": "feerique",
+          "bornAt": 1763020800000,
+          "stage": "child",
+          "stageSince": 1763107200000,
+          "life": "flown",
+          "flownAt": 1763298000000,
+          "gauges": {
+            "satiety": 0,
+            "happiness": 0,
+            "energy": 50,
+            "hygiene": 10,
+            "health": 0
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": true,
+            "sickSince": 1763200000000,
+            "messes": 3,
+            "messProgressSeconds": 0,
+            "weakSince": 1763196000000
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763298000000,
+          "rng": 123456
+        },
+        "album": [
+          {
+            "id": "00000000-0000-4000-8000-000000000101",
+            "name": "Etoile",
+            "bornAt": 1762000000001,
+            "flownAt": 1762500000001,
+            "stage": "adult",
+            "kind": "feerique"
+          }
+        ],
+        "settings": {
+          "reducedMotion": "on",
+          "sound": false,
+          "notifications": true
+        }
+      },
+      "expectState": {
+        "version": 2,
+        "pet.kind": "kawaii",
+        "album.0.kind": "kawaii"
+      }
+    },
+    {
+      "nowMs": 1763298000000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1763298000000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "bornAt": 1763020800000,
+          "stage": "child",
+          "stageSince": 1763107200000,
+          "life": "flown",
+          "flownAt": 1763298000000,
+          "gauges": {
+            "satiety": 0,
+            "happiness": 0,
+            "energy": 50,
+            "hygiene": 10,
+            "health": 0
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": true,
+            "sickSince": 1763200000000,
+            "messes": 3,
+            "messProgressSeconds": 0,
+            "weakSince": 1763196000000
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763298000000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "on",
+          "sound": false,
+          "notifications": true
+        }
+      },
+      "expectState": {
+        "version": 2,
+        "pet.kind": "kawaii",
+        "album": []
+      }
+    },
+    {
+      "nowMs": 1763298000000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1763298000000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "bornAt": 1763020800000,
+          "stage": "child",
+          "stageSince": 1763107200000,
+          "life": "flown",
+          "flownAt": 1763298000000,
+          "gauges": {
+            "satiety": 0,
+            "happiness": 0,
+            "energy": 50,
+            "hygiene": 10,
+            "health": 0
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": true,
+            "sickSince": 1763200000000,
+            "messes": 3,
+            "messProgressSeconds": 0,
+            "weakSince": 1763196000000
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763298000000,
+          "rng": 123456
+        },
+        "album": [
+          1
+        ],
+        "settings": {
+          "reducedMotion": "on",
+          "sound": false,
+          "notifications": true
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763298000000,
+      "query": "migrate",
+      "raw": {
+        "version": 1,
+        "savedAt": 1763298000000,
+        "pet": null,
+        "album": [],
+        "settings": {
+          "reducedMotion": "on",
+          "sound": false,
+          "notifications": true
+        }
+      },
+      "expectError": "invalid"
+    }
+  ]
+}

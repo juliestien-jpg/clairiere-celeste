@@ -1,0 +1,205 @@
+{
+  "scenarioVersion": 1,
+  "name": "actions-refusees",
+  "description": "Une action impossible ne change pas l'état et émet actionRefused, sans exception : repas alors que la satiété dépasse 90 (notHungry), coucher alors que l'énergie dépasse 85 (notTired), nettoyer un animal propre (alreadyClean), soigner un animal sain (nothingToHeal), réveiller un animal éveillé (notAsleep), jouer avec une énergie trop basse (tooTired), caresser pendant l'attente (cooldown), toute action pendant le sommeil (asleep). L'heure ne change pas entre les étapes : aucun temps ne passe.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 95,
+          "energy": 95
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "feed",
+          "reason": "notHungry"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 95,
+        "pet.gauges.happiness": 80,
+        "pet.gauges.energy": 95,
+        "pet.gauges.hygiene": 100,
+        "pet.gauges.health": 100
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "feed",
+        "food": "snack"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "feed",
+          "reason": "notHungry"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 95,
+        "pet.gauges.happiness": 80,
+        "pet.gauges.energy": 95,
+        "pet.gauges.hygiene": 100,
+        "pet.gauges.health": 100
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "sleep"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "sleep",
+          "reason": "notTired"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 95,
+        "pet.gauges.happiness": 80,
+        "pet.gauges.energy": 95,
+        "pet.gauges.hygiene": 100,
+        "pet.gauges.health": 100
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "clean"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "clean",
+          "reason": "alreadyClean"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 95,
+        "pet.gauges.happiness": 80,
+        "pet.gauges.energy": 95,
+        "pet.gauges.hygiene": 100,
+        "pet.gauges.health": 100
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "heal"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "heal",
+          "reason": "nothingToHeal"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 95,
+        "pet.gauges.happiness": 80,
+        "pet.gauges.energy": 95,
+        "pet.gauges.hygiene": 100,
+        "pet.gauges.health": 100
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "wake"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "wake",
+          "reason": "notAsleep"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 95,
+        "pet.gauges.happiness": 80,
+        "pet.gauges.energy": 95,
+        "pet.gauges.hygiene": 100,
+        "pet.gauges.health": 100
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "rebirth",
+        "id": "x",
+        "name": "Y",
+        "seed": 1
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "notFlown"
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 95,
+        "pet.gauges.happiness": 80,
+        "pet.gauges.energy": 95,
+        "pet.gauges.hygiene": 100,
+        "pet.gauges.health": 100
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "pet"
+      },
+      "expectEvents": [],
+      "expectState": {
+        "pet.gauges.happiness": 85
+      }
+    },
+    {
+      "nowMs": 1763020900000,
+      "action": {
+        "type": "pet"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "pet",
+          "reason": "cooldown"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763021100000,
+      "action": {
+        "type": "pet"
+      },
+      "forbidEventTypes": [
+        "actionRefused"
+      ],
+      "expectState": {
+        "pet.gauges.happiness": 89.75
+      }
+    }
+  ]
+}

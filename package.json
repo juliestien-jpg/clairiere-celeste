@@ -1,0 +1,13 @@
+{
+  "name": "tamagoshi",
+  "private": true,
+  "description": "Tamagoshi : animal virtuel (web puis Flutter). Règles du jeu dans packages/rules.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  }
+}

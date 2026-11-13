@@ -1,0 +1,75 @@
+{
+  "scenarioVersion": 1,
+  "name": "attention-historique-espacement",
+  "description": "D5, espacement et plafond (A2) : la satiété (38) devient basse vers 08:40. Sans envoi connu : 08:40. Un envoi à 08:00 (bonheur) repousse à 11:00 (minGapMinutes 180). Trois envois le même jour local (plafond 4 moins 1 place réservée à « affaiblie ») repoussent au lendemain 08:00. Sans historique, ni espacement ni plafond.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 38
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "expect": {
+        "at": {
+          "min": 1763022600000,
+          "max": 1763024400000
+        },
+        "need": "satiety"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "history": {
+        "sent": [
+          {
+            "at": 1763020800000,
+            "need": "happiness"
+          }
+        ]
+      },
+      "expect": {
+        "at": 1763031600000,
+        "need": "satiety"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "history": {
+        "sent": [
+          {
+            "at": 1762995600000,
+            "need": "hygiene"
+          },
+          {
+            "at": 1762999200000,
+            "need": "happiness"
+          },
+          {
+            "at": 1763002800000,
+            "need": "hygiene"
+          }
+        ]
+      },
+      "expect": {
+        "at": 1763107200000,
+        "need": "satiety"
+      }
+    }
+  ]
+}

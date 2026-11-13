@@ -1,0 +1,127 @@
+{
+  "scenarioVersion": 1,
+  "name": "renaissance-tire-espece",
+  "guarantee": "D6",
+  "description": "Renaissance (D6) : chaque rebirth retire l'espèce avec UN tirage depuis l'état de sa propre graine (pas depuis l'ancien pet.rng). Vie 1 : kawaii (forcée à la naissance, ce qui garde la séquence aléatoire des scénarios d'Envol). Abandon jusqu'à l'Envol ; rebirth seed 1 : feerique (rng 1831565814), l'album garde kawaii. Nouvel abandon et Envol ; rebirth seed 99 : kawaii (valeur 0.26, pick 0), l'album garde, dans l'ordre, kawaii puis feerique. deriveView expose l'espèce, y compris après l'Envol.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763712000000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.kind": "kawaii"
+      }
+    },
+    {
+      "nowMs": 1763715600000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 1
+      },
+      "expectEvents": [
+        {
+          "type": "reborn"
+        }
+      ],
+      "expectState": {
+        "pet.kind": "feerique",
+        "pet.rng": 1831565814,
+        "pet.life": "alive",
+        "album": [
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "name": "Lumi",
+            "bornAt": 1763020800000,
+            "flownAt": {
+              "min": 1763020800000
+            },
+            "stage": "child",
+            "kind": "kawaii"
+          }
+        ]
+      }
+    },
+    {
+      "nowMs": 1763715600000,
+      "query": "deriveView",
+      "expect": {
+        "kind": "feerique"
+      }
+    },
+    {
+      "nowMs": 1764489600000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.kind": "feerique"
+      }
+    },
+    {
+      "nowMs": 1764493200000,
+      "query": "deriveView",
+      "expect": {
+        "kind": "feerique",
+        "primary": "flown"
+      }
+    },
+    {
+      "nowMs": 1764496800000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000003",
+        "name": "Aube",
+        "seed": 99
+      },
+      "expectEvents": [
+        {
+          "type": "reborn"
+        }
+      ],
+      "expectState": {
+        "pet.kind": "kawaii",
+        "pet.rng": 1831565912,
+        "album.0.kind": "kawaii",
+        "album.0.name": "Lumi",
+        "album.1.kind": "feerique",
+        "album.1.name": "Nova"
+      }
+    },
+    {
+      "nowMs": 1764500400000,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.kind": "kawaii",
+        "album.0.kind": "kawaii",
+        "album.1.kind": "feerique"
+      }
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "scenarioVersion": 1,
+  "name": "grille-reste-reporte",
+  "description": "Grille de temps fixe (A2) : l'animal naît à une heure non alignée (…800777). lastUpdatedAt reste toujours sur bornAt + k × 60 s : moins d'un pas écoulé, rien n'avance ; le reste est reporté à l'appel suivant ; une action s'applique au point de grille (le cooldown du repas part de ce point).",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800777,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 40
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020860776,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.lastUpdatedAt": 1763020800777,
+        "pet.gauges.satiety": 40
+      }
+    },
+    {
+      "nowMs": 1763020860777,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.lastUpdatedAt": 1763020860777
+      }
+    },
+    {
+      "nowMs": 1763020980776,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.lastUpdatedAt": 1763020920777
+      }
+    },
+    {
+      "nowMs": 1763021010777,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      },
+      "expectState": {
+        "pet.lastUpdatedAt": 1763020980777,
+        "pet.cooldowns": {
+          "feed.meal": 1763026380777,
+          "feed.snack": 0,
+          "heal": 0,
+          "pet": 0
+        }
+      },
+      "forbidEventTypes": [
+        "actionRefused"
+      ]
+    }
+  ]
+}

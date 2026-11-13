@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<defs>
+  <radialGradient id="starfruit-fill" cx=".35" cy=".3" r=".9">
+    <stop offset="0" stop-color="#FFD9A0"/><stop offset="1" stop-color="#FFB547"/>
+  </radialGradient>
+</defs>
+<path d="M32 22 Q33 16 37 13" fill="none" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.6"/>
+<path d="M34 18 Q41 11 47 16 Q41 22 34 18 Z" fill="#8FE3CF" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.8"/>
+<circle cx="32" cy="36" r="15" fill="url(#starfruit-fill)" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2"/>
+<path d="M32 28 Q34.4 33.6 40 36 Q34.4 38.4 32 44 Q29.6 38.4 24 36 Q29.6 33.6 32 28 Z" fill="#FFF6E9" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.4"/>
+<path d="M48 19.6 Q49.3 22.7 52.4 24 Q49.3 25.3 48 28.4 Q46.7 25.3 43.6 24 Q46.7 22.7 48 19.6 Z" fill="#FFD27A" stroke="#2E2A5C" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.2"/>
+</svg>

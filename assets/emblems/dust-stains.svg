@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <radialGradient id="dust-blob" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#5E5878" stop-opacity=".78"/><stop offset=".6" stop-color="#5E5878" stop-opacity=".6"/><stop offset="1" stop-color="#5E5878" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<ellipse cx="78" cy="176" rx="17" ry="11" transform="rotate(-24 78 176)" fill="url(#dust-blob)"/>
+<ellipse cx="156" cy="186" rx="20" ry="12" transform="rotate(14 156 186)" fill="url(#dust-blob)"/>
+<ellipse cx="174" cy="112" rx="11" ry="7.5" transform="rotate(-40 174 112)" fill="url(#dust-blob)"/>
+<ellipse cx="86" cy="96" rx="10" ry="6.5" transform="rotate(30 86 96)" fill="url(#dust-blob)"/>
+<ellipse cx="122" cy="192" rx="9" ry="5.5" fill="url(#dust-blob)"/>
+<circle cx="102" cy="180" r="2.6" fill="#5E5878" fill-opacity=".7"/>
+<circle cx="140" cy="172" r="2.2" fill="#5E5878" fill-opacity=".7"/>
+<circle cx="64" cy="146" r="2.4" fill="#5E5878" fill-opacity=".65"/>
+<circle cx="186" cy="150" r="2.2" fill="#5E5878" fill-opacity=".65"/>
+</svg>

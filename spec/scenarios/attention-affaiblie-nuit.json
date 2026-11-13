@@ -1,0 +1,38 @@
+{
+  "scenarioVersion": 1,
+  "name": "attention-affaiblie-nuit",
+  "description": "D5 : « affaiblie » est toujours signalée, même de nuit : santé 46 et malade avec la satiété critique à 01:00, la santé passe sous 45 au bout de 37,5 min (T+38 min, fin de pas) : notification à cet instant (01:38 UTC), sans report à 08:00. Les besoins déjà actifs au moment de l'appel (satiété, maladie) ne sont pas re-signalés.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1762995600000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 10,
+          "health": 46
+        },
+        "status": {
+          "sick": true,
+          "sickSince": 1762995600000
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1762995600000,
+      "query": "nextAttentionAt",
+      "utcOffsetMin": 0,
+      "expect": {
+        "at": 1762997880000,
+        "need": "weak"
+      }
+    }
+  ]
+}

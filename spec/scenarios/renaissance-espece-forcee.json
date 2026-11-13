@@ -1,0 +1,91 @@
+{
+  "scenarioVersion": 1,
+  "name": "renaissance-espece-forcee",
+  "guarantee": "D6",
+  "description": "rebirth avec kind facultatif (D6) : l'espèce est forcée sans tirage (rng = graine). Un kind inconnu est refusé (invalidIdentity) et l'animal envolé reste inchangé ; kind null aussi. Sans kind, la renaissance tire.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "feerique",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763712000000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        }
+      ]
+    },
+    {
+      "nowMs": 1763715600000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 1,
+        "kind": "dragon"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "invalidIdentity"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.kind": "feerique",
+        "album": []
+      }
+    },
+    {
+      "nowMs": 1763715600000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 1,
+        "kind": null
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "invalidIdentity"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown"
+      }
+    },
+    {
+      "nowMs": 1763719200000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 1,
+        "kind": "kawaii"
+      },
+      "expectEvents": [
+        {
+          "type": "reborn"
+        }
+      ],
+      "expectState": {
+        "pet.kind": "kawaii",
+        "pet.rng": 1,
+        "album.0.kind": "feerique"
+      }
+    }
+  ]
+}

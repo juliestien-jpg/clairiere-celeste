@@ -1,0 +1,181 @@
+{
+  "scenarioVersion": 1,
+  "name": "envol-puis-renaissance",
+  "description": "Abandon jusqu'à l'Envol (malchance maximale), puis : toute action autre que rebirth est refusée (flown), un tick aussi, l'état ne change pas ; rebirth (espèce forcée à feerique : aucun tirage, rng = graine) ajoute la créature envolée à l'album avec son espèce (kawaii), crée un nouvel œuf (nouvel id, nom, graine, espèce) en conservant album et réglages ; la vie reprend normalement (repas accepté).",
+  "guarantee": "D3",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "settings": {
+        "sound": false,
+        "notifications": true,
+        "reducedMotion": "on"
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763308800000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        }
+      ],
+      "forbidEventTypes": [
+        "actionRefused",
+        "reborn"
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.flownAt": 1763297820000,
+        "pet.gauges.health": 0,
+        "album": []
+      }
+    },
+    {
+      "nowMs": 1763312400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "feed",
+          "reason": "flown"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.flownAt": 1763297820000,
+        "pet.gauges.health": 0,
+        "pet.lastUpdatedAt": 1763297820000,
+        "pet.gauges.satiety": 0
+      }
+    },
+    {
+      "nowMs": 1763316000000,
+      "action": {
+        "type": "heal"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "heal",
+          "reason": "flown"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.flownAt": 1763297820000,
+        "pet.gauges.health": 0
+      }
+    },
+    {
+      "nowMs": 1763319600000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "tick",
+          "reason": "flown"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.flownAt": 1763297820000,
+        "pet.gauges.health": 0
+      }
+    },
+    {
+      "nowMs": 1763323200000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 99,
+        "kind": "feerique"
+      },
+      "expectEvents": [
+        {
+          "type": "reborn"
+        }
+      ],
+      "expectState": {
+        "pet.id": "00000000-0000-4000-8000-000000000002",
+        "pet.name": "Nova",
+        "pet.life": "alive",
+        "pet.stage": "egg",
+        "pet.bornAt": 1763323200000,
+        "pet.stageSince": 1763323200000,
+        "pet.flownAt": null,
+        "pet.rng": 99,
+        "pet.kind": "feerique",
+        "pet.lastUpdatedAt": 1763323200000,
+        "pet.gauges.satiety": 80,
+        "pet.gauges.health": 100,
+        "pet.status.weakSince": null,
+        "pet.status.messes": 0,
+        "album": [
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "name": "Lumi",
+            "bornAt": 1763020800000,
+            "flownAt": 1763297820000,
+            "stage": "child",
+            "kind": "kawaii"
+          }
+        ],
+        "settings.sound": false,
+        "settings.notifications": true,
+        "settings.reducedMotion": "on",
+        "savedAt": 1763323200000
+      }
+    },
+    {
+      "nowMs": 1763323260000,
+      "action": {
+        "type": "rebirth",
+        "id": "x",
+        "name": "Autre",
+        "seed": 1
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "rebirth",
+          "reason": "notFlown"
+        }
+      ],
+      "expectState": {
+        "pet.name": "Nova"
+      }
+    },
+    {
+      "nowMs": 1763326800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      },
+      "forbidEventTypes": [
+        "actionRefused"
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 100,
+        "album.0.name": "Lumi"
+      }
+    }
+  ]
+}

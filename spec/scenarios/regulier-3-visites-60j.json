@@ -1,0 +1,4063 @@
+{
+  "scenarioVersion": 1,
+  "name": "regulier-3-visites-60j",
+  "description": "Joueur régulier : 60 jours de visites à 08:00, 13:00 et 19:30 (UTC), soins économes (repas si satiété <= 70, nettoyage si salissure ou hygiène <= 80, jeu si bonheur <= 75, soin si malade, coucher à la visite du soir, réveil à la première visite si l'énergie est >= 60). docs/equilibrage.md 5 : aucune jauge ne descend sous son seuil bas, aucune notification, santé 100. Donc aucun événement de besoin, de maladie, d'affaiblissement ni d'Envol, et aucune action refusée.",
+  "guarantee": "D3",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 7,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763038800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763038800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763038800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763038800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763062200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763062200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763062200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763062200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763107200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763107200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763107200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763125200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763125200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763148600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763148600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763148600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763148600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763148600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763193600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763193600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763193600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763211600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763211600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763211600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763235000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763235000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763235000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763235000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763235000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763280000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763280000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763298000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763298000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763298000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763321400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763321400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763321400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763321400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763366400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763366400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763366400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763366400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763384400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763384400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763384400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763407800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763407800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763407800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763407800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763407800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763452800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763452800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763470800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763470800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763470800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763494200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763494200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763494200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763494200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763494200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763539200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763539200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763539200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763557200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763557200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763557200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763580600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763580600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763580600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763580600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763625600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763625600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763625600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763625600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763643600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763643600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763643600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763667000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763667000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763667000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763667000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763667000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763712000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763712000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763712000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763730000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763730000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763730000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763753400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763753400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763753400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763753400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763753400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763798400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763798400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763798400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763816400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763816400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763816400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763839800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763839800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763839800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763839800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763839800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763884800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763884800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763884800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763884800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763902800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763902800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763926200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763926200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763926200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763926200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1763926200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1763971200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763971200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763971200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763989200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1763989200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1763989200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1763989200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764012600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764012600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764012600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764012600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764057600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764057600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764057600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764057600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764075600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764075600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764075600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764099000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764099000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764099000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764099000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764144000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764144000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764144000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764144000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764162000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764162000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764162000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764185400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764185400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764185400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764185400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764185400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764230400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764230400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764230400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764248400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764248400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764248400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764271800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764271800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764271800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764271800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764316800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764316800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764316800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764316800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764334800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764334800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764334800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764358200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764358200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764358200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764358200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764358200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764403200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764403200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764403200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764421200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764421200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764421200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764444600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764444600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764444600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764444600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764444600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764489600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764489600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764489600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764507600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764507600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764507600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764507600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764531000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764531000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764531000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764531000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764576000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764576000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764576000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764576000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764594000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764594000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764617400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764617400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764617400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764617400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764617400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764662400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764662400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764662400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764680400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764680400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764680400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764703800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764703800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764703800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764703800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764748800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764748800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764748800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764748800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764766800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764766800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764766800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764790200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764790200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764790200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764790200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764835200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764835200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764835200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764853200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764853200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764853200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764876600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764876600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764876600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764876600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764876600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1764921600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764921600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764939600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764939600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764939600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764963000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1764963000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1764963000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1764963000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1764963000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765008000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765008000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765026000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765026000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765026000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765049400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765049400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765049400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765049400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765049400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765094400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765094400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765094400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765112400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765112400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765135800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765135800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765135800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765135800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765135800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765180800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765180800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765198800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765198800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765198800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765198800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765222200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765222200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765222200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765222200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765267200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765267200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765267200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765267200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765285200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765285200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765285200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765308600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765308600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765308600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765308600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765353600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765353600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765353600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765371600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765371600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765371600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765395000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765395000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765395000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765395000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765395000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765440000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765440000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765440000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765458000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765458000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765458000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765481400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765481400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765481400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765481400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765526400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765526400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765526400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765526400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765544400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765544400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765544400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765567800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765567800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765567800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765567800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765567800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765612800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765612800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765612800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765630800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765630800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765630800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765654200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765654200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765654200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765654200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765654200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765699200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765699200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765699200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765717200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765717200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765717200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765717200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765740600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765740600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765740600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765740600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765785600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765785600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765785600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765785600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765803600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765803600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765827000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765827000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765827000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765827000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765827000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765872000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765872000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765872000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765872000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765890000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765890000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765890000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765913400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765913400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765913400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765913400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1765958400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765958400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765958400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765958400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765976400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765976400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765976400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1765999800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1765999800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1765999800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1765999800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766044800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766044800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766044800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766044800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766062800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766062800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766062800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766086200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766086200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766086200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766086200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766086200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766131200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766131200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766131200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766149200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766149200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766149200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766172600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766172600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766172600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766172600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766172600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766217600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766217600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766217600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766235600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766235600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766235600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766259000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766259000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766259000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766259000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766259000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766304000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766304000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766304000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766304000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766322000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766322000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766345400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766345400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766345400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766345400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766345400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766390400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766390400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766390400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766408400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766408400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766408400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766408400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766431800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766431800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766431800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766431800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766476800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766476800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766476800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766476800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766494800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766494800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766494800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766518200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766518200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766518200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766518200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766563200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766563200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766563200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766581200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766581200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766581200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766604600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766604600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766604600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766604600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766604600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766649600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766649600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766667600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766667600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766667600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766691000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766691000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766691000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766691000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766736000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766736000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766736000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766754000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766754000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766754000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766777400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766777400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766777400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766777400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766777400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766822400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766822400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766840400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766840400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766840400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766863800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766863800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766863800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766863800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766863800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766908800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766908800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766926800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766926800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766926800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766926800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1766950200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766950200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766950200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1766950200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1766995200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1766995200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1766995200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767013200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767013200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767036600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767036600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767036600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767036600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767036600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767081600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767081600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767099600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767099600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767099600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767099600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767123000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767123000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767123000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767123000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767168000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767168000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767168000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767168000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767186000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767186000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767186000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767209400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767209400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767209400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767209400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767254400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767254400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767254400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767272400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767272400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767272400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767295800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767295800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767295800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767295800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767295800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767340800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767340800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767340800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767358800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767358800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767358800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767382200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767382200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767382200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767382200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767382200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767427200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767427200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767427200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767445200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767445200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767445200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767468600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767468600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767468600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767468600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767468600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767513600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767513600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767513600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767513600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767531600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767531600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767555000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767555000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767555000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767555000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767555000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767600000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767600000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767600000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767618000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767618000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767618000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767618000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767641400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767641400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767641400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767641400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767686400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767686400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767686400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767686400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767704400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767704400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767704400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767727800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767727800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767727800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767727800000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767772800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767772800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767772800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767772800000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767790800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767790800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767790800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767814200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767814200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767814200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767814200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767814200000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767859200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767859200000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767859200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767877200000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767877200000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767877200000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767900600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767900600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767900600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767900600000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1767945600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767945600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767945600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767945600000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767963600000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767963600000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767963600000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767987000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1767987000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1767987000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1767987000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1767987000000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1768032000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1768032000000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1768032000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1768050000000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1768050000000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1768050000000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1768073400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1768073400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1768073400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1768073400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1768073400000,
+      "action": {
+        "type": "sleep"
+      }
+    },
+    {
+      "nowMs": 1768118400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1768118400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1768118400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1768136400000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1768136400000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1768136400000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1768136400000,
+      "action": {
+        "type": "play"
+      }
+    },
+    {
+      "nowMs": 1768159800000,
+      "action": {
+        "type": "tick"
+      }
+    },
+    {
+      "nowMs": 1768159800000,
+      "action": {
+        "type": "feed",
+        "food": "meal"
+      }
+    },
+    {
+      "nowMs": 1768159800000,
+      "action": {
+        "type": "clean"
+      }
+    },
+    {
+      "nowMs": 1768159800000,
+      "action": {
+        "type": "sleep"
+      }
+    }
+  ],
+  "forbidEventTypes": [
+    "needAppeared",
+    "becameSick",
+    "weakened",
+    "flewAway",
+    "actionRefused"
+  ],
+  "expectState": {
+    "pet.life": "alive",
+    "pet.gauges.health": 100,
+    "pet.status.sick": false,
+    "pet.status.weakSince": null,
+    "pet.stage": "adult"
+  }
+}

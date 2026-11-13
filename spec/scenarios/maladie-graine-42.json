@@ -1,0 +1,34 @@
+{
+  "scenarioVersion": 1,
+  "name": "maladie-graine-42",
+  "description": "Vecteur du générateur mulberry32 : graine 42, abandon depuis les jauges initiales. La maladie ne peut survenir que satiété ou hygiène critique (T+14,4 h) ; un tirage par pas de 60 s tant que la chance est non nulle. sickSince et l'état final du générateur (pet.rng) dépendent de la suite exacte des tirages : le port Dart doit les retrouver au bit près.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 42,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763128800000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "becameSick"
+        }
+      ],
+      "expectState": {
+        "pet.status.sick": true,
+        "pet.status.sickSince": 1763107440000,
+        "pet.rng": 2083085140,
+        "pet.gauges.health": 77.9783
+      }
+    }
+  ]
+}

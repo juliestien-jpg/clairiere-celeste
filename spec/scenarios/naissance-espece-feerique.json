@@ -1,0 +1,31 @@
+{
+  "scenarioVersion": 1,
+  "name": "naissance-espece-feerique",
+  "guarantee": "D6",
+  "description": "Naissance déterministe (D6) : seed 1, poids par défaut. Un tirage depuis l'état 1 : valeur 0.627, pick = floor(0.627 * 2) = 1, donc feerique (2e entrée). pet.rng = 1831565814 (état après le tirage). L'espèce est purement visuelle : mêmes jauges que kawaii.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 1,
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "deriveView",
+      "expect": {
+        "kind": "feerique",
+        "primary": "happy"
+      }
+    }
+  ],
+  "expectState": {
+    "pet.kind": "feerique",
+    "pet.rng": 1831565814,
+    "pet.gauges.satiety": 80,
+    "pet.gauges.health": 100
+  }
+}

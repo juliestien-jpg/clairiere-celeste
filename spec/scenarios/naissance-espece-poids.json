@@ -1,0 +1,32 @@
+{
+  "scenarioVersion": 1,
+  "name": "naissance-espece-poids",
+  "guarantee": "D6",
+  "description": "Poids et ordre du tableau kinds (D6). Poids feerique 3 puis kawaii 1 (total 4). Seed 12345 : valeur 0.9797, pick = floor(0.9797 * 4) = 3, donc 2e entrée (cumuls 3 puis 4) : kawaii, alors qu'avec les poids par défaut (pick = 1) ce serait feerique. Prouve que le tirage suit les poids et l'ordre.",
+  "balanceOverrides": {
+    "kinds": [
+      {
+        "id": "feerique",
+        "weight": 3
+      },
+      {
+        "id": "kawaii",
+        "weight": 1
+      }
+    ]
+  },
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 12345,
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [],
+  "expectState": {
+    "pet.kind": "kawaii",
+    "pet.rng": 1831578158
+  }
+}

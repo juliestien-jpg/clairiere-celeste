@@ -1,0 +1,21 @@
+{
+  "scenarioVersion": 1,
+  "name": "naissance-espece-forcee",
+  "guarantee": "D6",
+  "description": "Espèce forcée (tests, débogage, D6) : kind facultatif de createSave. Avec seed 1 (qui tirerait feerique), kind kawaii donne kawaii SANS consommer de tirage : pet.rng vaut la graine (1).",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 1,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [],
+  "expectState": {
+    "pet.kind": "kawaii",
+    "pet.rng": 1
+  }
+}

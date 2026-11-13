@@ -1,0 +1,31 @@
+{
+  "scenarioVersion": 1,
+  "name": "naissance-espece-kawaii",
+  "guarantee": "D6",
+  "description": "Naissance déterministe (D6) : seed 7, poids par défaut kawaii 1 / feerique 1. UN tirage mulberry32 depuis l'état de la graine (7) : valeur 0.0117, pick = floor(0.0117 * 2) = 0, donc kawaii. pet.rng vaut l'état après ce tirage (1831565820), non la graine. deriveView expose l'espèce.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 7,
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "deriveView",
+      "expect": {
+        "kind": "kawaii",
+        "primary": "happy"
+      }
+    }
+  ],
+  "expectState": {
+    "pet.kind": "kawaii",
+    "pet.rng": 1831565820,
+    "pet.stage": "egg",
+    "pet.life": "alive"
+  }
+}

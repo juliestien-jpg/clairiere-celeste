@@ -1,0 +1,50 @@
+{
+  "scenarioVersion": 1,
+  "name": "attention-heures-calmes",
+  "description": "D5, heures calmes 21:30 -> 08:00 : la satiété (97,8) devient basse à 21:58 UTC, pendant les heures calmes (UTC) : la notification est reportée à 08:00 le lendemain (T+24 h), regroupée avec l'hygiène et le bonheur apparus pendant la nuit ; le besoin le plus pressant est la satiété. Avec un décalage local de -240 min (heure locale 17:58), la même prévision tombe à l'apparition du besoin. Un animal déjà envolé ne donne rien.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "satiety": 97.8
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "utcOffsetMin": 0,
+      "expect": {
+        "at": 1763107200000,
+        "need": "satiety"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "nextAttentionAt",
+      "utcOffsetMin": -240,
+      "expect": {
+        "at": 1763071080000,
+        "need": "satiety"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "deriveView",
+      "expect": {
+        "primary": "happy",
+        "secondary": []
+      }
+    }
+  ]
+}

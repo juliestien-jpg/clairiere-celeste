@@ -1,0 +1,78 @@
+{
+  "scenarioVersion": 1,
+  "name": "sommeil-auto",
+  "description": "L'animal s'endort seul quand l'énergie tombe à 5 ou moins et se réveille seul à 100 sans intervention (doc : 14,6 h de sommeil). Départ : énergie 6, éveillé, sans malchance (graine « jamais malade »).",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    },
+    "patch": {
+      "pet": {
+        "gauges": {
+          "energy": 6
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763021160000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "fellAsleep"
+      ],
+      "expectState": {
+        "pet.status.asleep": false
+      }
+    },
+    {
+      "nowMs": 1763024400000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "fellAsleep"
+        }
+      ],
+      "expectState": {
+        "pet.status.asleep": true,
+        "pet.status.asleepSince": 1763021880000
+      }
+    },
+    {
+      "nowMs": 1763071200000,
+      "action": {
+        "type": "tick"
+      },
+      "forbidEventTypes": [
+        "wokeUp"
+      ],
+      "expectState": {
+        "pet.status.asleep": true
+      }
+    },
+    {
+      "nowMs": 1763078400000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "wokeUp"
+        }
+      ],
+      "expectState": {
+        "pet.status.asleep": false,
+        "pet.status.asleepSince": null
+      }
+    }
+  ]
+}
