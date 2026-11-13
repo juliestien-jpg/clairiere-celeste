@@ -171,7 +171,7 @@ export function App() {
       />
     );
   } else {
-    body = <MainScreen state={state} view={view} notice={snap.notice} onAction={perform} nav={nav} />;
+    body = <MainScreen state={state} view={view} nowMs={snap.time.nowMs} notice={snap.notice} onAction={perform} nav={nav} />;
   }
 
   return (

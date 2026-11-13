@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { particles, posesByKind, posesFor, reactions, svgInner } from "./data";
+import { allPosesOf, particles, reactions, svgInner } from "./data";
 import {
   hatchReaction,
   planReaction,
@@ -9,6 +9,9 @@ import {
   validateReactions,
   windowOpacityFrames,
 } from "./reactions";
+
+/** Toutes les poses de chaque espèce (bébé, enfant, adolescent, adulte) : une partie vaut dès qu'un stade la dessine. */
+const posesByKind = { kawaii: allPosesOf("kawaii"), feerique: allPosesOf("feerique") };
 
 function fileExists(file: string): boolean {
   try {
@@ -128,9 +131,10 @@ describe("cibles communes (D6)", () => {
     expect(k.sort()).toEqual(["ear-left", "ear-right"]);
     expect(f.sort()).toEqual(["antenna-left", "antenna-right"]);
   });
-  it("wings et chest-light n'existent que chez féérique : ignorés chez kawaii sans erreur", () => {
+  it("wings : ailes de l'adulte chez kawaii (ignorées aux autres stades), ailes dès le bébé chez féérique ; chest-light n'existe que chez féérique", () => {
     const wings = reactions.reactions["tap"]!.tracks["wings"]!;
-    expect(resolveTracks({ wings }, groups, "kawaii")).toEqual([]);
+    expect(resolveTracks({ wings }, groups, "kawaii").map((t) => t.target).sort()).toEqual(["wing-left", "wing-right"]);
+    expect(allPosesOf("kawaii").filter((p) => "wing-left" in p.parts).map((p) => p.stage)).toEqual(["adult"]);
     expect(resolveTracks({ wings }, groups, "feerique").map((t) => t.target).sort()).toEqual(["wing-left", "wing-right"]);
     expect(resolveTracks({ "chest-light": [{ offset: 0 }, { offset: 1 }] }, groups, "kawaii")).toEqual([]);
     expect(resolveTracks({ "chest-light": [{ offset: 0 }, { offset: 1 }] }, groups, "feerique").map((t) => t.target)).toEqual(["core"]);
@@ -157,7 +161,8 @@ describe("cibles communes (D6)", () => {
       planReaction(pet, reactions.props, false, { groups, kind }).tracks.map((t) => t.target);
     expect(targets("kawaii")).toContain("ear-left");
     expect(targets("kawaii")).not.toContain("antenna-left");
-    expect(targets("kawaii")).not.toContain("wing-left");
+    expect(targets("kawaii")).toContain("wing-left"); // ailes de l'adulte ; ignorées par les autres stades (absentes du SVG)
+    expect(targets("kawaii")).not.toContain("core");
     expect(targets("feerique")).toEqual(expect.arrayContaining(["antenna-left", "antenna-right", "wing-left", "wing-right", "core"]));
     expect(targets("feerique")).not.toContain("ear-left");
   });
@@ -171,10 +176,13 @@ describe("cibles communes (D6)", () => {
   });
   it("chaque cible résolue existe dans les poses de son espèce", () => {
     for (const kind of ["kawaii", "feerique"] as const) {
-      const poses = posesFor(kind);
+      const all = allPosesOf(kind);
       for (const [id, r] of Object.entries(reactions.reactions))
         for (const t of resolveTracks(r.tracks, groups, kind)) {
-          const found = t.target in poses.parts || t.target in poses.targets || t.target in reactions.targets || t.target in reactions.props;
+          const found =
+            all.some((poses) => t.target in poses.parts || t.target in poses.targets) ||
+            t.target in reactions.targets ||
+            t.target in reactions.props;
           expect(found, `${id}/${kind}/${t.target}`).toBe(true);
         }
     }

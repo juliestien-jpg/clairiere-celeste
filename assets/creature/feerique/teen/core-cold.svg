@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(-6 -24.00000000000003) scale(1.05 1.12)">
+<defs>
+  <clipPath id="fcc-clip"><path d="M120 54 C132 54 139 70 151 92 C167 120 180 136 180 158 C180 184 156 200 120 200 C84 200 60 184 60 158 C60 136 73 120 89 92 C101 70 108 54 120 54 Z"/></clipPath>
+  <radialGradient id="fcc-glow" cx="120" cy="184" r="26" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#BCD3C6" stop-opacity="0.45"/><stop offset="1" stop-color="#BCD3C6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="fcc-core" cx="120" cy="184" r="9" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#F2F8F4"/><stop offset="1" stop-color="#BCD3C6"/>
+  </radialGradient>
+</defs>
+<g clip-path="url(#fcc-clip)"><circle cx="120" cy="184" r="26" fill="url(#fcc-glow)"/></g>
+<g opacity="1"><path d="M120 175 Q121.8 182.2 129 184 Q121.8 185.8 120 193 Q118.2 185.8 111 184 Q118.2 182.2 120 175 Z" fill="url(#fcc-core)" stroke="#8FA396" stroke-width="2.67" stroke-linejoin="round"/><circle cx="120" cy="184" r="2.4" fill="#FFFFFF"/></g>
+</g>
+</svg>

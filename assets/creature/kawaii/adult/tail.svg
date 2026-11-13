@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(6 0)">
+<defs>
+  <linearGradient id="tail-fill" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFD27A"/><stop offset=".6" stop-color="#FFC98F"/><stop offset="1" stop-color="#F4A6C6"/></linearGradient>
+  <linearGradient id="tail-in" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFF1C9"/><stop offset="1" stop-color="#FFD27A"/></linearGradient>
+  <radialGradient id="tail-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".75"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="204" cy="172" r="36" fill="url(#tail-glow)"/>
+<path d="M190 200 C172 200 170 181 182 169 C192 159 196 150 198 138 C211 148 224 160 222 180 C220 194 208 200 190 200 Z" fill="url(#tail-fill)" stroke="#E8A049" stroke-width="3" stroke-linejoin="round"/>
+<path d="M192 194 C182 194 181 183 188 175 C194 169 197 162 198 153 C206 161 212 170 211 181 C210 190 202 194 192 194 Z" fill="url(#tail-in)"/>
+<path d="M217 138 C218 145 220 147 227 148 C220 149 218 151 217 158 C216 151 214 149 207 148 C214 147 216 145 217 138 Z" fill="#FFF6D8" stroke="#E8A049" stroke-width="2.4" stroke-linejoin="round"/>
+</g>
+</svg>

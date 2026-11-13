@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <radialGradient id="egg-gloss-g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="96" cy="98" rx="24" ry="13" transform="rotate(-38 96 98)" fill="url(#egg-gloss-g)"/>
+<circle cx="76" cy="124" r="3.4" fill="#FFFFFF" fill-opacity=".75"/>
+</svg>

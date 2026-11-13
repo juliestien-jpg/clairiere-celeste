@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(0 -11.16)">
+<defs>
+  <radialGradient id="halo-hungry-g" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD27A" stop-opacity="0.7"/><stop offset="0.45" stop-color="#FFD27A" stop-opacity="0.4"/><stop offset="0.75" stop-color="#FFD27A" stop-opacity="0.15"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="120" cy="138" r="100" fill="url(#halo-hungry-g)"/>
+<defs><radialGradient id="halo-hungry-dent" cx="120" cy="186" r="44" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E7CC3" stop-opacity=".75"/><stop offset=".6" stop-color="#8E7CC3" stop-opacity=".4"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/></radialGradient></defs>
+<circle cx="120" cy="186" r="44" fill="url(#halo-hungry-dent)"/>
+</g>
+</svg>

@@ -14,13 +14,23 @@
     },
     "wings": {
       "mirror": true, "additive": true,
-      "parts": { "feerique": ["wing-left", "wing-right"] },
-      "note": "Ailes : féérique seulement (absentes chez kawaii : la cible est alors ignorée). Écarts du côté DROIT (rotation positive = l'aile s'ouvre), côté gauche inversé."
+      "parts": { "kawaii": ["wing-left", "wing-right"], "feerique": ["wing-left", "wing-right"] },
+      "note": "Ailes : féérique dès le bébé, kawaii à l'âge adulte seulement (aux autres stades la cible est ignorée). Écarts du côté DROIT (rotation positive = l'aile s'ouvre), côté gauche inversé."
     },
     "chest-light": {
       "mirror": false, "additive": true,
       "parts": { "feerique": ["core"] },
       "note": "Étoile de poitrine : féérique seulement. Écarts (une échelle de 1,25 grossit l'étoile de 25 %)."
+    },
+    "tail-wag": {
+      "mirror": false, "additive": true,
+      "parts": { "kawaii": ["tail"], "feerique": ["tail"] },
+      "note": "Queue : adolescent et adulte, dans les deux espèces (aux stades plus jeunes la cible est ignorée). Écarts de rotation autour de la racine de la queue, jamais de version éteinte redressée : la queue qui pend frétille depuis sa pose. Nom distinct de la partie `tail` : un groupe ne porte jamais un nom de partie."
+    },
+    "crown-glow": {
+      "mirror": false, "additive": true,
+      "parts": { "feerique": ["crown"] },
+      "note": "Couronne de pétales : féérique adulte seulement. Écarts (une échelle de 1,1 grossit la couronne de 10 %), même rythme que l'étoile de poitrine."
     }
   },
   "props": {
@@ -73,6 +83,13 @@
           { "offset": 0.78, "rotate": 3 },
           { "offset": 1, "rotate": 0 }
         ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.5, "rotate": 4.5 },
+          { "offset": 0.62, "rotate": -1.5 },
+          { "offset": 0.78, "rotate": 4.5 },
+          { "offset": 1, "rotate": 0 }
+        ],
         "wings": [
           { "offset": 0, "rotate": 0 },
           { "offset": 0.5, "rotate": 6 },
@@ -81,6 +98,11 @@
         "chest-light": [
           { "offset": 0, "scale": [1, 1] },
           { "offset": 0.5, "scale": [1.25, 1.25] },
+          { "offset": 1, "scale": [1, 1] }
+        ],
+        "crown-glow": [
+          { "offset": 0, "scale": [1, 1] },
+          { "offset": 0.5, "scale": [1.125, 1.125] },
           { "offset": 1, "scale": [1, 1] }
         ]
       },
@@ -128,9 +150,19 @@
           { "offset": 0.5, "rotate": 3 },
           { "offset": 1, "rotate": 0 }
         ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.5, "rotate": 4.5 },
+          { "offset": 1, "rotate": 0 }
+        ],
         "chest-light": [
           { "offset": 0, "scale": [1, 1] },
           { "offset": 0.5, "scale": [1.2, 1.2] },
+          { "offset": 1, "scale": [1, 1] }
+        ],
+        "crown-glow": [
+          { "offset": 0, "scale": [1, 1] },
+          { "offset": 0.5, "scale": [1.1, 1.1] },
           { "offset": 1, "scale": [1, 1] }
         ]
       },
@@ -178,6 +210,14 @@
           { "offset": 0.81, "rotate": 7 },
           { "offset": 0.88, "rotate": -4 },
           { "offset": 0.94, "rotate": 3 },
+          { "offset": 1, "rotate": 0 }
+        ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.74, "rotate": 0 },
+          { "offset": 0.81, "rotate": 10.5 },
+          { "offset": 0.88, "rotate": -6 },
+          { "offset": 0.94, "rotate": 4.5 },
           { "offset": 1, "rotate": 0 }
         ],
         "wings": [
@@ -233,6 +273,11 @@
         "chest-light": [
           { "offset": 0, "scale": [1, 1] },
           { "offset": 0.7, "scale": [1.3, 1.3] },
+          { "offset": 1, "scale": [1, 1] }
+        ],
+        "crown-glow": [
+          { "offset": 0, "scale": [1, 1] },
+          { "offset": 0.7, "scale": [1.15, 1.15] },
           { "offset": 1, "scale": [1, 1] }
         ],
         "wings": [
@@ -292,6 +337,13 @@
           { "offset": 0.7, "rotate": -4 },
           { "offset": 1, "rotate": 0 }
         ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.34, "rotate": -9 },
+          { "offset": 0.52, "rotate": 6 },
+          { "offset": 0.7, "rotate": -6 },
+          { "offset": 1, "rotate": 0 }
+        ],
         "wings": [
           { "offset": 0, "rotate": 0 },
           { "offset": 0.34, "rotate": 14 },
@@ -303,6 +355,12 @@
           { "offset": 0, "scale": [1, 1] },
           { "offset": 0.34, "scale": [1.3, 1.3] },
           { "offset": 0.7, "scale": [1.2, 1.2] },
+          { "offset": 1, "scale": [1, 1] }
+        ],
+        "crown-glow": [
+          { "offset": 0, "scale": [1, 1] },
+          { "offset": 0.34, "scale": [1.15, 1.15] },
+          { "offset": 0.7, "scale": [1.1, 1.1] },
           { "offset": 1, "scale": [1, 1] }
         ]
       },
@@ -331,6 +389,11 @@
           { "offset": 0.4, "rotate": 4 },
           { "offset": 1, "rotate": 0 }
         ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.4, "rotate": 6 },
+          { "offset": 1, "rotate": 0 }
+        ],
         "wings": [
           { "offset": 0, "rotate": 0 },
           { "offset": 0.4, "rotate": 5 },
@@ -341,6 +404,13 @@
           { "offset": 0.25, "scale": [1.2, 1.2] },
           { "offset": 0.5, "scale": [1.05, 1.05] },
           { "offset": 0.75, "scale": [1.18, 1.18] },
+          { "offset": 1, "scale": [1, 1] }
+        ],
+        "crown-glow": [
+          { "offset": 0, "scale": [1, 1] },
+          { "offset": 0.25, "scale": [1.1, 1.1] },
+          { "offset": 0.5, "scale": [1.025, 1.025] },
+          { "offset": 0.75, "scale": [1.09, 1.09] },
           { "offset": 1, "scale": [1, 1] }
         ],
         "halo": [
@@ -381,6 +451,11 @@
           { "offset": 0.55, "rotate": 10 },
           { "offset": 1, "rotate": 0 }
         ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.55, "rotate": 15 },
+          { "offset": 1, "rotate": 0 }
+        ],
         "wings": [
           { "offset": 0, "rotate": 0 },
           { "offset": 0.55, "rotate": -8 },
@@ -414,6 +489,11 @@
         "head-tips": [
           { "offset": 0, "rotate": 0 },
           { "offset": 0.4, "rotate": 9 },
+          { "offset": 1, "rotate": 0 }
+        ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.4, "rotate": 13.5 },
           { "offset": 1, "rotate": 0 }
         ],
         "wings": [
@@ -472,6 +552,12 @@
           { "offset": 0.66, "rotate": -3 },
           { "offset": 1, "rotate": 0 }
         ],
+        "tail-wag": [
+          { "offset": 0, "rotate": 0 },
+          { "offset": 0.4, "rotate": 10.5 },
+          { "offset": 0.66, "rotate": -4.5 },
+          { "offset": 1, "rotate": 0 }
+        ],
         "wings": [
           { "offset": 0, "rotate": 0 },
           { "offset": 0.4, "rotate": 12 },
@@ -481,6 +567,11 @@
         "chest-light": [
           { "offset": 0, "scale": [1, 1] },
           { "offset": 0.4, "scale": [1.25, 1.25] },
+          { "offset": 1, "scale": [1, 1] }
+        ],
+        "crown-glow": [
+          { "offset": 0, "scale": [1, 1] },
+          { "offset": 0.4, "scale": [1.125, 1.125] },
           { "offset": 1, "scale": [1, 1] }
         ]
       },
@@ -518,6 +609,12 @@
           { "offset": 0.7, "rotate": -3 },
           { "offset": 1, "rotate": 0 }
         ],
+        "tail-wag": [
+          { "offset": 0, "rotate": -4.5 },
+          { "offset": 0.42, "rotate": 10.5 },
+          { "offset": 0.7, "rotate": -4.5 },
+          { "offset": 1, "rotate": 0 }
+        ],
         "wings": [
           { "offset": 0, "rotate": 0 },
           { "offset": 0.42, "rotate": 14 },
@@ -527,6 +624,11 @@
         "chest-light": [
           { "offset": 0, "scale": [1, 1] },
           { "offset": 0.42, "scale": [1.3, 1.3] },
+          { "offset": 1, "scale": [1, 1] }
+        ],
+        "crown-glow": [
+          { "offset": 0, "scale": [1, 1] },
+          { "offset": 0.42, "scale": [1.15, 1.15] },
           { "offset": 1, "scale": [1, 1] }
         ]
       },

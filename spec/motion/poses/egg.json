@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "stage": "egg",
+  "kind": "egg",
+  "description": "Œuf définitif, commun aux deux espèces (D6) : états idle, soon (fissures dorées, éclosion proche) et hatch (séquence de 3 s avec handoff vers le bébé de l'espèce tirée). Les clés communes (easings, targets, emblems, rest, transition, reducedMotion, priority) viennent de poses/kawaii.json. Format : spec/motion/README.md.",
+  "parts": {
+    "shadow": {
+      "origin": [120,206],
+      "variants": {"default":"creature/egg/shadow.svg"}
+    },
+    "glow": {
+      "origin": [120,138],
+      "variants": {"default":"creature/egg/glow.svg"}
+    },
+    "shell": {
+      "origin": [120,206],
+      "variants": {"default":"creature/egg/shell.svg"}
+    },
+    "sheen-a": {
+      "origin": [120,148],
+      "variants": {"default":"creature/egg/sheen-a.svg"}
+    },
+    "sheen-b": {
+      "origin": [120,148],
+      "variants": {"default":"creature/egg/sheen-b.svg"}
+    },
+    "gloss": {
+      "origin": [120,148],
+      "variants": {"default":"creature/egg/gloss.svg"}
+    },
+    "sparkle": {
+      "origin": [120,140],
+      "variants": {"default":"creature/egg/sparkle.svg"}
+    },
+    "light": {
+      "origin": [120,150],
+      "variants": {"default":"creature/egg/light.svg"}
+    },
+    "cracks-1": {
+      "origin": [120,148],
+      "variants": {"default":"creature/egg/cracks-1.svg"}
+    },
+    "cracks-2": {
+      "origin": [120,148],
+      "variants": {"default":"creature/egg/cracks-2.svg"}
+    },
+    "cracks-3": {
+      "origin": [120,148],
+      "variants": {"default":"creature/egg/cracks-3.svg"}
+    },
+    "shell-bottom": {
+      "origin": [120,206],
+      "variants": {"default":"creature/egg/shell-bottom.svg"}
+    },
+    "shell-top": {
+      "origin": [120,148],
+      "variants": {"default":"creature/egg/shell-top.svg"}
+    },
+    "burst": {
+      "origin": [120,140],
+      "variants": {"default":"creature/egg/burst.svg"}
+    }
+  },
+  "layers": ["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle","light","cracks-1","cracks-2","cracks-3","shell-bottom","shell-top","burst"],
+  "states": {
+    "idle": {
+      "label": "Œuf qui pulse",
+      "cue": "Œuf nacré aux reflets rose, menthe et bleu lune ; lueur dorée qui bat lentement, deux étincelles qui scintillent",
+      "emblem": null,
+      "visible": ["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle"],
+      "variants": {"shadow":"default","glow":"default","shell":"default","sheen-a":"default","sheen-b":"default","gloss":"default","sparkle":"default","light":"default","cracks-1":"default","cracks-2":"default","cracks-3":"default","shell-bottom":"default","shell-top":"default","burst":"default"},
+      "static": {},
+      "loops": [{"id":"glow-pulse","duration":3600,"iterations":"infinite","easing":"breath","targets":{"glow":[{"offset":0,"scale":[1,1],"opacity":0.7},{"offset":0.5,"scale":[1.07,1.07],"opacity":1},{"offset":1,"scale":[1,1],"opacity":0.7}]}},{"id":"sheen-shift","duration":5200,"iterations":"infinite","easing":"breath","targets":{"sheen-a":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":0.35},{"offset":1,"opacity":1}],"sheen-b":[{"offset":0,"opacity":0.35},{"offset":0.5,"opacity":1},{"offset":1,"opacity":0.35}]}},{"id":"twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"sparkle":[{"offset":0,"scale":[0.94,0.94],"opacity":0.45},{"offset":0.5,"scale":[1.06,1.06],"opacity":1},{"offset":1,"scale":[0.94,0.94],"opacity":0.45}]}}],
+      "particles": [{"preset":"ambient","continuous":true}]
+    },
+    "soon": {
+      "label": "Fissures dorées",
+      "cue": "Des fissures dorées courent sur la coquille, la lumière filtre de l’intérieur, l’œuf se balance doucement : il va éclore",
+      "emblem": null,
+      "visible": ["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle","light","cracks-1","cracks-2"],
+      "variants": {"shadow":"default","glow":"default","shell":"default","sheen-a":"default","sheen-b":"default","gloss":"default","sparkle":"default","light":"default","cracks-1":"default","cracks-2":"default","cracks-3":"default","shell-bottom":"default","shell-top":"default","burst":"default"},
+      "static": {"light":{"opacity":0.35}},
+      "loops": [{"id":"wobble","duration":4800,"iterations":"infinite","easing":"soft-in-out","targets":{"pose":[{"offset":0,"rotate":0},{"offset":0.12,"rotate":-3},{"offset":0.24,"rotate":3},{"offset":0.36,"rotate":-2},{"offset":0.46,"rotate":0},{"offset":1,"rotate":0}]}},{"id":"glow-pulse","duration":2800,"iterations":"infinite","easing":"breath","targets":{"glow":[{"offset":0,"scale":[1.04,1.04],"opacity":0.8},{"offset":0.5,"scale":[1.15,1.15],"opacity":1},{"offset":1,"scale":[1.04,1.04],"opacity":0.8}],"light":[{"offset":0,"opacity":0.25},{"offset":0.5,"opacity":0.6},{"offset":1,"opacity":0.25}]}},{"id":"twinkle","duration":3200,"iterations":"infinite","easing":"breath","targets":{"sparkle":[{"offset":0,"scale":[0.94,0.94],"opacity":0.45},{"offset":0.5,"scale":[1.06,1.06],"opacity":1},{"offset":1,"scale":[0.94,0.94],"opacity":0.45}]}}],
+      "particles": [{"preset":"ambient","continuous":true}]
+    },
+    "hatch": {
+      "label": "Éclosion",
+      "cue": "La coquille se fend en deux le long d’une ligne dorée, une lumière douce jaillit, le haut s’envole : la créature apparaît",
+      "emblem": null,
+      "visible": ["shadow","glow","shell","sheen-a","sheen-b","gloss","sparkle","light","cracks-1","cracks-2","cracks-3","shell-bottom","shell-top","burst"],
+      "variants": {"shadow":"default","glow":"default","shell":"default","sheen-a":"default","sheen-b":"default","gloss":"default","sparkle":"default","light":"default","cracks-1":"default","cracks-2":"default","cracks-3":"default","shell-bottom":"default","shell-top":"default","burst":"default"},
+      "static": {"light":{"opacity":0.35},"cracks-3":{"opacity":0},"shell-top":{"opacity":0},"shell-bottom":{"opacity":0},"burst":{"opacity":0}},
+      "rest": null,
+      "loops": [],
+      "sequence": {"id":"hatch","duration":3000,"iterations":1,"fill":"forwards","easing":"soft-in-out","reducedAt":1,"targets":{"pose":[{"offset":0,"rotate":0,"scale":[1,1]},{"offset":0.1,"rotate":-4},{"offset":0.2,"rotate":4},{"offset":0.3,"rotate":-5},{"offset":0.4,"rotate":5},{"offset":0.48,"rotate":0,"scale":[1,1]},{"offset":0.52,"rotate":0,"scale":[1.05,0.95],"easing":"ease-out-soft"},{"offset":0.58,"rotate":0,"scale":[0.98,1.04]},{"offset":0.68,"rotate":0,"scale":[1,1]},{"offset":1,"rotate":0,"scale":[1,1]}],"glow":[{"offset":0,"scale":[1.04,1.04],"opacity":0.8},{"offset":0.5,"scale":[1.2,1.2],"opacity":1},{"offset":0.62,"scale":[1.45,1.45],"opacity":1},{"offset":1,"scale":[1.7,1.7],"opacity":0}],"light":[{"offset":0,"opacity":0.35},{"offset":0.3,"opacity":0.6},{"offset":0.5,"opacity":0.95},{"offset":0.56,"opacity":0.95},{"offset":0.74,"opacity":0},{"offset":1,"opacity":0}],"cracks-1":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.54,"opacity":0},{"offset":1,"opacity":0}],"cracks-2":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.54,"opacity":0},{"offset":1,"opacity":0}],"cracks-3":[{"offset":0,"opacity":0},{"offset":0.3,"opacity":0},{"offset":0.46,"opacity":1},{"offset":0.53,"opacity":1},{"offset":0.57,"opacity":0},{"offset":1,"opacity":0}],"shell":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"sheen-a":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"sheen-b":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"gloss":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"sparkle":[{"offset":0,"opacity":1},{"offset":0.5,"opacity":1},{"offset":0.52,"opacity":0},{"offset":1,"opacity":0}],"shell-top":[{"offset":0,"translate":[0,0],"rotate":0,"opacity":0},{"offset":0.5,"translate":[0,0],"rotate":0,"opacity":0},{"offset":0.52,"translate":[0,0],"rotate":0,"opacity":1,"easing":"ease-out-soft"},{"offset":0.64,"translate":[-6,-40],"rotate":-16,"opacity":1,"easing":"soft-in-out"},{"offset":0.82,"translate":[-14,-80],"rotate":-30,"opacity":0.8},{"offset":1,"translate":[-20,-112],"rotate":-40,"opacity":0}],"shell-bottom":[{"offset":0,"translate":[0,0],"scale":[1,1],"opacity":0},{"offset":0.5,"translate":[0,0],"scale":[1,1],"opacity":0},{"offset":0.52,"translate":[0,0],"scale":[1,1],"opacity":1,"easing":"ease-out-soft"},{"offset":0.6,"translate":[0,2],"scale":[1.06,0.94],"opacity":1},{"offset":0.74,"translate":[0,3],"scale":[1.03,0.97],"opacity":1},{"offset":0.95,"translate":[0,6],"scale":[1.03,0.97],"opacity":0},{"offset":1,"translate":[0,6],"scale":[1.03,0.97],"opacity":0}],"burst":[{"offset":0,"scale":[0.5,0.5],"opacity":0},{"offset":0.5,"scale":[0.6,0.6],"opacity":0,"easing":"ease-out-soft"},{"offset":0.62,"scale":[1,1],"opacity":0.85},{"offset":0.82,"scale":[1.25,1.25],"opacity":0.45},{"offset":1,"scale":[1.5,1.5],"opacity":0}],"shadow":[{"offset":0,"opacity":1},{"offset":0.8,"opacity":1},{"offset":1,"opacity":0}]}},
+      "handoff": {"at":0.6,"reveal":"baby","note":"À cet offset l’interprète affiche la créature de l’espèce tirée (stade bébé, état courant) et joue la réaction hatch-<espèce> ; l’œuf finit invisible."},
+      "particles": [{"preset":"hatch-{kind}","at":0.6,"note":"{kind} = espèce tirée (kawaii ou feerique) ; préréglages de spec/motion/particles.json"}]
+    }
+  }
+}

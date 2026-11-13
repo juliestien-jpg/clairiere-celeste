@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs><linearGradient id="fw-fill" x1="81.16" y1="122.2" x2="23.96" y2="61.2" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFF6E9" stop-opacity=".92"/><stop offset=".55" stop-color="#C9DCFF" stop-opacity=".8"/><stop offset="1" stop-color="#F4A6C6" stop-opacity=".7"/></linearGradient></defs>
+<path d="M78.56 105.12 C68.16 78.28 47.36 56.32 23.96 52.66 C14.86 77.06 34.36 107.56 81.16 122.2 Z" fill="url(#fw-fill)" stroke="#6A5AAE" stroke-opacity="1" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M81.16 129.52 C57.76 129.52 34.36 141.72 23.96 163.68 C44.76 168.56 68.16 158.8 83.76 141.72 Z" fill="url(#fw-fill)" stroke="#6A5AAE" stroke-opacity="1" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M75.96 107.56 C62.96 88.04 46.06 70.96 31.76 61.2" fill="none" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M78.56 119.76 C57.76 114.88 39.56 102.68 26.56 80.72" fill="none" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M81.16 136.84 C62.96 139.28 44.76 149.04 34.36 158.8" fill="none" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="2.8" stroke-linecap="round"/>
+<circle cx="26.56" cy="56.32" r="3.4" fill="#FFFFFF" fill-opacity=".95"/><circle cx="21.36" cy="163.68" r="3" fill="#FFFFFF" fill-opacity=".9"/>
+
+</svg>

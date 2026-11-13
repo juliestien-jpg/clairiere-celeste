@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs>
+  <linearGradient id="ftl-fill" x1="150" y1="186" x2="216" y2="122" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFF6D8"/><stop offset=".5" stop-color="#FFD9A8"/><stop offset="1" stop-color="#F4A6C6" stop-opacity=".85"/></linearGradient>
+  <radialGradient id="ftl-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="209" cy="131" r="23.1" fill="url(#ftl-glow)"/>
+<path d="M148 190 C161.1 164.1 179.3 143.7 195.5 126.7 A14 14 0 0 1 214.5 147.3 C196.5 162.1 174.8 178.8 148 190 Z" fill="url(#ftl-fill)" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="203" cy="131" r="3.6" fill="#FFFFFF" fill-opacity=".9"/>
+<path d="M216 111 Q217.98 120.02 227 122 Q217.98 123.98 216 133 Q214.02 123.98 205 122 Q214.02 120.02 216 111 Z" fill="#FFF6D8" stroke="#C98A2B" stroke-width="2.8" stroke-linejoin="round"/>
+
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(240 0) scale(-1 1)">
+<path d="M111 61 C111 42 97 30 80 32 C71 33 64 37 61 41" fill="none" stroke="#6A5AAE" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M100 46 C90 46 85 40 85 33 C93 34 100 39 100 46 Z" fill="#8FE3CF" stroke="#6A5AAE" stroke-width="2.8" stroke-linejoin="round"/>
+<defs>
+  <radialGradient id="fa-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+  <radialGradient id="fa-petal" cx=".5" cy=".85" r=".95"><stop offset="0" stop-color="#FFF3F8"/><stop offset="1" stop-color="#F4A6C6"/></radialGradient>
+  <radialGradient id="fa-heart" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#FFF6D8"/><stop offset="1" stop-color="#FFD27A"/></radialGradient>
+</defs>
+<circle cx="58" cy="44" r="25.65" fill="url(#fa-glow)"/>
+<ellipse cx="0" cy="-7.43" rx="5" ry="7.43" transform="translate(58 44) rotate(0)" fill="url(#fa-petal)" stroke="#7A5CB0" stroke-width="2.8" stroke-linejoin="round"/>
+<ellipse cx="0" cy="-7.43" rx="5" ry="7.43" transform="translate(58 44) rotate(60)" fill="url(#fa-petal)" stroke="#7A5CB0" stroke-width="2.8" stroke-linejoin="round"/>
+<ellipse cx="0" cy="-7.43" rx="5" ry="7.43" transform="translate(58 44) rotate(120)" fill="url(#fa-petal)" stroke="#7A5CB0" stroke-width="2.8" stroke-linejoin="round"/>
+<ellipse cx="0" cy="-7.43" rx="5" ry="7.43" transform="translate(58 44) rotate(180)" fill="url(#fa-petal)" stroke="#7A5CB0" stroke-width="2.8" stroke-linejoin="round"/>
+<ellipse cx="0" cy="-7.43" rx="5" ry="7.43" transform="translate(58 44) rotate(240)" fill="url(#fa-petal)" stroke="#7A5CB0" stroke-width="2.8" stroke-linejoin="round"/>
+<ellipse cx="0" cy="-7.43" rx="5" ry="7.43" transform="translate(58 44) rotate(300)" fill="url(#fa-petal)" stroke="#7A5CB0" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="58" cy="44" r="4.32" fill="url(#fa-heart)" stroke="#B9791A" stroke-width="2.8"/>
+<circle cx="56.92" cy="42.92" r="1.35" fill="#FFFFFF" fill-opacity="0.95"/>
+
+</g>
+</svg>

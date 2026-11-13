@@ -2,7 +2,8 @@
 
 Ce dossier décrit **en données** comment la créature bouge. Trois sortes de fichiers :
 
-- `poses/kawaii.json` et `poses/feerique.json` : **un fichier par espèce** (D6, `pet.kind` / `view.kind`). Même format, mêmes 8 états de `deriveView` (`happy`, `hungry`, `tired`, `sick`, `asleep`, `dirty`, `weak`, `flown`), mêmes courbes, emblèmes et transitions ; seules les **parties** (et leurs poses) diffèrent. Le choix se fait sur `view.kind` ; l'œuf est commun aux deux espèces.
+- `poses/kawaii.json` et `poses/feerique.json` : **un fichier par espèce** (D6, `pet.kind` / `view.kind`). Même format, mêmes 8 états de `deriveView` (`happy`, `hungry`, `tired`, `sick`, `asleep`, `dirty`, `weak`, `flown`), mêmes courbes, emblèmes et transitions ; seules les **parties** (et leurs poses) diffèrent. Chaque fichier décrit le bébé à sa racine et les stades suivants dans `stages` (voir « Stades et œuf »). Le choix se fait sur `view.kind` et sur le stade `pet.stage`.
+- `poses/egg.json` : l'**œuf**, commun aux deux espèces (états `idle`, `soon`, `hatch`).
 - `reactions.json` : réactions aux actions et aux gestes, communes aux deux espèces grâce aux cibles communes (voir plus bas).
 - `particles.json` : préréglages de particules.
 
@@ -10,9 +11,11 @@ Ce dossier décrit **en données** comment la créature bouge. Trois sortes de f
 
 | | kawaii | féérique |
 |---|---|---|
-| Parties SVG | `assets/creature/kawaii/baby/` | `assets/creature/feerique/baby/` |
+| Parties SVG | `assets/creature/kawaii/<stade>/` | `assets/creature/feerique/<stade>/` |
 | Poses | `spec/motion/poses/kawaii.json` | `spec/motion/poses/feerique.json` |
-| Parties propres à l'espèce | `ear-left`, `ear-right` | `antenna-left`, `antenna-right`, `wing-left`, `wing-right`, `core`, `trail` |
+| Parties propres à l'espèce | `ear-left`, `ear-right` ; `wing-left`, `wing-right` à l'âge adulte | `antenna-left`, `antenna-right`, `wing-left`, `wing-right`, `core`, `trail`, `crown` (adulte) |
+| Parties communes aux deux espèces à partir de l'adolescent | `tail` | `tail` |
+| Œuf (commun) | `assets/creature/egg/`, `spec/motion/poses/egg.json` | idem |
 | Parties communes (mêmes noms) | `shadow`, `halo`, `body`, `cheeks`, `eye-left`, `eye-right`, `mouth`, `hand`, `dust-stains`, `dust-specks`, `star` | idem |
 
 Les emblèmes (`assets/emblems/`) et les accessoires (`assets/props/`) sont partagés. Les fichiers d'une espèce n'en partagent aucun avec l'autre.
@@ -20,6 +23,30 @@ Les emblèmes (`assets/emblems/`) et les accessoires (`assets/props/`) sont part
 Les couleurs viennent de `spec/theme.json`, les parties SVG de `assets/`. Chaque plateforme écrit un petit interprète : web (API Web Animations + canvas 2D), Flutter (`AnimationController` + `CustomPainter`). **Seules `transform` (translation, rotation, échelle) et `opacity` sont animées.**
 
 Une implémentation de référence de la version **kawaii seule** tient dans `assets/creature/planche.html` (générée avant D6 à partir de l'ancien `poses.json` et autonome : elle fonctionne mais n'est **pas régénérée** et ne montre pas l'espèce féérique ; pour celle-ci, voir `design/explorations/feerique/comparaison.html`, archive).
+
+## Stades et œuf
+
+Stades : `egg`, `baby`, `child`, `teen`, `adult` (`pet.stage`, calculé par les règles : 24 h, 96 h, 240 h d'après `spec/balance.json`). Un seul élément nouveau par stade (kawaii : oreilles longues, queue en flamme, ailes ; féérique : fleurs ouvertes, queue en comète, couronne).
+
+### Structure d'un fichier d'espèce
+
+```json
+{ "version": 1, "stage": "baby", "kind": "kawaii",
+  "easings": {}, "targets": {}, "emblems": {}, "rest": {}, "transition": {}, "reducedMotion": {}, "priority": [],
+  "parts": {}, "layers": [], "states": {},
+  "stages": { "child": { "label": "Enfant", "parts": {}, "layers": [], "states": {} }, "teen": {}, "adult": {} } }
+```
+
+- La **racine** est le bébé (`parts`, `layers`, `states`) **et** les clés communes à tous les stades (`easings`, `targets`, `emblems`, `rest`, `transition`, `reducedMotion`, `priority`).
+- `stages.<stade>` donne ce qui change : `parts` (origines propres au stade), `layers` (ordre de dessin) et `states` (les 8 états). Les parties inchangées d'un stade à l'autre **réutilisent le fichier du bébé** (ex. `creature/kawaii/baby/eye-left-open.svg`) ; féérique redessine tout le corps à chaque stade (`creature/feerique/<stade>/…`).
+- L'interprète charge `{ ...racine sans stages, ...stages[stade] }` (`composeStage` dans `apps/web/src/creature/parts.ts`). Un stade absent (ou le bébé) = la racine. Aucune partie n'est obligatoire : une réaction qui vise une partie absente d'un stade est ignorée.
+- `poses/egg.json` n'a que `parts`, `layers` et `states` (`idle`, `soon`, `hatch`) : les clés communes viennent du fichier kawaii (`composeEgg`).
+
+### Œuf et éclosion
+
+- `idle` : l'œuf pulse. `soon` : fissures dorées, lumière qui filtre, balancement ; choisi quand l'éclosion approche (**60 % de la durée du stade œuf** d'après l'équilibrage : `egg` dure jusqu'à `minAgeHours` de `baby`, soit 0,05 h = 3 min, donc `soon` à partir de 1 min 48 s ; `hatchProgress` et `eggState` dans `apps/web/src/creature/egg.ts`).
+- `hatch` : séquence de 3 s jouée une fois quand le stade passe de l'œuf au bébé sous les yeux du joueur (jamais à la réouverture d'une sauvegarde déjà éclose). Sa clé **`handoff`** `{ "at": 0.6, "reveal": "baby" }` dit à l'interprète : à cet offset de la séquence, afficher la créature de l'espèce tirée (stade bébé, état courant) en fondu par-dessus l'œuf, puis jouer la réaction `hatch-<espèce>` (voir plus bas). C'est la seule clé ajoutée au vocabulaire des états. En mouvement réduit : pas de séquence, l'œuf s'efface et le bébé apparaît en fondu de 250 ms.
+- **Gabarit `{kind}`** : un nom de préréglage de `particles` peut contenir `{kind}`, remplacé par l'espèce affichée (`hatch-{kind}` donne `hatch-kawaii` ou `hatch-feerique`). Ainsi un seul état d'œuf sert les deux espèces.
 
 ## Unités
 
@@ -152,8 +179,12 @@ Réactions courtes de la créature à une action ou à un geste (repas, goûter,
 | Groupe | kawaii | féérique | Usage |
 |---|---|---|---|
 | `head-tips` | `ear-left`, `ear-right` | `antenna-left`, `antenna-right` | extrémités de la tête : frémissent à la caresse, à la touche, au réveil, au jeu, au repas |
-| `wings` | absent (ignoré) | `wing-left`, `wing-right` | ailes : battent, s'ouvrent à l'étirement |
+| `wings` | `wing-left`, `wing-right` (adulte seulement, ignorées avant) | `wing-left`, `wing-right` | ailes : battent, s'ouvrent à l'étirement |
 | `chest-light` | absent (ignoré) | `core` | étoile de poitrine : pulse à chaque soin |
+| `tail-wag` | `tail` (ado, adulte) | `tail` (ado, adulte) | queue : frétille (rotation seule, autour de sa racine), mêmes moments que `head-tips` |
+| `crown-glow` | absent (ignoré) | `crown` (adulte) | couronne de pétales : pulse (échelle) avec `chest-light` |
+
+Un groupe ne porte jamais le nom d'une partie : `tail-wag` et `crown-glow`, pas `tail` et `crown`. Une partie absente du stade affiché (oreilles longues, queue, ailes qui n'existent pas encore) est ignorée sans erreur ; la validation exige seulement que la partie existe à au moins un stade de l'espèce.
 
 - `parts.<espèce>` : parties visées dans cette espèce. Une espèce absente de `parts` ignore le groupe.
 - `mirror` : `parts` est la paire **[gauche, droite]**. Les images clés décrivent le côté **droit** (rotation positive = vers l'extérieur ; pour une aile, elle s'ouvre) ; le côté gauche reçoit `rotate` et `translate[0]` de signe opposé. Sans `mirror`, toutes les parties reçoivent les mêmes images clés.

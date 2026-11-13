@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
+import { defaultBalance } from "@tamagoshi/rules";
 import type { AlbumEntry, Kind, SaveState, View } from "@tamagoshi/rules";
 import { Creature, RESTING_VIEW } from "../creature/Creature";
+import { hatchProgress } from "../creature/egg";
 import { MAX_NAME_LENGTH } from "../loop/gameLoop";
 import type { CreateResult, Notice } from "../loop/gameLoop";
 import { ActionBar } from "./ActionBar";
@@ -85,11 +87,13 @@ function NoticeLine({ notice, name, kind }: { notice: Notice | null; name: strin
 export function MainScreen(props: {
   state: SaveState;
   view: View;
+  /** Heure virtuelle courante : sert à faire se fissurer l'œuf quand l'éclosion approche. */
+  nowMs: number;
   notice: Notice | null;
   onAction: ActionHandler;
   nav?: Nav | undefined;
 }) {
-  const { state, view, notice, onAction, nav } = props;
+  const { state, view, nowMs, notice, onAction, nav } = props;
   const name = state.pet.name;
   return (
     <main className="screen screen-main">
@@ -101,6 +105,7 @@ export function MainScreen(props: {
           name={name}
           stage={state.pet.stage}
           view={view}
+          hatchProgress={state.pet.stage === "egg" ? hatchProgress(state.pet.bornAt, defaultBalance, nowMs) : 1}
           stateLabel={primaryLabel(view.primary, name)}
           secondaryLabel={secondaryLabel(view, name)}
         />

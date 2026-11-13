@@ -1,27 +1,27 @@
 // Créature : parties SVG composées selon spec/motion/poses/<espèce>.json pour l'état principal de
 // `deriveView`, emblème dans sa bulle, jusqu'à deux emblèmes secondaires (D4). Interprète de poses : ./motion.ts.
 //
-// Espèces (D6) : `view.kind` choisit les parties (assets/creature/<espèce>/baby) et les poses de l'espèce.
-// L'œuf est commun aux deux : dessin provisoire (./egg.ts) sur les parties de base de kawaii ; l'espèce se
-// découvre à l'éclosion, par une petite séquence de lumière (réaction `hatch-<espèce>`).
+// Espèces et stades (D6) : `view.kind` et le stade choisissent les parties (assets/creature/<espèce>/<stade>) et
+// les poses (spec/motion/poses/<espèce>.json, `stages`). Un changement de stade se fond comme un changement d'état.
 //
-// Stades : seul le stade bébé est dessiné. Pour « child », « teen » et « adult » on réutilise les parties
-// du bébé en attendant les dessins suivants (oreilles, queue, ailes : D4).
+// L'œuf est commun aux deux espèces (assets/creature/egg, poses/egg.json) : `idle`, puis `soon` quand l'éclosion
+// approche (./egg.ts). Quand le stade passe de l'œuf au bébé sous les yeux du joueur, la séquence `hatch` se joue
+// (3 s) et, au `handoff` de la séquence, la créature de l'espèce tirée apparaît : l'espèce se découvre.
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import type { Kind as Species, Need, PrimaryState, Stage, View } from "@tamagoshi/rules";
 import { useReducedMotion } from "../motion/MotionContext";
 import { getCreatureControl, requestReaction, setCreatureControl } from "./control";
 import { particles, posesFor, reactions, svgInner } from "./data";
-import { EGG_MARKUP, EGG_ORIGINS, EGG_STATE } from "./egg";
+import { eggState } from "./egg";
 import { burstChannel, careChannel, continuousChannel, setAnchorGetter } from "./effects";
-import { POSE_OFFSET_Y, VIEW_H } from "./geometry";
+import { POSE_OFFSET_Y, VIEW_H, setDisplayedStage } from "./geometry";
 import { easingString, playState } from "./motion";
 import { holdVariant, playReaction, setGaze, setLean, setStains } from "./reactionPlayer";
 import type { PlayerContext, ReactionHandle } from "./reactionPlayer";
-import { layerParts } from "./parts";
+import { layerParts, resolvePreset } from "./parts";
 import { hatchReaction } from "./reactions";
 import { prefixIds } from "./svgParts";
-import type { StateDef } from "./types";
+import type { PosesSpec, StateDef } from "./types";
 
 export interface CreatureProps {
   name: string;
@@ -36,6 +36,11 @@ export interface CreatureProps {
   caption?: boolean;
   /** Envol : jouer la séquence (sinon on montre directement l'image finale). */
   playFlight?: boolean;
+  /**
+   * Œuf seulement : avancement vers l'éclosion de 0 à 1 (`hatchProgress` de ./egg.ts). À partir de `SOON_FROM`
+   * l'œuf montre ses fissures dorées (`soon`). Absent : l'œuf reste calme (`idle`).
+   */
+  hatchProgress?: number;
 }
 
 /** Vue de repos, pour l'œuf de l'écran de création. */
@@ -65,29 +70,41 @@ const NEED_EMBLEM: Partial<Record<Need, string>> = {
 /** Poses communes aux deux espèces : œuf, emblèmes, courbes, transitions (identiques dans les deux fichiers). */
 const COMMON = posesFor("kawaii");
 
-function playerContext(species: Species): PlayerContext {
-  return { kind: species, poses: posesFor(species), reactions, svgInner };
+function playerContext(species: Species, stage: Stage): PlayerContext {
+  return { kind: species, poses: posesFor(species, stage), reactions, svgInner };
 }
 
-/** « Kind » local : un état de pose, ou l'œuf. L'espèce (kawaii, féérique) est le type `Species`. */
-type Kind = PrimaryState | "egg";
+/**
+ * Ce qui s'affiche : un stade, un état de ses poses (`PrimaryState` ; pour l'œuf `idle`, `soon` ou `hatch`) et
+ * l'espèce. Un changement d'une de ces trois valeurs empile une nouvelle couche (fondu).
+ */
+interface Look {
+  stage: Stage;
+  state: PrimaryState | EggLook;
+  species: Species;
+}
+type EggLook = "idle" | "soon" | "hatch";
 
-/** L'œuf est commun : il se dessine toujours avec les parties de kawaii. */
-function speciesOf(kind: Kind, species: Species): Species {
-  return kind === "egg" ? "kawaii" : species;
+/** Stade dessiné : un œuf envolé (sauvegarde étrangère) se montre avec les poses du bébé, qui ont l'Envol. */
+function drawStageOf(stage: Stage, primary: PrimaryState): Stage {
+  return stage === "egg" && primary === "flown" ? "baby" : stage;
 }
 
-function stateOf(kind: Kind, species: Species): StateDef {
-  if (kind === "egg") return EGG_STATE;
-  const s = posesFor(species).states[kind];
-  if (!s) throw new Error(`état de pose inconnu : ${species}/${kind}`);
+function sameLook(a: Look, b: Look): boolean {
+  // L'œuf est commun aux deux espèces : changer d'espèce de l'œuf ne le redessine pas.
+  return a.stage === b.stage && a.state === b.state && (a.stage === "egg" || a.species === b.species);
+}
+
+function stateOf(look: Look): StateDef {
+  const s = posesFor(look.species, look.stage).states[look.state];
+  if (!s) throw new Error(`état de pose inconnu : ${look.species}/${look.stage}/${look.state}`);
   return s;
 }
 
 /** Contenu SVG d'une couche : toutes les parties visibles, dans l'ordre de `layers`, et l'emblème. */
-function layerMarkup(kind: Kind, species: Species, prefix: string): string {
-  const poses = posesFor(species);
-  const def = stateOf(kind, species);
+function layerMarkup(look: Look, prefix: string): string {
+  const poses = posesFor(look.species, look.stage);
+  const def = stateOf(look);
   const flash =
     `<defs><radialGradient id="${prefix}-flash" cx="120" cy="138" r="100" gradientUnits="userSpaceOnUse">` +
     `<stop offset="0" stop-color="#FFD27A" stop-opacity=".85"/><stop offset=".6" stop-color="#FFD27A" stop-opacity=".3"/>` +
@@ -110,10 +127,7 @@ function layerMarkup(kind: Kind, species: Species, prefix: string): string {
       body += "</g>";
       gazeOpen = false;
     }
-    if (part === "halo") body += flash;
-    if (part === "halo" && kind === "egg") {
-      body += `<g data-target="egg">${prefixIds(EGG_MARKUP, `${prefix}-egg`)}</g>`;
-    }
+    if (part === "halo" || (look.stage === "egg" && part === "glow")) body += flash;
   }
   if (gazeOpen) body += "</g>";
   let out = `<g transform="translate(0 ${POSE_OFFSET_Y})"><g data-target="touch"><g data-target="creature"><g data-target="pose">${body}</g></g></g></g>`;
@@ -130,8 +144,7 @@ function layerMarkup(kind: Kind, species: Species, prefix: string): string {
 
 interface LayerProps {
   id: number;
-  kind: Kind;
-  species: Species;
+  look: Look;
   fadeIn: boolean;
   playSequence: boolean;
   reduced: boolean;
@@ -139,9 +152,10 @@ interface LayerProps {
 }
 
 /** Une couche = une créature complète dans un état. Un changement d'état empile une nouvelle couche. */
-const CreatureLayer = memo(function CreatureLayer({ id, kind, species, fadeIn, playSequence, reduced, onShown }: LayerProps) {
+const CreatureLayer = memo(function CreatureLayer({ id, look, fadeIn, playSequence, reduced, onShown }: LayerProps) {
   const ref = useRef<SVGSVGElement>(null);
-  const markup = useMemo(() => layerMarkup(kind, species, `c${id}`), [kind, species, id]);
+  const { stage, state, species } = look;
+  const markup = useMemo(() => layerMarkup({ stage, state, species }, `c${id}`), [stage, state, species, id]);
 
   // Fondu d'entrée : la nouvelle couche apparaît par-dessus l'ancienne (qui reste opaque dessous).
   useEffect(() => {
@@ -167,27 +181,28 @@ const CreatureLayer = memo(function CreatureLayer({ id, kind, species, fadeIn, p
   useEffect(() => {
     const svg = ref.current;
     if (!svg) return;
-    const poses = posesFor(species);
-    const def = stateOf(kind, species);
+    const poses: PosesSpec = posesFor(species, stage);
+    const def = stateOf({ stage, state, species });
     const handle = playState(svg, def, {
       spec: poses,
       reduced,
       settled: !playSequence,
-      origins: EGG_ORIGINS,
       rest: poses.rest,
     });
     const timers: ReturnType<typeof setTimeout>[] = [];
     if (!reduced && playSequence && def.sequence) {
       for (const p of def.particles) {
         if (p.at === undefined) continue;
-        timers.push(setTimeout(() => burstChannel.emit({ preset: p.preset }), p.at * def.sequence.duration));
+        timers.push(
+          setTimeout(() => burstChannel.emit({ preset: resolvePreset(p.preset, species) }), p.at * def.sequence.duration),
+        );
       }
     }
     return () => {
       timers.forEach(clearTimeout);
       handle.cancel();
     };
-  }, [kind, species, reduced, playSequence]);
+  }, [stage, state, species, reduced, playSequence]);
 
   // Retour lumineux : le halo s'intensifie (opacité seule), jamais en mouvement réduit.
   useEffect(() => {
@@ -297,9 +312,10 @@ function Clearing({ reduced }: { reduced: boolean }) {
 
 interface LayerState {
   id: number;
-  kind: Kind;
-  species: Species;
+  look: Look;
   fade: boolean;
+  /** Première couche de la créature après l'éclosion : la réaction `hatch-<espèce>` s'y joue. */
+  reveal?: boolean;
 }
 
 export function Creature({
@@ -310,23 +326,56 @@ export function Creature({
   secondaryLabel = null,
   caption = true,
   playFlight = false,
+  hatchProgress,
 }: CreatureProps) {
   const reduced = useReducedMotion();
-  const kind: Kind = stage === "egg" && view.primary !== "flown" ? "egg" : view.primary;
-  const species = speciesOf(kind, view.kind);
-  const [layers, setLayers] = useState<LayerState[]>(() => [{ id: 0, kind, species, fade: playFlight }]);
+  const drawStage = drawStageOf(stage, view.primary);
+  const desired: Look = {
+    stage: drawStage,
+    state: drawStage === "egg" ? eggState(hatchProgress) : view.primary,
+    species: view.kind,
+  };
+  const desiredRef = useRef(desired);
+  desiredRef.current = desired;
+  const [layers, setLayers] = useState<LayerState[]>(() => [{ id: 0, look: desired, fade: playFlight }]);
   const top = layers[layers.length - 1] as LayerState;
-  if (top.kind !== kind || top.species !== species) {
-    setLayers((ls) => [...ls, { id: (ls[ls.length - 1] as LayerState).id + 1, kind, species, fade: true }]);
+  const leavingEgg = top.look.stage === "egg" && desired.stage !== "egg";
+  if (!sameLook(top.look, desired) && !(top.look.state === "hatch" && desired.stage !== "egg")) {
+    // L'œuf qui devient créature sous nos yeux éclôt d'abord (mouvement réduit : simple fondu vers le bébé).
+    const hatch = leavingEgg && !reduced;
+    const next: LayerState = {
+      id: top.id + 1,
+      look: hatch ? { stage: "egg", state: "hatch", species: view.kind } : desired,
+      fade: true,
+      reveal: leavingEgg && !hatch,
+    };
+    setLayers((ls) => [...ls, next]);
   }
-  // Éclosion sous nos yeux (l'œuf devient créature) : l'espèce se découvre par une petite séquence de lumière.
-  const [hatched, setHatched] = useState<number | null>(null);
-  const hatching = top.kind === "egg" && kind !== "egg" && hatched !== top.id;
-  if (hatching) setHatched(top.id);
   const dropOlder = (id: number): void => setLayers((ls) => ls.filter((l) => l.id >= id));
 
+  // Handoff de la séquence d'éclosion : à cet instant la créature de l'espèce tirée prend la place de l'œuf.
+  const hatchId = top.look.state === "hatch" ? top.id : null;
+  useEffect(() => {
+    if (hatchId === null) return;
+    const def = posesFor("kawaii", "egg").states["hatch"];
+    const at = reduced ? 0 : (def?.handoff?.at ?? 0.6) * (def?.sequence?.duration ?? 3000);
+    const timer = setTimeout(() => {
+      setLayers((ls) => {
+        const last = ls[ls.length - 1] as LayerState;
+        if (last.id !== hatchId) return ls;
+        return [...ls, { id: last.id + 1, look: desiredRef.current, fade: true, reveal: true }];
+      });
+    }, at);
+    return () => clearTimeout(timer);
+  }, [hatchId, reduced]);
+
+  // Le stade affiché règle les zones de geste (tête, bouche, silhouette).
+  useEffect(() => {
+    setDisplayedStage(drawStage);
+  }, [drawStage]);
+
   // Emblèmes secondaires : ceux qui en ont un, sans doublon avec l'emblème principal, deux au plus.
-  const mainEmblem = stateOf(kind, species).emblem;
+  const mainEmblem = stateOf(top.look).emblem;
   const secondaryEmblems = view.secondary
     .map((n) => NEED_EMBLEM[n])
     .filter((e): e is string => e !== undefined && e !== mainEmblem)
@@ -345,30 +394,27 @@ export function Creature({
     return () => setAnchorGetter(null);
   }, []);
   const continuous = useMemo(
-    () => stateOf(kind, species).particles.filter((p) => p.continuous).map((p) => p.preset),
-    [kind, species],
-  );
-  // La séquence de lumière se joue une fois la nouvelle couche en place (requestReaction attend le rendu).
-  const hatchKey = hatched !== null && kind !== "egg" ? `${hatched}:${species}` : null;
-  const hatchPlayed = useRef<string | null>(null);
-  useEffect(() => {
-    if (hatchKey === null || hatchPlayed.current === hatchKey) return;
-    hatchPlayed.current = hatchKey;
-    requestReaction(hatchReaction(species));
-    careChannel.emit("play");
+    () => stateOf(desired).particles.filter((p) => p.continuous).map((p) => p.preset),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hatchKey]);
+    [desired.stage, desired.state, desired.species],
+  );
+  // La créature se révèle (fin de l'éclosion) : la séquence de lumière de son espèce se joue une fois la
+  // nouvelle couche en place (requestReaction attend le rendu).
+  const revealId = top.reveal ? top.id : null;
+  const revealSpecies = top.look.species;
+  useEffect(() => {
+    if (revealId === null) return;
+    requestReaction(hatchReaction(revealSpecies));
+    careChannel.emit("play");
+  }, [revealId, revealSpecies]);
   useEffect(() => {
     continuousChannel.emit(continuous);
     return () => continuousChannel.emit([]);
   }, [continuous]);
 
   // Poignée de commande pour les réactions et les gestes : toujours sur la couche du dessus.
-  const topRef = useRef({ kind, species });
-  topRef.current = {
-    kind: (layers[layers.length - 1] as LayerState).kind,
-    species: (layers[layers.length - 1] as LayerState).species,
-  };
+  const topRef = useRef(top.look);
+  topRef.current = top.look;
   const reducedRef = useRef(reduced);
   reducedRef.current = reduced;
   useEffect(() => {
@@ -388,19 +434,19 @@ export function Creature({
         if (!svg) return;
         handle?.cancel();
         const top = topRef.current;
-        handle = playReaction(svg, id, stateOf(top.kind, top.species), playerContext(top.species), reducedRef.current);
+        handle = playReaction(svg, id, stateOf(top), playerContext(top.species, top.stage), reducedRef.current);
       },
       lean: (v) => {
         const svg = topSvg();
-        if (svg) setLean(svg, playerContext(topRef.current.species), v);
+        if (svg) setLean(svg, playerContext(topRef.current.species, topRef.current.stage), v);
       },
       gaze: (v) => {
         const svg = topSvg();
-        if (svg) setGaze(svg, playerContext(topRef.current.species), v ? [v.x, v.y] : null);
+        if (svg) setGaze(svg, playerContext(topRef.current.species, topRef.current.stage), v ? [v.x, v.y] : null);
       },
       hold: (part, variant) => {
         const svg = topSvg();
-        if (svg) holdVariant(svg, playerContext(topRef.current.species), part, variant);
+        if (svg) holdVariant(svg, playerContext(topRef.current.species, topRef.current.stage), part, variant);
       },
       stains: (o) => {
         const svg = topSvg();
@@ -426,7 +472,7 @@ export function Creature({
     <figure
       className="creature"
       data-stage={stage}
-      data-kind={species}
+      data-kind={view.kind}
       data-state={view.primary}
       aria-label={`${name}, ${STAGE_LABEL[stage]}. ${stateLabel}.`}
     >
@@ -436,10 +482,9 @@ export function Creature({
           <CreatureLayer
             key={l.id}
             id={l.id}
-            kind={l.kind}
-            species={l.species}
+            look={l.look}
             fadeIn={l.fade}
-            playSequence={playFlight}
+            playSequence={playFlight || l.look.state === "hatch"}
             reduced={reduced}
             onShown={dropOlder}
           />

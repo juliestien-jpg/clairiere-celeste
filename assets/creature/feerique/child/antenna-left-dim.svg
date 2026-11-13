@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<path d="M111.8 68.6 C111 52 99 40 83 41 C75 42 70 45 67 49" fill="none" stroke="#6A5AAE" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M101 52 C92 52 87 47 87 40 C95 41 101 46 101 52 Z" fill="#C9D2C6" stroke="#6A5AAE" stroke-width="2.8" stroke-linejoin="round"/>
+<defs><radialGradient id="fa-bud" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#F1ECF8"/><stop offset="1" stop-color="#CFC6E0"/></radialGradient></defs>
+<path d="M65 59.96 C56.11 55.74 58.45 46.85 65 42.17 C71.55 46.85 73.89 55.74 65 59.96 Z" fill="url(#fa-bud)" stroke="#8F84AE" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M65 43.58 C62.66 50.13 63.13 55.74 65 59.49" fill="none" stroke="#8F84AE" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M59.85 59.02 C63.13 59.49 66.87 59.49 70.15 59.02 C67.81 62.76 62.19 62.76 59.85 59.02 Z" fill="#C9D2C6" stroke="#8F84AE" stroke-width="2.8" stroke-linejoin="round"/>
+
+</svg>

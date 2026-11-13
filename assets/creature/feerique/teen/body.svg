@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<g transform="translate(-6 -24.00000000000003) scale(1.05 1.12)">
+<defs>
+  <radialGradient id="fb-fill" cx="120" cy="150" r="96" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#FFFDF8"/><stop offset=".5" stop-color="#FFF6E9"/>
+    <stop offset=".8" stop-color="#FBE4EF"/><stop offset="1" stop-color="#DCD4F5"/>
+  </radialGradient>
+  <linearGradient id="fb-nacre" x1="64" y1="70" x2="178" y2="200" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#8FE3CF" stop-opacity=".34"/><stop offset=".5" stop-color="#F4A6C6" stop-opacity=".16"/><stop offset="1" stop-color="#A9C8FF" stop-opacity=".4"/>
+  </linearGradient>
+  <radialGradient id="fb-shade" cx="120" cy="204" r="70" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#8E7CC3" stop-opacity=".34"/><stop offset="1" stop-color="#8E7CC3" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="fb-gloss" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<path d="M120 54 C132 54 139 70 151 92 C167 120 180 136 180 158 C180 184 156 200 120 200 C84 200 60 184 60 158 C60 136 73 120 89 92 C101 70 108 54 120 54 Z" fill="url(#fb-fill)"/>
+<path d="M120 54 C132 54 139 70 151 92 C167 120 180 136 180 158 C180 184 156 200 120 200 C84 200 60 184 60 158 C60 136 73 120 89 92 C101 70 108 54 120 54 Z" fill="url(#fb-nacre)"/>
+<path d="M120 54 C132 54 139 70 151 92 C167 120 180 136 180 158 C180 184 156 200 120 200 C84 200 60 184 60 158 C60 136 73 120 89 92 C101 70 108 54 120 54 Z" fill="url(#fb-shade)"/>
+<ellipse cx="104" cy="112" rx="17" ry="7" transform="rotate(-62 104 112)" fill="url(#fb-gloss)"/>
+<circle cx="92" cy="130" r="2.6" fill="#FFFFFF" fill-opacity=".8"/>
+<path d="M120 54 C132 54 139 70 151 92 C167 120 180 136 180 158 C180 184 156 200 120 200 C84 200 60 184 60 158 C60 136 73 120 89 92 C101 70 108 54 120 54 Z" fill="none" stroke="#6A5AAE" stroke-width="2.67" stroke-linejoin="round"/>
+</g>
+</svg>

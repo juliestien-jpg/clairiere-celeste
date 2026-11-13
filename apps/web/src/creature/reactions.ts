@@ -274,16 +274,21 @@ export function hatchReaction(kind: Kind): string {
 /** Liste des incohérences de reactions.json (vide si tout va bien), pour toutes les espèces. */
 export function validateReactions(
   spec: ReactionsSpec,
-  posesByKind: Record<Kind, PosesSpec>,
+  posesByKind: Record<Kind, PosesSpec | readonly PosesSpec[]>,
   particles: ParticlesSpec,
   fileExists: (file: string) => boolean,
 ): string[] {
   const problems: string[] = [];
   const kinds = Object.keys(posesByKind) as Kind[];
-  const anyPoses = (f: (p: PosesSpec) => boolean): boolean => kinds.some((k) => f(posesByKind[k]));
+  // Une espèce peut avoir un jeu de poses par stade : une partie existe dès qu’un stade la dessine.
+  const specsOf = (k: Kind): readonly PosesSpec[] => {
+    const s = posesByKind[k];
+    return Array.isArray(s) ? (s as readonly PosesSpec[]) : [s as PosesSpec];
+  };
+  const anyPoses = (f: (p: PosesSpec) => boolean): boolean => kinds.some((k) => specsOf(k).some(f));
   const known = (name: string): boolean =>
     name in spec.targets || name in spec.groups || name in spec.props || anyPoses((p) => name in p.targets || name in p.parts);
-  const easings = posesByKind[kinds[0] as Kind].easings;
+  const easings = (specsOf(kinds[0] as Kind)[0] as PosesSpec).easings;
   for (const [id, p] of Object.entries(spec.props)) {
     if (!fileExists(p.file)) problems.push(`accessoire ${id} : fichier introuvable ${p.file}`);
     if (id in spec.groups || id in spec.targets || anyPoses((q) => id in q.parts || id in q.targets))
@@ -292,14 +297,14 @@ export function validateReactions(
   for (const [id, g] of Object.entries(spec.groups)) {
     if (id in spec.targets || anyPoses((q) => id in q.parts || id in q.targets)) problems.push(`groupe ${id} : nom déjà pris`);
     for (const k of Object.keys(g.parts) as Kind[]) {
-      const poses = posesByKind[k];
-      if (!poses) {
+      const poses = specsOf(k);
+      if (poses.length === 0) {
         problems.push(`groupe ${id} : espèce inconnue ${k}`);
         continue;
       }
       const list = g.parts[k] ?? [];
       if (g.mirror && list.length !== 2) problems.push(`groupe ${id} : ${k} doit donner la paire [gauche, droite]`);
-      for (const part of list) if (!(part in poses.parts)) problems.push(`groupe ${id} : partie ${part} absente de ${k}`);
+      for (const part of list) if (!poses.some((p) => part in p.parts)) problems.push(`groupe ${id} : partie ${part} absente de ${k}`);
     }
   }
   for (const [id, r] of Object.entries(spec.reactions)) {
@@ -332,9 +337,11 @@ export function validateReactions(
     const byPart = new Map<string, SwapDef[]>();
     for (const s of r.swaps) {
       for (const k of kinds) {
-        const variants = posesByKind[k].parts[s.part]?.variants;
-        if (!variants) problems.push(at(`swap : partie inconnue ${s.part} (${k})`));
-        else if (!(s.variant in variants)) problems.push(at(`swap : variante inconnue ${s.part}/${s.variant} (${k})`));
+        // La partie existe à au moins un stade ; la variante, à tous ceux qui dessinent la partie.
+        const having = specsOf(k).filter((p) => s.part in p.parts);
+        if (having.length === 0) problems.push(at(`swap : partie inconnue ${s.part} (${k})`));
+        else if (having.some((p) => !(s.variant in (p.parts[s.part] as { variants: object }).variants)))
+          problems.push(at(`swap : variante inconnue ${s.part}/${s.variant} (${k})`));
       }
       if (!(s.from >= 0 && s.from < s.to && s.to <= 1)) problems.push(at(`swap ${s.part}/${s.variant} : fenêtre invalide`));
       byPart.set(s.part, [...(byPart.get(s.part) ?? []), s]);

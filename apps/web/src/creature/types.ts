@@ -33,6 +33,7 @@ export interface Sequence extends Loop {
 }
 
 export interface ParticleRef {
+  /** Préréglage de particules ; `{kind}` est remplacé par l'espèce (ex. `hatch-{kind}`). */
   preset: string;
   continuous?: boolean;
   /** Offset de la séquence où déclencher une bouffée. */
@@ -52,6 +53,8 @@ export interface StateDef {
   sequence?: Sequence;
   after?: { loops: readonly Loop[] };
   particles: readonly ParticleRef[];
+  /** Œuf, séquence `hatch` : à cet offset (0 à 1), l'interprète révèle la créature de l'espèce tirée (bébé). */
+  handoff?: { at: number; reveal: "baby" };
 }
 
 export interface PartDef {
@@ -67,6 +70,8 @@ export interface EmblemDef {
 
 export interface PosesSpec {
   version: number;
+  /** Stade décrit (baby à la racine du fichier, child, teen, adult ou egg une fois composé). */
+  stage?: string;
   /** Espèce décrite par ce fichier (poses/<espèce>.json). */
   kind?: string;
   transition: { duration: number; easing: string };
@@ -78,6 +83,16 @@ export interface PosesSpec {
   layers: readonly string[];
   emblems: Record<string, EmblemDef>;
   rest: Loop;
+  states: Record<string, StateDef>;
+  /** Fichier d'une espèce : entrées par stade (child, teen, adult) qui remplacent `parts`, `layers` et `states` du bébé. */
+  stages?: Record<string, StageDef>;
+}
+
+/** Ce qui change d'un stade à l'autre ; les clés communes (courbes, emblèmes…) restent à la racine du fichier. */
+export interface StageDef {
+  label?: string;
+  parts: Record<string, PartDef>;
+  layers: readonly string[];
   states: Record<string, StateDef>;
 }
 
