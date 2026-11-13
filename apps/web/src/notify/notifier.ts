@@ -5,7 +5,7 @@ import { nextAttentionAt } from "@tamagoshi/rules";
 import type { Attention, Balance, Need } from "@tamagoshi/rules";
 import type { Snapshot } from "../loop/gameLoop";
 import { notificationContent } from "../ui/labels";
-import { forPet, recordSent, resolveNeed } from "./history";
+import { forPet, recordSent, resolveNeed, shiftHistory } from "./history";
 import type { HistoryStore, StoredHistory } from "./history";
 
 export type PermissionState = "granted" | "denied" | "default" | "unsupported";
@@ -70,7 +70,14 @@ export class Notifier {
     let changed = h !== this.history;
     for (const entry of snap.journal) {
       if (entry.seq <= this.lastSeq) continue;
-      if (entry.event.type === "needResolved") {
+      if (entry.event.type === "clockAdjusted") {
+        // Horloge reculée : l'historique suit la chronologie de l'animal, et la prévision est refaite (commit).
+        const next = shiftHistory(h, entry.event.deltaMs);
+        if (next !== h) {
+          h = next;
+          changed = true;
+        }
+      } else if (entry.event.type === "needResolved") {
         const next = resolveNeed(h, entry.event.need);
         if (next !== h) {
           h = next;

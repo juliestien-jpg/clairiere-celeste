@@ -1,0 +1,113 @@
+{
+  "scenarioVersion": 1,
+  "name": "horloge-avancee-remise",
+  "description": "L'horloge de l'appareil a été avancée (le temps jusqu'à T0+10 h 30 est rattrapé comme une vraie absence), puis remise à l'heure réelle (T0+1 h). Translation de -9 h 30 : jauges, messes, rng, stade (baby) et grille inchangés, bornAt, stageSince, lastUpdatedAt, savedAt et la recharge de la caresse décalés du même delta. L'animal reprend : la caresse est refusée (cooldown) 4 min après, acceptée à l'instant exact de fin de la recharge, 5 min après.",
+  "guarantee": "D3",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763058600000,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.gauges.satiety": 32.75,
+        "pet.gauges.happiness": 48.5,
+        "pet.gauges.energy": 43.25,
+        "pet.gauges.hygiene": 54.25,
+        "pet.status.messes": 2,
+        "pet.stage": "baby"
+      }
+    },
+    {
+      "nowMs": 1763058600000,
+      "action": {
+        "type": "pet"
+      },
+      "expectState": {
+        "pet.gauges.happiness": 53.5,
+        "pet.cooldowns": {
+          "feed.meal": 0,
+          "feed.snack": 0,
+          "heal": 0,
+          "pet": 1763058900000
+        }
+      }
+    },
+    {
+      "nowMs": 1763024400000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -34200000
+        }
+      ],
+      "expectState": {
+        "pet.gauges.satiety": 32.75,
+        "pet.gauges.happiness": 53.5,
+        "pet.gauges.energy": 43.25,
+        "pet.gauges.hygiene": 54.25,
+        "pet.status.messes": 2,
+        "pet.status.messProgressSeconds": 1800,
+        "pet.stage": "baby",
+        "pet.life": "alive",
+        "pet.bornAt": 1762986600000,
+        "pet.stageSince": 1762986780000,
+        "pet.lastUpdatedAt": 1763024400000,
+        "savedAt": 1763024400000,
+        "pet.cooldowns": {
+          "feed.meal": 0,
+          "feed.snack": 0,
+          "heal": 0,
+          "pet": 1763024700000
+        }
+      }
+    },
+    {
+      "nowMs": 1763024640000,
+      "action": {
+        "type": "pet"
+      },
+      "expectEvents": [
+        {
+          "type": "actionRefused",
+          "action": "pet",
+          "reason": "cooldown"
+        }
+      ],
+      "expectState": {
+        "pet.lastUpdatedAt": 1763024640000,
+        "pet.gauges.happiness": 53.3
+      }
+    },
+    {
+      "nowMs": 1763024700000,
+      "action": {
+        "type": "pet"
+      },
+      "expectEvents": [],
+      "expectState": {
+        "pet.lastUpdatedAt": 1763024700000,
+        "pet.gauges.happiness": 58.25,
+        "pet.cooldowns": {
+          "feed.meal": 0,
+          "feed.snack": 0,
+          "heal": 0,
+          "pet": 1763025000000
+        }
+      }
+    }
+  ]
+}

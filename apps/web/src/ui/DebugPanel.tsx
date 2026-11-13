@@ -1,4 +1,4 @@
-// Panneau de débogage : observer le jeu sans attendre des heures. Visible en dev ou avec ?debug.
+// Panneau de débogage : observer le jeu sans attendre des heures. Visible en développement uniquement (jamais dans le site publié).
 import { useMemo, useState } from "react";
 import { nextAttentionAt } from "@tamagoshi/rules";
 import type { GameLoop, Snapshot } from "../loop/gameLoop";
@@ -14,7 +14,7 @@ const JUMPS: { label: string; ms: number }[] = [
 ];
 
 export function isDebugVisible(): boolean {
-  return import.meta.env.DEV || new URLSearchParams(window.location.search).has("debug");
+  return import.meta.env.DEV;
 }
 
 function fmtDate(ms: number): string {

@@ -38,3 +38,11 @@ describe("labels", () => {
     }
   });
 });
+
+describe("événement clockAdjusted", () => {
+  it("est annoncé par un message doux", () => {
+    expect(describeEvent({ type: "clockAdjusted", deltaMs: -3_600_000 }, "Lumi")?.text).toBe(
+      "L'horloge de l'appareil a changé : la clairière s'est remise à l'heure.",
+    );
+  });
+});

@@ -1,0 +1,796 @@
+{
+  "scenarioVersion": 1,
+  "name": "migrate-limites-taille",
+  "description": "Limites de taille de migrate (A1, LIMITS) : nom de 40 caracteres accepte, de 40 avec espaces autour accepte (trim), de 41 refuse ; la limite se compte en points de code (40 emojis acceptes, 41 refuses) ; nom brut de plus de 128 caracteres refuse meme si le trim le ramene a 40 ; identifiant de 128 caracteres accepte, de 129 refuse ; nom trop long dans l'album refuse ; 33 cles de cooldowns refusees ; cle de cooldown de 129 caracteres refusee.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectState": {
+        "pet.name": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "  NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN  ",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectState": {
+        "pet.name": "  NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN  "
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectState": {
+        "pet.name": "🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "                                                                                                    NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN                                                                                                    ",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectState": {
+        "pet.id": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [
+          {
+            "id": "a0",
+            "name": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+            "bornAt": 0,
+            "flownAt": 1,
+            "stage": "egg",
+            "kind": "kawaii"
+          }
+        ],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectState": {
+        "album.0.name": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [
+          {
+            "id": "a0",
+            "name": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+            "bornAt": 0,
+            "flownAt": 1,
+            "stage": "egg",
+            "kind": "kawaii"
+          }
+        ],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "feed.meal": 0,
+            "feed.snack": 0,
+            "heal": 0,
+            "pet": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [
+          {
+            "id": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+            "name": "E0",
+            "bornAt": 0,
+            "flownAt": 1,
+            "stage": "egg",
+            "kind": "kawaii"
+          }
+        ],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "k0": 0,
+            "k1": 0,
+            "k2": 0,
+            "k3": 0,
+            "k4": 0,
+            "k5": 0,
+            "k6": 0,
+            "k7": 0,
+            "k8": 0,
+            "k9": 0,
+            "k10": 0,
+            "k11": 0,
+            "k12": 0,
+            "k13": 0,
+            "k14": 0,
+            "k15": 0,
+            "k16": 0,
+            "k17": 0,
+            "k18": 0,
+            "k19": 0,
+            "k20": 0,
+            "k21": 0,
+            "k22": 0,
+            "k23": 0,
+            "k24": 0,
+            "k25": 0,
+            "k26": 0,
+            "k27": 0,
+            "k28": 0,
+            "k29": 0,
+            "k30": 0,
+            "k31": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectState": {
+        "pet.name": "Lumi"
+      }
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "k0": 0,
+            "k1": 0,
+            "k2": 0,
+            "k3": 0,
+            "k4": 0,
+            "k5": 0,
+            "k6": 0,
+            "k7": 0,
+            "k8": 0,
+            "k9": 0,
+            "k10": 0,
+            "k11": 0,
+            "k12": 0,
+            "k13": 0,
+            "k14": 0,
+            "k15": 0,
+            "k16": 0,
+            "k17": 0,
+            "k18": 0,
+            "k19": 0,
+            "k20": 0,
+            "k21": 0,
+            "k22": 0,
+            "k23": 0,
+            "k24": 0,
+            "k25": 0,
+            "k26": 0,
+            "k27": 0,
+            "k28": 0,
+            "k29": 0,
+            "k30": 0,
+            "k31": 0,
+            "k32": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    },
+    {
+      "nowMs": 1763020800000,
+      "query": "migrate",
+      "raw": {
+        "version": 2,
+        "savedAt": 1763020800000,
+        "pet": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "name": "Lumi",
+          "kind": "kawaii",
+          "bornAt": 1763020800000,
+          "stage": "egg",
+          "stageSince": 1763020800000,
+          "life": "alive",
+          "flownAt": null,
+          "gauges": {
+            "satiety": 80,
+            "happiness": 80,
+            "energy": 80,
+            "hygiene": 100,
+            "health": 100
+          },
+          "status": {
+            "asleep": false,
+            "asleepSince": null,
+            "sick": false,
+            "sickSince": null,
+            "messes": 0,
+            "messProgressSeconds": 0,
+            "weakSince": null
+          },
+          "cooldowns": {
+            "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk": 0
+          },
+          "lastUpdatedAt": 1763020800000,
+          "rng": 123456
+        },
+        "album": [],
+        "settings": {
+          "reducedMotion": "system",
+          "sound": true,
+          "notifications": false
+        }
+      },
+      "expectError": "invalid"
+    }
+  ]
+}

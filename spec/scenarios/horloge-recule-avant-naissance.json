@@ -1,0 +1,59 @@
+{
+  "scenarioVersion": 1,
+  "name": "horloge-recule-avant-naissance",
+  "description": "Horloge remise en arrière avant l'instant de naissance : la translation n'a pas de plancher (bornAt aussi est décalé, l'âge relatif et le stade baby sont conservés), lastUpdatedAt devient le dernier point de grille <= nowMs, les jauges restent intactes, puis le temps reprend normalement depuis ce point.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763028000000,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.stage": "baby",
+        "pet.gauges.satiety": 71
+      }
+    },
+    {
+      "nowMs": 1763010000000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -18000000
+        }
+      ],
+      "expectState": {
+        "pet.bornAt": 1763002800000,
+        "pet.lastUpdatedAt": 1763010000000,
+        "savedAt": 1763010000000,
+        "pet.stage": "baby",
+        "pet.stageSince": 1763002980000,
+        "pet.gauges.satiety": 71,
+        "pet.gauges.hygiene": 97
+      }
+    },
+    {
+      "nowMs": 1763013600000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [],
+      "expectState": {
+        "pet.lastUpdatedAt": 1763013600000,
+        "pet.gauges.satiety": 66.5
+      }
+    }
+  ]
+}

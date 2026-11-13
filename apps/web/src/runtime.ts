@@ -11,11 +11,11 @@ import { createDefaultStore } from "./storage/indexedDbStore";
 
 const { store, persistent } = createDefaultStore();
 
-// En débogage, le décalage de l'heure virtuelle (sauts, accélération) survit au rechargement.
+// Débogage (développement uniquement, jamais en production) : le décalage de l'heure virtuelle (sauts, accélération) survit au rechargement.
 // Sans cela, une sauvegarde créée à une heure virtuelle avancée paraît « dans le futur » après
 // rechargement, et les règles (qui ne font jamais reculer le temps) figent l'animal.
 const DEBUG_CLOCK_KEY = "tamagoshi.debugClockOffsetMs";
-const debugClock = import.meta.env.DEV || new URLSearchParams(location.search).has("debug");
+const debugClock = import.meta.env.DEV;
 
 function readSavedOffset(): number {
   if (!debugClock) return 0;

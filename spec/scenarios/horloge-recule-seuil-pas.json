@@ -1,0 +1,86 @@
+{
+  "scenarioVersion": 1,
+  "name": "horloge-recule-seuil-pas",
+  "description": "Seuil de la translation : un recul de 59,999 s (moins d'un pas de 60 s) ne fait rien (aucun événement, lastUpdatedAt inchangé) ; un recul de exactement un pas translate de -60 s ; un recul de 1,5 pas translate de -120 s (dernier point de grille <= nowMs : le reste de 30 s est perdu, lastUpdatedAt reste sur la grille) ; un nowMs fractionnaire est arrondi à l'entier inférieur avant comparaison.",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 11184255,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763024400000,
+      "action": {
+        "type": "tick"
+      },
+      "expectState": {
+        "pet.lastUpdatedAt": 1763024400000
+      }
+    },
+    {
+      "nowMs": 1763024340001,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [],
+      "expectState": {
+        "pet.lastUpdatedAt": 1763024400000,
+        "pet.bornAt": 1763020800000
+      }
+    },
+    {
+      "nowMs": 1763024340000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -60000
+        }
+      ],
+      "expectState": {
+        "pet.lastUpdatedAt": 1763024340000,
+        "pet.bornAt": 1763020740000,
+        "savedAt": 1763024340000
+      }
+    },
+    {
+      "nowMs": 1763024250000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -120000
+        }
+      ],
+      "expectState": {
+        "pet.lastUpdatedAt": 1763024220000,
+        "pet.bornAt": 1763020620000
+      }
+    },
+    {
+      "nowMs": 1763024160000.7,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -60000
+        }
+      ],
+      "expectState": {
+        "pet.lastUpdatedAt": 1763024160000,
+        "pet.bornAt": 1763020560000
+      }
+    }
+  ]
+}

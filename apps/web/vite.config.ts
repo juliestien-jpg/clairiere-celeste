@@ -3,6 +3,7 @@ import { join, relative } from "node:path";
 import react from "@vitejs/plugin-react";
 import type { Plugin } from "vite";
 import { defineConfig } from "vitest/config";
+import { injectCsp } from "./src/pwa/csp.ts";
 import { buildServiceWorker } from "./src/pwa/serviceWorkerBuild.ts";
 
 // Racine du dépôt (deux niveaux au-dessus de apps/web) : `spec/` et `assets/` y vivent, hors du projet Vite.
@@ -34,9 +35,18 @@ function serviceWorkerPlugin(): Plugin {
   };
 }
 
+/** Ajoute la politique de sécurité du contenu à index.html, au build seulement (le dev a besoin de scripts en ligne). */
+function cspPlugin(): Plugin {
+  return {
+    name: "tamagoshi-csp",
+    apply: "build",
+    transformIndexHtml: { order: "post", handler: (html: string) => injectCsp(html) },
+  };
+}
+
 // Serveur de développement local uniquement (127.0.0.1:5173, port imposé), avec accès au dépôt entier.
 export default defineConfig({
-  plugins: [react(), serviceWorkerPlugin()],
+  plugins: [react(), cspPlugin(), serviceWorkerPlugin()],
   server: { host: "127.0.0.1", port: 5173, strictPort: true, fs: { allow: [repoRoot] } },
   preview: { host: "127.0.0.1", port: 5173, strictPort: true },
   test: { environment: "node", include: ["src/**/*.test.ts"] },

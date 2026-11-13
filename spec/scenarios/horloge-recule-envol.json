@@ -1,0 +1,81 @@
+{
+  "scenarioVersion": 1,
+  "name": "horloge-recule-envol",
+  "description": "Animal déjà envolé (flownAt = lastUpdatedAt = 1763297820000) et horloge remise 10 h en arrière : la translation décale aussi flownAt (et bornAt), sans toucher aux jauges ; le tick est ensuite refusé (flown) ; la renaissance crée un nouvel oeuf au nouveau lastUpdatedAt et l'album garde l'écart relatif (flownAt et bornAt décalés).",
+  "guarantee": "D3",
+  "initial": {
+    "createSave": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Lumi",
+      "seed": 14056,
+      "kind": "kawaii",
+      "nowMs": 1763020800000,
+      "utcOffsetMin": 0
+    }
+  },
+  "steps": [
+    {
+      "nowMs": 1763308800000,
+      "action": {
+        "type": "tick"
+      },
+      "containsEvents": [
+        {
+          "type": "flewAway"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.flownAt": 1763297820000,
+        "pet.lastUpdatedAt": 1763297820000
+      }
+    },
+    {
+      "nowMs": 1763261820000,
+      "action": {
+        "type": "tick"
+      },
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -36000000
+        },
+        {
+          "type": "actionRefused",
+          "action": "tick",
+          "reason": "flown"
+        }
+      ],
+      "expectState": {
+        "pet.life": "flown",
+        "pet.flownAt": 1763261820000,
+        "pet.lastUpdatedAt": 1763261820000,
+        "pet.bornAt": 1762984800000,
+        "pet.gauges.health": 0
+      }
+    },
+    {
+      "nowMs": 1763261820000,
+      "action": {
+        "type": "rebirth",
+        "id": "00000000-0000-4000-8000-000000000002",
+        "name": "Nova",
+        "seed": 777,
+        "kind": "feerique"
+      },
+      "expectEvents": [
+        {
+          "type": "reborn"
+        }
+      ],
+      "expectState": {
+        "album.0.flownAt": 1763261820000,
+        "album.0.bornAt": 1762984800000,
+        "pet.name": "Nova",
+        "pet.bornAt": 1763261820000,
+        "pet.lastUpdatedAt": 1763261820000,
+        "pet.life": "alive"
+      }
+    }
+  ]
+}

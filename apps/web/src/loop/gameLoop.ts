@@ -2,7 +2,7 @@
 // injectée, tient le journal des événements et déclenche la sauvegarde. Sans dépendance à React.
 import { deriveView, reduce } from "@tamagoshi/rules";
 import type { Action, Balance, GameEvent, Kind, SaveState, Settings, Time, View } from "@tamagoshi/rules";
-import { createSave } from "@tamagoshi/rules";
+import { createSave, InvalidIdentityError, LIMITS, MigrationError } from "@tamagoshi/rules";
 import type { SaveStore } from "../storage/saveStore";
 import type { ControllableClock } from "./clock";
 import { localUtcOffsetMin } from "./clock";
@@ -30,10 +30,16 @@ export interface Snapshot {
   journal: readonly JournalEntry[];
   notice: Notice | null;
   loadError: string | null;
+  /** Nature de l'erreur de chargement : `unsupportedVersion` (sauvegarde plus récente que le jeu), `invalid` (illisible), `storage` (stockage inaccessible). */
+  loadErrorCode: LoadErrorCode | null;
+  /** Vrai après une erreur de chargement : plus aucune écriture, pour ne jamais écraser la sauvegarde stockée. */
+  readOnly: boolean;
   saveError: string | null;
   /** Augmente à chaque action du joueur, import, rechargement ou changement de réglage : les prévisions (D5) sont à refaire. */
   revision: number;
 }
+
+export type LoadErrorCode = "unsupportedVersion" | "invalid" | "storage";
 
 export interface Timers {
   setInterval(fn: () => void, ms: number): unknown;
@@ -51,6 +57,8 @@ export interface GameLoopOptions {
   store: SaveStore;
   utcOffsetMin?: (ms: number) => number;
   tickIntervalMs?: number;
+  /** Rythme de la boucle quand la page est cachée (suffisant pour les notifications « page ouverte »). */
+  hiddenTickIntervalMs?: number;
   /** Sauvegarde périodique (sans prévenir les autres onglets) toutes les N secondes de boucle. */
   saveEveryTicks?: number;
   journalSize?: number;
@@ -75,7 +83,8 @@ export const CATCH_UP_MS = 30_000;
 
 export type CreateResult = { ok: true } | { ok: false; reason: "emptyName" | "tooLong" | "exists" };
 
-export const MAX_NAME_LENGTH = 24;
+/** Longueur maximale du nom (points de code, après trim) : la limite vient des règles. */
+export const MAX_NAME_LENGTH = LIMITS.nameMaxLength;
 
 function defaultIdentity(): Identity {
   const buf = new Uint32Array(1);
@@ -99,6 +108,7 @@ export class GameLoop {
   private readonly store: SaveStore;
   private readonly offsetOf: (ms: number) => number;
   private readonly tickIntervalMs: number;
+  private readonly hiddenTickIntervalMs: number;
   private readonly saveEveryTicks: number;
   private readonly journalSize: number;
   private readonly timers: Timers;
@@ -112,6 +122,11 @@ export class GameLoop {
   private revision = 0;
   private notice: Notice | null = null;
   private loadError: string | null = null;
+  private loadErrorCode: LoadErrorCode | null = null;
+  private readOnly = false;
+  private hidden = false;
+  /** Prochaine écriture sans comparaison : la chronologie vient d'être translatée (horloge reculée), `savedAt` recule légitimement. */
+  private forceNextSave = false;
   private saveError: string | null = null;
   private ticksSinceSave = 0;
   private timer: unknown = null;
@@ -126,6 +141,7 @@ export class GameLoop {
     this.store = opts.store;
     this.offsetOf = opts.utcOffsetMin ?? localUtcOffsetMin;
     this.tickIntervalMs = opts.tickIntervalMs ?? 1000;
+    this.hiddenTickIntervalMs = opts.hiddenTickIntervalMs ?? 15_000;
     this.saveEveryTicks = opts.saveEveryTicks ?? 10;
     this.journalSize = opts.journalSize ?? 60;
     this.timers = opts.timers ?? defaultTimers;
@@ -165,6 +181,8 @@ export class GameLoop {
       journal: this.journal,
       notice: this.notice,
       loadError: this.loadError,
+      loadErrorCode: this.loadErrorCode,
+      readOnly: this.readOnly,
       saveError: this.saveError,
       revision: this.revision,
     };
@@ -188,17 +206,40 @@ export class GameLoop {
     try {
       this.state = await this.store.load();
     } catch (e) {
-      this.loadError = e instanceof Error ? e.message : "sauvegarde illisible";
+      this.failLoad(e);
     }
     this.ready = true;
     if (this.state) this.dispatch({ type: "tick" });
     else this.emit();
   }
 
+  /** Erreur de chargement : on passe en lecture seule, la sauvegarde stockée ne sera plus jamais écrite. */
+  private failLoad(e: unknown): void {
+    this.readOnly = true;
+    this.loadError = e instanceof Error ? e.message : "sauvegarde illisible";
+    this.loadErrorCode = e instanceof MigrationError ? (e.code === "unsupportedVersion" ? "unsupportedVersion" : "invalid") : "storage";
+  }
+
   start(): void {
     if (this.timer !== null) return;
-    this.timer = this.timers.setInterval(() => this.tick(), this.tickIntervalMs);
+    this.timer = this.timers.setInterval(() => this.tick(), this.currentTickMs());
     this.unsubscribeStore ??= this.store.subscribe(() => void this.reloadFromStore());
+  }
+
+  private currentTickMs(): number {
+    return this.hidden ? this.hiddenTickIntervalMs : this.tickIntervalMs;
+  }
+
+  /**
+   * Page cachée : la boucle ralentit (plus de rendu chaque seconde) mais continue, pour que les
+   * notifications « page ouverte » (D5) apparaissent à l'heure. Revenir à l'écran refait un tick.
+   */
+  setHidden(hidden: boolean): void {
+    if (this.hidden === hidden) return;
+    this.hidden = hidden;
+    if (this.timer === null) return;
+    this.timers.clearInterval(this.timer);
+    this.timer = this.timers.setInterval(() => this.tick(), this.currentTickMs());
   }
 
   stop(): void {
@@ -227,6 +268,7 @@ export class GameLoop {
     const catchUp = action.type === "tick" && time.nowMs - this.state.pet.lastUpdatedAt > CATCH_UP_MS;
     const result = reduce(this.state, action, time, this.balance);
     this.state = result.state;
+    if (result.events.some((e) => e.type === "clockAdjusted")) this.forceNextSave = true;
     const events =
       action.type === "tick"
         ? result.events.filter((e) => !(e.type === "actionRefused" && e.action === "tick"))
@@ -255,7 +297,12 @@ export class GameLoop {
     if (name === "") return { ok: false, reason: "emptyName" };
     if ([...name].length > MAX_NAME_LENGTH) return { ok: false, reason: "tooLong" };
     const { id, seed } = this.newIdentity();
-    this.state = createSave({ id, name, seed }, this.time(), this.balance);
+    try {
+      this.state = createSave({ id, name, seed }, this.time(), this.balance);
+    } catch (e) {
+      if (e instanceof InvalidIdentityError) return { ok: false, reason: "tooLong" };
+      throw e;
+    }
     this.revision++;
     this.journal = [];
     this.notice = null;
@@ -294,8 +341,14 @@ export class GameLoop {
     else this.emit();
   }
 
-  /** Efface la sauvegarde : retour à l'écran de création. */
-  async reset(): Promise<void> {
+  /**
+   * Efface la sauvegarde : retour à l'écran de création. Refusé (sans rien effacer) quand la sauvegarde vient
+   * d'une version plus récente du jeu. Renvoie `false` si rien n'a été effacé.
+   */
+  async reset(): Promise<boolean> {
+    if (this.loadErrorCode === "unsupportedVersion") return false;
+    this.readOnly = false;
+    this.loadErrorCode = null;
     this.state = null;
     this.revision++;
     this.journal = [];
@@ -303,10 +356,24 @@ export class GameLoop {
     this.loadError = null;
     this.emit();
     await this.store.clear();
+    return true;
+  }
+
+  /** Après une erreur de stockage (et seulement alors) : joue sans sauvegarde plutôt que de rester bloqué. */
+  continueWithoutSave(): void {
+    if (this.loadErrorCode !== "storage") return;
+    this.loadError = null;
+    this.loadErrorCode = null;
+    this.emit();
   }
 
   exportBlob(): Blob | null {
     return this.state ? this.store.exportFile(this.state) : null;
+  }
+
+  /** Contenu stocké tel quel (sauvegarde illisible comprise), à télécharger sans transformation. */
+  exportRaw(): Promise<string | null> {
+    return this.store.readRaw();
   }
 
   /** Lit et valide un fichier de sauvegarde sans rien changer. Lève `MigrationError` si illisible. */
@@ -318,6 +385,9 @@ export class GameLoop {
   async applyImport(imported: SaveState): Promise<void> {
     this.state = imported;
     this.loadError = null;
+    this.loadErrorCode = null;
+    this.readOnly = false;
+    this.forceNextSave = true; // le fichier choisi par le joueur remplace le stockage, même plus ancien
     this.journal = [];
     this.notice = null;
     this.revision++;
@@ -337,7 +407,8 @@ export class GameLoop {
    */
   updateSettings(patch: Partial<Settings>): void {
     if (!this.state) return;
-    this.state = { ...this.state, settings: { ...this.state.settings, ...patch } };
+    const savedAt = Math.max(this.state.savedAt, this.time().nowMs);
+    this.state = { ...this.state, savedAt, settings: { ...this.state.settings, ...patch } };
     this.revision++;
     this.emit();
     void this.persist(true);
@@ -349,15 +420,30 @@ export class GameLoop {
   }
 
   private async persist(notify: boolean): Promise<void> {
-    if (!this.state) return;
+    if (!this.state || this.readOnly) return;
     this.ticksSinceSave = 0;
+    const force = this.forceNextSave;
+    this.forceNextSave = false;
     try {
-      await this.store.save(this.state, { notify });
+      const outcome = await this.store.save(this.state, { notify, force });
+      if (outcome.status === "newer") {
+        // Un autre onglet a écrit plus récemment : on garde son état (dernier écrit gagne) et on rattrape le temps.
+        this.state = outcome.state;
+        this.revision++;
+        this.dispatch({ type: "tick" });
+      }
       if (this.saveError !== null) {
         this.saveError = null;
         this.emit();
       }
     } catch (e) {
+      if (force) this.forceNextSave = true;
+      if (e instanceof MigrationError) {
+        // Le stockage contient une sauvegarde qu'on ne sait pas lire (autre onglet plus récent...) : ne plus rien écrire.
+        this.failLoad(e);
+        this.emit();
+        return;
+      }
       this.saveError = e instanceof Error ? e.message : "écriture impossible";
       this.emit();
     }
@@ -367,8 +453,11 @@ export class GameLoop {
   private async reloadFromStore(): Promise<void> {
     try {
       this.state = await this.store.load();
+      this.loadError = null;
+      this.loadErrorCode = null;
+      this.readOnly = false;
     } catch (e) {
-      this.loadError = e instanceof Error ? e.message : "sauvegarde illisible";
+      this.failLoad(e);
     }
     this.revision++;
     if (this.state) this.dispatch({ type: "tick" });

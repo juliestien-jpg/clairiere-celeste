@@ -143,6 +143,8 @@ export function describeEvent(e: GameEvent, name: string, kind?: Kind): { text: 
       return { text: `${name} rejoint les étoiles et veille sur la clairière.`, refused: false };
     case "reborn":
       return { text: "Une nouvelle lueur a pris la forme d'un œuf.", refused: false };
+    case "clockAdjusted":
+      return { text: "L'horloge de l'appareil a changé : la clairière s'est remise à l'heure.", refused: false };
     case "needAppeared":
     case "needResolved":
       return null;

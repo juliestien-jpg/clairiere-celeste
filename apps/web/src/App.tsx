@@ -9,6 +9,7 @@ import { Sky } from "./theme/Sky";
 import { perform } from "./ui/perform";
 import { DebugPanel, isDebugVisible } from "./ui/DebugPanel";
 import { AlbumScreen } from "./ui/AlbumScreen";
+import { LoadErrorScreen, StorageBar } from "./ui/StorageNotices";
 import { SettingsScreen } from "./ui/SettingsScreen";
 import { CreateScreen, FlownScreen, MainScreen } from "./ui/Screens";
 import { resetSeen } from "./ui/hints";
@@ -88,10 +89,14 @@ export function App() {
     void game.init().then(() => {
       if (!cancelled) game.start();
     });
+    // Page cachée : la boucle ralentit (pas de rendu chaque seconde) mais continue pour les notifications.
     const onVisibility = (): void => {
-      if (document.visibilityState === "visible") game.tick();
-      else void game.flush();
+      const hidden = document.visibilityState === "hidden";
+      game.setHidden(hidden);
+      if (hidden) void game.flush();
+      else game.tick();
     };
+    game.setHidden(document.visibilityState === "hidden");
     const onHide = (): void => void game.flush();
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pagehide", onHide);
@@ -147,16 +152,7 @@ export function App() {
   } else if (!snap.ready) {
     body = <p className="lead" role="status">La clairière se réveille…</p>;
   } else if (snap.loadError && !state) {
-    body = (
-      <main className="screen">
-        <h1>Sauvegarde illisible</h1>
-        <p className="message" role="alert">{snap.loadError}</p>
-        <p className="lead">Tu peux importer un fichier de sauvegarde, ou repartir d'un nouvel œuf.</p>
-        <button type="button" className="primary" onClick={() => void game.reset()}>
-          Repartir d'un nouvel œuf
-        </button>
-      </main>
-    );
+    body = <LoadErrorScreen game={game} snap={snap} />;
   } else if (!state || !view) {
     body = <CreateScreen onCreate={(name) => game.create(name)} nav={nav} />;
   } else if (state.pet.life === "flown") {
@@ -188,6 +184,7 @@ export function App() {
               </button>
             </div>
           )}
+          <StorageBar game={game} snap={snap} />
           {body}
           {!storagePersistent && (
             <p className="message" role="status">

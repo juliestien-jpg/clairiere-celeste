@@ -12,7 +12,8 @@
     "pet": { "$ref": "#/$defs/pet" },
     "album": {
       "type": "array",
-      "description": "Une entrée par créature envolée ; les étoiles du ciel en sont dérivées.",
+      "description": "Une entrée par créature envolée ; les étoiles du ciel en sont dérivées. Au plus 1000 entrées (LIMITS.albumMaxEntries) ; une renaissance sur un album plein retire l'entrée la plus ancienne.",
+      "maxItems": 1000,
       "items": { "$ref": "#/$defs/albumEntry" }
     },
     "settings": {
@@ -37,8 +38,8 @@
       "additionalProperties": false,
       "required": ["id", "name", "bornAt", "flownAt", "stage", "kind"],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "name": { "type": "string" },
+        "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 128, "description": "Au plus 40 caractères après trim (LIMITS.nameMaxLength, vérifié par migrate : JSON Schema ne sait pas exprimer le trim) ; 128 au plus avant trim." },
         "bornAt": { "$ref": "#/$defs/timestamp" },
         "flownAt": { "$ref": "#/$defs/timestamp" },
         "stage": { "$ref": "#/$defs/stage" },
@@ -64,8 +65,8 @@
         "rng"
       ],
       "properties": {
-        "id": { "type": "string", "minLength": 1, "description": "Identifiant de l'animal (UUID)." },
-        "name": { "type": "string" },
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "description": "Identifiant de l'animal (UUID)." },
+        "name": { "type": "string", "maxLength": 128, "description": "Au plus 40 caractères après trim (LIMITS.nameMaxLength, vérifié par migrate : JSON Schema ne sait pas exprimer le trim) ; 128 au plus avant trim." },
         "kind": { "$ref": "#/$defs/kind" },
         "bornAt": { "$ref": "#/$defs/timestamp" },
         "stage": { "$ref": "#/$defs/stage" },
@@ -104,7 +105,9 @@
         },
         "cooldowns": {
           "type": "object",
-          "description": "Instants (ms) avant lesquels l'action est refusée ; 0 = disponible. Clés : feed.meal, feed.snack, heal, pet.",
+          "description": "Instants (ms) avant lesquels l'action est refusée ; 0 = disponible. Clés : feed.meal, feed.snack, heal, pet. Au plus 32 entrées, clés de 128 caractères au plus.",
+          "maxProperties": 32,
+          "propertyNames": { "maxLength": 128 },
           "additionalProperties": { "type": "number", "minimum": 0 }
         },
         "lastUpdatedAt": { "$ref": "#/$defs/timestamp" },

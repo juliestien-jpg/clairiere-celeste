@@ -219,22 +219,25 @@ describe("QA temps : découper une absence ou la faire d'un coup", () => {
 });
 
 describe("QA temps : horloge qui recule, plafond de 7 jours, valeurs de temps étranges", () => {
-  it("horloge reculée : rien ne bouge, même après un état avancé ; action appliquée à lastUpdatedAt", () => {
+  it("horloge reculée de moins d'un pas : rien ne bouge, même après un état avancé ; action appliquée à lastUpdatedAt", () => {
     const s1 = reduce(fresh(), tick, at(10 * H), B).state;
-    const back = reduce(s1, tick, at(2 * H), B);
+    const back = reduce(s1, tick, at(10 * H - 30000), B);
     expect(back.state).toEqual(s1);
     expect(back.events).toEqual([]);
-    const play = reduce(s1, { type: "pet" }, at(-50 * H), B);
+    const play = reduce(s1, { type: "pet" }, at(10 * H - 1), B);
     expect(play.state.pet.lastUpdatedAt).toBe(s1.pet.lastUpdatedAt);
     expect(play.state.savedAt).toBe(s1.savedAt);
     expect(play.state.pet.cooldowns["pet"]).toBe(s1.pet.lastUpdatedAt + 300000);
   });
 
-  it("après un recul d'horloge, le retour à l'heure d'origine ne rejoue pas le temps déjà vécu", () => {
+  it("après un recul d'horloge (translation), le retour à l'heure d'origine ne rejoue pas le temps déjà vécu", () => {
     const s1 = reduce(fresh(), tick, at(10 * H), B).state;
-    const s2 = reduce(s1, tick, at(3 * H), B).state; // recul
-    const s3 = reduce(s2, tick, at(10 * H), B).state; // retour à la même heure
-    expect(s3).toEqual(s1);
+    const s2 = reduce(s1, tick, at(3 * H), B).state; // recul de 7 h : translation, jauges intactes
+    expect(s2.pet.gauges).toEqual(s1.pet.gauges);
+    expect(s2.pet.lastUpdatedAt).toBe(T0 + 3 * H);
+    const s3 = reduce(s2, tick, at(10 * H), B).state; // 7 h de plus de vie réelle : l'animal vit
+    expect(s3.pet.lastUpdatedAt).toBe(T0 + 10 * H);
+    expect(s3.pet.gauges.satiety).toBeLessThan(s1.pet.gauges.satiety);
   });
 
   it("nextAttentionAt et deriveView avec une horloge reculée : ni exception, ni retour dans le passé", () => {

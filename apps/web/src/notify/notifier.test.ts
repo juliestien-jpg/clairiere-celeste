@@ -25,6 +25,8 @@ function setup(opts: { permission?: PermissionState; hidden?: boolean; notificat
     journal: [],
     notice: null,
     loadError: null,
+    loadErrorCode: null,
+    readOnly: false,
     saveError: null,
     revision: 0,
   };
@@ -114,6 +116,17 @@ describe("Notifier (page ouverte, D5)", () => {
     t.setHidden(false); // la page est visible : le besoin encore actif ne repart pas aussitôt
     t.pushEvent({ type: "needResolved", need }, 1);
     expect(t.notifier.current()?.sent.some((e) => e.need === need)).toBe(false);
+  });
+
+  it("une horloge reculée (clockAdjusted) décale d'autant les envois de l'historique", () => {
+    const t = setup();
+    t.at(0);
+    for (let h = 1; h <= 30 && t.shown.length === 0; h++) t.at(h * HOUR);
+    const before = t.notifier.current()?.sent.map((e) => e.at) ?? [];
+    expect(before.length).toBeGreaterThan(0);
+    t.setHidden(false);
+    t.pushEvent({ type: "clockAdjusted", deltaMs: -HOUR }, 1);
+    expect(t.notifier.current()?.sent.map((e) => e.at)).toEqual(before.map((at) => at - HOUR));
   });
 
   it("l'historique d'un animal précédent est ignoré", () => {

@@ -37,6 +37,7 @@ export type GameEvent =
   | { type: "reborn" }
   | { type: "needAppeared"; need: Need }
   | { type: "needResolved"; need: Need }
+  | { type: "clockAdjusted"; deltaMs: number } // horloge reculée : chronologie de l'animal translatée (deltaMs < 0)
   | { type: "actionRefused"; action: Action["type"]; reason: string };
 
 export type Gauges = Record<Gauge, number>;

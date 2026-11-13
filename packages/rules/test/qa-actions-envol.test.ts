@@ -104,8 +104,10 @@ describe("QA temps de recharge", () => {
     const s0 = fresh(NEVER, { pet: { gauges: { satiety: 30 } } });
     const s1 = reduce(s0, { type: "pet" }, at(10 * MIN), B).state;
     const cd = s1.pet.cooldowns["pet"];
-    const s2 = reduce(s1, { type: "pet" }, at(5 * MIN), B); // recul : refusé, cooldown inchangé
-    expect(s2.state.pet.cooldowns["pet"]).toBe(cd);
+    const s2 = reduce(s1, { type: "pet" }, at(5 * MIN), B); // recul de 5 min : translation, la recharge reste refusée
+    expect(s2.events).toContainEqual({ type: "actionRefused", action: "pet", reason: "cooldown" });
+    expect(s2.state.pet.cooldowns["pet"]).toBe((cd ?? 0) - 5 * MIN); // décalée comme le reste de la chronologie
+    expect((s2.state.pet.cooldowns["pet"] ?? 0) - s2.state.pet.lastUpdatedAt).toBe((cd ?? 0) - s1.pet.lastUpdatedAt); // reste à attendre inchangé
   });
 });
 
@@ -160,7 +162,7 @@ describe("QA Envol", () => {
     { type: "pet" },
   ];
   for (const a of allButRebirth) {
-    for (const when of [0, 3 * H, 400 * H, -5 * H]) {
+    for (const when of [0, 3 * H, 400 * H, -30000]) {
       it(`après l'Envol, ${a.type} (à ${when / H} h) est refusé (flown) et l'état ne change pas`, () => {
         const s = flownState();
         const r = reduce(s, a, at(when), B);
@@ -284,9 +286,14 @@ describe("QA renaissance (rebirth)", () => {
 
   it("rebirth avec une horloge reculée : nouvel animal né à lastUpdatedAt (pas dans le passé de l'ancien)", () => {
     const s = flown();
-    const r = reduce(s, rebirth, at(-100 * H), B).state;
+    const r = reduce(s, rebirth, at(-30000), B).state; // recul inférieur à un pas : rien ne recule
     expect(r.pet.bornAt).toBe(s.pet.lastUpdatedAt);
     expect(r.pet.lastUpdatedAt).toBeGreaterThanOrEqual(s.pet.lastUpdatedAt);
+    // recul important : la chronologie est translatée, la renaissance a lieu au nouveau lastUpdatedAt
+    const r2 = reduce(s, rebirth, at(-100 * H), B);
+    expect(r2.events[0]).toMatchObject({ type: "clockAdjusted" });
+    expect(r2.state.pet.bornAt).toBeLessThanOrEqual(T0 - 100 * H);
+    expect(r2.state.album[r2.state.album.length - 1]?.flownAt).toBe(s.pet.flownAt! + (r2.events[0] as { deltaMs: number }).deltaMs);
   });
 
   it("l'entrée est gelée : rebirth ne mute ni l'album ni l'animal reçus", () => {

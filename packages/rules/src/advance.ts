@@ -221,3 +221,36 @@ export function catchUp(p: Pet, nowMs: number, b: Balance, ev: GameEvent[] | nul
   // Animal envolé : l'horloge s'arrête à l'Envol (`lastUpdatedAt` = `flownAt`, sur la grille), ce qui
   // rend l'état final indépendant du découpage de l'absence.
 }
+
+/**
+ * Translation de la chronologie (horloge de l'appareil remise en arrière). `nowMs` doit être un
+ * nombre fini (sinon 0) ; il est arrondi à l'entier inférieur. Si `lastUpdatedAt - nowMs >= pas`,
+ * renvoie `delta = G - lastUpdatedAt` (négatif, multiple entier du pas) où `G = bornAt + floor((nowMs - bornAt) / pas) * pas`
+ * est le dernier point de grille <= `nowMs` ; sinon 0. Renvoie aussi 0 si `G` ou `bornAt + delta` n'est pas un entier sûr.
+ */
+export function timelineShift(p: Pet, nowMs: number, b: Balance): number {
+  if (typeof nowMs !== "number" || !Number.isFinite(nowMs)) return 0;
+  const stepMs = b.catchUp.stepSeconds * 1000;
+  const now = Math.floor(nowMs);
+  if (p.lastUpdatedAt - now < stepMs) return 0;
+  const target = p.bornAt + Math.floor((now - p.bornAt) / stepMs) * stepMs;
+  const delta = target - p.lastUpdatedAt;
+  if (!Number.isSafeInteger(target) || !Number.isSafeInteger(delta) || !Number.isSafeInteger(p.bornAt + delta) || delta >= 0) return 0;
+  return delta;
+}
+
+/** Décale d'un même `delta` tous les instants de l'animal (cooldowns non nuls compris). Ne touche ni jauges, ni rng, ni album. */
+export function shiftPet(p: Pet, delta: number): void {
+  p.bornAt += delta;
+  p.stageSince += delta;
+  p.lastUpdatedAt += delta;
+  if (p.flownAt !== null) p.flownAt += delta;
+  const st = p.status;
+  if (st.asleepSince !== null) st.asleepSince += delta;
+  if (st.sickSince !== null) st.sickSince += delta;
+  if (st.weakSince !== null) st.weakSince += delta;
+  for (const k of Object.keys(p.cooldowns)) {
+    const c = p.cooldowns[k];
+    if (c !== undefined && c !== 0) p.cooldowns[k] = c + delta;
+  }
+}

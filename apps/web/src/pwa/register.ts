@@ -65,3 +65,25 @@ export function registerServiceWorker(beforeReload: () => Promise<void>): void {
   if (document.readyState === "complete") register();
   else window.addEventListener("load", register, { once: true });
 }
+
+/**
+ * « Une version plus récente du jeu est nécessaire » : cherche une mise à jour du service worker, l'active si elle
+ * attend, sinon recharge la page (le réseau, ou le cache à jour, fournit la nouvelle version).
+ */
+export async function reloadForNewVersion(): Promise<void> {
+  try {
+    const reg = await navigator.serviceWorker?.getRegistration();
+    if (reg) {
+      await reg.update();
+      if (reg.waiting) {
+        reg.waiting.postMessage({ type: "SKIP_WAITING" });
+        // Le rechargement suit `controllerchange` ; filet de sécurité si l'événement n'arrive pas.
+        setTimeout(() => location.reload(), 3000);
+        return;
+      }
+    }
+  } catch {
+    // Pas de service worker : on recharge simplement.
+  }
+  location.reload();
+}

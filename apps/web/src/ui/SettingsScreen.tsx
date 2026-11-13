@@ -6,7 +6,8 @@ import type { SaveState, Settings } from "@tamagoshi/rules";
 import type { GameLoop } from "../loop/gameLoop";
 import { permissionState, requestNotificationPermission } from "../notify/system";
 import type { PermissionState } from "../notify/notifier";
-import { exportFileName } from "../storage/saveStore";
+import { MAX_IMPORT_BYTES, exportFileName } from "../storage/saveStore";
+import { downloadBlob } from "./download";
 import { Icon } from "./Icon";
 import { STAGE_LABEL } from "./albumFormat";
 import { KIND_LABEL } from "./labels";
@@ -94,12 +95,7 @@ export function SettingsScreen(props: {
   function download(): void {
     const blob = game.exportBlob();
     if (!blob || !state) return;
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = exportFileName(state);
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    downloadBlob(blob, exportFileName(state));
     setSaveMessage(`Sauvegarde exportée dans le fichier ${exportFileName(state)}.`);
   }
 
@@ -108,6 +104,11 @@ export function SettingsScreen(props: {
     e.target.value = "";
     if (!file) return;
     setSaveMessage(null);
+    // Un fichier trop gros n'est même pas lu : une sauvegarde fait quelques Ko.
+    if (file.size > MAX_IMPORT_BYTES) {
+      setSaveMessage(`Ce fichier est trop volumineux pour être une sauvegarde (${Math.round(file.size / 1024)} Ko, maximum ${MAX_IMPORT_BYTES / 1024} Ko). Rien n'a été changé.`);
+      return;
+    }
     try {
       setPending(await game.parseImport(file));
     } catch (err) {
@@ -268,7 +269,19 @@ export function SettingsScreen(props: {
 
       <section className="panel setting" aria-labelledby="about-title">
         <h2 id="about-title">À propos</h2>
-        <p className="panel-text">Clairière céleste : un petit compagnon de lumière à faire vivre. Rien ne quitte ton appareil.</p>
+        <p className="panel-text">Clairière céleste : un petit compagnon de lumière à faire vivre.</p>
+        <ul className="panel-text about-list">
+          <li>Tout reste sur ton appareil : aucune donnée n'est envoyée, il n'y a ni compte ni statistiques.</li>
+          <li>Les notifications ne marchent que tant que le jeu est ouvert.</li>
+          <li>Si tu effaces les données du site dans ton navigateur, ton compagnon disparaît aussi : pense à exporter ta sauvegarde.</li>
+          <li>
+            Une question, une idée, un souci ? Le jeu vit sur{" "}
+            <a href="https://github.com/juliestien-jpg/clairiere-celeste" target="_blank" rel="noopener noreferrer">
+              son dépôt GitHub public (s'ouvre dans un nouvel onglet)
+            </a>
+            .
+          </li>
+        </ul>
       </section>
     </main>
   );

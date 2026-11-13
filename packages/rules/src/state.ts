@@ -1,6 +1,7 @@
 import { assertBalance } from "./balance";
 import type { Balance } from "./balance";
 import { sanitizeNow } from "./advance";
+import { isIdTooLong, isNameTooLong } from "./limits";
 import { drawKind, seedToState } from "./rng";
 import { KINDS } from "./types";
 import type { AlbumEntry, Kind, Pet, SaveState, Time } from "./types";
@@ -12,6 +13,14 @@ export class InvalidKindError extends Error {
   constructor(message: string) {
     super(message);
     this.name = "InvalidKindError";
+  }
+}
+
+/** `id` ou `name` trop long passé à `createSave` : erreur de développement. */
+export class InvalidIdentityError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "InvalidIdentityError";
   }
 }
 
@@ -73,12 +82,14 @@ export function createPet(input: PetInput, nowMs: number, b: Balance): Pet {
 
 /**
  * `nowMs` fractionnaire : arrondi à l'entier inférieur ; non fini : 0. `seed` : normalisée en
- * entier 32 bits non signé. Lève `BalanceError` si la balance est invalide et `InvalidKindError`
- * si `input.kind` est fourni mais n'est pas une espèce connue.
+ * entier 32 bits non signé. Lève `BalanceError` si la balance est invalide, `InvalidKindError`
+ * si `input.kind` est fourni mais n'est pas une espèce connue, et `InvalidIdentityError` si `id` ou `name` dépasse les limites (LIMITS).
  */
 export function createSave(input: PetInput, time: Time, balance: Balance): SaveState {
   assertBalance(balance);
   if (input.kind !== undefined && !isKind(input.kind)) throw new InvalidKindError(`espèce inconnue : ${String(input.kind)}`);
+  if (typeof input.id === "string" && isIdTooLong(input.id)) throw new InvalidIdentityError("id trop long (128 caractères au plus)");
+  if (typeof input.name === "string" && isNameTooLong(input.name)) throw new InvalidIdentityError("name trop long (40 caractères au plus après trim)");
   const floored = sanitizeNow(time.nowMs, Number.NEGATIVE_INFINITY);
   const nowMs = Number.isFinite(floored) ? floored : 0;
   return {

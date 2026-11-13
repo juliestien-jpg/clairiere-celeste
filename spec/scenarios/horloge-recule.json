@@ -1,7 +1,7 @@
 {
   "scenarioVersion": 1,
   "name": "horloge-recule",
-  "description": "Une heure antérieure à lastUpdatedAt (horloge du téléphone reculée) ne fait pas reculer l'état : ni jauges, ni lastUpdatedAt, ni savedAt ; un tick antérieur ne change rien et n'émet rien ; une action antérieure est appliquée à l'instant lastUpdatedAt ; le temps reprend ensuite normalement.",
+  "description": "Horloge de l'appareil remise en arrière (A2, translation de la chronologie). Un recul d'au moins un pas translate tous les instants de l'animal d'un multiple entier du pas (jauges, rng, stade, grille conservés) et émet clockAdjusted ; un recul de moins d'un pas ne fait rien avancer ni reculer ; un recul de 5 h puis de moins d'un pas ; le temps reprend ensuite normalement.",
   "initial": {
     "createSave": {
       "id": "00000000-0000-4000-8000-000000000001",
@@ -32,14 +32,20 @@
       "action": {
         "type": "tick"
       },
-      "expectEvents": [],
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -3600000
+        }
+      ],
       "expectState": {
         "pet.gauges.satiety": 71,
         "pet.gauges.happiness": 74,
         "pet.gauges.energy": 73,
         "pet.gauges.hygiene": 97,
-        "pet.lastUpdatedAt": 1763028000000,
-        "savedAt": 1763028000000
+        "pet.lastUpdatedAt": 1763024400000,
+        "pet.bornAt": 1763017200000,
+        "savedAt": 1763024400000
       }
     },
     {
@@ -47,34 +53,47 @@
       "action": {
         "type": "tick"
       },
-      "expectEvents": [],
+      "expectEvents": [
+        {
+          "type": "clockAdjusted",
+          "deltaMs": -21600000
+        }
+      ],
       "expectState": {
         "pet.gauges.satiety": 71,
         "pet.gauges.happiness": 74,
         "pet.gauges.energy": 73,
         "pet.gauges.hygiene": 97,
-        "pet.lastUpdatedAt": 1763028000000
+        "pet.lastUpdatedAt": 1763002800000,
+        "pet.bornAt": 1762995600000,
+        "savedAt": 1763002800000
       }
     },
     {
-      "nowMs": 1763022600000,
+      "nowMs": 1763002770000,
       "action": {
         "type": "pet"
       },
       "expectEvents": [],
       "expectState": {
         "pet.gauges.happiness": 79,
-        "pet.lastUpdatedAt": 1763028000000,
-        "pet.cooldowns.pet": 1763028300000
+        "pet.lastUpdatedAt": 1763002800000,
+        "pet.cooldowns": {
+          "feed.meal": 0,
+          "feed.snack": 0,
+          "heal": 0,
+          "pet": 1763003100000
+        }
       }
     },
     {
-      "nowMs": 1763031600000,
+      "nowMs": 1763006400000,
       "action": {
         "type": "tick"
       },
+      "expectEvents": [],
       "expectState": {
-        "pet.lastUpdatedAt": 1763031600000,
+        "pet.lastUpdatedAt": 1763006400000,
         "pet.gauges.satiety": 66.5
       }
     }

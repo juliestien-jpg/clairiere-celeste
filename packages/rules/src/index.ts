@@ -1,5 +1,6 @@
 export { reduce } from "./reduce";
-export { createSave, InvalidKindError, SAVE_VERSION } from "./state";
+export { createSave, InvalidIdentityError, InvalidKindError, SAVE_VERSION } from "./state";
+export { LIMITS } from "./limits";
 export { deriveView } from "./view";
 export { nextAttentionAt } from "./attention";
 export { migrate, MigrationError } from "./migrate";

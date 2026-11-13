@@ -1,7 +1,7 @@
 // Validateur JSON Schema minimal (sous-ensemble utilisé par spec/*.schema.json), écrit ici
 // pour ne pas ajouter de dépendance : $ref local (#/$defs/...), type, enum, const, properties,
 // required, additionalProperties, items, minItems, minimum, maximum, exclusiveMinimum,
-// minLength, pattern. Mots-clés inconnus (title, description, $id...) ignorés.
+// minLength, maxLength (en points de code), maxItems, maxProperties, propertyNames.maxLength, pattern. Mots-clés inconnus (title, description, $id...) ignorés.
 
 type Schema = { [k: string]: unknown };
 
@@ -59,17 +59,27 @@ export function validate(root: Schema, value: unknown, schema: Schema = root, pa
   if (typeof value === "string") {
     const ml = schema["minLength"];
     const pat = schema["pattern"];
+    const xl = schema["maxLength"];
     if (typeof ml === "number" && value.length < ml) errors.push(`${path} : texte trop court`);
+    if (typeof xl === "number" && [...value].length > xl) errors.push(`${path} : texte trop long (> ${xl})`);
     if (typeof pat === "string" && !new RegExp(pat).test(value)) errors.push(`${path} : ne respecte pas ${pat}`);
   }
   if (Array.isArray(value)) {
     const mi = schema["minItems"];
     if (typeof mi === "number" && value.length < mi) errors.push(`${path} : au moins ${mi} éléments`);
+    const mxi = schema["maxItems"];
+    if (typeof mxi === "number" && value.length > mxi) errors.push(`${path} : au plus ${mxi} éléments`);
     const items = schema["items"];
     if (isObject(items)) value.forEach((v, i) => errors.push(...validate(root, v, items, `${path}[${i}]`)));
   }
   if (isObject(value)) {
     const props = isObject(schema["properties"]) ? schema["properties"] : {};
+    const mxp = schema["maxProperties"];
+    if (typeof mxp === "number" && Object.keys(value).length > mxp) errors.push(`${path} : au plus ${mxp} propriétés`);
+    const pn = schema["propertyNames"];
+    if (isObject(pn) && typeof pn["maxLength"] === "number") {
+      for (const k of Object.keys(value)) if ([...k].length > pn["maxLength"]) errors.push(`${path} : nom de propriété trop long (${k.slice(0, 20)}…)`);
+    }
     const req = schema["required"];
     if (Array.isArray(req)) {
       for (const k of req) if (!(String(k) in value)) errors.push(`${path} : propriété requise absente (${String(k)})`);

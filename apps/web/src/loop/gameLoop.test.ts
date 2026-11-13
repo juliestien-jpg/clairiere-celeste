@@ -51,7 +51,7 @@ describe("GameLoop", () => {
     const { game } = setup();
     await game.init();
     expect(game.create("   ")).toEqual({ ok: false, reason: "emptyName" });
-    expect(game.create("x".repeat(40))).toEqual({ ok: false, reason: "tooLong" });
+    expect(game.create("x".repeat(41))).toEqual({ ok: false, reason: "tooLong" });
     expect(game.getSnapshot().state).toBeNull();
   });
 

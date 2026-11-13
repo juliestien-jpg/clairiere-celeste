@@ -3,6 +3,7 @@
 // la forme obtenue. Toute sauvegarde illisible lève une `MigrationError` typée.
 import { assertBalance, defaultBalance } from "./balance";
 import type { Balance } from "./balance";
+import { codePointLength, LIMITS } from "./limits";
 import { isKind, SAVE_VERSION } from "./state";
 import { STAGES } from "./types";
 import type { AlbumEntry, Kind, Pet, SaveState, Settings, Stage } from "./types";
@@ -71,9 +72,21 @@ function obj(v: unknown, path: string): Raw {
   if (!isRecord(v)) return fail(path, "objet attendu");
   return v;
 }
-function idText(v: unknown, path: string): string {
+/** Texte d'au plus `LIMITS.textMaxLength` points de code (hors nom). */
+function boundedStr(v: unknown, path: string): string {
   const t = str(v, path);
+  if (codePointLength(t) > LIMITS.textMaxLength) return fail(path, `${LIMITS.textMaxLength} caractères au plus attendus`);
+  return t;
+}
+function idText(v: unknown, path: string): string {
+  const t = boundedStr(v, path);
   if (t.length < 1) return fail(path, "texte non vide attendu");
+  return t;
+}
+/** Nom : au plus `LIMITS.nameMaxLength` points de code après `trim` (`textMaxLength` avant). Valeur conservée telle quelle. */
+function nameText(v: unknown, path: string): string {
+  const t = boundedStr(v, path);
+  if (codePointLength(t.trim()) > LIMITS.nameMaxLength) return fail(path, `${LIMITS.nameMaxLength} caractères au plus attendus (après trim)`);
   return t;
 }
 function stage(v: unknown, path: string): Stage {
@@ -95,7 +108,9 @@ function readPet(raw: unknown, b: Balance): Pet {
   const life = p["life"];
   if (life !== "alive" && life !== "flown") return fail("pet.life", "alive ou flown attendu");
   const cooldowns: Record<string, number> = {};
+  if (Object.keys(cds).length > LIMITS.cooldownsMaxEntries) return fail("pet.cooldowns", `${LIMITS.cooldownsMaxEntries} entrées au plus attendues`);
   for (const k of Object.keys(cds)) {
+    if (codePointLength(k) > LIMITS.textMaxLength) return fail("pet.cooldowns", `clé de plus de ${LIMITS.textMaxLength} caractères`);
     const c = num(cds[k], `pet.cooldowns.${k}`);
     if (c < 0) return fail(`pet.cooldowns.${k}`, "positif attendu");
     cooldowns[k] = c;
@@ -118,7 +133,7 @@ function readPet(raw: unknown, b: Balance): Pet {
   const lastUpdatedAt = bornAt + Math.floor((lastRaw - bornAt) / stepMs) * stepMs;
   return {
     id: idText(p["id"], "pet.id"),
-    name: str(p["name"], "pet.name"),
+    name: nameText(p["name"], "pet.name"),
     kind: kind(p["kind"], "pet.kind"),
     bornAt,
     stage: stage(p["stage"], "pet.stage"),
@@ -149,11 +164,12 @@ function readPet(raw: unknown, b: Balance): Pet {
 
 function readAlbum(raw: unknown): AlbumEntry[] {
   if (!Array.isArray(raw)) return fail("album", "tableau attendu");
+  if (raw.length > LIMITS.albumMaxEntries) return fail("album", `${LIMITS.albumMaxEntries} entrées au plus attendues`);
   return raw.map((e: unknown, i: number) => {
     const o = obj(e, `album.${i}`);
     return {
       id: idText(o["id"], `album.${i}.id`),
-      name: str(o["name"], `album.${i}.name`),
+      name: nameText(o["name"], `album.${i}.name`),
       bornAt: int(o["bornAt"], `album.${i}.bornAt`),
       flownAt: int(o["flownAt"], `album.${i}.flownAt`),
       stage: stage(o["stage"], `album.${i}.stage`),

@@ -1,7 +1,8 @@
 import { applyAction } from "./actions";
-import { catchUp, evalWeak, needMask, pushNeedEvents, sanitizeNow } from "./advance";
+import { catchUp, evalWeak, needMask, pushNeedEvents, sanitizeNow, shiftPet, timelineShift } from "./advance";
 import { assertBalance } from "./balance";
 import type { Balance } from "./balance";
+import { LIMITS, isValidId, isValidName } from "./limits";
 import { cloneSave, createPet, isKind } from "./state";
 import type { Action, GameEvent, SaveState, Time } from "./types";
 
@@ -11,17 +12,15 @@ function refuse(events: GameEvent[], type: unknown, reason: string): void {
   events.push({ type: "actionRefused", action: (typeof type === "string" ? type : "unknown") as Action["type"], reason });
 }
 
-function isNonEmptyText(v: unknown): v is string {
-  return typeof v === "string" && v.trim() !== "";
-}
-
 /**
  * Cœur des règles : (état, action, heure) -> état. Rattrape d'abord le temps écoulé sur la grille
  * fixe `bornAt + k * catchUp.stepSeconds` (voir `catchUp`), puis applique l'action à ce point de
  * grille. Pure : ne modifie pas `state`, ne lève jamais d'exception à cause de l'action ou de
  * l'heure (seule une balance invalide lève `BalanceError`).
  *
- * - heure antérieure à `lastUpdatedAt`, non finie (NaN, ±Infinity) : le temps n'est pas rattrapé et
+ * - heure antérieure d'au moins un pas à `lastUpdatedAt` (horloge de l'appareil remise en arrière) :
+ *   translation de la chronologie de l'animal et événement `clockAdjusted` (voir A2), puis appel normal ;
+ * - heure antérieure de moins d'un pas à `lastUpdatedAt`, non finie (NaN, ±Infinity) : le temps n'est pas rattrapé et
  *   l'action est appliquée à l'instant `lastUpdatedAt` (l'état ne recule jamais) ; heure
  *   fractionnaire : arrondie à l'entier inférieur ;
  * - action refusée : l'action n'a aucun effet, mais le temps déjà rattrapé reste acquis. Raisons
@@ -43,6 +42,13 @@ export function reduce(
   const wasFlown = p.life === "flown";
   const rawType: unknown = typeof action === "object" && action !== null ? (action as { type?: unknown }).type : undefined;
   const nowMs = typeof time === "object" && time !== null ? time.nowMs : Number.NaN;
+  // Horloge reculée d'au moins un pas : on translate la chronologie de l'animal (A2), sans simuler.
+  const delta = timelineShift(p, nowMs, balance);
+  if (delta !== 0) {
+    shiftPet(p, delta);
+    s.savedAt += delta;
+    events.push({ type: "clockAdjusted", deltaMs: delta });
+  }
   let now = sanitizeNow(nowMs, p.lastUpdatedAt);
 
   if (!wasFlown) {
@@ -67,10 +73,11 @@ export function reduce(
       return { state: s, events };
     }
     const r = action as Extract<Action, { type: "rebirth" }>;
-    if (!isNonEmptyText(r.id) || !isNonEmptyText(r.name) || (r.kind !== undefined && !isKind(r.kind))) {
+    if (!isValidId(r.id) || !isValidName(r.name) || (r.kind !== undefined && !isKind(r.kind))) {
       refuse(events, rawType, "invalidIdentity");
       return { state: s, events };
     }
+    if (s.album.length >= LIMITS.albumMaxEntries) s.album.splice(0, s.album.length - LIMITS.albumMaxEntries + 1); // album plein : l'entrée la plus ancienne (index 0) est retirée
     s.album.push({
       id: p.id,
       name: p.name,

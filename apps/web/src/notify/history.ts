@@ -25,6 +25,12 @@ export function recordSent(h: StoredHistory, need: Need, at: number): StoredHist
   return purge({ ...h, sent: [...h.sent, { at, need }] }, at);
 }
 
+/** L'horloge de l'appareil a reculé de `deltaMs` (négatif) : les envois passés sont décalés d'autant. */
+export function shiftHistory(h: StoredHistory, deltaMs: number): StoredHistory {
+  if (deltaMs === 0 || h.sent.length === 0) return h;
+  return { ...h, sent: h.sent.map((e) => ({ ...e, at: e.at + deltaMs })) };
+}
+
 /** Retire les entrées d'un besoin résolu (événement `needResolved`). */
 export function resolveNeed(h: StoredHistory, need: Need): StoredHistory {
   if (!h.sent.some((e) => e.need === need)) return h;
