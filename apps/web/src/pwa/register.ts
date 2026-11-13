@@ -53,12 +53,15 @@ export function registerServiceWorker(beforeReload: () => Promise<void>): void {
     location.reload();
   });
 
-  window.addEventListener("load", () => {
+  const register = (): void => {
     navigator.serviceWorker
       .register(publicUrl(SW_FILE, base), { scope: publicUrl("", base) })
       .then(watch)
       .catch(() => {
         // Le jeu fonctionne sans service worker (pas de mode hors ligne).
       });
-  });
+  };
+  // Appelée depuis un effet React : l'événement « load » est souvent déjà passé à ce moment-là.
+  if (document.readyState === "complete") register();
+  else window.addEventListener("load", register, { once: true });
 }
